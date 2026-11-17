@@ -1,0 +1,13 @@
+{
+  "chapter": "preparation",
+  "lines": [
+    {"id":"armour-offer","speaker":"Saul","voice":"am_michael","speed":0.94,"text":"Take my helmet and armour. Try how they feel before you go."},
+    {"id":"armour-heavy","speaker":"David","voice":"am_puck","speed":0.94,"text":"They are heavy. My steps do not feel like my own."},
+    {"id":"armour-decline","speaker":"David","voice":"am_puck","speed":0.94,"text":"I cannot go in these. I have never learned to use them."},
+    {"id":"saul-release","speaker":"Saul","voice":"am_michael","speed":0.94,"text":"Then take what you know. May the Lord go with you."},
+    {"id":"brook-arrival","speaker":"David","voice":"am_puck","speed":0.94,"text":"Five smooth stones from the brook. My shepherd's sling is enough."},
+    {"id":"stones-first","speaker":"David","voice":"am_puck","speed":0.94,"text":"Smooth and round. This one will sit well in the sling."},
+    {"id":"stones-five","speaker":"David","voice":"am_puck","speed":0.94,"text":"Five stones, safely in my bag. Now to prepare my sling."},
+    {"id":"practice-ready","speaker":"David","voice":"am_puck","speed":0.94,"text":"A steady hand. My trust is in the Lord."}
+  ]
+}

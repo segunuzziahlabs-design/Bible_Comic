@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 720" role="img" aria-labelledby="title description">
+  <title id="title">David and Jesse character silhouettes and conversation framing</title>
+  <desc id="description">David wears a blue-green tunic and small satchel. Jesse has broader shoulders, grey hair and a clay-coloured mantle. The landscape shot shows both faces and the bundle. Portrait staggers the actors in depth and leaves the lower screen for subtitles.</desc>
+  <defs>
+    <style>
+      .title{font:700 38px Georgia,serif;fill:#f8efda}
+      .intro{font:15px system-ui,sans-serif;fill:#c7cec4}
+      .label{font:700 15px system-ui,sans-serif;fill:#253732}
+      .body{font:14px system-ui,sans-serif;fill:#4d584e}
+      .caption{font:700 12px system-ui,sans-serif;fill:#f9efd8}
+      .small{font:12px system-ui,sans-serif;fill:#d7dfd4}
+    </style>
+    <g id="david">
+      <ellipse cx="0" cy="0" rx="45" ry="9" fill="#63483b" opacity=".2"/>
+      <path d="M-27-78-25-12l-13 5v6h27l7-74m13-3L7-12l-10 6v5h28l4-76" fill="#98634b"/>
+      <path d="M-25-12-37-6v5h28v-8zm33 0L-3-6v5h28v-8z" fill="#49372e"/>
+      <path d="M-29-167l-15 42 7 41 11-3-3-34 19-37m33-8 20 32 6 41-12 4-10-37-17-27" fill="#ae7859"/>
+      <path d="M-29-169Q0-184 30-165l-6 54 12 40q-36 12-74 1l13-44z" fill="#3d6863"/>
+      <path d="m-29-169 24 11 34-7-13 21-16 5z" fill="#678a78"/>
+      <path d="m-21-113 45-1 2 8-49 1z" fill="#5d4030"/>
+      <path d="m-20-171 43 63-5 5-45-62z" fill="#8b6648"/>
+      <path d="M18-112q15-3 21 6v21q-9 6-23 1z" fill="#927051"/>
+      <path d="M-9-183h17v20H-9z" fill="#a56f51"/>
+      <path d="M-25-199q0-28 24-29 26 0 26 29l-5 13-13 12-16-4-12-10z" fill="#b77e5c"/>
+      <path d="M-25-197q-10-18 3-31 8-8 17-6 10-6 21 2 12 6 12 23l-8 4-2-10q-13 8-32 4l-2 11z" fill="#352a26"/>
+      <path d="M5-200h5m8 0h3m-11 14h9" stroke="#503a2e" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="jesse">
+      <ellipse cx="0" cy="0" rx="54" ry="10" fill="#63483b" opacity=".2"/>
+      <path d="m-25-71-2 59-15 7v5h30l11-70m10 0 2 60L1-5v5h32l-2-69" fill="#92664f"/>
+      <path d="M-26-13-42-5v5h31v-10zm38 1L1-6v6h32v-9z" fill="#4e3b30"/>
+      <path d="M-41-176l-14 48 5 35 12-1-2-34 19-32m52-13 26 30 33 6-2 12-39-2-26-29" fill="#ac7655"/>
+      <path d="M-42-178q34-16 73-2l7 58 10 54q-45 12-94 1l9-54z" fill="#b49c72"/>
+      <path d="M-43-176q20-14 47-13 13 23 24 54L9-113l-34-18-22 13z" fill="#93593f"/>
+      <path d="M-41-119q39 12 78-2l2 8q-37 13-81 3z" fill="#71533c"/>
+      <path d="M-11-198h20v20h-20z" fill="#94634d"/>
+      <path d="M-27-216q0-26 26-27 28 1 29 27l-7 23-14 14-17-5-14-15z" fill="#ae7957"/>
+      <path d="M-26-209q-9-15 3-30 10-10 25-7 21-1 27 18l-5 15-5-14q-15 7-33 4l-4 15z" fill="#6e675a"/>
+      <path d="M-19-201q12 10 22 4 14 4 21-8l-3 14L6-177l-19-6z" fill="#726858"/>
+      <path d="M4-213h6m9 0h4m-14 15h9" stroke="#513a30" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="bundle">
+      <path d="M-22 0q-8-8-3-17l6-7 10-5h23l10 10 3 18z" fill="#c4a473"/>
+      <path d="m-11-28 6 27m18-27-3 27m-35-14 49 2" stroke="#785539" stroke-width="3" fill="none"/>
+    </g>
+    <clipPath id="landscape"><rect x="48" y="406" width="478" height="269" rx="12"/></clipPath>
+    <clipPath id="portrait"><rect x="720" y="406" width="124" height="269" rx="12"/></clipPath>
+  </defs>
+  <rect width="1120" height="720" fill="#223631"/>
+  <text class="title" x="48" y="64">David &amp; Jesse</text>
+  <text class="intro" x="50" y="93">Q01 visual proposal · Illustrated 3D · Early Iron Age highland courtyard</text>
+  <rect x="48" y="120" width="502" height="235" rx="14" fill="#f5eddb"/>
+  <rect x="570" y="120" width="502" height="235" rx="14" fill="#f5eddb"/>
+  <use href="#david" transform="translate(163 331) scale(.79)"/>
+  <use href="#jesse" transform="translate(684 331) scale(.79)"/>
+  <text class="label" x="254" y="170">DAVID</text>
+  <text class="body" x="254" y="199">Youthful, lean silhouette</text>
+  <text class="body" x="254" y="222">Short dark curls, light satchel</text>
+  <text class="body" x="254" y="245">Alert gaze, relaxed hands</text>
+  <text class="label" x="782" y="170">JESSE</text>
+  <text class="body" x="782" y="199">Older face, broader stance</text>
+  <text class="body" x="782" y="222">Grey beard, layered mantle</text>
+  <text class="body" x="782" y="245">Measured gesture and weight</text>
+  <g>
+    <circle cx="265" cy="287" r="11" fill="#3d6863"/><circle cx="296" cy="287" r="11" fill="#b77e5c"/><circle cx="327" cy="287" r="11" fill="#927051"/>
+    <circle cx="793" cy="287" r="11" fill="#93593f"/><circle cx="824" cy="287" r="11" fill="#b49c72"/><circle cx="855" cy="287" r="11" fill="#726858"/>
+  </g>
+  <text class="caption" x="48" y="391">LANDSCAPE · MEDIUM TWO-SHOT</text>
+  <text class="caption" x="720" y="391">PORTRAIT · STAGGERED</text>
+  <g clip-path="url(#landscape)">
+    <rect x="48" y="406" width="478" height="269" fill="#ddc9a3"/>
+    <path d="M48 447h478v80H48z" fill="#ba9b73"/>
+    <path d="M48 513h478v21H48z" fill="#97785b"/>
+    <path d="M105 447v73m115-73v73m-172-28h478m-94-45v72" fill="none" stroke="#a88b67" stroke-width="3"/>
+    <path d="M268 546h114v12H268z" fill="#795d43"/>
+    <path d="M276 555h7v39h-7zm92 0h7v39h-7z" fill="#795d43"/>
+    <use href="#bundle" transform="translate(321 546) scale(.75)"/>
+    <use href="#david" transform="translate(172 636) scale(.77)"/>
+    <use href="#jesse" transform="translate(431 626) scale(-.77 .77)"/>
+    <rect x="94" y="612" width="386" height="49" rx="8" fill="#283830" opacity=".97"/>
+    <text class="caption" x="114" y="632">JESSE</text>
+    <text class="small" x="114" y="649">Bring me news of how they are doing.</text>
+  </g>
+  <g clip-path="url(#portrait)">
+    <rect x="720" y="406" width="124" height="269" fill="#ddc9a3"/>
+    <rect x="720" y="446" width="124" height="74" fill="#ba9b73"/>
+    <path d="M722 519h122v10H722z" fill="#97785b"/>
+    <path d="M751 548h61v9h-61z" fill="#795d43"/>
+    <use href="#bundle" transform="translate(782 549) scale(.45)"/>
+    <use href="#jesse" transform="translate(814 590) scale(-.51 .51)"/>
+    <use href="#david" transform="translate(748 628) scale(.54)"/>
+    <rect x="726" y="604" width="112" height="57" rx="7" fill="#283830"/>
+    <text class="caption" x="734" y="623">JESSE</text>
+    <text class="small" x="734" y="639" style="font-size:10px">Bring me news of</text>
+    <text class="small" x="734" y="652" style="font-size:10px">how they are doing.</text>
+  </g>
+  <text class="small" x="552" y="443">16:9 frame</text>
+  <text class="small" x="552" y="465">Hold both faces</text>
+  <text class="small" x="552" y="487">Let the gesture read</text>
+  <text class="small" x="910" y="443">Same eye line</text>
+  <text class="small" x="910" y="465">Faces above subtitles</text>
+  <text class="small" x="910" y="487">Bundle in the middle</text>
+  <text class="small" x="910" y="519">David nearer camera</text>
+  <text class="small" x="910" y="541">Jesse further up-frame</text>
+  <text class="intro" x="48" y="701">Original design sketch for silhouette and blocking review. Runtime assets are produced in Q02.</text>
+</svg>

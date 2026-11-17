@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "platform": "windows-x64",
+  "pinnedOn": "2026-10-29",
+  "godot": {
+    "version": "4.7.2",
+    "templateVersion": "4.7.2.stable",
+    "archive": "Godot_v4.7.2-stable_win64.exe.zip",
+    "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip",
+    "sha256": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953",
+    "checksumSource": "https://api.github.com/repos/godotengine/godot-builds/releases/tags/4.7.2-stable",
+    "directory": "godot-4.7.2",
+    "executable": "Godot_v4.7.2-stable_win64_console.exe"
+  },
+  "templates": {
+    "archive": "Godot_v4.7.2-stable_export_templates.tpz",
+    "url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz",
+    "sha256": "f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011",
+    "checksumSource": "https://api.github.com/repos/godotengine/godot-builds/releases/tags/4.7.2-stable",
+    "files": [
+      "version.txt",
+      "web_debug.zip",
+      "web_release.zip",
+      "web_nothreads_debug.zip",
+      "web_nothreads_release.zip",
+      "web_dlink_debug.zip",
+      "web_dlink_release.zip",
+      "web_dlink_nothreads_debug.zip",
+      "web_dlink_nothreads_release.zip"
+    ]
+  },
+  "blender": {
+    "version": "4.5.15",
+    "channel": "4.5 LTS",
+    "archive": "blender-4.5.15-windows-x64.zip",
+    "url": "https://download.blender.org/release/Blender4.5/blender-4.5.15-windows-x64.zip",
+    "sha256": "52dd02fd74877fa08e74b67d7854cf32468a232c02aaa19b6844c91285574f8d",
+    "checksumSource": "https://download.blender.org/release/Blender4.5/blender-4.5.15.sha256",
+    "directory": "blender-4.5.15",
+    "executable": "blender-4.5.15-windows-x64/blender.exe"
+  }
+}

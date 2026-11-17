@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/story/village_exchange_story.gd" id="1_story"]
+
+[resource]
+script = ExtResource("1_story")
+resource_name = "Jesse's errand"
+duration = 30.0
+beats = Array[Dictionary]([{
+"at": 0.0, "shot": "establish", "line": "Bethlehem  ·  c. 1000 BCE"
+}, {
+"at": 2.0, "shot": "two_shot", "cue": "greet", "line": "Jesse  ·  David, take these provisions to your brothers at the camp."
+}, {
+"at": 8.0, "shot": "two_shot", "cue": "point", "line": "Jesse  ·  Bring me news of how they are doing."
+}, {
+"at": 8.5, "cue": "listen"
+}, {
+"at": 13.0, "shot": "response", "cue": "acknowledge", "line": "David  ·  I will, Father."
+}, {
+"at": 17.0, "shot": "yard", "line": "Narrator  ·  Mattan, enslaved in Jesse’s household, has been packing the bread."
+}, {
+"at": 23.0, "shot": "two_shot", "line": "Jesse  ·  The bundle is ready. Take it before you leave."
+}, {
+"at": 28.1, "shot": "two_shot", "line": ""
+}])

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Cloth"]
+albedo_color = Color(0.882353, 0.756863, 0.54902, 1)
+roughness = 0.95
+
+[sub_resource type="SphereMesh" id="Sack"]
+material = SubResource("Cloth")
+radius = 0.32
+height = 0.52
+radial_segments = 10
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="Tie"]
+albedo_color = Color(0.443137, 0.317647, 0.211765, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderMesh" id="Closure"]
+material = SubResource("Tie")
+top_radius = 0.13
+bottom_radius = 0.13
+height = 0.08
+radial_segments = 10
+rings = 1
+
+[node name="Bundle" type="Node3D"]
+
+[node name="Sack" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.3, 0)
+mesh = SubResource("Sack")
+
+[node name="Closure" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.55, 0)
+mesh = SubResource("Closure")

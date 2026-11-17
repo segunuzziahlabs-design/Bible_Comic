@@ -1,0 +1,21 @@
+DAVID AND GOLIATH - CHAPTER 6: VICTORY
+
+Seven original spoken/cheer recordings were generated locally with the same
+Kokoro-82M v1.0 model and standard voice bank used by the preceding chapters.
+Model: Apache-2.0. kokoro-onnx runtime: MIT. Existing notices accompany this file.
+Standard voices: am_fenrir, bm_george, am_michael, am_liam and am_puck.
+No performer imitation, voice cloning or reference-film recording was used.
+
+The music is original runtime plucked-string synthesis. Wind and equipment/
+footstep effects are original project synthesis; no external music/sound pack.
+
+Soldiers derive from the recorded Quaternius CC0 rig pipeline. New cheering,
+running, attached equipment and inexpensive crowd pose bakes are original
+project additions. Earlier assets are retained. See the source and hash records:
+source-assets/characters/victory_soldiers.py,
+source-assets/audio/chapter-06-lines.json,
+docs/assets/victory-voice-provenance.json,
+docs/assets/victory-asset-manifest.json and docs/assets/victory-assets.md.
+
+Story context: 1 Samuel 17:50-53, adapted to the approved non-graphic treatment.
+Choreography, dialogue and closing reflection are original game adaptations.

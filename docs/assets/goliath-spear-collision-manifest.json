@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "checks": "Retained animation names, joint/mesh/triangle counts, speaking face and actual grip/tip/forehead markers.",
+  "triangles": 11785,
+  "joints": [
+    68
+  ],
+  "meshes": 12,
+  "files": [
+    {
+      "file": "apps/playcanvas/src/assets/goliath-encounter.glb",
+      "bytes": 1165612,
+      "sha256": "0d6de74a681eb4a5020b43388ddf76687770a96ebdfce80a817ada606e0c0dc0",
+      "animations": [
+        "goliath_advance",
+        "goliath_challenge",
+        "goliath_fall",
+        "goliath_ready",
+        "goliath_speak",
+        "goliath_spear",
+        "goliath_spear_1",
+        "goliath_spear_2",
+        "goliath_spear_3"
+      ]
+    },
+    {
+      "file": "apps/playcanvas/src/assets/goliath-collision.glb",
+      "bytes": 1168172,
+      "sha256": "cd8a573f93b06220e1b2f8c42f25282bf4f4e15aeba30fb2fc8571f8e82990fa",
+      "animations": [
+        "goliath_advance",
+        "goliath_challenge",
+        "goliath_fall",
+        "goliath_ready",
+        "goliath_speak",
+        "goliath_spear",
+        "goliath_spear_1",
+        "goliath_spear_2",
+        "goliath_spear_3"
+      ]
+    }
+  ]
+}

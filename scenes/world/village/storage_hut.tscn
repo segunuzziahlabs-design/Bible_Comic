@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/village_module.gd" id="1_module"]
+
+[node name="StorageHut" type="Node3D"]
+script = ExtResource("1_module")
+kind = 5

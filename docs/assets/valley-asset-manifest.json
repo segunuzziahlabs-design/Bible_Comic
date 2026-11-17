@@ -1,0 +1,18 @@
+{
+  "checked": "2026-11-11T13:49:56.294Z",
+  "soldier": {
+    "file": "apps/playcanvas/src/assets/soldier-standing-lod.glb",
+    "sha256": "dc31499bbd23090601b5940049f2406905cff9d21eb76c99ccd35f62f21a4e2c",
+    "bytes": 223904,
+    "triangles": 3416,
+    "skins": 0,
+    "animations": 0,
+    "source": "Existing prepared CC0 adult character; original shield and spear; Blender bake/decimation",
+    "generator": "source-assets/characters/valley_soldier_lod.py"
+  },
+  "voices": {
+    "clips": 7,
+    "hashes": "all match provenance",
+    "model": "same licensed model and supplied voice bank as the accepted Saul sample"
+  }
+}

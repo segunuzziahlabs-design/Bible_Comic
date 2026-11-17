@@ -1,0 +1,10 @@
+Jesse courtyard correction, 13 November 2026
+Retained Quaternius CC0 character basis with the project's original Q02 grey beard,
+clay mantle, wardrobe, greeting/pointing animation and new speaking face controls.
+Original procedural household courtyard and paraphrased dialogue by this project.
+Generated standard voices use the same retained Kokoro-82M v1.0 (Apache-2.0),
+voice bank and kokoro-onnx (MIT) as the previously checked cinematic sample.
+Source and hashes: docs/assets/courtyard-voice-provenance.json and
+docs/assets/jesse-courtyard-assets.md. No named actor cloning or film recording.
+Jesse personally gives the provisions errand; the courtyard setting, keeper's call
+and three defensive spear exchanges are creative staging, not quoted Bible events.

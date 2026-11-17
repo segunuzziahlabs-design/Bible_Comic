@@ -1,0 +1,21 @@
+DAVID AND GOLIATH - CHAPTER 4: PREPARATION
+
+The accepted three David-Saul recordings are reused. Eight additional original
+lines were generated locally using Kokoro-82M v1.0 (Apache-2.0), standard
+am_puck and am_michael voices, and kokoro-onnx 0.6.1 (MIT).
+Model/runtime notices accompany this file. No voice cloning, named-performer
+imitation, reference-film audio, external sound pack or paid provider was used.
+
+David and Saul derive from the existing Quaternius CC0 character pipeline.
+The loaned armour and its stand props, fitting/removal, armoured trial
+walk treatment, stone pickup and the brook/target geometry and textures are
+original project work. Existing characters and accepted assets are retained.
+Wind, water, movement, equipment and impact effects are original synthesis.
+
+Story context: 1 Samuel 17:32-40, in original game paraphrases. Sling practice
+at a woven target is a game adaptation. No reward or new defeat rule is added.
+
+Source/provenance: source-assets/characters/preparation_assets.py,
+source-assets/audio/chapter-04-lines.json,
+docs/assets/preparation-voice-provenance.json,
+docs/assets/preparation-asset-manifest.json and docs/assets/preparation-assets.md.

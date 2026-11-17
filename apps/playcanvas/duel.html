@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#172322" />
+    <link rel="icon" href="data:," />
+    <title>Chapter 5 · David and Goliath</title>
+  </head>
+  <body>
+    <main class="movement duel" data-scene="elah">
+      <header class="preview-heading">
+        <div>
+          <p class="eyebrow">David &amp; Goliath · Chapter Five</p>
+          <h1>David and Goliath</h1>
+        </div>
+        <nav class="preview-nav" aria-label="Valley options">
+          <button type="button" id="sound" aria-pressed="true" aria-label="Battle sound">Mute sound</button>
+          
+        </nav>
+      </header>
+      <section class="stage" aria-label="Valley of Elah">
+        <canvas id="stage" tabindex="0" aria-label="Explore Elah as David" aria-describedby="instructions">A browser with canvas and WebGL 2 is required.</canvas>
+        <div id="battle-hud" class="valley-hud" hidden>
+          <p id="objective" role="status">Follow the track across the brook</p>
+          <p id="stone-count" hidden></p>
+        </div>
+        <div id="sling-aim" class="sling-aim" aria-hidden="true" hidden></div>
+        <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
+        <button type="button" id="throw-stone" class="interaction-prompt" hidden>Throw <kbd aria-hidden="true">F</kbd></button>
+        <button type="button" id="dodge" class="sling-dodge" hidden>Dodge</button>
+        <button type="button" id="jump-shot" class="jump-shot" hidden>Jump Shot <kbd>Q</kbd></button>
+        <div id="pause-notice" class="pause-notice" role="status" hidden>Paused</div>
+        <p id="battle-caption" class="cue-caption" role="status" hidden></p>
+        <section id="battle-result" class="entry battle-result" aria-labelledby="battle-result-title" hidden>
+          <div class="entry-card">
+            <h2 id="battle-result-title"></h2>
+            <p id="battle-result-detail"></p>
+            <button type="button" id="battle-replay"></button>
+          </div>
+        </section>
+        <div id="spear-guide" class="spear-guide" role="status" hidden></div><div id="review-gate" class="entry" hidden><div class="entry-card"><p class="eyebrow">Chapter Five</p><h2>The champion has fallen</h2><p>David prevailed with his sling. The victory chapter follows.</p><p id="review-message" role="status"></p><button id="continue-victory">Continue to Victory</button><button id="replay-chapter">Replay Chapter 5</button><p class="review-note">Battle outcome confirmed</p></div></div><div id="save-error" class="entry" hidden><div class="entry-card"><h2>Checkpoint not saved</h2><p id="save-error-message" role="alert"></p><button id="retry-save">Retry save</button><button id="reload-save">Reload checkpoint</button></div></div><div class="entry" id="entry">
+          <div class="entry-card">
+            <p id="entry-message" role="status">Loading David and the Valley of Elah…</p>
+            <button type="button" id="retry" hidden>Retry</button>
+            <button type="button" id="enter" hidden>Begin Chapter 5</button>
+          </div>
+        </div>
+      </section>
+      <footer class="movement-footer">
+        <p id="instructions">
+          <span class="keyboard-hint">WASD or arrows to move. Drag to look.</span>
+          <span class="touch-hint">Drag the left stick to move. Drag the view to look.</span>
+        </p>
+        <p id="battle-instructions" hidden>
+          <span class="keyboard-hint">Move: WASD · Aim: mouse · Throw: click / F · Dodge: Shift</span>
+          <span class="touch-hint">Move: left stick · Aim: drag · Tap Throw / Dodge</span>
+        </p>
+        <span id="save-status">Chapter 5</span><div class="actions">
+          <button type="button" id="pause" disabled>Pause</button>
+          <button type="button" id="reset" disabled>Restart checkpoint</button>
+        </div>
+      </footer>
+      <noscript><p>Enable JavaScript to enter the valley.</p></noscript>
+    </main>
+    <script type="module" src="/src/app/duel-main.ts"></script>
+  </body>
+</html>

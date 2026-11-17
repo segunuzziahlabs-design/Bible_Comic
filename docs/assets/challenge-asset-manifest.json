@@ -1,0 +1,23 @@
+{
+  "checked": "2026-11-11T15:25:47.456Z",
+  "goliath": {
+    "file": "apps/playcanvas/src/assets/goliath-speaking.glb",
+    "bytes": 953108,
+    "triangles": 11785,
+    "sha256": "76338583ba33b807ef60cf6bd82c4a6775c5454e490261d1d63dab095dc3315c",
+    "originalBattleClips": "All retained with identical duration",
+    "addition": "Original speaking face and eight-second speech gesture; original CC0-derived model preserved separately"
+  },
+  "adult": {
+    "file": "apps/playcanvas/src/assets/challenge-soldier.glb",
+    "bytes": 1254564,
+    "triangles": 10563,
+    "sha256": "53e613aaefd7c2de15eb4b94b826469f2fb9dc8bc5a056e7f6f3de732d3fd6e5",
+    "addition": "Original backward alarm step and rebuke clip; existing adult conversation rig"
+  },
+  "generator": "source-assets/characters/challenge_performances.py",
+  "voices": {
+    "clips": 9,
+    "hashes": "All match WAVs and previously licensed model/standard voice bank"
+  }
+}

@@ -1,0 +1,18 @@
+DAVID AND GOLIATH - CHAPTER 2: DAVID ARRIVES
+
+Original game dialogue generated locally using Kokoro-82M v1.0 (Apache-2.0)
+and the supplied standard am_puck, bm_george and am_michael voices through
+kokoro-onnx 0.6.1 (MIT). Model and runtime notices accompany this file.
+No voice cloning or named-performer imitation was used.
+
+Models derive from the existing Quaternius CC0 character pipeline, with
+original project wardrobe, facial controls and performances. The teenage
+David's new carry/set-down action and the camp's procedural props, textures
+and synthesized environmental effects are original project work.
+Background figures reuse the existing standing-soldier bake.
+
+Exact scripts, model/voice and asset hashes, authoring sources and rights
+records are preserved in docs/assets/camp-voice-provenance.json,
+docs/assets/camp-asset-manifest.json and docs/assets/camp-arrival-assets.md
+in the source project. Dialogue is an original adaptation of the provisions
+and greeting context of 1 Samuel 17:17-22, not a copied modern translation.

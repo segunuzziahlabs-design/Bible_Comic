@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/proof/courtyard_proof.gd" id="1_proof"]
+[ext_resource type="PackedScene" path="res://scenes/world/courtyard.tscn" id="2_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/david.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/shepherd.tscn" id="4_actor"]
+[ext_resource type="PackedScene" path="res://scenes/player/game_input.tscn" id="5_input"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_ui.tscn" id="6_ui"]
+[ext_resource type="PackedScene" path="res://scenes/ui/objective_marker.tscn" id="7_marker"]
+[ext_resource type="AudioStream" path="res://assets/proof/confirmation.wav" id="8_cue"]
+[ext_resource type="PackedScene" path="res://scenes/player/exploration_camera.tscn" id="9_camera"]
+[ext_resource type="PackedScene" path="res://scenes/interaction/interactor.tscn" id="10_interactor"]
+
+[node name="CourtyardProof" type="Node3D"]
+script = ExtResource("1_proof")
+
+[node name="Interactor" parent="." instance=ExtResource("10_interactor")]
+
+[node name="Courtyard" parent="." instance=ExtResource("2_world")]
+
+[node name="David" parent="." instance=ExtResource("3_player")]
+position = Vector3(0, 0.1, 5)
+
+[node name="Jesse" parent="." instance=ExtResource("4_actor")]
+position = Vector3(0, 0, 1.3)
+scale = Vector3(1.12, 1.12, 1.12)
+
+[node name="ExplorationCamera" parent="." instance=ExtResource("9_camera")]
+
+[node name="ObjectiveMarker" parent="." instance=ExtResource("7_marker")]
+visible = false
+
+[node name="Confirmation" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_cue")
+volume_db = -6.0
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="GameInput" parent="Interface" instance=ExtResource("5_input")]
+
+[node name="GameUI" parent="Interface" instance=ExtResource("6_ui")]

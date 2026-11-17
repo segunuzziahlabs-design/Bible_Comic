@@ -1,0 +1,88 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-11",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/chapter-04-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "armour-offer",
+      "speaker": "Saul",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "Take my helmet and armour. Try how they feel before you go.",
+      "duration": 4.181333333333333,
+      "sha256": "ca235360a4bdcb3443061c223b8f4faa486592eb16eaeb132fffc5f600151e4d"
+    },
+    {
+      "id": "armour-heavy",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "They are heavy. My steps do not feel like my own.",
+      "duration": 2.7733333333333334,
+      "sha256": "01145cd5331648e1eaa4a0d1c113cf540c8dbe2b9c2195231e48d0a5cc1765a1"
+    },
+    {
+      "id": "armour-decline",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "I cannot go in these. I have never learned to use them.",
+      "duration": 3.1146666666666665,
+      "sha256": "38ef39b404d7a202f21ab3c675c0eea976fbfeb2513db403b5bff0be3fdb2e47"
+    },
+    {
+      "id": "saul-release",
+      "speaker": "Saul",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "Then take what you know. May the Lord go with you.",
+      "duration": 3.1573333333333333,
+      "sha256": "5d6ca02c697eeb8eb9b2d8395625cc771c1596c1d3e6e0ea77caa9fd380c229b"
+    },
+    {
+      "id": "brook-arrival",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Five smooth stones from the brook. My shepherd's sling is enough.",
+      "duration": 3.776,
+      "sha256": "3f3da82911ebd510dec6ea5fbfa196ecae0732921f9fa9fa02bcc5cebdb08378"
+    },
+    {
+      "id": "stones-first",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Smooth and round. This one will sit well in the sling.",
+      "duration": 2.88,
+      "sha256": "ce31b889a0a95a3d33abce1f5a251efe47d5b76f4fd14595ff0905c052a13738"
+    },
+    {
+      "id": "stones-five",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Five stones, safely in my bag. Now to prepare my sling.",
+      "duration": 3.7546666666666666,
+      "sha256": "54525143ebc8b17e9e58b54b2871823d3cb0ae54757003afcb1ff83026d8d309"
+    },
+    {
+      "id": "practice-ready",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "A steady hand. My trust is in the Lord.",
+      "duration": 2.432,
+      "sha256": "71434e5b38bfea416f19c49cc25e68fee31314a236cb8a78601a8e542a415c30"
+    }
+  ]
+}

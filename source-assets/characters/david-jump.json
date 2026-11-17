@@ -1,0 +1,23 @@
+{
+  "source": "Existing project teenage David rig; original poses authored by this script.",
+  "rootMotion": "None; controller supplies physical vertical motion.",
+  "clips": [
+    {
+      "name": "jump_takeoff",
+      "frames": 7,
+      "fps": 30
+    },
+    {
+      "name": "jump_air",
+      "frames": 21,
+      "fps": 30
+    },
+    {
+      "name": "jump_land",
+      "frames": 9,
+      "fps": 30
+    }
+  ],
+  "rig": "Armature",
+  "bones": 65
+}

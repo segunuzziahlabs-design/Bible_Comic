@@ -1,0 +1,33 @@
+{
+  "generator": "tools/create-proof-assets.py",
+  "blender": "4.5.15 LTS",
+  "units": "metres",
+  "source_axes": "Blender Z-up, character faces -Y",
+  "export_axes": "glTF/Godot Y-up, character faces +Z",
+  "assets": [
+    {
+      "file": "shepherd.glb",
+      "bytes": 125236,
+      "triangles": 736,
+      "meshes": 1,
+      "materials": 6,
+      "skins": 1,
+      "joints": 11,
+      "animations": [
+        "Idle",
+        "Walk",
+        "Wave"
+      ]
+    },
+    {
+      "file": "courtyard-gate.glb",
+      "bytes": 32624,
+      "triangles": 252,
+      "meshes": 21,
+      "materials": 2,
+      "skins": 0,
+      "joints": 0,
+      "animations": []
+    }
+  ]
+}

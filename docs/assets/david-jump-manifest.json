@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-16",
+  "source": "Retained teenage David rig, original CTRL-04 pose authoring; existing CC0-derived lineage referenced in david-jump.md",
+  "nodes": 66,
+  "meshCount": 0,
+  "rootPathsMatchExistingModel": true,
+  "noTravellingRootTranslation": true,
+  "clips": [
+    {
+      "name": "jump_air",
+      "channels": 195,
+      "durationSeconds": 0.6666666666666666
+    },
+    {
+      "name": "jump_land",
+      "channels": 195,
+      "durationSeconds": 0.26666666666666666
+    },
+    {
+      "name": "jump_takeoff",
+      "channels": 195,
+      "durationSeconds": 0.2
+    }
+  ],
+  "files": [
+    {
+      "path": "apps/playcanvas/src/assets/david-jump.glb",
+      "bytes": 161592,
+      "sha256": "8ab23fc9d3553c1a71c592da6d994808a58826560e7bffa2315ef9ba15d3b55e"
+    },
+    {
+      "path": "source-assets/characters/david-jump.blend",
+      "bytes": 806602,
+      "sha256": "2cbbda30683bd8e81c3888903881cd48da2f2f38c65f993114fc152c9ed3c3ec"
+    },
+    {
+      "path": "source-assets/characters/david_jump.py",
+      "bytes": 5276,
+      "sha256": "2a0586ba3566f8efc7e81adb2df23540a9fe0fa3a23a583203385237121e380c"
+    },
+    {
+      "path": "source-assets/characters/david-jump.json",
+      "bytes": 467,
+      "sha256": "df395dd868f7d16ea8c7035e2843719e7bb5bf5f46e51266d6bd7d07fdb0b979"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/david-adventure.glb",
+      "bytes": 1388116,
+      "sha256": "869d6e0c1abe22268d2548f440507c267d0d0091d87551353b148adb3629b484"
+    }
+  ]
+}

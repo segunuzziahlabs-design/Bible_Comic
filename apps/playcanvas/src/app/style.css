@@ -1,0 +1,124 @@
+:root {
+  color-scheme: dark;
+  font: 1rem/1.45 system-ui, sans-serif;
+  color: #f7ecda;
+  background: #172322;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+main {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 83rem);
+  margin-inline: auto;
+  padding: clamp(.75rem, 2vw, 1.5rem);
+}
+
+.eyebrow {
+  margin: 0 0 .2rem;
+  color: #dfb87f;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+h1 { margin: 0; font: 600 clamp(1.45rem, 3.5vw, 2.1rem)/1.1 Georgia, serif; }
+.preview-heading { display: flex; align-items: end; justify-content: space-between; gap: .5rem; }
+.preview-nav { display: flex; flex-wrap: wrap; justify-content: end; gap: .35rem; }
+
+.stage {
+  position: relative;
+  height: clamp(16rem, 69svh, 45rem);
+  overflow: hidden;
+  border: 1px solid #586866;
+  border-radius: .75rem;
+  background: #3b5155;
+}
+canvas { display: block; width: 100%; height: 100%; }
+.entry {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(12 24 22 / 66%);
+}
+.entry-card {
+  max-width: 29rem;
+  padding: 1.15rem;
+  border: 1px solid #63726b;
+  border-radius: .75rem;
+  background: #172322;
+  text-align: center;
+}
+.entry-card p { margin: 0; }
+.entry-card button { margin-top: .8rem; }
+.controls, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.controls { justify-content: space-between; }
+.controls output { color: #d2d9d1; font-size: .86rem; }
+.appearance {
+  border: 1px solid #586866;
+  border-radius: .75rem;
+  padding: .75rem;
+  background: #1e2e2c;
+}
+.appearance h2 { margin: 0 0 .65rem; font: 600 1.15rem/1.2 Georgia, serif; }
+.appearance-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: .6rem;
+  margin-bottom: .65rem;
+}
+.appearance-field { display: grid; gap: .2rem; min-width: 0; }
+.appearance-field label { font-size: .8rem; }
+main[data-customizing] .stage { height: clamp(12rem, 45svh, 31rem); }
+
+button, select, .preview-link {
+  min-height: 44px;
+  padding: .4rem .75rem;
+  border: 1px solid #667774;
+  border-radius: .45rem;
+  background: #243533;
+  color: inherit;
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+select { width: 100%; min-width: 0; }
+.preview-link { display: inline-flex; align-items: center; text-decoration: none; }
+button[aria-pressed="true"], #enter, #retry {
+  background: #e5bf83;
+  border-color: #e5bf83;
+  color: #231e17;
+}
+button:disabled { opacity: .52; cursor: default; }
+button:focus-visible, select:focus-visible, .preview-link:focus-visible { outline: 2px solid #f7ecda; outline-offset: 2px; }
+
+@media (orientation: portrait) {
+  .stage { height: clamp(16rem, 62svh, 40rem); }
+  .appearance-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (orientation: portrait) and (max-width: 360px) {
+  main { gap: .75rem; }
+  h1 { font-size: 1.25rem; }
+  .stage { height: clamp(14rem, 57svh, 40rem); }
+  main[data-customizing] .stage { height: max(11rem, 34svh); }
+  .actions button { padding-inline: .5rem; }
+}
+@media (orientation: landscape) and (max-height: 480px) {
+  main { gap: .45rem; padding-block: .45rem; }
+  .eyebrow { margin-bottom: 0; font-size: .68rem; }
+  h1 { font-size: 1.15rem; }
+  .stage { height: max(10rem, calc(100svh - 7.4rem)); }
+  main[data-customizing] { grid-template-columns: minmax(0, 1fr) minmax(13rem, 44%); }
+  main[data-customizing] .preview-heading { grid-column: 1 / -1; }
+  main[data-customizing] .stage { height: max(8rem, calc(100svh - 10.5rem)); }
+  main[data-customizing] .appearance { grid-column: 2; grid-row: 2 / span 2; padding: .55rem; }
+  main[data-customizing] .controls { grid-column: 1; }
+  main[data-customizing] .actions button { padding-inline: .4rem; font-size: .8rem; }
+  .appearance-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .appearance select { padding-inline: .35rem; font-size: .76rem; }
+}

@@ -1,0 +1,116 @@
+import { Vec3, type Application, type Entity } from 'playcanvas';
+import { buildValleyOpening } from './valley-opening';
+import { createSceneSpeech, mouthEnvelope } from './scene-speech';
+import type { ElahBattleState } from '../gameplay/elah-battle';
+import type { loadDavid } from './david-character';
+import davidUrl from '../assets/david-adventure.glb?url';
+import goliathUrl from '../assets/goliath-ranged.glb?url';
+import actorUrl from '../assets/challenge-soldier.glb?url';
+import oldLines from '../assets/duel-dialogue/dialogue.json';
+import encounterLines from '../assets/encounter-dialogue/dialogue.json';
+import concern from '../assets/encounter-dialogue/soldier-concern.wav?url';
+import forward from '../assets/encounter-dialogue/step-forward.wav?url';
+import steady from '../assets/encounter-dialogue/steady.wav?url';
+const lines=[...oldLines,...encounterLines];
+import contempt from '../assets/duel-dialogue/goliath-contempt.wav?url';
+import threat from '../assets/duel-dialogue/goliath-threat.wav?url';
+import faith from '../assets/duel-dialogue/david-faith.wav?url';
+import battle from '../assets/duel-dialogue/david-battle.wav?url';
+import watch from '../assets/duel-dialogue/soldier-watch.wav?url';
+
+export const duelVersion = 'cinematic-duel-2';
+export const confrontationDuration = 28;
+type David = Awaited<ReturnType<typeof loadDavid>>;
+
+export async function createDuelPresentation(app: Application) {
+  const world = await buildValleyOpening(app, { goliathUrl, actorUrl, playableBattle: true, externalChallenge: true });
+  // The opening hides the original fixture dressing. Retain its combat props only.
+  for (const child of app.root.children) if (/^(Spear warning|Sling stone|Stone trail|Sling cord|Sling pouch)/.test(child.name)) child.enabled = true;
+  world.anchors={...world.anchors,'battle.approach':{x:0,z:-1.0}};
+  world.marker.enabled = false;
+  const audio = await createSceneSpeech(lines, {
+    'soldier-concern':concern,'step-forward':forward,steady,
+    'goliath-contempt': contempt, 'goliath-threat': threat, 'david-faith': faith,
+    'david-battle': battle, 'soldier-watch': watch,
+  }, {departure:[{id:'soldier-concern',start:1},{id:'step-forward',start:5.2}],opportunity:[{id:'steady',start:.2}],confrontation: [
+    { id: 'goliath-contempt', start: 1.4 }, { id: 'goliath-threat', start: 6 },
+    { id: 'david-faith', start: 9.5 }, { id: 'david-battle', start: 16.5 },
+    { id: 'soldier-watch', start: 22.2 },
+  ] }, [], 7);
+  let phase = '', starts = 0, shot = 'approach', previousShot = '', elapsed = 0;
+  const eye = new Vec3();let opportunity=false,entranceGap=0;const beats=new Set<number>();
+  function reset() { audio.reset(); world.resetActivity(); phase = ''; shot = 'approach'; elapsed = 0;opportunity=false;entranceGap=0;beats.clear(); }
+  function step(state: ElahBattleState, dt: number, david: David) {
+    elapsed += dt;
+    if (state.phase !== phase) {
+      phase = state.phase;
+      if(phase==='entrance'){audio.begin('departure',{David:david.model.getPosition(),Soldier:world.patrol.model.getPosition()});}
+      else if (phase === 'challenge') {
+        starts++;
+        audio.begin('confrontation', {
+          David: david.model.getPosition(), Goliath: world.champion.forehead.getPosition(),
+          Soldier: { x: -4, y: world.groundHeight(-4, 7.4) + 1.5, z: 7.4 },
+        });
+      } else audio.cancel();
+    }
+    world.stage(elapsed,true,phase==='entrance'?Math.min(.8,state.time/5):phase==='challenge'?.7:.3,false);
+    if(phase==='entrance'){entranceGap=Math.min(.8,state.time/5);for(const beat of[.4,1.1,1.8,2.5,3.2,3.9])if(state.time>=beat&&!beats.has(beat)){beats.add(beat);audio.footstep(world.champion.model.getPosition());audio.equipment(world.champion.model.getPosition());}}
+    for(const actor of[world.patrol,world.sentinel]){const p=actor.model.getPosition();actor.model.setPosition(p.x+(p.x<0?-1:1)*entranceGap,p.y,p.z);}
+    if(phase==='fight'&&state.dodges>=3&&!opportunity){opportunity=true;audio.begin('opportunity',{David:david.model.getPosition()});}
+    const line = audio.lineAt();
+    const mouth = line ? mouthEnvelope(line, line.local) : [0, 0];
+    david.speech(line?.speaker === 'David' ? mouth[0] : 0, line?.speaker === 'David' ? mouth[1] : 0);
+    world.champion.face(line?.speaker === 'Goliath' ? mouth[0] : 0, line?.speaker === 'Goliath' ? mouth[1] : 0);
+    world.patrol.face(line?.speaker === 'Soldier' ? mouth[0] : 0, line?.speaker === 'Soldier' ? mouth[1] : 0, 0, .35, 0);
+    for (const actor of [world.patrol, world.sentinel]) {
+      const clip = (phase === 'challenge' && state.time < 4)||(phase==='entrance'&&state.time>=1&&state.time<8) ? 'react_alarm' : 'listen';
+      const actual = actor.tracks.has(clip) ? clip : 'listen';
+      actor.pose(actual, elapsed % actor.tracks.get(actual)!.duration, dt);
+    }
+    if (phase === 'challenge') {
+      if (line?.speaker === 'Goliath') world.champion.pose('goliath_speak', line.local, 0);
+      else world.champion.pose('goliath_ready', elapsed % 2.083, 0);
+      const layer = david.animator.baseLayer!;
+      const clip = line?.speaker === 'David' ? 'Speak' : 'Listen';
+      if (layer.activeState !== clip) layer.transition(clip,.12);
+      layer.activeStateCurrentTime = line?.speaker === 'David'
+        ? Math.min(line.local, david.tracks.get('speak_resolve')!.duration)
+        : elapsed % david.tracks.get('listen')!.duration;
+      david.animator.update(dt);
+    }
+    audio.update(world.camera.getPosition(), world.camera.forward);
+  }
+  const canvasPortrait=()=>app.graphicsDevice.canvas.clientHeight>app.graphicsDevice.canvas.clientWidth;
+  function frame(state: ElahBattleState, david: Entity, dt: number) {
+    if(state.phase==='fight'&&state.jumpShotTime!==undefined){
+      shot='david-jump-and-sling';const p=david.getPosition(),g=world.champion.forehead.getPosition(),angle=Math.atan2(p.x-g.x,p.z-g.z),t=state.jumpShotTime;
+      const side=1.8*Math.min(1,t/.3),distance=canvasPortrait()?4.7:4.2;
+      const destination=new Vec3(p.x+Math.sin(angle)*distance+Math.cos(angle)*side,p.y+1.9,p.z+Math.cos(angle)*distance-Math.sin(angle)*side);
+      eye.lerp(world.camera.getPosition(),destination,1-Math.exp(-5*dt));world.camera.setPosition(eye);world.camera.lookAt((p.x+g.x)*.5,p.y+1.15,(p.z+g.z)*.5);world.camera.camera!.fov=canvasPortrait()?61:53;return true;
+    }
+    if(state.phase==='entrance'){const p=david.getPosition(),g=world.champion.model.getPosition(),t=state.time;shot=t<4.5?'the-champion-walks-out':t<9?'david-steps-forward':'the-field-awaits';const target=t<4.5?new Vec3(g.x+3.1,g.y+.9,g.z+4.3):t<9?new Vec3(p.x+2.0,p.y+1.65,p.z-.8):new Vec3(p.x+.4,p.y+2.1,p.z+3.8);eye.lerp(world.camera.getPosition(),target,1-Math.exp(-5*dt));world.camera.setPosition(eye);if(t<4.5)world.camera.lookAt(g.x,g.y+1.85,g.z);else if(t<9)world.camera.lookAt(p.x,p.y+1.3,p.z);else world.camera.lookAt(g.x,g.y+1.8,g.z);world.camera.camera!.fov=53;return true;}
+    if (state.phase === 'fall' || state.phase === 'victory') {
+      shot = 'the-champion-falls'; const p = state.foe, y = world.groundHeight(p.x, p.z);
+      eye.set(p.x + 2.6, y + 1.65, p.z + 4.1).lerp(world.camera.getPosition(), eye, 1 - Math.exp(-5 * dt));
+      world.camera.setPosition(eye); world.camera.lookAt(p.x, y + .5, p.z + .25); world.camera.camera!.fov = 49; return true;
+    }
+    if (state.phase !== 'challenge') { shot = state.phase; previousShot = ''; return false; }
+    const t = state.time, p = david.getPosition(), g = world.champion.forehead.getPosition();
+    const portrait = app.graphicsDevice.canvas.clientHeight > app.graphicsDevice.canvas.clientWidth;
+    let focus: number[], destination: number[], fov = portrait ? 48 : 42;
+    if (t < 1.4) { shot = 'a-shepherd-before-the-champion'; destination = [-3.2, p.y + 2.6, p.z + .6]; focus = [.2, g.y - .6, -9.2]; fov = 54; }
+    else if (t < 9.1) { shot = 'goliath-contempt'; destination = [2.1 - t * .025, g.y + .05, -6.6]; focus = [g.x, g.y - .18, g.z]; }
+    else if (t < 21.9) { shot = 'david-faith'; destination = [p.x + 1.0, p.y + 1.59, p.z - 2.5]; focus = [p.x, p.y + 1.43, p.z]; }
+    else if (t < 24.8) { shot = 'soldiers-hold-their-breath'; const a = world.patrol.model.getPosition(); destination = [a.x + 1, a.y + 1.8, a.z - 2.2]; focus = [a.x, a.y + 1.5, a.z]; }
+    else { shot = 'control-returns-to-david'; destination = [p.x + (portrait ? .31 : .53), p.y + 1.92, p.z + 3.3]; focus = [g.x, world.groundHeight(g.x, g.z) + 2, g.z]; fov = 52; }
+    const blend = shot !== previousShot ? 1 : 1 - Math.exp(-5 * dt); previousShot = shot;
+    eye.set(destination[0], destination[1], destination[2]); eye.lerp(world.camera.getPosition(), eye, blend);
+    world.camera.setPosition(eye); world.camera.lookAt(focus[0], focus[1], focus[2]); world.camera.camera!.fov = fov;
+    return true;
+  }
+  return { world, davidUrl, audio, step, frame, reset,
+    caption: () => { const line = audio.lineAt(); return line ? `${line.speaker}: ${line.text}` : ''; },
+    sample: () => ({ version: duelVersion, starts, shot, speaker: audio.lineAt()?.speaker,
+      voiceTime: audio.cueTime(), audio: audio.context.state, goliathMouth: world.champion.mouthWeights(), soldierMouth: world.patrol.mouthWeights() }),
+  };
+}

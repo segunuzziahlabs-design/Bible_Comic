@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#172322" />
+    <link rel="icon" href="data:," />
+    <title>David &amp; Goliath · Movement Test</title>
+  </head>
+  <body>
+    <main class="movement">
+      <header class="preview-heading">
+        <div>
+          <p class="eyebrow">David &amp; Goliath</p>
+          <h1>Movement test</h1>
+        </div>
+        <nav class="actions" aria-label="Other previews">
+          <a class="preview-link" href="./" aria-label="Animation preview">Animations</a>
+          <a class="preview-link" href="./elah.html">Elah</a>
+        </nav>
+      </header>
+      <section class="stage" aria-label="Movement courtyard">
+        <canvas id="stage" tabindex="0" aria-label="Move David around the courtyard" aria-describedby="instructions">A browser with canvas and WebGL 2 is required.</canvas>
+        <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
+        <button type="button" id="inspect-marker" class="interaction-prompt" hidden>Inspect marker <kbd aria-hidden="true">E</kbd></button>
+        <div id="pause-notice" class="pause-notice" role="status" hidden>Paused</div>
+        <p id="cue-caption" class="cue-caption" role="status" hidden></p>
+        <div class="entry" id="entry">
+          <div class="entry-card">
+            <p id="entry-message" role="status">Loading David and the courtyard…</p>
+            <button type="button" id="retry" hidden>Retry</button>
+            <button type="button" id="enter" hidden>Enter courtyard</button>
+          </div>
+        </div>
+      </section>
+      <footer class="movement-footer">
+        <p id="instructions">
+          <span class="keyboard-hint">WASD or arrows to move. Drag to look. E to interact.</span>
+          <span class="touch-hint">Drag the left stick to move. Drag the view to look.</span>
+        </p>
+        <div class="actions">
+          <button type="button" id="pause" disabled>Pause</button>
+          <button type="button" id="reset" disabled>Restart</button>
+        </div>
+      </footer>
+      <noscript><p>Enable JavaScript to enter the courtyard.</p></noscript>
+    </main>
+    <script type="module" src="/src/app/movement-main.ts"></script>
+  </body>
+</html>

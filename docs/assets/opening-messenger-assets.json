@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-13",
+  "source": "source-assets/audio/messenger-lines.json",
+  "provenance": "docs/assets/messenger-voice-provenance.json",
+  "retainedLicensedModelAndVoiceBankMatch": true,
+  "lines": [
+    {
+      "id": "jesse-calls",
+      "speaker": "Messenger",
+      "text": "David! Jesse, your father, is calling you. He is waiting for you in the courtyard.",
+      "voice": "am_michael",
+      "speed": 1.0,
+      "duration": 5.226666666666667,
+      "sha256": "8604b8621ef3974359332dcb66a956076c971f9327231cf866e79f1c16a61581"
+    },
+    {
+      "id": "david-follows",
+      "speaker": "David",
+      "text": "I am coming. Let me leave the sheep with their keeper, and I will go to my father.",
+      "voice": "am_puck",
+      "speed": 1.0,
+      "duration": 4.288,
+      "sha256": "45f92773fe55247ced9ec59051922fe30bb06ec2b74a4c17f8b9ffe5c3e4f91f"
+    },
+    {
+      "id": "keeper-ready",
+      "speaker": "Keeper",
+      "text": "Go to your father, David. I will keep the flock safe.",
+      "voice": "bm_daniel",
+      "speed": 1.0,
+      "duration": 3.072,
+      "sha256": "5b448dff3e332aead130ff2d8ccc7b287ddc39e2367f00861d4d4d7cee1a1646"
+    }
+  ],
+  "characters": "Separate Messenger and Keeper instances of the retained challenge-soldier rig, with individual clothing tints and royal equipment hidden; no new model download."
+}

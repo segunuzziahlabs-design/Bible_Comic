@@ -1,0 +1,30 @@
+# M4 account and product implementation plan
+
+17 November 2026. The owner authorised M4 and signed in to Clerk as `segun.uzziahlabs@gmail.com`. Verify the actual dashboard before claiming that an application is configured. [Approved milestone](../roadmap/project-reset-plan.md#implementation-order-and-review-gates) / [Production blueprint](playcanvas-production-blueprint.md) / [Accepted game candidate](elah-saul-cinematic-polish.md).
+
+## Scope and implementation order
+
+| Task | Implementation and dependencies | Completion evidence |
+| --- | --- | --- |
+| M4-01 Service configuration | Inspect the signed-in Clerk account and intended development application. Use its publishable key and supported JavaScript SDK. Identify the intended Supabase development project and configure native Clerk token verification. Keep credentials out of logs, source and bundles. No paid subscription or production changes. | Actual Clerk session and intended application verified; development settings captured privately; provider configuration verified rather than assumed. |
+| M4-02 Responsive product shell | Extend the existing Vite/TypeScript application with public landing, Clerk sign-in/sign-up/account UI, dashboard, chapter catalog, profile, settings and results. Keep the current character preview accessible separately and keep PlayCanvas off the landing/dashboard load path. | Browser captures on desktop, portrait and landscape; accessible navigation and real loaded/unavailable states without fabricated player statistics. |
+| M4-03 Owned persistence | Add versioned Postgres migrations for profiles, preferences, episode runs, attempt history and idempotent command receipts. Use Clerk's verified token subject for ownership, restricted RPC writes, row-level security, revision checks and validated progression. Prepare/review migrations before applying to a specifically identified development project. | Fresh database checks; real anonymous/two-account isolation; duplicate/stale command checks; no direct arbitrary snapshot overwrite. |
+| M4-04 Game integration | Connect the existing episode session through its save-adapter boundary. Keep the twelve objectives, six chapters, current cinematic rendering, lethal-defeat rule and Retry Battle. Load account appearance/preferences before rendering, preserve normal confirmed saves and make local appearance import explicit. | A signed-in run saves and resumes across browser contexts; valid defeat/retry and replay preserve preparation/history; saves never silently fall back to another account or local-only storage. |
+| M4-05 Account lifecycle and recovery | Handle sign-out, expiry/account switching, save/network failure, stale revisions, safe return URLs and settings conflicts. Chapter selection exposes only legitimately unlocked progress; replay must not forge progress or erase history. | Verified state reset on logout, account isolation, pending-save retry with the same command ID and authoritative reload after conflict. |
+| M4-06 Integrated verification and handover | Build/typecheck; run meaningful rule/API tests and responsive browser journeys. Verify the live Clerk and database integrations separately from local fixtures. Freeze a separate candidate and retain port 4202's scene-review build. | Website-to-game-to-results/dashboard journey, two-account isolation and cross-browser resume demonstrated; exact gaps reported if service access/configuration is unavailable. No deployment, commit or push. |
+
+## Engineering decisions
+
+- Retain PlayCanvas 2.24, TypeScript, Vite and HTML/CSS. Use Clerk's JavaScript components rather than introduce a new frontend framework.
+- Follow the approved Clerk plus Supabase Postgres/Data API architecture. Use public browser configuration only; no Clerk secret key or Supabase privileged key belongs in Vite.
+- Account progression must be server validated. Adapt accepted local snapshot changes into typed events; the server validates the ordered objective/retry/defeat/replay transition and commits with an expected revision and unique command receipt. A successful local write is not a cloud-save verification.
+- Keep the existing local development/review path explicit. A missing account service must show an unavailable/retry state, not impersonate a signed-in user or claim a local save is cloud-confirmed.
+- Reuse the existing appearance options, voice settings and six chapters. Rewards and additional episodes remain outside this milestone.
+
+## Dependencies and owner decisions
+
+Clerk dashboard access was verified. With owner approval, the dedicated **David and Goliath development app** was created on 17 November (`app_3MEVSiOeIUzWx5cGOP8xcoRK9uR`, instance `ins_3MEVSms2QnQgVJtMZGERssCteAY`). Its frontend is `blessed-wren-3811.clerk.accounts.dev`. Only publishable configuration is written to ignored `.env.local`; the unrelated existing application is preserved. Real Clerk forms render in desktop, portrait and landscape browser layouts.
+
+The owner authorised the Supabase project and live tests. The dedicated free project **bible-comic-dev** (`hvwdhxabbqufkcptcega`) was created in **London/eu-west-2** under the existing `segunuzziahlabs-design's Org`. Native Clerk trust was enabled on both services, and the reviewed migration was applied to this project. Hosted sign-in, ordered saves, account isolation, Chrome-to-Edge resume and the complete episode passed. Final responsive/recovery checks passed on the separate port 4206 candidate. **Implementation and engineering checks are complete; owner approval of the product journey remains open.** No paid upgrade, game deployment, commit or push. [Handover and evidence](m4-account-and-product-handover.md).
+
+Official references checked for this integration: [Clerk JavaScript/Vite quickstart](https://clerk.com/docs/js-frontend/getting-started/quickstart) / [Supabase native Clerk integration](https://supabase.com/docs/guides/auth/third-party/clerk). Check installed SDK declarations before using version-sensitive methods.

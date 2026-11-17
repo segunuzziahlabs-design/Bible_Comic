@@ -1,0 +1,78 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-11",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Actual waveform amplitude and spectral envelopes at 30 Hz; not phoneme alignment",
+  "lines": [
+    {
+      "id": "valley",
+      "speaker": "Narrator",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "On the hills above the Valley of Elah, two armies face one another.",
+      "duration": 4.586666666666667,
+      "sha256": "c51d1fad614a2eacac96807aed6c1963923deec6ab3ffd2de4665f5f0b0e418e"
+    },
+    {
+      "id": "sentinel",
+      "speaker": "Soldier",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "Keep to the path, young shepherd. The Philistines hold the far ridge.",
+      "duration": 4.586666666666667,
+      "sha256": "85428c2a988d8ba5d1f990a1df0c1a251ca3386d7fa06db40263b11f6891b9cb"
+    },
+    {
+      "id": "champion",
+      "speaker": "Narrator",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "Across the brook stands Goliath, the Philistine champion. His challenge has troubled Israel for forty days.",
+      "duration": 7.36,
+      "sha256": "be27e29c61b980bc6b9f90cea0b6c6a66da539a7c0095897c908ec4ae09e8b8f"
+    },
+    {
+      "id": "david",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "My brothers are here. I must find them.",
+      "duration": 2.1546666666666665,
+      "sha256": "e4d064152b563290ec216b7cdf45781ab981206b2de6abc39183aec98792dac3"
+    },
+    {
+      "id": "survey",
+      "speaker": "Soldier",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "You can see their ranks beyond the brook. Bring your provisions to the baggage keeper.",
+      "duration": 4.906666666666666,
+      "sha256": "9550bc07b234d746a6477115ac326593b2fe8c041cfc52d0cb52129fdb841b58"
+    },
+    {
+      "id": "hold",
+      "speaker": "Distant soldier",
+      "voice": "am_michael",
+      "speed": 1.0,
+      "text": "Hold the line.",
+      "duration": 1.1946666666666668,
+      "sha256": "bd788e2a29285814ec5055a5ba26d3f67a958e02a547c49d3b4d9fcd962ed989"
+    },
+    {
+      "id": "ready",
+      "speaker": "Distant soldier",
+      "voice": "bm_george",
+      "speed": 1.0,
+      "text": "Stand ready.",
+      "duration": 1.1306666666666667,
+      "sha256": "bf88d059fde7064075e3a63e5aa0bd680b8dac47b7c3c8b630f3c6eab1476341"
+    }
+  ]
+}

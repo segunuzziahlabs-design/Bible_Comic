@@ -1,0 +1,13 @@
+{
+  "chapter": "camp",
+  "lines": [
+    {"id":"delivery-david","speaker":"David","voice":"am_puck","speed":0.94,"text":"I have brought provisions from Bethlehem for my brothers."},
+    {"id":"delivery-keeper","speaker":"Baggage keeper","voice":"bm_george","speed":0.94,"text":"Leave them here, young shepherd. I will keep them safe."},
+    {"id":"directions-david","speaker":"David","voice":"am_puck","speed":0.94,"text":"Thank you. Where can I find my brothers?"},
+    {"id":"directions-keeper","speaker":"Baggage keeper","voice":"bm_george","speed":0.94,"text":"By the line beyond the tents. Follow the path, and stay clear of the ranks."},
+    {"id":"greeting-eliab","speaker":"Eliab","voice":"am_michael","speed":0.94,"text":"David? Who is tending the sheep at home?"},
+    {"id":"greeting-david","speaker":"David","voice":"am_puck","speed":0.94,"text":"They are in safe hands. Our father sent food, and asked me to see how you are."},
+    {"id":"answer-eliab","speaker":"Eliab","voice":"am_michael","speed":0.94,"text":"We are well. Stay close. The camp is waiting for the champion's next challenge."},
+    {"id":"answer-david","speaker":"David","voice":"am_puck","speed":0.94,"text":"Then I will listen."}
+  ]
+}

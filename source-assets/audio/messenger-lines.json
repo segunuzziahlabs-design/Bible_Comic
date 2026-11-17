@@ -1,0 +1,5 @@
+{"chapter":"messenger","lines":[
+{"id":"jesse-calls","speaker":"Messenger","text":"David! Jesse, your father, is calling you. He is waiting for you in the courtyard.","voice":"am_michael","speed":1.0},
+{"id":"david-follows","speaker":"David","text":"I am coming. Let me leave the sheep with their keeper, and I will go to my father.","voice":"am_puck","speed":1.0},
+{"id":"keeper-ready","speaker":"Keeper","text":"Go to your father, David. I will keep the flock safe.","voice":"bm_daniel","speed":1.0}
+]}

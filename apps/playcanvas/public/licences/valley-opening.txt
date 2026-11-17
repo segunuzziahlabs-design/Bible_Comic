@@ -1,0 +1,14 @@
+The Valley of Elah — Chapter 1
+
+Original dialogue generated locally with standard Kokoro-82M v1.0 synthetic voices:
+bm_george (narrator/camp), am_michael (sentinel/camp), am_puck (David).
+Model: https://huggingface.co/hexgrad/Kokoro-82M — Apache-2.0.
+Generation runtime: https://github.com/thewh1teagle/kokoro-onnx — MIT.
+Rights checked 11 November 2026. Companion notices are included here.
+The generator model is not part of the browser download.
+
+Character source: project's existing Quaternius CC0-derived character workflow.
+Original project additions: clothing, gestures, facial controls, soldier LOD bake,
+environment geometry/textures/sky and procedural sound effects.
+See docs/assets/valley-opening-assets.md, valley-voice-provenance.json and
+valley-asset-manifest.json in the project repository for exact provenance.

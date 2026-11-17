@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "checked": "2026-11-12T12:44:56.301Z",
+  "checks": "Recorded model/bank hash continuity, source text, waveform hash/duration and non-silent mouth envelopes; rigged speaking/combat GLB resources",
+  "files": [
+    {
+      "file": "apps/playcanvas/src/assets/duel-dialogue/goliath-contempt.wav",
+      "bytes": 185388,
+      "sha256": "e177552d924972ca39da6aaf9157ba00074f91fb7c09178314cece14a883626c",
+      "duration": 3.8613333333333335
+    },
+    {
+      "file": "apps/playcanvas/src/assets/duel-dialogue/goliath-threat.wav",
+      "bytes": 119852,
+      "sha256": "742df646a4c96ee158a15ffd5f2594f0ade82ecf27d24f059d69bea69d634f69",
+      "duration": 2.496
+    },
+    {
+      "file": "apps/playcanvas/src/assets/duel-dialogue/david-faith.wav",
+      "bytes": 282668,
+      "sha256": "1db3108079c410d037c23663d9e4ecf004c5b648ff6bb8415693ce3efb3c060b",
+      "duration": 5.888
+    },
+    {
+      "file": "apps/playcanvas/src/assets/duel-dialogue/david-battle.wav",
+      "bytes": 223276,
+      "sha256": "e06fa1aaa27d704884201f1f630efab9e40547ff2fd76e3219ca59815c705bde",
+      "duration": 4.650666666666667
+    },
+    {
+      "file": "apps/playcanvas/src/assets/duel-dialogue/soldier-watch.wav",
+      "bytes": 109612,
+      "sha256": "743a6a91b8e5ff6032a27750ebbc2c9cca0044cea3acddcd80c639ccf1535ab9",
+      "duration": 2.2826666666666666
+    },
+    {
+      "file": "apps/playcanvas/src/assets/david-dialogue.glb",
+      "bytes": 1211436,
+      "sha256": "e74f64c411acddd4dc7b3bc7278fa2fe1785456af9dc9e6351bd033e2e06efec"
+    },
+    {
+      "file": "apps/playcanvas/src/assets/goliath-speaking.glb",
+      "bytes": 953108,
+      "sha256": "76338583ba33b807ef60cf6bd82c4a6775c5454e490261d1d63dab095dc3315c"
+    },
+    {
+      "file": "apps/playcanvas/src/assets/challenge-soldier.glb",
+      "bytes": 1254564,
+      "sha256": "53e613aaefd7c2de15eb4b94b826469f2fb9dc8bc5a056e7f6f3de732d3fd6e5"
+    }
+  ]
+}

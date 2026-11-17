@@ -1,0 +1,12 @@
+{
+  "chapter":"victory",
+  "lines":[
+    {"id":"retreat-call","speaker":"Philistine","voice":"am_fenrir","speed":1.05,"text":"Our champion has fallen! Retreat! Back to the ridge!"},
+    {"id":"israel-call","speaker":"Soldier","voice":"bm_george","speed":1.02,"text":"He has fallen! The Lord has delivered us!"},
+    {"id":"cheer-israel","speaker":"Crowd","voice":"bm_george","speed":1.13,"text":"Israel! Israel!"},
+    {"id":"cheer-victory","speaker":"Crowd","voice":"am_michael","speed":1.08,"text":"The Lord has given us victory!"},
+    {"id":"cheer-david","speaker":"Crowd","voice":"am_liam","speed":1.12,"text":"David! David!"},
+    {"id":"david-thanks","speaker":"David","voice":"am_puck","speed":0.94,"text":"The Lord was with me. The victory belongs to him."},
+    {"id":"closing","speaker":"Narrator","voice":"bm_george","speed":0.94,"text":"A shepherd faced a giant with faith and courage. David prevailed, and the people of Israel were delivered."}
+  ]
+}

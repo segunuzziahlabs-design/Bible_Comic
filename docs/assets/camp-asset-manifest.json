@@ -1,0 +1,17 @@
+{
+  "checked": "2026-11-11T14:45:00.721Z",
+  "david": {
+    "file": "apps/playcanvas/src/assets/david-camp.glb",
+    "sha256": "1361dbfac69451b0f706deeb2c7461766c60d5629c36913538f4e9bcefc9ca23",
+    "bytes": 1262092,
+    "triangles": 9893,
+    "source": "Existing prepared CC0-derived teenage David, unchanged mesh and appearance morphs",
+    "animation": "Original carry/set-down clip; existing actions retained",
+    "generator": "source-assets/characters/camp_delivery.py"
+  },
+  "voices": {
+    "clips": 8,
+    "hashes": "All match generated WAVs and licensed model/voice bank from accepted Saul sample"
+  },
+  "environment": "Original procedural camp props and textures; existing CC0-derived soldier LOD"
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci --prefix apps/playcanvas",
+  "buildCommand": "npm run build --prefix apps/playcanvas",
+  "outputDirectory": "build/playcanvas",
+  "cleanUrls": false
+}

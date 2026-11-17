@@ -1,0 +1,97 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-11",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/chapter-03-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "summon",
+      "speaker": "Goliath",
+      "voice": "am_fenrir",
+      "speed": 0.9,
+      "text": "Why do you stand there in battle ranks? Choose your champion. Send one man down to face me!",
+      "duration": 5.354666666666667,
+      "sha256": "0d7b6bb350554ecc9446e8f0e51bdf0a7ed78e44da9cc1a44bf8854befa71232"
+    },
+    {
+      "id": "terms",
+      "speaker": "Goliath",
+      "voice": "am_fenrir",
+      "speed": 0.9,
+      "text": "If your champion wins, we will serve you. If I win, you will serve the Philistines!",
+      "duration": 5.0986666666666665,
+      "sha256": "6434f49dbcdc6071848dbc7241222ff6e6f8f9edbb47abf4fcddb3b4b71b64c8"
+    },
+    {
+      "id": "defiance",
+      "speaker": "Goliath",
+      "voice": "am_fenrir",
+      "speed": 0.9,
+      "text": "I challenge the armies of Israel today! Send me a man. Let us fight!",
+      "duration": 4.309333333333333,
+      "sha256": "1b80cca55a65b5cc87f81b17e15c4d90b9cd9576842b78773221d1bed4b083e4"
+    },
+    {
+      "id": "fall-back",
+      "speaker": "Soldier",
+      "voice": "bm_george",
+      "speed": 0.97,
+      "text": "Fall back! Stay behind the line!",
+      "duration": 2.176,
+      "sha256": "7dc8f10f79e1c07348aa9c1041aae9f6ae3e0900cc346d27ee6f0afb5be646b3"
+    },
+    {
+      "id": "fear",
+      "speaker": "Soldier",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "Who can stand against him?",
+      "duration": 1.7493333333333334,
+      "sha256": "cbda0967ecfc59c1227b6044172391a8f2535273f5e9d469a416ce71589c7c14"
+    },
+    {
+      "id": "david-question",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Who is this Philistine to speak against the armies of the living God?",
+      "duration": 4.032,
+      "sha256": "7e16db2865bc4571a114eac80122343b96f77578e12bf7662105831ef4b678f1"
+    },
+    {
+      "id": "eliab-rebuke",
+      "speaker": "Eliab",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "Why are you here, David? Who is watching those few sheep? You only came to see the battle.",
+      "duration": 6.1226666666666665,
+      "sha256": "f116e054676f21ea4873ab43afcd2395ff6c4ae399f32782906aa8e3c049b4c8"
+    },
+    {
+      "id": "david-answer",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "What have I done now? May I not ask a question?",
+      "duration": 2.5813333333333333,
+      "sha256": "7bc566dac37d8611d5e1226589cb0db15715bc9ef4252a408768fd6fd214e94d"
+    },
+    {
+      "id": "report-to-saul",
+      "speaker": "Soldier",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "The king should hear what this young shepherd is saying.",
+      "duration": 3.3706666666666667,
+      "sha256": "229cf4524cb5a5439088671043a7d4c1d9a257c6074e2061ca0051e9efce7a2c"
+    }
+  ]
+}

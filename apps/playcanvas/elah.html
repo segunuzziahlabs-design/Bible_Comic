@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#172322" />
+    <link rel="icon" href="data:," />
+    <title>David &amp; Goliath · Valley of Elah</title>
+  </head>
+  <body>
+    <main class="movement" data-scene="elah">
+      <header class="preview-heading">
+        <div>
+          <p class="eyebrow">David &amp; Goliath</p>
+          <h1>Valley of Elah</h1>
+        </div>
+        <nav class="preview-nav" aria-label="Valley options">
+          <button type="button" id="sound" aria-pressed="true" aria-label="Battle sound">Sound on</button>
+          <a class="preview-link" href="./movement.html">Courtyard</a>
+        </nav>
+      </header>
+      <section class="stage" aria-label="Valley of Elah">
+        <canvas id="stage" tabindex="0" aria-label="Explore Elah as David" aria-describedby="instructions">A browser with canvas and WebGL 2 is required.</canvas>
+        <div id="battle-hud" class="valley-hud" hidden>
+          <p id="objective" role="status">Follow the track across the brook</p>
+          <p id="stone-count" hidden></p>
+        </div>
+        <div id="sling-aim" class="sling-aim" aria-hidden="true" hidden></div>
+        <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
+        <button type="button" id="throw-stone" class="interaction-prompt" hidden>Throw <kbd aria-hidden="true">Space</kbd></button>
+        <div id="pause-notice" class="pause-notice" role="status" hidden>Paused</div>
+        <p id="battle-caption" class="cue-caption" role="status" hidden></p>
+        <section id="battle-result" class="entry battle-result" aria-labelledby="battle-result-title" hidden>
+          <div class="entry-card">
+            <h2 id="battle-result-title"></h2>
+            <p id="battle-result-detail"></p>
+            <button type="button" id="battle-replay"></button>
+          </div>
+        </section>
+        <div class="entry" id="entry">
+          <div class="entry-card">
+            <p id="entry-message" role="status">Loading David and the Valley of Elah…</p>
+            <button type="button" id="retry" hidden>Retry</button>
+            <button type="button" id="enter" hidden>Enter valley</button>
+          </div>
+        </div>
+      </section>
+      <footer class="movement-footer">
+        <p id="instructions">
+          <span class="keyboard-hint">WASD or arrows to move. Drag to look.</span>
+          <span class="touch-hint">Drag the left stick to move. Drag the view to look.</span>
+        </p>
+        <p id="battle-instructions" hidden>
+          <span class="keyboard-hint">WASD or arrows to move. Drag or use I/J/K/L to aim. Space to throw.</span>
+          <span class="touch-hint">Left stick to move. Drag to aim. Tap Throw to release.</span>
+        </p>
+        <div class="actions">
+          <button type="button" id="pause" disabled>Pause</button>
+          <button type="button" id="reset" disabled>Restart</button>
+        </div>
+      </footer>
+      <noscript><p>Enable JavaScript to enter the valley.</p></noscript>
+    </main>
+    <script type="module" src="/src/app/movement-main.ts"></script>
+  </body>
+</html>

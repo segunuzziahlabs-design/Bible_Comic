@@ -1,0 +1,10 @@
+{
+  "chapter":"duel",
+  "lines":[
+    {"id":"goliath-contempt","speaker":"Goliath","voice":"am_fenrir","speed":0.90,"text":"A boy? Do you take me for a dog, coming at me with a shepherd's staff?"},
+    {"id":"goliath-threat","speaker":"Goliath","voice":"am_fenrir","speed":0.90,"text":"Come closer! Today you will fall before me!"},
+    {"id":"david-faith","speaker":"David","voice":"am_puck","speed":0.94,"text":"You come with sword and spear. I come in the name of the Lord, the God of the armies of Israel."},
+    {"id":"david-battle","speaker":"David","voice":"am_puck","speed":0.94,"text":"This battle belongs to the Lord. He does not need sword or spear to save us."},
+    {"id":"soldier-watch","speaker":"Soldier","voice":"bm_george","speed":0.94,"text":"Quiet. The shepherd is facing him."}
+  ]
+}

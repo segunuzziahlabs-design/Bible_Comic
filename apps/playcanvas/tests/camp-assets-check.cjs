@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../..'),hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
+const provenance=JSON.parse(fs.readFileSync(path.join(root,'docs/assets/camp-voice-provenance.json'))),previous=JSON.parse(fs.readFileSync(path.join(root,'docs/assets/saul-voice-provenance.json')));
+assert.equal(provenance.modelSha256,previous.modelSha256);assert.equal(provenance.voicesSha256,previous.voicesSha256);
+const lines=JSON.parse(fs.readFileSync(path.join(root,'apps/playcanvas/src/assets/camp-dialogue/dialogue.json')));
+for(const line of provenance.lines){const audio=fs.readFileSync(path.join(root,'apps/playcanvas/src/assets/camp-dialogue',line.id+'.wav'));assert.equal(hash(audio),line.sha256);assert.equal(audio.toString('ascii',0,4),'RIFF');const cues=lines.find(item=>item.id===line.id);assert.equal(cues.text,line.text);assert.ok(cues.mouthCues.length>=Math.floor(line.duration*30));assert.ok(cues.mouthCues.every(cue=>cue.length===3&&cue.every(Number.isFinite)));}
+function glb(name){const bytes=fs.readFileSync(path.join(root,'apps/playcanvas/src/assets',name));assert.equal(bytes.toString('ascii',0,4),'glTF');return{bytes,data:JSON.parse(bytes.toString('utf8',20,20+bytes.readUInt32LE(12)))};}
+const {bytes,data}=glb('david-camp.glb'),original=glb('david-dialogue.glb').data;
+assert.ok(data.skins.length>0);for(const name of ['idle_relaxed','walk_forward','listen','speak_resolve','deliver_provisions'])assert.ok(data.animations.some(animation=>animation.name===name),name);
+const triangles=data.meshes.flatMap(mesh=>mesh.primitives).reduce((sum,p)=>sum+data.accessors[p.indices].count/3,0);
+assert.equal(triangles,original.meshes.flatMap(mesh=>mesh.primitives).reduce((sum,p)=>sum+original.accessors[p.indices].count/3,0),'Carry sample retains original teenage mesh');
+const result={checked:new Date().toISOString(),david:{file:'apps/playcanvas/src/assets/david-camp.glb',sha256:hash(bytes),bytes:bytes.length,triangles,source:'Existing prepared CC0-derived teenage David, unchanged mesh and appearance morphs',animation:'Original carry/set-down clip; existing actions retained',generator:'source-assets/characters/camp_delivery.py'},voices:{clips:provenance.lines.length,hashes:'All match generated WAVs and licensed model/voice bank from accepted Saul sample'},environment:'Original procedural camp props and textures; existing CC0-derived soldier LOD'};
+fs.writeFileSync(path.join(root,'docs/assets/camp-asset-manifest.json'),JSON.stringify(result,null,2)+'\n');console.log('PASS Chapter 2 voice hashes, timing envelopes, licensed source continuity and delivery character:',triangles,'triangles');

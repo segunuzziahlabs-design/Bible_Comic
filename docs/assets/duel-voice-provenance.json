@@ -1,0 +1,61 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-12",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/chapter-05-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "goliath-contempt",
+      "speaker": "Goliath",
+      "voice": "am_fenrir",
+      "speed": 0.9,
+      "text": "A boy? Do you take me for a dog, coming at me with a shepherd's staff?",
+      "duration": 3.8613333333333335,
+      "sha256": "e177552d924972ca39da6aaf9157ba00074f91fb7c09178314cece14a883626c"
+    },
+    {
+      "id": "goliath-threat",
+      "speaker": "Goliath",
+      "voice": "am_fenrir",
+      "speed": 0.9,
+      "text": "Come closer! Today you will fall before me!",
+      "duration": 2.496,
+      "sha256": "742df646a4c96ee158a15ffd5f2594f0ade82ecf27d24f059d69bea69d634f69"
+    },
+    {
+      "id": "david-faith",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "You come with sword and spear. I come in the name of the Lord, the God of the armies of Israel.",
+      "duration": 5.888,
+      "sha256": "1db3108079c410d037c23663d9e4ecf004c5b648ff6bb8415693ce3efb3c060b"
+    },
+    {
+      "id": "david-battle",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "This battle belongs to the Lord. He does not need sword or spear to save us.",
+      "duration": 4.650666666666667,
+      "sha256": "e06fa1aaa27d704884201f1f630efab9e40547ff2fd76e3219ca59815c705bde"
+    },
+    {
+      "id": "soldier-watch",
+      "speaker": "Soldier",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "Quiet. The shepherd is facing him.",
+      "duration": 2.2826666666666666,
+      "sha256": "743a6a91b8e5ff6032a27750ebbc2c9cca0044cea3acddcd80c639ccf1535ab9"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "checks": "Retained topology/triangle total, joint count, all original animation names, speech face and marker hierarchy; separate held shaft/head and added original throw.",
+  "triangles": 11785,
+  "joints": [
+    68
+  ],
+  "meshes": 13,
+  "files": [
+    {
+      "file": "apps/playcanvas/src/assets/goliath-collision.glb",
+      "bytes": 1168172,
+      "sha256": "cd8a573f93b06220e1b2f8c42f25282bf4f4e15aeba30fb2fc8571f8e82990fa",
+      "clips": [
+        "goliath_advance",
+        "goliath_challenge",
+        "goliath_fall",
+        "goliath_ready",
+        "goliath_speak",
+        "goliath_spear",
+        "goliath_spear_1",
+        "goliath_spear_2",
+        "goliath_spear_3"
+      ]
+    },
+    {
+      "file": "apps/playcanvas/src/assets/goliath-ranged.glb",
+      "bytes": 1230796,
+      "sha256": "b427eba8b13961b73c3273c29c513dde5b6c42f368f3d30653fa5f643cf9c3f2",
+      "clips": [
+        "goliath_advance",
+        "goliath_challenge",
+        "goliath_fall",
+        "goliath_ready",
+        "goliath_speak",
+        "goliath_spear",
+        "goliath_spear_1",
+        "goliath_spear_2",
+        "goliath_spear_3",
+        "goliath_throw"
+      ]
+    }
+  ]
+}

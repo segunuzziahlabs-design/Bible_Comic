@@ -1,0 +1,10 @@
+Opening messenger/audio correction, 13 November 2026
+Distinct messenger and flock keeper reuse the retained Quaternius CC0/project rig,
+wardrobe, speaking face and animation pipeline. No new third-party model download.
+Original summons dialogue is generated locally with standard voices am_michael,
+am_puck and bm_daniel through the retained Kokoro-82M v1.0 (Apache-2.0) model,
+voice bank and kokoro-onnx (MIT). Sources/rights: docs/assets/saul-generated-voices.md
+and docs/assets/messenger-voice-provenance.json. No film audio or actor cloning.
+The messenger only says Jesse is calling. Jesse personally gives the provisions
+errand in the courtyard; the bundle is collected there. Messenger/courtyard staging
+and the three spear exchanges are creative presentation of the biblical story.

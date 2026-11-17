@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#161b1c" />
+  <link rel="icon" href="data:," />
+  <title>David before Saul · David &amp; Goliath</title>
+</head>
+<body>
+  <main>
+    <header><div><p class="eyebrow">David &amp; Goliath</p><h1>David before Saul</h1></div><p class="chapter">A moment before the battle</p></header>
+    <section class="stage" aria-label="Saul's command pavilion">
+      <canvas id="stage" tabindex="0" aria-label="Explore the camp and speak to Saul" aria-describedby="instructions"></canvas>
+      <div class="letterbox top"></div><div class="letterbox bottom"></div>
+      <div class="objective"><span>THE ISRAELITE CAMP</span><p id="objective">Speak to Saul</p></div>
+      <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
+      <button id="speak" class="interact" hidden>Speak to Saul <kbd>E</kbd></button>
+      <p id="caption" class="caption" role="status" hidden></p>
+      <div id="pause-notice" class="pause-notice" role="status" hidden>Paused</div>
+      <div id="entry" class="entry"><div class="entry-card"><p class="eyebrow">Faith. Courage. Resolve.</p><h2>Before the king</h2><p id="entry-message" role="status">Preparing the camp and voices…</p><button id="enter" hidden>Enter camp</button><button id="retry" hidden>Try again</button></div></div>
+    </section>
+    <footer><p id="instructions"><span class="keyboard-hint">WASD / arrows to move · Drag to look · E to speak</span><span class="touch-hint">Left stick to move · Drag the view to look</span></p><div class="actions"><button id="sound" disabled>Sound on</button><button id="pause" disabled>Pause</button><button id="reset" disabled>Restart</button></div></footer>
+    <noscript>Enable JavaScript to enter the camp.</noscript>
+  </main>
+  <script type="module" src="/src/app/saul-main.ts"></script>
+</body>
+</html>

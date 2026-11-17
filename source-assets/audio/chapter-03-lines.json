@@ -1,0 +1,14 @@
+{
+  "chapter": "challenge",
+  "lines": [
+    {"id":"summon","speaker":"Goliath","voice":"am_fenrir","speed":0.90,"text":"Why do you stand there in battle ranks? Choose your champion. Send one man down to face me!"},
+    {"id":"terms","speaker":"Goliath","voice":"am_fenrir","speed":0.90,"text":"If your champion wins, we will serve you. If I win, you will serve the Philistines!"},
+    {"id":"defiance","speaker":"Goliath","voice":"am_fenrir","speed":0.90,"text":"I challenge the armies of Israel today! Send me a man. Let us fight!"},
+    {"id":"fall-back","speaker":"Soldier","voice":"bm_george","speed":0.97,"text":"Fall back! Stay behind the line!"},
+    {"id":"fear","speaker":"Soldier","voice":"bm_george","speed":0.94,"text":"Who can stand against him?"},
+    {"id":"david-question","speaker":"David","voice":"am_puck","speed":0.94,"text":"Who is this Philistine to speak against the armies of the living God?"},
+    {"id":"eliab-rebuke","speaker":"Eliab","voice":"am_michael","speed":0.94,"text":"Why are you here, David? Who is watching those few sheep? You only came to see the battle."},
+    {"id":"david-answer","speaker":"David","voice":"am_puck","speed":0.94,"text":"What have I done now? May I not ask a question?"},
+    {"id":"report-to-saul","speaker":"Soldier","voice":"bm_george","speed":0.94,"text":"The king should hear what this young shepherd is saying."}
+  ]
+}

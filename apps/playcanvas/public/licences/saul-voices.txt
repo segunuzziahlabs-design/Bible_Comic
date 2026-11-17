@@ -1,0 +1,12 @@
+David before Saul — generated voice sample
+
+Original dialogue generated locally using standard Kokoro-82M v1.0 voices:
+David: am_puck. Saul: am_michael. No named-person imitation or voice cloning.
+Model: https://huggingface.co/hexgrad/Kokoro-82M (Apache-2.0)
+Generation runtime: https://github.com/thewh1teagle/kokoro-onnx (MIT)
+Licence sources checked 11 November 2026.
+
+The generator and voice model are not shipped in the browser build.
+See the repository docs/assets/saul-generated-voices.md and
+docs/assets/saul-voice-provenance.json for generation settings and hashes.
+Companion Apache-2.0 and runtime MIT notices are included in this directory.

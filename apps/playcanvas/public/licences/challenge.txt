@@ -1,0 +1,18 @@
+DAVID AND GOLIATH - CHAPTER 3: THE CHALLENGE
+
+Nine original game dialogue lines generated locally using Kokoro-82M v1.0
+(Apache-2.0) and its supplied standard voices: am_fenrir (Goliath), am_puck
+(David), am_michael (Eliab), bm_george (soldier). Generation runtime:
+kokoro-onnx 0.6.1 (MIT). Model and runtime notices accompany this file.
+No cloned voice, named-performer imitation or reference-film audio was used.
+
+Existing character models derive from the project's Quaternius CC0 pipeline.
+The speaking mouth, extended Goliath gestures, soldier alarm step and Eliab
+rebuke animation are original project additions; the original assets remain
+separate. The valley, camp props, textures and synthesized effects reuse
+original project work. Background ranks reuse the existing standing bake.
+
+Script/provenance: source-assets/audio/chapter-03-lines.json and
+docs/assets/challenge-voice-provenance.json in the source project.
+Asset hashes/sources: docs/assets/challenge-asset-manifest.json.
+Dialogue adapts 1 Samuel 17:8-11 and 23-31 in original game paraphrase.

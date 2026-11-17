@@ -1,0 +1,22 @@
+# Generated Godot metadata and local build/check output.
+.godot/
+/build/
+# Installed packages, hosting metadata and alternative frontend build output.
+node_modules/
+.vercel/
+/apps/playcanvas/dist/
+# Raw browser evidence is a local archive (recordings, screenshots and traces).
+# Keep the written reports and asset/licence manifests in source control.
+/docs/**/evidence/
+# Generated Python verification-tool bytecode.
+__pycache__/
+# Credentials must never enter source control.
+.env
+.env.*
+!.env.example
+export_credentials.cfg
+# OS/editor temporary files.
+Thumbs.db
+.DS_Store
+*.blend1
+*.blend2

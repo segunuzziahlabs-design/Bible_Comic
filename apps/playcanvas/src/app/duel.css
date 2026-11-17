@@ -1,0 +1,13 @@
+.duel .preview-heading h1 { font-family: Georgia,serif; }
+.duel .preview-heading { gap:.5rem; }
+.duel .cue-caption { bottom:1rem; font-size:clamp(.85rem,1.3vw,1.05rem); max-width:min(42rem,calc(100% - 1.5rem)); }
+.duel .entry-card { max-height:100%; overflow:auto; }
+.duel .entry-card h2 { font-family:Georgia,serif; }
+.duel #save-status { font-size:.65rem; }
+.duel .review-note { font-size:.75rem; color:#c6c2b3; }
+.duel #save-error { z-index:20; }
+.duel #review-gate { z-index:10; }
+.duel .stage .jump-shot{position:absolute;right:18px;bottom:154px;z-index:3;min-height:48px;min-width:112px;max-width:145px;padding:7px 12px;border:1px solid #e4bc74;border-radius:10px;background:#e5be7d;color:#172322;font-weight:700;touch-action:none}.duel .jump-shot kbd{font-size:10px}
+@media(max-width:360px){.duel .stage .jump-shot{right:12px;bottom:230px}}
+@media(max-width:600px){.duel .preview-heading h1{font-size:1.15rem}.duel .eyebrow{font-size:.55rem}.duel main{padding:.45rem}.duel .movement-footer p{font-size:.72rem}}
+@media(max-height:450px){main.movement.duel{padding:.3rem;gap:.25rem}.duel .preview-heading h1{font-size:1rem}.duel .preview-heading .eyebrow{display:none}.duel .preview-heading{min-height:0}.duel .movement-footer p{font-size:.65rem}.duel .entry{padding:.4rem}.duel .entry-card{padding:.65rem}.duel .entry-card p{margin:.35rem 0}.duel .entry-card h2{font-size:1.2rem;margin:.3rem 0}.duel .cue-caption{bottom:.3rem}}

@@ -1,0 +1,5 @@
+// Generated test evidence must not retain auth/testing tokens in resource URLs.
+const fs=require('node:fs'),path=require('node:path');const root=path.resolve(process.argv[2]);let changed=0;
+function scrub(value){if(typeof value==='string'&&/^https?:\/\//.test(value)){try{const u=new URL(value);for(const k of [...u.searchParams.keys()])if(/token|ticket|jwt|password|secret|session_id|^code$/i.test(k))u.searchParams.set(k,'[redacted]');return u.href;}catch{return value;}}if(Array.isArray(value))return value.map(scrub);if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,scrub(v)]));return value;}
+function visit(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())visit(file);else if(entry.name.endsWith('.json')){const original=fs.readFileSync(file,'utf8');const safe=JSON.stringify(scrub(JSON.parse(original)),null,2);if(safe!==original){fs.writeFileSync(file,safe);changed++;}}}}
+visit(root);console.log('Sanitized generated evidence JSON files: '+changed+' (no credential values printed).');

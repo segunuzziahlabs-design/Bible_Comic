@@ -1,0 +1,4 @@
+.game-dashboard{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-height:44px;padding:3px 14px;background:#162321ed;color:#f0dfb9;border:1px solid #b5a079;border-radius:18px;font:12px system-ui;text-decoration:none}
+header.with-game-account{gap:12px}header.with-game-account>div:first-child{min-width:0}header.with-game-account .chapter{margin-left:auto;text-align:right}.with-game-account .preview-nav{flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:600px){header.with-game-account h1{font-size:19px}.with-game-account .preview-nav{gap:5px}.with-game-account .preview-nav>button,.game-dashboard{padding-inline:10px}}
+html[data-captions="off"] .caption,html[data-captions="off"] .cue-caption{visibility:hidden}

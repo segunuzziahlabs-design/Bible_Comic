@@ -1,0 +1,10 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const base='apps/playcanvas/src/assets',hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const script=JSON.parse(fs.readFileSync('source-assets/audio/chapter-05-lines.json','utf8'));
+const lines=JSON.parse(fs.readFileSync(base+'/duel-dialogue/dialogue.json','utf8'));
+const provenance=JSON.parse(fs.readFileSync('docs/assets/duel-voice-provenance.json','utf8'));
+const previous=JSON.parse(fs.readFileSync('docs/assets/challenge-voice-provenance.json','utf8'));
+assert.equal(provenance.modelSha256,previous.modelSha256);assert.equal(provenance.voicesSha256,previous.voicesSha256);assert.equal(lines.length,5);
+const files=[];for(const line of lines){assert.equal(line.text,script.lines.find(l=>l.id===line.id).text);assert(line.duration>2&&line.duration<6);assert(line.mouthCues.length>60);assert(line.mouthCues.some(c=>c[1]>.4));assert.equal(line.mouthCues.at(-1)[1],0);const file=base+'/duel-dialogue/'+line.id+'.wav',bytes=fs.readFileSync(file);assert.equal(hash(bytes),line.sha256);files.push({file,bytes:bytes.length,sha256:hash(bytes),duration:line.duration});}
+for(const [name,clips]of[['david-dialogue.glb',['speak_resolve','listen','walk_forward','sling_throw']],['goliath-speaking.glb',['goliath_speak','goliath_spear','goliath_fall','goliath_advance']],['challenge-soldier.glb',['listen','react_alarm']]]){const file=base+'/'+name,b=fs.readFileSync(file),j=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)).toString());for(const clip of clips)assert(j.animations.some(a=>a.name===clip),name+': '+clip);assert(j.skins.length>0);assert(j.meshes.some(m=>m.extras?.targetNames?.includes('SpeakOpen')));files.push({file,bytes:b.length,sha256:hash(b)});}
+fs.writeFileSync('docs/assets/duel-asset-manifest.json',JSON.stringify({status:'PASS',checked:new Date().toISOString(),checks:'Recorded model/bank hash continuity, source text, waveform hash/duration and non-silent mouth envelopes; rigged speaking/combat GLB resources',files},null,2)+'\n');console.log('PASS duel asset provenance, voice envelopes and combat resources');

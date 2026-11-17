@@ -1,0 +1,135 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/world/village.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/house.tscn" id="2_house"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/well.tscn" id="3_well"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/olive.tscn" id="4_olive"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/stall.tscn" id="5_stall"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/wall.tscn" id="6_wall"]
+[ext_resource type="PackedScene" path="res://assets/proof/courtyard-gate.glb" id="7_gate"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/provisions_table.tscn" id="8_table"]
+[ext_resource type="PackedScene" path="res://scenes/interaction/interactable.tscn" id="9_target"]
+[ext_resource type="PackedScene" path="res://scenes/world/village/storage_hut.tscn" id="10_hut"]
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.58, 0.71, 0.74, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.91, 0.91, 0.88, 1)
+ambient_light_energy = 0.73
+tonemap_mode = 2
+
+[node name="Village" type="Node3D"]
+script = ExtResource("1_world")
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-42, 26, 0)
+light_color = Color(1, 0.93, 0.80, 1)
+light_energy = 0.92
+shadow_enabled = false
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="FamilyHome" parent="Buildings" instance=ExtResource("2_house")]
+position = Vector3(-6.4, 0, 1.2)
+rotation_degrees = Vector3(0, 75, 0)
+dimensions = Vector3(5, 3.1, 4)
+plaster = Color(0.72, 0.64, 0.51, 1)
+
+[node name="EastHome" parent="Buildings" instance=ExtResource("2_house")]
+position = Vector3(8.2, 0, 2.4)
+rotation_degrees = Vector3(0, -80, 0)
+dimensions = Vector3(5.5, 2.7, 4.2)
+plaster = Color(0.65, 0.52, 0.38, 1)
+
+[node name="NorthWestHome" parent="Buildings" instance=ExtResource("2_house")]
+position = Vector3(-9.5, 0, -9)
+rotation_degrees = Vector3(0, 85, 0)
+dimensions = Vector3(5, 3.5, 4.2)
+plaster = Color(0.69, 0.63, 0.53, 1)
+
+[node name="NorthEastHome" parent="Buildings" instance=ExtResource("2_house")]
+position = Vector3(8, 0, -8.8)
+rotation_degrees = Vector3(0, -80, 0)
+dimensions = Vector3(5.8, 3.2, 4.5)
+plaster = Color(0.70, 0.61, 0.47, 1)
+
+[node name="WesternGranary" parent="Buildings" instance=ExtResource("10_hut")]
+position = Vector3(-8.9, 0, 5.0)
+rotation_degrees = Vector3(0, 57, 0)
+dimensions = Vector3(2.2, 1.8, 1.75)
+plaster = Color(0.61, 0.48, 0.35, 1)
+
+[node name="EasternStore" parent="Buildings" instance=ExtResource("10_hut")]
+position = Vector3(5.2, 0, -6.4)
+rotation_degrees = Vector3(0, -52, 0)
+dimensions = Vector3(2.65, 2, 1.9)
+plaster = Color(0.68, 0.53, 0.39, 1)
+
+[node name="Landmarks" type="Node3D" parent="."]
+[node name="Well" parent="Landmarks" instance=ExtResource("3_well")]
+position = Vector3(-4.5, 0, -5.9)
+[node name="ProvisionsStall" parent="Landmarks" instance=ExtResource("5_stall")]
+position = Vector3(4, 0, -1)
+[node name="Gate" parent="Landmarks" instance=ExtResource("7_gate")]
+position = Vector3(0, 0, -15)
+
+[node name="Planting" type="Node3D" parent="."]
+[node name="HomeOlive" parent="Planting" instance=ExtResource("4_olive")]
+position = Vector3(-5.5, 0, 5.5)
+[node name="EastOlive" parent="Planting" instance=ExtResource("4_olive")]
+position = Vector3(9.5, 0, 6)
+[node name="SquareOlive" parent="Planting" instance=ExtResource("4_olive")]
+position = Vector3(6, 0, -4.5)
+[node name="WestOlive" parent="Planting" instance=ExtResource("4_olive")]
+position = Vector3(-10.5, 0, -4)
+
+[node name="Bounds" type="Node3D" parent="."]
+[node name="West" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(-14.5, 0, -3.5)
+rotation_degrees = Vector3(0, 90, 0)
+dimensions = Vector3(26.5, 1.4, 0.5)
+[node name="East" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(14.5, 0, -3.5)
+rotation_degrees = Vector3(0, 90, 0)
+dimensions = Vector3(26.5, 1.4, 0.5)
+[node name="South" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(0, 0, 9.5)
+dimensions = Vector3(29.5, 1.4, 0.5)
+[node name="NorthWest" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(-8.2, 0, -15)
+dimensions = Vector3(12.7, 1.6, 0.6)
+[node name="NorthEast" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(8.2, 0, -15)
+dimensions = Vector3(12.7, 1.6, 0.6)
+[node name="OuterBoundary" parent="Bounds" instance=ExtResource("6_wall")]
+position = Vector3(0, 0, -16.5)
+dimensions = Vector3(29.5, 1.1, 0.45)
+
+[node name="Anchors" type="Node3D" parent="."]
+[node name="DavidSpawn" type="Marker3D" parent="Anchors"]
+position = Vector3(0, 0.1, 5)
+[node name="Jesse" parent="Anchors" instance=ExtResource("9_target")]
+position = Vector3(0, 0, 1.3)
+interaction_id = "jesse"
+event_id = "jesse_spoken"
+prompt = "Speak to Jesse"
+one_shot = false
+[node name="Provisions" parent="Anchors" instance=ExtResource("9_target")]
+position = Vector3(2.2, 0, -0.42)
+interaction_id = "provisions"
+event_id = "provisions_collected"
+prompt = "Take provisions"
+interaction_range = 1.65
+own_collider_path = NodePath("Table")
+enabled = false
+[node name="Table" parent="Anchors/Provisions" instance=ExtResource("8_table")]
+[node name="Gate" parent="Anchors" instance=ExtResource("9_target")]
+position = Vector3(0, 0, -14)
+interaction_id = "gate"
+event_id = "gate_reached"
+prompt = "Leave village"
+enabled = false

@@ -1,0 +1,88 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-11",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/chapter-02-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "delivery-david",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "I have brought provisions from Bethlehem for my brothers.",
+      "duration": 2.88,
+      "sha256": "81777432b59af854b794c821f6470e3fd34101292b7d7a7ddd2d60387ab64ee2"
+    },
+    {
+      "id": "delivery-keeper",
+      "speaker": "Baggage keeper",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "Leave them here, young shepherd. I will keep them safe.",
+      "duration": 3.7546666666666666,
+      "sha256": "0e6ca399a144667a6281d7dd3448d1560adfbc821220f3844aec22cc415bd509"
+    },
+    {
+      "id": "directions-david",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Thank you. Where can I find my brothers?",
+      "duration": 2.112,
+      "sha256": "0fc4cffda2aa649d2765aa1704c6007279ed262affee0721264b80d11f1dbfb3"
+    },
+    {
+      "id": "directions-keeper",
+      "speaker": "Baggage keeper",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "By the line beyond the tents. Follow the path, and stay clear of the ranks.",
+      "duration": 4.842666666666666,
+      "sha256": "83ddc774367181190016c303233a2e8dce9e59dfdef001d83f6664742987242a"
+    },
+    {
+      "id": "greeting-eliab",
+      "speaker": "Eliab",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "David? Who is tending the sheep at home?",
+      "duration": 2.496,
+      "sha256": "f77f9c720ef5e8c031cc510d84fb0851fefaf8d9b08b7a7ba01d71ffbd80b5f6"
+    },
+    {
+      "id": "greeting-david",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "They are in safe hands. Our father sent food, and asked me to see how you are.",
+      "duration": 4.672,
+      "sha256": "aed74903e1bd058f9b75fea9d570187e4adbbc260039dccba887b08305bfba84"
+    },
+    {
+      "id": "answer-eliab",
+      "speaker": "Eliab",
+      "voice": "am_michael",
+      "speed": 0.94,
+      "text": "We are well. Stay close. The camp is waiting for the champion's next challenge.",
+      "duration": 5.12,
+      "sha256": "9660212753b8974e14f491abb9d47eb66c320212eccef4adc7e87dbfd03c3504"
+    },
+    {
+      "id": "answer-david",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "Then I will listen.",
+      "duration": 1.1306666666666667,
+      "sha256": "5837688a951d20401aa8c0f900829736b5fb958831b77e5f8c829cd5c06c1156"
+    }
+  ]
+}

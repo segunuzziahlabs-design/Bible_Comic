@@ -1,0 +1,53 @@
+# PlayCanvas scene development plan
+
+The [11 November reset plan](../roadmap/project-reset-plan.md) is the current planning proposal. The scene sequence below records the earlier Elah prototype track and its acceptance history.
+
+**10 November 2026 · Scenes first**
+
+Build the encounter in the Valley of Elah first, then connect Bethlehem, the road, the camp and the brook to it. The player controls David in an illustrated 3D interpretation of the southern Levant around **1000 BC**. Start with the tested PC-04 movement, camera and cue systems. Use local play and checkpoints for scene review. Schedule Clerk and durable saves after the episode meets the scene acceptance gate. [PC-04 results](playcanvas-pc04-foundation-review.md) · [Implementation order](playcanvas-implementation-plan.md#milestones)
+
+## Period and story direction
+
+Use 1 Samuel 17 for the sequence, the opposing hills, the equipment named in the account and David's reason for facing Goliath. Treat the exact layout, clothing, colours, dialogue wording and combat timing as design choices. Keep a short reference sheet with the object, date and place for each reference, plus a note on how the game interprets it. [1 Samuel 17](https://bible.usccb.org/bible/1samuel/17)
+
+| Scene or asset | Art and sound direction | Reference |
+| --- | --- | --- |
+| **Bethlehem** | Low dwellings with rough stone bases, earthen walls and timber details. Use plain clay vessels, baskets and woven surfaces around Jesse's yard. Add a few ordinary household actions so the place feels occupied. | Harvard's reconstruction is a later Iron Age regional reference for materials. [Village house](https://hmane.harvard.edu/house) · [Existing village art notes](q05-village-presentation.md) |
+| **Road, brook and Elah** | Use an earthen footpath, rounded ridges and a shallow streambed. Reveal both opposing camps from a ridge. Use wind, stone underfoot and distant voices to establish distance. Compress the walking distances for play. | The opposing hills and brook come from the account. The scale, ground cover and paths are interpretive. [1 Samuel 17:1–3, 40](https://bible.usccb.org/bible/1samuel/17) |
+| **Camps** | Use low shelters, woven bundles, simple vessels and a few soldiers preparing equipment. Differentiate the camps by placement, shapes and a restrained palette. Use the Iron Age Philistine ceramic record to inform vessels in the Philistine camp. | [Ashkelon Iron Age I excavations](https://hmane.harvard.edu/publications/ashkelon-7-iron-age-i) · [Philistine cooking ware](https://www.levantineceramics.org/wares/158-philistine-cooking-ware) |
+| **David and Goliath** | Reuse teenage David and retain his shepherd's pouch, staff and cord sling with a cradle for the stone. Make Goliath readable by scale, silhouette, weight and sound. Give him a bronze-coloured helmet, scale armour and a long spear with a separate shield-bearer in the opening. Test the equipment in motion before approving its detail. | The equipment is based on the passage. The dimensions and visual reconstruction are choices for this adaptation. [1 Samuel 17:4–7, 38–49](https://bible.usccb.org/bible/1samuel/17) |
+
+## Build order and review points
+
+| Step | Tasks | What to show at review |
+| --- | --- | --- |
+| **1 · Plan and block out Elah** · SC-01 | Assemble the period reference sheet. Sketch the entry, valley floor, ridges and lines of sight. Set David and Goliath's relative scale in plain geometry. Place `battle.entry` and `battle.aftermath`, the shield-bearer and a few silhouettes on each ridge. Walk the route in the browser before adding detail. | From the entry, a player can see the opposing camps, recognise Goliath and find the way into the fight in portrait and landscape. |
+| **2 · Make the battle playable** · SAVE-02 | Reuse movement, collision and the following camera. Add a deliberate sling release, an assisted aim window, a visible stone flight, a miss and a hit. Give Goliath a readable advance and one attack with a warning, active strike and recovery. Check both outcomes and local retry. | The player can aim and throw, avoid the attack, miss and try again, or lose and use **Retry Battle**. One successful release produces one impact and fall. |
+| **3 · Finish one representative encounter** · SC-02 | Build and import Goliath's rig and the sling and spear props. Animate the opening exchange, wind-up, release, recoil and fall. Add cloth movement, foot contacts, scale armour sound, wind, crowd hush and retreat. Use short cues for story beats and leave the camera with David through the active fight. | A person unfamiliar with the controls can play from the battlefield entrance to the retreat. The owner can judge the setting, character scale, timing and sound in a served build. |
+| **4 · Build the opening and preparation** · PC-05, PC-06, EP-01, EP-02 | Port Jesse's yard and existing exchange. Connect the gate to a short road, camp delivery, Goliath's distant challenge, Eliab and Saul. Stage the armour refusal and let David gather five stones at the brook. Hand off the local mission state and equipment at safe area entries. | David gets the errand, delivers provisions, prepares and reaches Elah without a developer skip. A restart or return to a checkpoint preserves the correct objective and props. |
+| **5 · Connect, polish and review the episode** · EP-03, EP-04, QA-01, QA-02 | Use the approved encounter in the full route. Connect the fall, offscreen sword action and retreat to episode completion. Refine the story cues, landmarks, sound, materials and touch controls. Test the full journey and retry in a production build, then review the scenes with the owner. | A player can complete and replay the episode from Bethlehem, and defeat returns David to the battlefield entrance with preparation intact. Use the gate below to decide when the scene work is satisfactory. |
+
+## Direct the encounter from the player's view
+
+1. **Reveal the valley.** Start behind David at the battlefield entrance. Let the player walk the last stretch while Goliath's voice carries across the valley. Use the opposing ridges and the shield-bearer to establish scale and direction.
+2. **Play the exchange.** Use one short cue for Goliath's challenge and David's response about trusting God. Blend back to David's shoulder and return control before Goliath can land an attack. A readable stance change and a sound cue mark the handoff.
+3. **Let the fight unfold in real time.** David moves, aims and decides when to throw while Goliath approaches. Show the attack wind-up with body weight, spear motion and sound. Give the player time to step clear using normal movement. The attack and projectile resolve in the same game clock as movement, camera and animation. Pausing freezes all of them.
+4. **Make the throw and its result legible.** Show the sling loading, circling and releasing at the player's input. Follow the stone through sound and a subtle visual trace. A miss leaves the fight active and another throw available. On a successful strike, show the impact and Goliath losing his balance before the fall. Tune aim assistance with keyboard, mouse and touch.
+5. **Preserve the story and the retry.** Goliath killing David is the only defeat condition. **Retry Battle** resets the actors, projectiles, cue and attack state at `battle.entry` with the earlier preparation intact. On success, shift attention to the retreat and make the outcome clear without showing the sword action or graphic injury. [Episode design](../story/david-and-goliath-episode-design.md) · [Mission and outcome rules](playcanvas-production-blueprint.md#mission-design-and-outcomes)
+
+## How to build and test each scene
+
+1. **Write the scene card.** Record the verse or adaptation beat, player action, entry and exit anchors, required props, and the point at which control passes to or from a cue. Keep it short enough to compare against a playthrough.
+2. **Play the plain geometry.** Check terrain, collision, camera framing, readable paths and touch input. Tune distances at David's eye level and from the follow camera. Export a short walk-through for review before committing to final geometry.
+3. **Add the minimum scene assets.** In Blender, establish consistent units, pivots and naming. Export one scene pack or actor GLB at a time. Check scale, clip names, animation events, materials and file sizes in PlayCanvas. Prioritise David, Goliath, the sling, spear and the surfaces the player approaches.
+4. **Stage actions and sound.** Use the existing pause-aware cue clock for dialogue and brief shots. Author or license original voice, footsteps, sling release, armour and wind. Test the fight with sound off so captions and body motion still convey the handoff and attack.
+5. **Wire and verify the handoff.** Load the destination before switching the active scene and commit the safe local checkpoint. Test entering, pausing, restarting and replaying. Record the build, browser, viewport, result and any blocker.
+
+## Scene acceptance gate
+
+- **Playable.** A first-time player completes the route in a production browser build. They understand where to go, when they have control and how to aim, throw and avoid the attack without coaching. Review the complete journey against the existing 10–15 minute pacing target.
+- **Immersive.** In the owner's review, the two ridges, camp activity, materials, clothing and equipment convey the intended setting. The attack reads from motion and sound, the release feels tied to the player's input, and the fall and retreat follow it clearly.
+- **Recoverable.** Desktop and emulated portrait and landscape runs cover miss, lethal defeat, **Retry Battle**, hit, pause and resume, and repeat completion. No cue or input from the earlier attempt fires after retry. Touch controls and captions stay readable. Include 390 × 844, 568 × 320 and 320 × 568 in the review.
+- **Measured.** Capture the largest area handoff and the busiest part of the fight. Reuse the PC-04 startup, transfer and frame pacing measurements as the comparison method and record the new workload. Use a few nearby actors and distant groups, reusable materials and scene packs loaded on demand. Resolve performance blockers found on the Intel N150 baseline before scene sign-off. [PC-04 method and baseline](playcanvas-pc04-foundation-review.md)
+
+**SC-02 is ready for play review.** Walk from the entrance through the challenge, fight and Philistine retreat. The next scene work connects Jesse's yard, the road, camp and brook to Elah. [Animated encounter and browser results](playcanvas-sc02-encounter.md) · [Elah scene card and period references](playcanvas-sc01-elah.md)

@@ -1,0 +1,9 @@
+{"chapter":"courtyard","lines":[
+{"id":"keeper-call","speaker":"Keeper","text":"David, your father is waiting in the courtyard. I will watch the flock while you go to him.","voice":"am_michael","speed":0.98},
+{"id":"keeper-answer","speaker":"David","text":"Thank you. Keep them near the water. I will go to my father.","voice":"am_puck","speed":1.0},
+{"id":"jesse-greeting","speaker":"Jesse","text":"David, my son. Come here. I have an errand for you.","voice":"bm_lewis","speed":0.98},
+{"id":"david-listens","speaker":"David","text":"I am here, Father. What would you have me do?","voice":"am_puck","speed":1.0},
+{"id":"jesse-provisions","speaker":"Jesse","text":"Take this roasted grain and these loaves to your brothers at the camp. Take these cheeses to their commander. See how your brothers are, and bring me word of them.","voice":"bm_lewis","speed":0.98},
+{"id":"david-accepts","speaker":"David","text":"I will go, Father. I will take the provisions and bring you news of my brothers.","voice":"am_puck","speed":1.0},
+{"id":"jesse-farewell","speaker":"Jesse","text":"Go, my son. May the Lord be with you.","voice":"bm_lewis","speed":0.98}
+]}

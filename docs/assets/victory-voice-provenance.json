@@ -1,0 +1,79 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-12",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/chapter-06-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "retreat-call",
+      "speaker": "Philistine",
+      "voice": "am_fenrir",
+      "speed": 1.05,
+      "text": "Our champion has fallen! Retreat! Back to the ridge!",
+      "duration": 2.6666666666666665,
+      "sha256": "c7be146ff575ec67e3e9faa009173e361b1d350378b77bd6e508126fcb624ff7"
+    },
+    {
+      "id": "israel-call",
+      "speaker": "Soldier",
+      "voice": "bm_george",
+      "speed": 1.02,
+      "text": "He has fallen! The Lord has delivered us!",
+      "duration": 2.5813333333333333,
+      "sha256": "ba664fce7b6ad927ac7c4ccbd4265dd8e3cafede31b108fed7acb2751d38bdc6"
+    },
+    {
+      "id": "cheer-israel",
+      "speaker": "Crowd",
+      "voice": "bm_george",
+      "speed": 1.13,
+      "text": "Israel! Israel!",
+      "duration": 1.28,
+      "sha256": "2e6ccf9e842007cea811cc07423cea3db45148ffd687f9ce2f68042b2eb7bf2c"
+    },
+    {
+      "id": "cheer-victory",
+      "speaker": "Crowd",
+      "voice": "am_michael",
+      "speed": 1.08,
+      "text": "The Lord has given us victory!",
+      "duration": 1.8346666666666667,
+      "sha256": "afb2dee081581ac5b648ef7ac314b6bf6adfac118bf303bd2487fbea816b76f6"
+    },
+    {
+      "id": "cheer-david",
+      "speaker": "Crowd",
+      "voice": "am_liam",
+      "speed": 1.12,
+      "text": "David! David!",
+      "duration": 1.2373333333333334,
+      "sha256": "2513731a9c7a84846a127d90c525ceb992f5713d6e4acb69a9698e79b3bdb746"
+    },
+    {
+      "id": "david-thanks",
+      "speaker": "David",
+      "voice": "am_puck",
+      "speed": 0.94,
+      "text": "The Lord was with me. The victory belongs to him.",
+      "duration": 2.88,
+      "sha256": "0c6e684cc05c220d650dcd8a1643ce584523214532d70c47d171414bd3573f0b"
+    },
+    {
+      "id": "closing",
+      "speaker": "Narrator",
+      "voice": "bm_george",
+      "speed": 0.94,
+      "text": "A shepherd faced a giant with faith and courage. David prevailed, and the people of Israel were delivered.",
+      "duration": 7.018666666666666,
+      "sha256": "991348825afe210bb544d9c3a8c73a3453a6e9ed214b540596bff0918a9ce11c"
+    }
+  ]
+}

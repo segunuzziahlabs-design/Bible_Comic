@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#172322" />
+    <link rel="icon" href="data:," />
+    <title>David &amp; Goliath · Animation Preview</title>
+  </head>
+  <body>
+    <main>
+      <header class="preview-heading">
+        <div>
+          <p class="eyebrow">David &amp; Goliath</p>
+          <h1>Animation preview</h1>
+        </div>
+        <div class="preview-nav">
+          <a class="preview-link" href="./movement.html">Movement</a>
+          <button type="button" id="customize" aria-controls="appearance" aria-expanded="false" hidden>Customize</button>
+        </div>
+      </header>
+      <section class="stage" aria-label="David model preview">
+        <canvas id="stage" aria-label="3D view of David">A browser with canvas and WebGL 2 is required.</canvas>
+        <div class="entry" id="entry">
+          <div class="entry-card">
+            <p id="entry-message" role="status">Loading David and the test area…</p>
+            <button type="button" id="retry" hidden>Retry</button>
+            <button type="button" id="enter" hidden>Enter preview</button>
+          </div>
+        </div>
+      </section>
+      <section class="controls" aria-label="Animation controls">
+        <div class="actions">
+          <button type="button" id="walk" aria-pressed="false" disabled>Walk</button>
+          <button type="button" id="acknowledge" aria-pressed="false" disabled>Acknowledge</button>
+          <button type="button" id="pose" aria-pressed="false" disabled>Reference pose</button>
+        </div>
+        <output id="playback" aria-live="polite">Ready when the preview opens</output>
+      </section>
+      <section class="appearance" id="appearance" aria-labelledby="appearance-title" hidden>
+        <h2 id="appearance-title">Design your David</h2>
+        <div class="appearance-options">
+          <div class="appearance-field"><label for="skin-tone">Skin tone</label><select id="skin-tone"></select></div>
+          <div class="appearance-field"><label for="hair-style">Hairstyle</label><select id="hair-style"></select></div>
+          <div class="appearance-field"><label for="hair-colour">Hair colour</label><select id="hair-colour"></select></div>
+          <div class="appearance-field"><label for="tunic-colour">Tunic colour</label><select id="tunic-colour"></select></div>
+        </div>
+        <button type="button" id="reset-look">Reset look</button>
+      </section>
+      <noscript><p>Enable JavaScript to open the preview.</p></noscript>
+    </main>
+    <script type="module" src="/src/app/main.ts"></script>
+  </body>
+</html>

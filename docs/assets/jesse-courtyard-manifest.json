@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-13",
+  "sourceBlend": "source-assets/characters/jesse.blend",
+  "sourceSha256": "b6afa321cfb94fa67ac3b9eb59f589f6f89877a0101f7e78fd29a25df54b177f",
+  "authoringScript": "source-assets/characters/jesse_courtyard.py",
+  "model": {
+    "path": "apps/playcanvas/src/assets/jesse-courtyard.glb",
+    "bytes": 829508,
+    "sha256": "5dbfa5fc8db387ed04a48939635c7e64e0b25a40f1c7357d48a80b8310f400f2",
+    "triangles": 9919,
+    "meshes": 3,
+    "clips": [
+      "explain_point",
+      "greet",
+      "idle_relaxed"
+    ],
+    "morphs": [
+      "SpeakOpen",
+      "SpeakRound"
+    ]
+  },
+  "voiceProvenance": "docs/assets/courtyard-voice-provenance.json",
+  "voiceModelAndBankMatchRetainedLicensedSample": true,
+  "voices": [
+    {
+      "id": "keeper-call",
+      "speaker": "Keeper",
+      "voice": "am_michael",
+      "seconds": 5.717333333333333,
+      "sha256": "67f6df8fed7efd3c812dec77c98d637436daa0f0ae35df0b86454447b151bc70"
+    },
+    {
+      "id": "keeper-answer",
+      "speaker": "David",
+      "voice": "am_puck",
+      "seconds": 3.328,
+      "sha256": "e8a02110fc49dc65217f196f1f4f4175677f7ccd6cada45494ab7f99f3139f02"
+    },
+    {
+      "id": "jesse-greeting",
+      "speaker": "Jesse",
+      "voice": "bm_lewis",
+      "seconds": 3.2,
+      "sha256": "82061dcab309591d11951f45c2206e02ec2b2d567724b54ec902a36ee7a7e17c"
+    },
+    {
+      "id": "david-listens",
+      "speaker": "David",
+      "voice": "am_puck",
+      "seconds": 2.24,
+      "sha256": "a9299c92dfbbbe11a0170456f83302ed0978c01b38c755db6b7f0078e16d764b"
+    },
+    {
+      "id": "jesse-provisions",
+      "speaker": "Jesse",
+      "voice": "bm_lewis",
+      "seconds": 9.578666666666667,
+      "sha256": "f37e80307d61a81d698ad83216772447caf17cdc1b80faeea5a292ff07f2703f"
+    },
+    {
+      "id": "david-accepts",
+      "speaker": "David",
+      "voice": "am_puck",
+      "seconds": 4.650666666666667,
+      "sha256": "8ecd7bf640ff9b2ba0dcdeb5fcf5516b90be8706bf33d3b1689d02f1b6b369ff"
+    },
+    {
+      "id": "jesse-farewell",
+      "speaker": "Jesse",
+      "voice": "bm_lewis",
+      "seconds": 2.56,
+      "sha256": "5f60e1890cb122d5d29562917addf86bc38d698f74adc3da8e727d5dbbb86ed8"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "checked": "2026-11-12T16:14:03.947Z",
+  "checks": "Source text/WAV/mouth envelope and licensed generator hash continuity; speaking rig with new clips; nine unskinned coloured crowd poses under 1900 triangles each",
+  "crowdTriangles": {
+    "Run 0": 1745,
+    "Run 1": 1744,
+    "Run 2": 1745,
+    "Run 3": 1745,
+    "Run 4": 1744,
+    "Run 5": 1744,
+    "Cheer 0": 1746,
+    "Cheer 1": 1744,
+    "Cheer 2": 1744
+  },
+  "files": [
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/retreat-call.wav",
+      "bytes": 128044,
+      "sha256": "c7be146ff575ec67e3e9faa009173e361b1d350378b77bd6e508126fcb624ff7",
+      "duration": 2.6666666666666665
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/israel-call.wav",
+      "bytes": 123948,
+      "sha256": "ba664fce7b6ad927ac7c4ccbd4265dd8e3cafede31b108fed7acb2751d38bdc6",
+      "duration": 2.5813333333333333
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/cheer-israel.wav",
+      "bytes": 61484,
+      "sha256": "2e6ccf9e842007cea811cc07423cea3db45148ffd687f9ce2f68042b2eb7bf2c",
+      "duration": 1.28
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/cheer-victory.wav",
+      "bytes": 88108,
+      "sha256": "afb2dee081581ac5b648ef7ac314b6bf6adfac118bf303bd2487fbea816b76f6",
+      "duration": 1.8346666666666667
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/cheer-david.wav",
+      "bytes": 59436,
+      "sha256": "2513731a9c7a84846a127d90c525ceb992f5713d6e4acb69a9698e79b3bdb746",
+      "duration": 1.2373333333333334
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/david-thanks.wav",
+      "bytes": 138284,
+      "sha256": "0c6e684cc05c220d650dcd8a1643ce584523214532d70c47d171414bd3573f0b",
+      "duration": 2.88
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-dialogue/closing.wav",
+      "bytes": 336940,
+      "sha256": "991348825afe210bb544d9c3a8c73a3453a6e9ed214b540596bff0918a9ce11c",
+      "duration": 7.018666666666666
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-soldier.glb",
+      "bytes": 1296744,
+      "sha256": "af2c846a7ec93f3e15e72548ccab57a8d20c7c854ef50da8eb7fa20838264794"
+    },
+    {
+      "file": "apps/playcanvas/src/assets/victory-crowd.glb",
+      "bytes": 429316,
+      "sha256": "7bc9a21d314006d64987f5b4ada2ebf417e8e86f4fe181ba076a0f7f2202642c"
+    }
+  ]
+}

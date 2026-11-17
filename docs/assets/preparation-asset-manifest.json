@@ -1,0 +1,60 @@
+{
+  "checked": "2026-11-11T17:20:30.352Z",
+  "david": {
+    "file": "apps/playcanvas/src/assets/david-preparation.glb",
+    "bytes": 1453472,
+    "triangles": 11385,
+    "sha256": "ff9e77136c4f3b18f59e8f6aadd1c65dc9e4fcf086062f1641635ccda6666074",
+    "source": "Existing CC0-derived teenage David, original loaned equipment and fitting/pickup performances",
+    "originalClips": "All retained at identical duration"
+  },
+  "equipment": {
+    "file": "apps/playcanvas/src/assets/preparation-armour.glb",
+    "bytes": 48156,
+    "triangles": 1492,
+    "sha256": "3385f3200472fa3f3b196a2d7d866d1a5c935167a8661f47118a00e9e3eeccf3",
+    "skins": 0,
+    "animations": 0,
+    "helmetHeight": 0.20822834968566895,
+    "anchors": {
+      "coat": [
+        0.0002620987070258707,
+        -0.04589281976222992,
+        -0.029877252876758575
+      ],
+      "helmet": [
+        -0.000050523078243713826,
+        0.14785507321357727,
+        -0.0041350130923092365
+      ]
+    }
+  },
+  "pickupContact": {
+    "wrist_source_world": [
+      -0.13282611966133118,
+      -0.2829146981239319,
+      0.10371004045009613
+    ],
+    "palm_source_world": [
+      -0.12984156608581543,
+      -0.2834182679653168,
+      0.05955934152007103
+    ],
+    "left_ankle": [
+      0.09648147970438004,
+      0.05044839158654213,
+      0.0960218757390976
+    ],
+    "right_ankle": [
+      -0.09644236415624619,
+      0.07168100029230118,
+      0.09601456671953201
+    ]
+  },
+  "generator": "source-assets/characters/preparation_assets.py",
+  "voices": {
+    "newClips": 8,
+    "reusedAudienceClips": 3,
+    "hashes": "New WAVs and licensed model/voice bank match provenance"
+  }
+}

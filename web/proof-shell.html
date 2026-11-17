@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#182d32">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23182d32'/%3E%3Cpath d='M11 8h5c10 0 10 16 0 16h-5z' fill='none' stroke='%23d3ae71' stroke-width='3'/%3E%3C/svg%3E">
+<title>David &amp; Goliath · Village proof</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#182d32;color:#f5edda;font-family:system-ui,sans-serif}
+#frame{position:fixed;inset:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+#loading{position:fixed;inset:0;display:flex;overflow:auto;padding:max(20px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));background:radial-gradient(ellipse at 70% 20%,#355350,#182d32 70%)}
+.card{max-width:440px;width:100%;margin:auto}.eyebrow{font-size:12px;letter-spacing:.17em;color:#d3ae71}h1{font:500 clamp(28px,7vw,44px)/1.1 Georgia,serif;margin:16px 0}p{line-height:1.5;color:#d5dacb}progress{width:100%;height:8px;accent-color:#d3ae71}small{display:block;margin-top:12px;color:#b7c2b6}button{font:inherit;border:0;border-radius:8px;padding:12px 24px;background:#d3ae71;color:#182d32;cursor:pointer;min-height:48px}button:focus-visible{outline:3px solid #f5edda;outline-offset:4px}#retry{margin-top:16px}#loading[hidden],[hidden]{display:none!important}@media(max-height:420px){h1{font-size:28px;margin:10px 0}p{margin:8px 0}small{margin-top:8px}.card{max-width:580px}}
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<div id="frame"><canvas id="canvas" tabindex="0" aria-label="Interactive David and Goliath village. Keyboard: WASD or arrows to move, drag to look, E to interact, Escape to pause.">Your browser needs canvas support.</canvas></div>
+<div id="loading"><div class="card"><div class="eyebrow">DAVID &amp; GOLIATH</div><h1 id="loading-title">A small step into the story.</h1><p id="notice" role="status" aria-live="polite">Preparing the village. The first visit may take a little longer.</p><progress id="progress" aria-label="Loading village"></progress><small id="loading-hint">No login. One small place to explore.</small><button id="retry" type="button" hidden>Try again</button><noscript><p>JavaScript is needed to play. Enable it in your browser settings, then reload this page.</p></noscript></div></div>
+<script>
+const config=$GODOT_CONFIG;
+const canvas=document.getElementById('canvas');
+const frame=document.getElementById('frame');
+// Use CSS pixels for the UI and cap 3D cost separately in Godot. Avoid a phone's DPR multiplying render cost.
+config.canvasResizePolicy=0;
+config.canvas=canvas;
+function resizeCanvas(){canvas.width=Math.max(1,Math.round(frame.clientWidth));canvas.height=Math.max(1,Math.round(frame.clientHeight));}
+resizeCanvas();
+new ResizeObserver(resizeCanvas).observe(frame);
+const overlay=document.getElementById('loading');
+const notice=document.getElementById('notice');
+const progress=document.getElementById('progress');
+const retry=document.getElementById('retry');
+const loading=window.__proofLoading={startedAt:performance.now(),ready:false,error:null,phase:'loading'};
+const slowTimer=setTimeout(()=>{
+ if(loading.ready||loading.error)return;
+ loading.phase='slow';
+ notice.textContent='Still preparing the village. You can wait, or check your connection and try again.';
+ retry.hidden=false;
+},20000);
+function failure(error,kind='startup'){
+ if(loading.error)return;
+ clearTimeout(slowTimer);
+ const message=error instanceof Error?error.message:String(error);
+ loading.error=message;loading.phase=kind;loading.ready=false;
+ overlay.hidden=false;
+ document.getElementById('loading-title').textContent=kind==='graphics'?'Let’s get you back.':'The village could not start.';
+ notice.textContent={features:'This browser cannot run the 3D experience. Try an updated browser with graphics enabled.',download:'Some game files could not load. Check your connection, then try again.',graphics:'The graphics stopped responding. Reload to start a new visit.',startup:'Please try again. If this keeps happening, close other tabs or try an updated browser.'}[kind]||'Please reload to start a new visit.';
+ document.getElementById('loading-hint').textContent='Reloading starts again from the village entrance.';
+ progress.hidden=true;
+ retry.hidden=false;
+ retry.textContent=kind==='graphics'?'Reload village':'Try again';
+ retry.focus();
+ console.error('Village launch:',message);
+}
+retry.onclick=()=>location.reload();
+// Some engine download failures reject a separate promise instead of startGame().
+// During boot, surface those failures too; keep the original console diagnostics.
+window.addEventListener('unhandledrejection',event=>{if(!loading.ready)failure(event.reason);});
+window.addEventListener('error',event=>{if(!loading.ready&&(event.error||event.message))failure(event.error||event.message);});
+async function start(){
+ try{
+  if(typeof Engine==='undefined')throw new Error('Engine script did not initialise');
+  const missing=Engine.getMissingFeatures({threads:false});
+  if(missing.length){failure('Missing browser features: '+missing.join(', '),'features');return;}
+  const engine=new Engine(config);
+  await engine.startGame({onProgress(current,total){if(total>0){progress.max=total;progress.value=Math.min(current,total);}},onExit(code){failure('Engine exited: '+code);}});
+  if(loading.error)return;
+  clearTimeout(slowTimer);
+  overlay.hidden=true;
+  retry.hidden=true;
+  loading.ready=true;loading.phase='ready';
+  loading.readyMs=performance.now()-loading.startedAt;
+  canvas.focus();
+ }catch(error){failure(error);}
+}
+const engineScript=document.createElement('script');
+engineScript.src='$GODOT_URL';
+engineScript.onload=start;
+engineScript.onerror=()=>failure('Engine JavaScript download failed','download');
+document.body.appendChild(engineScript);
+canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();window.dispatchEvent(new Event('blur'));failure('WebGL context lost','graphics');});
+canvas.addEventListener('contextmenu',event=>event.preventDefault());
+</script>
+</body>
+</html>

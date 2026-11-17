@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Wood"]
+albedo_color = Color(0.39, 0.27, 0.17, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="Top"]
+material = SubResource("Wood")
+size = Vector3(0.58, 0.064, 0.30)
+
+[sub_resource type="BoxMesh" id="Leg"]
+material = SubResource("Wood")
+size = Vector3(0.066, 0.81, 0.07)
+
+[sub_resource type="BoxShape3D" id="TableCollision"]
+size = Vector3(0.58, 0.87, 0.30)
+
+[sub_resource type="StandardMaterial3D" id="Cloth"]
+albedo_color = Color(0.79, 0.63, 0.36, 1)
+roughness = 1.0
+
+[sub_resource type="SphereMesh" id="Parcel"]
+material = SubResource("Cloth")
+radius = 1.0
+height = 2.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="Rope"]
+albedo_color = Color(0.39, 0.29, 0.17, 1)
+roughness = 1.0
+
+[sub_resource type="TorusMesh" id="Tie"]
+material = SubResource("Rope")
+inner_radius = 0.907
+outer_radius = 1.014
+rings = 16
+ring_segments = 6
+
+[node name="Table" type="StaticBody3D"]
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.435, 0)
+shape = SubResource("TableCollision")
+
+[node name="Top" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.838, 0)
+mesh = SubResource("Top")
+
+[node name="Leg1" type="MeshInstance3D" parent="."]
+position = Vector3(-0.22, 0.405, -0.105)
+mesh = SubResource("Leg")
+
+[node name="Leg2" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 0.405, -0.105)
+mesh = SubResource("Leg")
+
+[node name="Leg3" type="MeshInstance3D" parent="."]
+position = Vector3(-0.22, 0.405, 0.105)
+mesh = SubResource("Leg")
+
+[node name="Leg4" type="MeshInstance3D" parent="."]
+position = Vector3(0.22, 0.405, 0.105)
+mesh = SubResource("Leg")
+
+[node name="Parcel" type="Node3D" parent="."]
+position = Vector3(0, 0.942, 0)
+rotation = Vector3(0, 3.14159265, 0)
+
+[node name="Shape" type="Node3D" parent="Parcel"]
+scale = Vector3(0.152, 0.072, 0.106)
+
+[node name="Cloth" type="MeshInstance3D" parent="Parcel/Shape"]
+mesh = SubResource("Parcel")
+
+[node name="Tie1" type="MeshInstance3D" parent="Parcel/Shape"]
+position = Vector3(-0.35, 0, 0)
+rotation = Vector3(0, 0, 1.57079633)
+mesh = SubResource("Tie")
+
+[node name="Tie2" type="MeshInstance3D" parent="Parcel/Shape"]
+position = Vector3(0.35, 0, 0)
+rotation = Vector3(0, 0, 1.57079633)
+mesh = SubResource("Tie")

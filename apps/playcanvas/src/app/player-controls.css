@@ -1,0 +1,31 @@
+.stage .player-movement{position:absolute;left:max(14px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));width:148px;height:130px;z-index:3;user-select:none;touch-action:none;font:11px system-ui}
+.stage .player-direction-keys{position:absolute;left:0;bottom:24px;display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:4px}
+.stage .player-direction-keys button{display:grid;place-items:center;min-width:44px;min-height:44px;width:46px;height:46px;padding:0;border:1px solid #dbbd7b80;border-radius:9px;background:#162e31eb;color:#fff0ce;font:600 15px system-ui;touch-action:none}
+.stage .player-direction-keys button[data-move=forward]{grid-column:2}
+.stage .player-direction-keys button[data-move=left]{grid-column:1;grid-row:2}
+.stage .player-direction-keys button[data-move=back]{grid-column:2;grid-row:2}
+.stage .player-direction-keys button[data-move=right]{grid-column:3;grid-row:2}
+.stage .player-direction-keys button[aria-pressed=true]{background:#e3bd76;color:#142326;box-shadow:0 0 0 2px #fff0bb80}
+.stage .player-move-label{position:absolute;bottom:0;left:0;margin:0;padding:4px 7px;background:#162e31e8;color:#f7e9c9;border-radius:5px;font:10px system-ui;white-space:nowrap;pointer-events:none}
+.stage .player-movement-options{position:absolute;right:0;top:-2px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;display:grid;place-items:center;border:1px solid #dbbd7b70;border-radius:8px;background:#162e31eb;color:#fff0ce;font:20px system-ui;touch-action:manipulation}
+.stage .player-movement .move-pad{position:absolute;left:0;top:auto;bottom:24px;width:104px;height:104px;margin:0;border:1px solid #dbbd7bb0;background:#162e31b8;display:none;place-items:center}
+.stage .player-movement .move-pad span{position:absolute;left:31px;top:31px;width:40px;height:40px;margin:0;background:#e5bf83d9;border:1px solid #f7ecda;border-radius:50%;transform:translate(var(--stick-x,0px),var(--stick-y,0px));pointer-events:none}
+.stage .player-movement .move-pad strong{display:none}
+.stage .player-movement[data-layout=stick] .move-pad{display:grid}
+.stage .player-movement[data-layout=stick] .player-direction-keys{display:none}
+.stage[data-shared-controls] .player-movement[data-layout=keys] .move-pad{display:none}
+.stage .player-control-settings{z-index:45;background:#101a1df0;padding:12px}
+.player-control-settings .entry-card{width:min(100%,420px);max-width:100%;max-height:100%;overflow:auto;padding:20px}
+.player-control-settings h2{font:500 25px Georgia,serif}
+.player-control-settings label{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;margin:10px 0;font:13px system-ui;color:#eee2c8}
+.player-control-settings select{min-height:44px;min-width:140px;max-width:65%;padding:6px;background:#203438;border:1px solid #b89a5b80;border-radius:4px;color:#fff0ce;font:13px system-ui}
+.stage[data-shared-controls] [data-player-action]{touch-action:none;min-height:48px;min-width:96px;font-weight:600}
+.stage[data-shared-controls] #dodge{min-width:112px;max-width:145px}
+.stage[data-shared-controls] .interact,.stage[data-shared-controls] .interaction-prompt,.stage[data-shared-controls] .sling-dodge{z-index:3}
+.stage[data-shared-controls] [hidden]{display:none!important}
+.stage[data-shared-controls] .player-jump{position:absolute;right:16px;bottom:92px;z-index:3;display:grid;place-content:center;gap:1px;min-width:64px;width:64px;min-height:56px;height:56px;padding:4px;border:1px solid #dbbd7ba0;border-radius:14px;background:#173b40ed;color:#fff0ce;font:600 12px system-ui;touch-action:none}
+.stage .player-jump span{font-size:18px;line-height:1}.stage .player-jump kbd{margin:0;font:9px system-ui}
+.stage[data-practice] .player-jump,.duel .stage .player-jump{right:146px;bottom:18px}
+@media(max-width:360px){.stage[data-shared-controls] .player-jump{right:12px;bottom:100px}.stage[data-shared-controls] #dodge,.stage[data-practice] .sling-leave{right:12px;bottom:166px}}
+@media(max-width:360px){.stage .player-movement{left:10px;width:140px}.stage .player-direction-keys{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px)}.stage .player-direction-keys button{width:44px;height:44px}.stage[data-shared-controls] .interact,.stage[data-shared-controls] .interaction-prompt{right:10px;min-width:96px;max-width:140px;padding:8px}.stage .player-movement-options{right:0}}
+@media(max-height:500px){.stage .player-movement{left:max(10px,env(safe-area-inset-left));bottom:8px;height:112px}.stage .player-direction-keys{bottom:16px;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px)}.stage .player-direction-keys button{width:44px;height:44px}.stage .player-movement-options{top:0;right:-2px}.stage .player-movement .move-pad{width:88px;height:88px;bottom:16px}.stage .player-movement .move-pad span{left:23px;top:23px}.stage .player-move-label{font-size:9px;padding:2px 6px}.player-control-settings .entry-card{padding:10px}.player-control-settings .entry-card p{font-size:12px;margin:.4rem 0}.player-control-settings h2{font-size:20px;margin:5px 0}}

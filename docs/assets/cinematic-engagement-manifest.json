@@ -1,0 +1,129 @@
+{
+  "models": [
+    {
+      "name": "david-adventure",
+      "path": "apps/playcanvas/src/assets/david-adventure.glb",
+      "bytes": 1388116,
+      "triangles": 9893,
+      "clips": {
+        "acknowledge": 1.5,
+        "care_for_lamb": 3.5,
+        "deliver_provisions": 3.4166666666666665,
+        "dodge_left": 0.75,
+        "dodge_right": 0.75,
+        "idle_relaxed": 2.5,
+        "listen": 2.5,
+        "listen_to_provisions": 2,
+        "pickup_provisions": 3,
+        "sling_throw": 0.9583333333333334,
+        "speak_resolve": 4.416666666666667,
+        "walk_forward": 1.3333333333333333
+      },
+      "morphs": [
+        "Blink",
+        "BrowLift",
+        "FullerHair",
+        "Smile",
+        "SpeakOpen",
+        "SpeakRound"
+      ],
+      "sha256": "869d6e0c1abe22268d2548f440507c267d0d0091d87551353b148adb3629b484"
+    },
+    {
+      "name": "goliath-encounter",
+      "path": "apps/playcanvas/src/assets/goliath-encounter.glb",
+      "bytes": 1165612,
+      "triangles": 11785,
+      "clips": {
+        "goliath_advance": 1.3333333333333333,
+        "goliath_challenge": 2.7916666666666665,
+        "goliath_fall": 1.9166666666666667,
+        "goliath_ready": 2.0833333333333335,
+        "goliath_speak": 8,
+        "goliath_spear": 3.25,
+        "goliath_spear_1": 3.25,
+        "goliath_spear_2": 3.25,
+        "goliath_spear_3": 3.25
+      },
+      "morphs": [
+        "SpeakOpen",
+        "SpeakRound"
+      ],
+      "sha256": "0d6de74a681eb4a5020b43388ddf76687770a96ebdfce80a817ada606e0c0dc0"
+    }
+  ],
+  "voices": [
+    {
+      "chapter": "shepherd",
+      "id": "shepherd-life",
+      "seconds": 5.653333333333333,
+      "bytes": 271404,
+      "sha256": "ad20a023375c92403f2acde60ae4e31b3991234b1ec1f77363739cf0b1aae458"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "gentle",
+      "seconds": 3.1786666666666665,
+      "bytes": 152620,
+      "sha256": "3ccbc1e7980151c3d3548f61939c2202e7e5da0e4d6f7f3e18b346249f565aae"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "jesse-errand",
+      "seconds": 10.56,
+      "bytes": 506924,
+      "sha256": "e03bb0564a583301990afccb40af606e6760e4c711f249dd2d19e17647fab11e"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "keeper",
+      "seconds": 3.562666666666667,
+      "bytes": 171052,
+      "sha256": "89f2e5762181bb3fe6ef961d55078dea3aec49359cc6d18555ccb2eb20b28c7a"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "leaving",
+      "seconds": 4.522666666666667,
+      "bytes": 217132,
+      "sha256": "489190b81c6dbb56b870c8c7b0d633372ce86d6ac9cca4f451a5ebea67b7c2ac"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "journey",
+      "seconds": 7.765333333333333,
+      "bytes": 372780,
+      "sha256": "ce692578cc555f6d27e5734f9ce5c13f9565c428d9fca5f228ec9ea4f9d7d363"
+    },
+    {
+      "chapter": "shepherd",
+      "id": "distant-horns",
+      "seconds": 4.8,
+      "bytes": 230444,
+      "sha256": "9ed51c83163564fcc56a306bda29dbdf3e4ce9be8ce31b98f50b68fb07da7677"
+    },
+    {
+      "chapter": "encounter",
+      "id": "soldier-concern",
+      "seconds": 2.7093333333333334,
+      "bytes": 130092,
+      "sha256": "722e09c84c7ae99e561a270fef735502b118262cef54d537e6fe4211f6c24890"
+    },
+    {
+      "chapter": "encounter",
+      "id": "step-forward",
+      "seconds": 2.517333333333333,
+      "bytes": 120876,
+      "sha256": "94e0f112286269243c331a62098f7afa87e1eb7c791d3fefdb0ef0ecd4e0f03d"
+    },
+    {
+      "chapter": "encounter",
+      "id": "steady",
+      "seconds": 1.5786666666666667,
+      "bytes": 75820,
+      "sha256": "6266bb63de583cd3f8ca798609cc0f24873b0412f692626159ab2b8966e05d20"
+    }
+  ],
+  "voiceLicenceBasis": "Identical retained Kokoro model/voice-bank hashes to the licensed Saul sample; scripts are original paraphrases.",
+  "scenery": "Original source-code meshes, instanced dressing and procedural sheep/limb animation; no downloaded film, music or animal recording."
+}

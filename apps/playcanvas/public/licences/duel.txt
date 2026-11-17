@@ -1,0 +1,18 @@
+DAVID AND GOLIATH - CHAPTER 5: THE DUEL
+
+Five original dialogue paraphrases were generated locally with the previously
+licensed Kokoro-82M v1.0 weights (Apache-2.0), standard am_puck, am_fenrir and
+bm_george voices and kokoro-onnx 0.6.1 (MIT). Model and runtime notices accompany
+this file. No voice cloning, performer imitation or reference-film audio.
+
+Existing David, Goliath and soldier assets derive from the recorded Quaternius
+CC0 pipeline, with original project clothing, equipment and animation. The
+Elah terrain, sky, vegetation, camp dressing and synthesized effects are reused
+project work. No new external character, music or sound pack was downloaded.
+
+Story context: 1 Samuel 17:41-50, adapted into original game dialogue.
+Spear telegraph, assisted aiming and brook refill are game adaptations.
+No reward is granted. Only Goliath's lethal strike causes defeat.
+
+See source-assets/audio/chapter-05-lines.json,
+docs/assets/duel-voice-provenance.json and docs/assets/duel-assets.md.

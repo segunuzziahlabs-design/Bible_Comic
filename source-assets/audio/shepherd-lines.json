@@ -1,0 +1,9 @@
+{"chapter":"shepherd","lines":[
+{"id":"shepherd-life","speaker":"Narrator","text":"Before the armies and the challenge, David watched his father's sheep in the hills of Bethlehem.","voice":"bm_george","speed":0.98},
+{"id":"gentle","speaker":"David","text":"Easy, little one. There is water here. Stay close to the flock.","voice":"am_puck","speed":1.0},
+{"id":"jesse-errand","speaker":"Messenger","text":"David! Jesse, your father, sends you to your brothers. Take this grain and these loaves to the camp, and the cheeses to their commander. Bring word of how your brothers are.","voice":"am_michael","speed":1.0},
+{"id":"keeper","speaker":"Messenger","text":"I will watch the sheep. Your father is counting on you.","voice":"am_michael","speed":0.98},
+{"id":"leaving","speaker":"David","text":"Keep them near the water. I will take the provisions and bring my father news.","voice":"am_puck","speed":1.0},
+{"id":"journey","speaker":"Narrator","text":"David left the flock with a keeper and set out for the valley of Elah. Beyond the quiet hills, two armies faced one another.","voice":"bm_george","speed":0.98},
+{"id":"distant-horns","speaker":"David","text":"The camp is beyond that ridge. I can hear the soldiers. I must find my brothers.","voice":"am_puck","speed":1.0}
+]}

@@ -1,0 +1,43 @@
+{
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "checked": "2026-11-13",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "source": "https://github.com/thewh1teagle/kokoro-onnx",
+  "script": "source-assets/audio/encounter-lines.json",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "mouthTiming": "Waveform amplitude and spectral envelopes at 30 Hz, not phoneme alignment",
+  "lines": [
+    {
+      "id": "soldier-concern",
+      "speaker": "Soldier",
+      "text": "David? Stay back! He is a man of war!",
+      "voice": "am_michael",
+      "speed": 1.0,
+      "duration": 2.7093333333333334,
+      "sha256": "722e09c84c7ae99e561a270fef735502b118262cef54d537e6fe4211f6c24890"
+    },
+    {
+      "id": "step-forward",
+      "speaker": "David",
+      "text": "Let no one lose heart. I will go and face him.",
+      "voice": "am_puck",
+      "speed": 1.0,
+      "duration": 2.517333333333333,
+      "sha256": "94e0f112286269243c331a62098f7afa87e1eb7c791d3fefdb0ef0ecd4e0f03d"
+    },
+    {
+      "id": "steady",
+      "speaker": "David",
+      "text": "Steady. Now I have my moment.",
+      "voice": "am_puck",
+      "speed": 1.0,
+      "duration": 1.5786666666666667,
+      "sha256": "6266bb63de583cd3f8ca798609cc0f24873b0412f692626159ab2b8966e05d20"
+    }
+  ]
+}

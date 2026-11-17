@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>David · Player control design</title><link rel="icon" href="data:,"><link rel="stylesheet" href="controls.css"></head>
+<body><main>
+  <header class="review-header"><div><p class="eyebrow">David &amp; Goliath · Control design</p><h1>Put David in the player’s hands.</h1></div><a class="game-link" href="http://127.0.0.1:4194/episode.html" target="_blank" rel="noopener">Play automatic opening ↗</a></header>
+  <p id="preview-note" class="review-note"><strong>Interface prototype.</strong> Try keyboard, pointer or touch feedback. Jump, Dodge and Jump Shot are simulated here; the game’s battle controls have not changed.</p>
+  <div class="toolbar" aria-label="Preview settings">
+    <div class="segmented" aria-label="Screen layout"><button data-device="desktop" aria-pressed="true">Desktop</button><button data-device="portrait" aria-pressed="false">Portrait</button><button data-device="landscape" aria-pressed="false">Landscape</button></div>
+    <label>Scene <select id="phase"><option value="defend">Defend · 3 spears</option><option value="strike">Sling opportunity</option><option value="explore">Explore / interact</option><option value="cinematic">Cinematic</option></select></label>
+    <label>Movement <select id="movement-mode"><option value="keys">On-screen keys</option><option value="stick">Thumb stick</option></select></label>
+    <label>Key labels <select id="key-style"><option value="wasd">WASD</option><option value="arrows">Arrows</option></select></label>
+  </div>
+  <div class="screen-shell"><section id="screen" data-device="desktop" data-phase="defend" tabindex="0" role="application" aria-label="Proposed David controls" aria-describedby="preview-note">
+    <img id="scene-image" src="battle-scene.png" alt="Existing rendered David and Goliath battle used as a control-layout backdrop" draggable="false">
+    <div id="aim-zone" aria-label="Aim area"></div><div class="scene-shade"></div>
+    <div class="objective-card" id="objective-card"><p id="objective-label" class="eyebrow">Stand your ground</p><h2 id="objective">Dodge the incoming spear</h2><p id="objective-detail">1 of 3 · Move left, then Dodge</p><div class="warning-track" aria-hidden="true"><span></span></div></div>
+    <button id="pause" class="pause-control" aria-label="Pause preview">Ⅱ <span>Pause</span></button>
+    <div id="head-target" role="img" aria-label="Goliath’s forehead aiming target"><span></span></div>
+    <div id="reticle" aria-hidden="true"><i></i></div><span id="aim-state" class="aim-state">Aim at the forehead</span>
+    <div id="move-feedback" class="move-feedback" aria-hidden="true">↑</div>
+    <svg id="action-arc" aria-hidden="true"><path id="arc-path"></path></svg><span id="action-tag" hidden>Jump preview</span>
+    <div id="move-console" class="move-console">
+      <div id="direction-keys" class="direction-keys" aria-label="Movement console"><button data-move="forward" aria-label="Move forward"><kbd>W</kbd></button><button data-move="left" aria-label="Move left"><kbd>A</kbd></button><button data-move="back" aria-label="Move backward"><kbd>S</kbd></button><button data-move="right" aria-label="Move right"><kbd>D</kbd></button></div>
+      <div id="stick" class="stick" aria-label="Movement thumb stick" role="group" hidden><span class="stick-cross">＋</span><span id="stick-knob"></span></div>
+      <p id="move-label">Move · WASD / arrows</p>
+    </div>
+    <div id="combat-actions" class="combat-actions" aria-label="Combat actions">
+      <button id="dodge" class="action dodge" data-action="dodge"><span class="symbol">↙</span><strong>Dodge</strong><kbd>Shift</kbd></button>
+      <button id="jump-shot" class="action jump-shot" data-action="jump-shot" disabled><span class="symbol">⌁</span><strong>Jump shot</strong><kbd>Q</kbd></button>
+      <button id="jump" class="action jump" data-action="jump"><span class="symbol">↥</span><strong>Jump</strong><kbd>Space</kbd></button>
+      <button id="sling" class="action sling primary" data-action="sling" disabled><span class="symbol">◎</span><strong>Sling</strong><kbd>F / click</kbd></button>
+    </div>
+    <p id="finisher-hint" class="finisher-hint" hidden>Aim at the forehead to ready Jump Shot</p>
+    <button id="interact" class="interact primary" data-action="interact" hidden>Inspect <kbd>E</kbd></button>
+    <p id="caption" class="caption" hidden>Dialogue captions stay readable while movement controls are hidden.</p>
+    <div id="paused" class="paused" hidden><h2>Paused</h2><p>Inputs cleared · Resume to continue the preview</p><button id="resume" class="primary">Resume</button></div>
+  </section></div>
+  <div class="input-readout"><span class="eyebrow">Input preview</span><p id="input-status" role="status" aria-live="polite">Click the picture, then try WASD / arrows, Space, Shift and F. Touch controls work independently.</p></div>
+  <div class="design-notes"><p><strong>Move left. Act right.</strong> The middle stays clear for David, Goliath and the reticle.</p><p><strong>One action for the cinematic shot.</strong> After the three evasions, aim at the forehead and use Jump Shot. A real hit will still need collision verification.</p></div>
+</main><script type="module" src="controls.js"></script></body></html>

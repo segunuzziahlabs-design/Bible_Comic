@@ -1,0 +1,15 @@
+<script src="Build/{{{ LOADER_FILENAME }}}"></script>
+<script type="module">
+import './cue.js';
+
+createUnityInstance(document.querySelector('#canvas'), {
+    dataUrl: 'Build/{{{ DATA_FILENAME }}}',
+    frameworkUrl: 'Build/{{{ FRAMEWORK_FILENAME }}}',
+    codeUrl: 'Build/{{{ CODE_FILENAME }}}',
+    streamingAssetsUrl: 'StreamingAssets',
+    companyName: 'Bible Comic',
+    productName: 'David Stack Comparison',
+    productVersion: '1.0',
+    devicePixelRatio: 1,
+}).catch(error => window.stack.fail(error));
+</script>
