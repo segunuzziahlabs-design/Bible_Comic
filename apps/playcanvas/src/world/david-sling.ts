@@ -19,6 +19,7 @@ export function createDavidSling(model: Entity, animator: AnimComponent, clip: A
   const palm = new Vec3(0, .086, 0);
   const grip = new Vec3();
   const pouch = new Vec3();
+  let releaseOffset: Vec3 | undefined;
 
   function pose(time: number | undefined) {
     if (time === undefined && layer.weight === 0) return;
@@ -38,5 +39,13 @@ export function createDavidSling(model: Entity, animator: AnimComponent, clip: A
     pouch.y += .14 * Math.sin(Math.PI * progress);
     return { grip, pouch };
   }
-  return { pose, position };
+  function previewOrigin() {
+    if (!releaseOffset) {
+      pose(slingWindup);
+      releaseOffset = model.getWorldTransform().clone().invert().transformPoint(position(slingWindup).pouch, new Vec3());
+      pose(undefined);
+    }
+    return model.getWorldTransform().transformPoint(releaseOffset, new Vec3());
+  }
+  return { pose, position, previewOrigin };
 }

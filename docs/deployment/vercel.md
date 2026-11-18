@@ -1,5 +1,7 @@
 # GitHub and Vercel hosting
 
+18 November update: the cinematic Chapter 5 source uses the same build settings and four public variables below. The environment template now includes the current public development values for copying into Vercel. Sign into the hosted game and continue to Chapter 5, or use the chapter catalog to revisit it if previously completed. Authentication/progression gates remain active. This update requires no new database migration.
+
 Prepared 17 November 2026. This configuration hosts the existing PlayCanvas application; the Clerk and Supabase services remain separate. Preparing and pushing the source is not a deployment or M5 release approval.
 
 ## Import settings
@@ -19,7 +21,7 @@ The committed [vercel.json](../../vercel.json) supplies the framework, install, 
 
 ## Public build configuration
 
-Add the following environment variables to the intended Vercel environment **before building**. Use the public values from the dedicated game provider dashboards or the existing ignored local configuration; actual values are deliberately absent from Git.
+Add the following environment variables to the intended Vercel environment **before building**. The [environment template](../../apps/playcanvas/.env.example) contains the current public development values, ready to copy. Backend secrets and database credentials remain outside the repository.
 
 | Variable | Value/source |
 | --- | --- |

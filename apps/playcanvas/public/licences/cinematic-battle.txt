@@ -1,0 +1,12 @@
+David and Goliath cinematic battle additions, 18 November 2026.
+
+Goliath duel: derived from this project's goliath-ranged.glb. All prior character,
+speaking, spear, walking and fall data are retained. Original project-authored
+sword, sheath, keyed draw/chop and forehead reaction are added in Blender.
+See source-assets/characters/goliath_duel.py and the retained Goliath/Quaternius
+base-character provenance in the project's asset registers. Those underlying
+licence notices continue to apply; no new external character or media was used.
+
+The ballistic trajectory guide, warning lane, impact dust and weapon sound
+extensions are original procedural project work. Retained dialogue/audio
+provenance is described in duel.txt and the other scene notices.

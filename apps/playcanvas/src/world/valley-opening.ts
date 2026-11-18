@@ -208,6 +208,8 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   stage(0);
   function resetActivity(){lastTime=patrolTime=patrolWalk=0;patrolX=-4;patrolYaw=90;stage(0);}
   return { ...area, groundHeight, root, sentinel, patrol, marker, stage, resetActivity, soldierCount: 51,
-    walls: [...area.walls, {minX:-10,maxX:10,minZ:3.4,maxZ:3.8},
+    // The overlook's camera rail is not geometry in the playable battlefield.
+    // Keeping it here shortened the battle camera behind a backward evasion.
+    walls: [...area.walls, ...(options.playableBattle?[]:[{minX:-10,maxX:10,minZ:3.4,maxZ:3.8}]),
       {minX:1.98,maxX:2.82,minZ:8.9,maxZ:9.7}, {minX:-5.5,maxX:-3.1,minZ:9.4,maxZ:12.6}, {minX:3.7,maxX:6.1,minZ:9.7,maxZ:12.7}] };
 }

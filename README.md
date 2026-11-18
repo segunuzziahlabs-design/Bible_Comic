@@ -1,5 +1,7 @@
 # Bible Comic — David and Goliath
 
+**18 November — cinematic Chapter 5:** sword → spear → aimed ballistic sling encounter, with an earned finishing replay. [Implementation and browser evidence](docs/implementation/cinematic-battle.md) · [Quick battle review](http://127.0.0.1:4208/duel.html?review=1) · [Account-enabled application](http://127.0.0.1:4210/). These are local review links; use the [Vercel setup](docs/deployment/vercel.md) for hosted testing from `main`.
+
 **GitHub / Vercel:** [Hosting configuration and setup](docs/deployment/vercel.md). Import from the repository root; the committed `vercel.json` builds the PlayCanvas app. Public Clerk/Supabase build settings must be supplied in Vercel. Generated builds, credentials and raw browser evidence remain local; written reports and game assets are included.
 
 **M4 accounts, 17 November — implemented and verified:** [Open the application](http://127.0.0.1:4206/) · [Handover and evidence](docs/implementation/m4-account-and-product-handover.md). Dedicated Clerk and Supabase development services are connected. Real sign-in, hosted saves, Chrome-to-Edge resume, two-account isolation and the complete six-chapter journey passed; final desktop/portrait/landscape checks passed. Owner journey approval and M5 release checks remain open. The scene-review build on port 4202 is preserved.

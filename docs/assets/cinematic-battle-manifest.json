@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "basis": "Original sword mesh and keyed performances on the retained project Goliath rig, authored in Blender 4.5.15 and exported as GLB. Original third-party base provenance/licences unchanged; no external new media.",
+  "source": {
+    "file": "apps/playcanvas/src/assets/goliath-ranged.glb",
+    "sha256": "b427eba8b13961b73c3273c29c513dde5b6c42f368f3d30653fa5f643cf9c3f2"
+  },
+  "output": {
+    "file": "apps/playcanvas/src/assets/goliath-duel.glb",
+    "sha256": "b74222d89230d817c3c53c450e5215e903c64e94f3fbf10360e3ce420d240fa4",
+    "bytes": 1387224,
+    "triangles": 11859,
+    "joints": 70,
+    "animations": [
+      "goliath_advance",
+      "goliath_challenge",
+      "goliath_draw_sword",
+      "goliath_fall",
+      "goliath_hit",
+      "goliath_ready",
+      "goliath_speak",
+      "goliath_spear",
+      "goliath_spear_1",
+      "goliath_spear_2",
+      "goliath_spear_3",
+      "goliath_sword_strike",
+      "goliath_throw"
+    ]
+  },
+  "checks": [
+    "All earlier animation names retained",
+    "Added sword draw, strike and forehead reaction",
+    "Blade, spear and forehead markers",
+    "Speech face morph retained",
+    "Two additional sword marker joints"
+  ]
+}

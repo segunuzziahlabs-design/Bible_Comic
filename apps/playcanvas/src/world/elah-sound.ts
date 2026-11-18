@@ -1,9 +1,10 @@
 import { type ElahBattleState } from '../gameplay/elah-battle';
+import { decisiveReplay } from '../gameplay/sling-ballistics';
 
 const rate = 22050;
 const durations = {
   wind: 3.2, ranks: 3.2, step: .18, armour: .32, whirl: .46, release: .18,
-  spear: .3, miss: .16, impact: .37, landing: .62, retreat: .75,
+  spear: .3, sword: .48, miss: .16, impact: .37, landing: .62, retreat: .75,
 } as const;
 type Sound = keyof typeof durations;
 
@@ -36,6 +37,7 @@ function synthesize(context: AudioContext, sound: Sound) {
       case 'release': sample = ((noise - middle) * .55 + ring(362) * .11) * Math.exp(-p * 7); break;
       case 'spear': sample = (middle * .75 + (noise - middle) * .20)
         * Math.sin(Math.PI * p) ** 2 * (1 - .45 * p); break;
+      case 'sword': sample = ((noise-middle)*.30*Math.sin(Math.PI*p)**2+(ring(590)*.11+ring(1117)*.07)*Math.exp(-p*8))*burst;break;
       case 'miss': sample = (middle * .47 + ring(164) * .22 + ring(993) * .10) * Math.exp(-p * 9); break;
       case 'impact': sample = (ring(125) * .37 + ring(518) * .17 + ring(1019) * .09 + middle * .32)
         * Math.exp(-p * 6); break;
@@ -59,7 +61,7 @@ export function createElahSound() {
   const buffers = new Map<Sound, AudioBuffer>();
   const transient = new Set<AudioBufferSourceNode>();
   let previous: { phase: ElahBattleState['phase']; attack: ElahBattleState['attack']; time: number;
-    launches: number; misses: number; hits: number; strikes: number; x: number; z: number } | undefined;
+    launches: number; misses: number; hits: number; strikes: number; x: number; z: number; swordGround:boolean; spearLanded:boolean } | undefined;
   let davidStride = 0;
   let foeStride = 0;
   let footsteps = 0;
@@ -133,11 +135,18 @@ export function createElahSound() {
         if (phase === 'retreat') source('retreat', .43);
       }
       if (attack === 'windup' && previous.attack !== attack) source('armour', .60, false, .87);
-      if (strikes > previous.strikes) source('spear', .78);
+      if (attack === 'draw' && previous.attack !== attack) source('armour', .63, false, 1.2);
+      if (strikes > previous.strikes) source(state.combatStage==='sword'?'sword':'spear', .78);
+      if(state.swordGround&&!previous.swordGround||state.spear?.landed&&!previous.spearLanded)source('landing',.72,false,1.3);
       if (throwTime !== undefined && throwTime < dt * 1.1) source('whirl', .60);
       if (throws > previous.launches) source('release', .83);
       if (misses > previous.misses) source('miss', .48);
-      if (hits > previous.hits) source('impact', .88);
+      if (hits > previous.hits&&phase!=='finisher') source('impact', .88);
+      if(phase==='finisher'&&previous.phase==='finisher'){
+        if(previous.time<.4&&time>=.4)source('whirl',.55);
+        if(previous.time<decisiveReplay.release&&time>=decisiveReplay.release)source('release',.72,false,.85);
+        if(previous.time<decisiveReplay.impact&&time>=decisiveReplay.impact)source('impact',.9,false,.8);
+      }
       if (phase === 'fall' && previous.phase === 'fall' && previous.time < 1.34 && time >= 1.34) source('landing', .84);
       if (phase === 'defeat' && previous.phase === 'defeat' && previous.time < .42 && time >= .42) source('landing', .56);
       foeStride += Math.hypot(foe.x - previous.x, foe.z - previous.z);
@@ -152,7 +161,7 @@ export function createElahSound() {
       source('step', .84, false, .67);
       source('armour', .31, false, .91);
     }
-    previous = { phase, attack, time, launches: throws, misses, hits, strikes, x: foe.x, z: foe.z };
+    previous = { phase, attack, time, launches: throws, misses, hits, strikes, x: foe.x, z: foe.z,swordGround:!!state.swordGround,spearLanded:!!state.spear?.landed };
   }
 
   return {

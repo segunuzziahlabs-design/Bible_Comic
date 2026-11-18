@@ -13,6 +13,9 @@ import { createDavidSling } from './david-sling';
 import { createCharacterJump } from './character-jump';
 import { createElahSound } from './elah-sound';
 import { createWebGLApp, observeCanvas, waitForFrame } from './graphics';
+import { decisiveReplay, slingGuidance, type SlingGuidance } from '../gameplay/sling-ballistics';
+import { swordTiming } from '../gameplay/sword-combat';
+import { createStonePreview } from './stone-preview';
 
 const walls = [
   { minX: -6.45, maxX: -6, minZ: -6.45, maxZ: 6.45 },
@@ -47,6 +50,8 @@ export type BattleView = {
   reason?: 'david_killed_by_goliath';
   dodgeReady?: boolean;
   dodgeCooldown?: number; slingReady?:boolean; dodges?:number; attackDirection?:number;attackName?:string;attackHeight?:'low'|'middle'|'high';attackProgress?:number;
+  combatStage?: 'sword'|'spear'|'sling'; swordEvaded?:boolean; spearEvasions?:number; weaponHit?:'sword'|'spear';
+  positionHint?:string; aimHint?:string; distance?:number; foreheadX?:number; foreheadY?:number; foreheadVisible?:boolean;
 };
 export type InteractionView = { canInteract: boolean; cueText: string; battle?: BattleView };
 
@@ -173,7 +178,7 @@ export async function openMovementArea(
     const spawn = elah?.anchors[chapter&&episode&&episode.attempt>1&&episode.anchor==='battle.entry'&&!episode.defeated?'battle.approach':episode?.anchor ?? 'battle.entry'] ?? start;
     const cameraWalls = elah?.walls ?? walls;
     const battle = elah && createElahBattle(elah.anchors['battle.approach'].z, elah.brookZ, elah.goliath, elah.groundHeight,
-      () => elah.champion.forehead.getPosition(), episode, {...(chapter?{challengeSeconds:28,stopAfterFall:true,requiredDodges:3,entranceSeconds:13,rangedSpear:true}:{}),sampleSpear:elah.poseChampion});
+      () => elah.champion.forehead.getPosition(), episode, {...(chapter?{challengeSeconds:28,stopAfterFall:true,requiredDodges:3,entranceSeconds:13,rangedSpear:true,cinematicCombat:true,sampleSword:elah.sampleSword}:{}),sampleSpear:elah.poseChampion});
     const lookHeight = elah ? 1.46 : .91;
     const startPitch = (elah ? 16 : 20) * math.DEG_TO_RAD;
     const david = await loadDavid(app, chapter?.davidUrl);
@@ -182,6 +187,8 @@ export async function openMovementArea(
     const { layer, gestureDuration } = configureLocomotion(animator, tracks);
     const sling = elah && createDavidSling(model, animator, tracks.get('sling_throw'));
     const sound = elah && createElahSound();
+    const stonePreview=chapter?createStonePreview(app):undefined;
+    let guidance:SlingGuidance|undefined;
     const inspect = new URLSearchParams(location.search).has('inspect');
 
     let position = { ...spawn };let defeatLift=0,jumpShotActive=false;
@@ -241,15 +248,26 @@ export async function openMovementArea(
         else if (shot) instruction = 'Stone away';
         else if (misses) instruction = 'Missed. Aim at his forehead and throw again.';
         else instruction = chapter ? 'Move · Aim at his forehead · Click or F to throw · Shift to dodge' : 'Aim at Goliath’s forehead and throw';
+        if(battle.state.cinematicCombat){
+          if(battle.state.combatStage==='sword')instruction=attack==='draw'?'Goliath draws his sword — stay ready':attack==='windup'?'Sword raised — move out of the marked strike':attack==='strike'?'Dodge the blade!':battle.state.swordEvaded?'Sword evaded — stay alert':'Keep moving — Goliath is closing in';
+          else if(battle.state.combatStage==='spear')instruction=attack==='windup'?`Spear ${battle.state.spearEvasions+1}/2 — leave the marked landing point`:attack==='strike'?'Incoming spear — move now!':battle.state.feedbackTime>0?battle.state.feedback:'Keep your distance — watch for the spear';
+          else instruction=stones===0&&!shot?'Return to the brook for more stones':shot?'Stone away — watch its arc':battle.state.feedbackTime>0?battle.state.feedback:'Find your position · Aim at the forehead';
+        }
       }
+      if(phase==='finisher')caption='Decisive shot · Cinematic replay';
       if (phase === 'fall') caption = 'The stone struck Goliath.';
       if (phase === 'retreat') caption = time < 1.7
         ? 'The Philistines saw their champion fall.'
         : 'They turned and fled. David prevailed.';
       const result = phase === 'victory' || (phase === 'defeat' && time >= defeatDuration) ? phase : '';
+      const forehead=chapter?camera.camera!.worldToScreen(battle.target()):undefined;
       return { phase, instruction, caption, stones, canThrow: phase === 'fight' && !jumpShotActive && !jump.active() && battle.slingAvailable() && throwTime === undefined && !shot && stones > 0,
-        aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive,
-        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackDirection:recommendedDodgeDirection(),attackName:battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,attackProgress:attack==='windup'?Math.min(1,battle.state.attackTime/battle.pattern().windup):0,dodgeReady: phase === 'fight' && !jumpShotActive && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
+        aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive||phase==='finisher',
+        combatStage:battle.state.combatStage,swordEvaded:battle.state.swordEvaded,spearEvasions:battle.state.spearEvasions,weaponHit:battle.state.weaponHit,
+        positionHint:guidance?.position,aimHint:guidance?.aiming,distance:guidance?.distance,
+        foreheadX:forehead?forehead.x/canvas.clientWidth:undefined,foreheadY:forehead?forehead.y/canvas.clientHeight:undefined,
+        foreheadVisible:!!forehead&&forehead.z>0&&forehead.x>0&&forehead.x<canvas.clientWidth&&forehead.y>0&&forehead.y<canvas.clientHeight,
+        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackDirection:recommendedDodgeDirection(),attackName:battle.state.combatStage==='sword'?'Overhead sword strike':battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,attackProgress:attack==='windup'?Math.min(1,battle.state.attackTime/(battle.state.combatStage==='sword'?swordTiming.windup:battle.pattern().windup)):0,dodgeReady: phase === 'fight' && !jumpShotActive && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
     }
 
     function updateInteraction() {
@@ -304,7 +322,9 @@ export async function openMovementArea(
     function frameBattle(dt: number) {
       if (!battle || !elah) return;
       if (chapter?.frame(battle.state, model, dt)) return;
-      camera.camera!.fov = chapter?(battle?.state.ranged?(canvas.clientWidth<canvas.clientHeight?61:55):battle&&!battle.slingAvailable()?61:58):52;
+      const swordStage=battle.state.cinematicCombat&&battle.state.combatStage==='sword'&&battle.state.phase==='fight';
+      const spearStage=battle.state.cinematicCombat&&battle.state.combatStage==='spear'&&battle.state.phase==='fight';
+      camera.camera!.fov = swordStage?(canvas.clientWidth<canvas.clientHeight?70:63):spearStage?(canvas.clientWidth<canvas.clientHeight?66:62):chapter?(battle?.state.ranged?(canvas.clientWidth<canvas.clientHeight?61:55):battle&&!battle.slingAvailable()?61:58):52;
       const { phase, time, foe } = battle.state;
       const narrow = canvas.clientWidth < canvas.clientHeight;
       const landing=phase==='fight'&&battle.state.ranged&&['windup','strike'].includes(battle.state.attack)?battle.state.aimLock:undefined;
@@ -313,7 +333,7 @@ export async function openMovementArea(
       const exchange = phase === 'challenge' ? 1 - math.smoothstep(challengeDuration - .65, challengeDuration, time) : 0;
       const angle = (landing?Math.atan2(nearX-foe.x,nearZ-foe.z):battleBearing()) + exchange * (narrow ? .18 : .48);
       const defence=!!chapter&&phase==='fight'&&(battle.state.ranged||!battle.slingAvailable());
-      const distance = safeArm(angle, defence?(narrow?5.4:5.3)+Math.min(4,spread*(narrow?.65:.25)):(chapter?4.3:3.3) + exchange * .45);
+      const distance = safeArm(angle, defence?(narrow?5.4:5.3)+(swordStage?.6:spearStage?.9:0)+Math.min(4,spread*(narrow?.65:.25)):(chapter?4.3:3.3) + exchange * .45);
       const shoulder = (battle.state.ranged&&phase==='fight'?(narrow?.55:1.6):(narrow ? .31 : .53)) * (1 - exchange) * Math.min(1, distance / 2);
       const eyeX = nearX + Math.sin(angle) * distance + Math.cos(angle) * shoulder;
       const eyeZ = nearZ + Math.cos(angle) * distance - Math.sin(angle) * shoulder;
@@ -335,7 +355,8 @@ export async function openMovementArea(
       const focus = battle.state.ranged&&phase==='fight'?.42:.28 * exchange + .38 * collapse;
       const runner = elah.retreatFocus.getPosition();
       const focusX = math.lerp(foe.x, nearX, focus);
-      const focusY = battle.state.ranged&&phase==='fight'?math.lerp(elah.groundHeight(foe.x,foe.z)+2,model.getPosition().y+1.1,.42):elah.groundHeight(foe.x, foe.z) + math.lerp(2.0 - .43 * exchange, .38, Math.max(fall, .68 * collapse));
+      let focusY = battle.state.ranged&&phase==='fight'?math.lerp(elah.groundHeight(foe.x,foe.z)+(swordStage?2.7:2),model.getPosition().y+1.1,.42):elah.groundHeight(foe.x, foe.z) + math.lerp(2.0 - .43 * exchange, .38, Math.max(fall, .68 * collapse));
+      if(spearStage&&battle.state.spear&&!battle.state.spear.landed)focusY=math.lerp(focusY,Math.min(focusY,battle.state.spear.sample.tip.y+.45),.7*math.smoothstep(.75,1.22,battle.state.spear.time));
       const focusZ = math.lerp(foe.z, nearZ, focus);
       camera.lookAt(math.lerp(focusX, math.lerp(runner.x, 6.4, .24), retreat),
         math.lerp(focusY, runner.y + 1.12, retreat), math.lerp(focusZ, math.lerp(runner.z, -18.5, .24), retreat));
@@ -352,7 +373,8 @@ export async function openMovementArea(
       aimRay.sub(eye);
       aimDepth.sub2(target, eye);
       aimRay.mulScalar(aimDepth.dot(forward) / aimRay.dot(forward)).add(eye);
-      aimed = aimRay.distance(target) <= aimAssistRadius;
+      if(battle!.state.cinematicCombat&&sling&&elah){guidance=slingGuidance(model.getPosition(),{x:battle!.state.foe.x,y:elah.groundHeight(battle!.state.foe.x,battle!.state.foe.z),z:battle!.state.foe.z},sling.previewOrigin(),aimRay,target,elah.groundHeight,battle!.state.foeYaw);aimed=guidance.aligned;}
+      else aimed = aimRay.distance(target) <= aimAssistRadius;
       return aimRay;
     }
 
@@ -390,16 +412,27 @@ export async function openMovementArea(
       }
       if(phase==='defeat'){model.setPosition(position.x,elah.groundHeight(position.x,position.z)+Math.max(0,defeatLift-7*time*time),position.z);model.setEulerAngles(-80*math.smoothstep(0,defeatDuration,time),heading*math.RAD_TO_DEG,0);}
       sling.pose(battle.state.throwTime);
+      if(phase==='finisher'){
+        jumpShotActive=false;animator.playing=false;
+        const hop=time<decisiveReplay.release?.50*Math.sin(Math.PI*time/decisiveReplay.release):0;
+        model.setPosition(position.x,elah.groundHeight(position.x,position.z)+hop,position.z);
+        const clip=time<.18?'jump_takeoff':time<.65?'jump_air':time<decisiveReplay.release?'jump_land':'Listen';
+        if(layer.activeState!==clip)layer.transition(clip,.06);
+        layer.activeStateCurrentTime=clip==='Listen'?time%david.tracks.get('listen')!.duration:Math.min(tracks.get(clip)!.duration,time<.18?time/.18*tracks.get(clip)!.duration:time<.65?(time-.18)/.47*tracks.get(clip)!.duration:(time-.65)/.3*tracks.get(clip)!.duration);
+        animator.update(0);sling.pose(time<1.4?Math.max(0,time-decisiveReplay.release+slingWindup):undefined);
+      }
       sound?.step(battle.state, dt, jump.active()?0:speed);
       if (phase === 'approach') placeCamera(dt);
       else {
         const shot = battle.state.shot;
-        elah.renderBattle(battle.state, dt, shot?.kind === 'windup' ? sling.position(shot.time) : undefined);
+        const replayWindup=phase==='finisher'&&time>=decisiveReplay.release-slingWindup&&time<decisiveReplay.release;
+        elah.renderBattle(battle.state, dt, shot?.kind === 'windup' ? sling.position(shot.time) : replayWindup?sling.position(time-decisiveReplay.release+slingWindup):undefined);
         frameBattle(dt);
       }
       chapter?.step(battle.state, dt, david);
-      if(jumpShotActive&&phase==='fight'&&!jump.active()&&battle.state.jumpShotTime!>1.3&&!battle.state.shot){jumpShotActive=false;battle.state.jumpShotTime=undefined;input.clear();input.setEnabled(!paused);}
+      if((jumpShotActive||battle.state.cinematicCombat&&battle.state.jumpShotTime!==undefined)&&phase==='fight'&&!jump.active()&&battle.state.jumpShotTime!>1.3&&!battle.state.shot){jumpShotActive=false;battle.state.jumpShotTime=undefined;input.clear();input.setEnabled(!paused);}
       if (phase === 'fight') aimAt();
+      stonePreview?.update(phase==='fight'&&battle.slingAvailable()&&!battle.state.shot?guidance:undefined);
     }
 
     function showSample() {
@@ -418,12 +451,13 @@ export async function openMovementArea(
         battle: battleState && {
           ...battleState, preparation: battle.checkpoint.preparation, aimX, aimY, aimed,
           target: battle.target(),
+          guidance,
         },
       });
     }
 
     function reset(options?: { attempt: number }) {
-      cue = undefined;defeatLift=0;jumpShotActive=false;
+      cue = undefined;defeatLift=0;jumpShotActive=false;guidance=undefined;stonePreview?.update();
       completedCueId = 0;
       position = { ...(initialized && elah ? elah.anchors[chapter&&(options?.attempt??battle?.state.attempt??1)>1?'battle.approach':'battle.entry'] : spawn) };
       // The initial setup may resume an aftermath/defeat; later resets use battle.entry.
@@ -463,7 +497,7 @@ export async function openMovementArea(
       if (chapter) void (paused ? chapter.audio.pause() : chapter.audio.resume());
       if (!paused) sound?.start();
       input.setEnabled(!paused && !cue && !jumpShotActive && battleControlsAvailable());
-      animator.playing = !paused && !cue && !jump.active() && dodgeAge<0 && battle?.state.phase !== 'defeat' && !(chapter && (battle?.state.phase === 'challenge'||battle?.state.phase==='entrance'));
+      animator.playing = !paused && !cue && !jump.active() && dodgeAge<0 && battle?.state.phase !== 'defeat' && battle?.state.phase !== 'finisher' && !(chapter && (battle?.state.phase === 'challenge'||battle?.state.phase==='entrance'));
       if (paused) {
         destinationGuide?.hide();
         velocity = { x: 0, z: 0 };
@@ -511,7 +545,7 @@ export async function openMovementArea(
     function jumpShot(){
       if(!canJumpShot()||!battle)return false;const pointer=input.pointerAim();if(pointer){aimX=pointer.x;aimY=pointer.y;}const point=aimAt().clone();
       if(!jump.request(position))return false;if(!battle.startThrow(point,false,true)){jump.reset(position);return false;}
-      jumpShotActive=true;velocity={x:0,z:0};input.clear();input.setEnabled(false);updateInteraction();showSample();return true;
+      jumpShotActive=!battle.state.cinematicCombat;velocity={x:0,z:0};input.clear();input.setEnabled(!jumpShotActive);updateInteraction();showSample();return true;
     }
     function dodge() {
       if (!chapter || paused || jumpShotActive || jump.active() || battle?.state.phase !== 'fight' || dodgeCooldown > 0) return false;

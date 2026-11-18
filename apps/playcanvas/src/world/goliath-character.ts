@@ -25,12 +25,13 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
     if (!track) throw new Error(`Missing Goliath animation: ${clip}`);
     animator.assignAnimation(clip, track, undefined, 1, false);
   }
-  for(const clip of ['goliath_spear_1','goliath_spear_2','goliath_spear_3','goliath_throw'])if(tracks.has(clip))animator.assignAnimation(clip,tracks.get(clip)!,undefined,1,false);
+  for(const clip of ['goliath_spear_1','goliath_spear_2','goliath_spear_3','goliath_throw','goliath_draw_sword','goliath_sword_strike','goliath_hit'])if(tracks.has(clip))animator.assignAnimation(clip,tracks.get(clip)!,undefined,1,false);
   if (tracks.has('goliath_speak')) animator.assignAnimation('goliath_speak', tracks.get('goliath_speak')!, undefined, 1, false);
   animator.playing = false;
   const baseLayer = animator.baseLayer;
   const forehead = model.findByName('Goliath forehead') as Entity | null;
   const grip=model.findByName('Spear grip') as Entity|null,tip=model.findByName('Spear tip') as Entity|null;
+  const swordGrip=model.findByName('Sword grip') as Entity|null,swordTip=model.findByName('Sword tip') as Entity|null;
   if (!baseLayer || !forehead || !grip || !tip) throw new Error('Goliath rig is missing its animation layer, forehead or spear markers');
   const layer = baseLayer;
 
@@ -46,7 +47,7 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
       for (const [instance, index] of morphs.get(name) ?? []) instance.setWeight(index, value);
   }
   function mouthWeights() { return (morphs.get('SpeakOpen') ?? []).map(([instance, index]) => instance.getWeight(index)); }
-  function pose(clip: Clip | 'goliath_speak' | 'goliath_spear_1' | 'goliath_spear_2' | 'goliath_spear_3' | 'goliath_throw', time: number, dt: number, cut = false) {
+  function pose(clip: Clip | 'goliath_speak' | 'goliath_spear_1' | 'goliath_spear_2' | 'goliath_spear_3' | 'goliath_throw' | 'goliath_draw_sword' | 'goliath_sword_strike' | 'goliath_hit', time: number, dt: number, cut = false) {
     if (layer.activeState !== clip || cut) {
       if (!dt || cut) { layer.play(clip); animator.update(.0001); }
       else layer.transition(clip, .10);
@@ -59,5 +60,9 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
   // Transitioning directly from an unstarted controller leaves its skin bounds collapsed.
   pose('goliath_ready', 0, 0, true);
   const weapon=model.findComponents('render').filter(r=>/Goliath spear (shaft|head)/.test(r.entity.name));
-  return { heldWeapon(visible:boolean){for(const render of weapon)render.enabled=visible;}, model, pose, forehead, grip, tip, face, mouthWeights, tracks };
+  const sword=model.findComponents('render').filter(r=>/Goliath drawn sword/.test(r.entity.name));
+  const hilt=model.findComponents('render').filter(r=>/Goliath sheathed sword/.test(r.entity.name));
+  return { heldWeapon(visible:boolean){for(const render of weapon)render.enabled=visible;},
+    heldSword(visible:boolean){for(const render of sword)render.enabled=visible;for(const render of hilt)render.enabled=!visible;},
+    swordGrip,swordTip,model, pose, forehead, grip, tip, face, mouthWeights, tracks };
 }

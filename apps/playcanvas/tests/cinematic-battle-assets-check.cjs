@@ -1,0 +1,11 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const read=name=>{const file=`apps/playcanvas/src/assets/${name}.glb`,b=fs.readFileSync(file);return{file,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex'),json:JSON.parse(b.subarray(20,20+b.readUInt32LE(12)))};};
+const source=read('goliath-ranged'),duel=read('goliath-duel');
+for(const a of source.json.animations)assert(duel.json.animations.some(n=>n.name===a.name),'Retained clip '+a.name);
+for(const name of ['goliath_draw_sword','goliath_sword_strike','goliath_hit'])assert(duel.json.animations.some(a=>a.name===name));
+for(const name of ['Sword grip','Sword tip','Spear grip','Spear tip','Goliath forehead'])assert(duel.json.nodes.some(n=>n.name===name));
+assert(duel.json.meshes.some(m=>m.extras?.targetNames?.includes('SpeakOpen')));
+assert.equal(duel.json.skins[0].joints.length,source.json.skins[0].joints.length+2);
+const triangles=j=>j.meshes.flatMap(m=>m.primitives).reduce((sum,p)=>sum+j.accessors[p.indices].count/3,0);
+const report={status:'PASS',basis:'Original sword mesh and keyed performances on the retained project Goliath rig, authored in Blender 4.5.15 and exported as GLB. Original third-party base provenance/licences unchanged; no external new media.',source:{file:source.file,sha256:source.sha256},output:{file:duel.file,sha256:duel.sha256,bytes:duel.bytes,triangles:triangles(duel.json),joints:duel.json.skins[0].joints.length,animations:duel.json.animations.map(a=>a.name)},checks:['All earlier animation names retained','Added sword draw, strike and forehead reaction','Blade, spear and forehead markers','Speech face morph retained','Two additional sword marker joints']};
+fs.writeFileSync('docs/assets/cinematic-battle-manifest.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

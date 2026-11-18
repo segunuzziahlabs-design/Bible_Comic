@@ -22,10 +22,16 @@
       <section class="stage" aria-label="Valley of Elah">
         <canvas id="stage" tabindex="0" aria-label="Explore Elah as David" aria-describedby="instructions">A browser with canvas and WebGL 2 is required.</canvas>
         <div id="battle-hud" class="valley-hud" hidden>
+          <p id="combat-stage-label" class="combat-stage-label"></p>
           <p id="objective" role="status">Follow the track across the brook</p>
           <p id="stone-count" hidden></p>
         </div>
         <div id="sling-aim" class="sling-aim" aria-hidden="true" hidden></div>
+        <div id="forehead-target" class="forehead-target" aria-hidden="true" hidden><span>Forehead</span></div>
+        <div id="combat-aim-panel" class="combat-aim-panel" hidden>
+          <p><span class="guidance-label">Position</span> <span id="position-guidance"></span></p>
+          <p><span class="guidance-label">Aim</span> <span id="angle-guidance"></span></p>
+        </div>
         <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
         <button type="button" id="throw-stone" class="interaction-prompt" hidden>Throw <kbd aria-hidden="true">F</kbd></button>
         <button type="button" id="dodge" class="sling-dodge" hidden>Dodge</button>

@@ -33,7 +33,7 @@ function controls() {
   stage.toggleAttribute('data-running', moving);
   stage.toggleAttribute('data-aiming', live && view?.phase === 'fight'&&!!view.slingReady);
   el('battle-hud').hidden = !moving;
-  el('stone-count').hidden = view?.phase !== 'fight';
+  el('stone-count').hidden = true;
   el('sling-aim').hidden = button('throw-stone').hidden = cinematic || !live || view?.phase !== 'fight'||!view.slingReady;
   button('throw-stone').disabled = !live || !view?.canThrow;
   button('pause').disabled = button('reset').disabled = !started || busy || !!view?.result;
@@ -49,7 +49,19 @@ function controls() {
   el('instructions').hidden = view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
   el('battle-instructions').hidden = view?.phase !== 'fight';
   el('spear-guide').hidden=!live||view?.phase!=='fight'||!!view.slingReady;
-  if(view){text('spear-guide',view.slingReady?'':`${view.dodges??0} / 3 spears avoided · ${view.attackName??''}`);el('spear-guide').style.setProperty('--attack-progress',`${(view.attackProgress??0)*100}%`);el('spear-guide').toggleAttribute('data-warning',(view.attackProgress??0)>0);}
+  if(view){
+    text('combat-stage-label',view.phase==='approach'?'The confrontation':view.combatStage==='sword'?'I · Survive the sword':view.combatStage==='spear'?`II · Survive the spear · ${view.spearEvasions??0}/2`:`III · David’s counterattack · ${view.stones} stones`);
+    text('spear-guide',view.combatStage==='sword'?'Sword strike · Leave the marked ground':`Spear ${Math.min(2,(view.spearEvasions??0)+1)} of 2 · Watch the landing circle`);
+    el('spear-guide').style.setProperty('--attack-progress',`${(view.attackProgress??0)*100}%`);el('spear-guide').toggleAttribute('data-warning',(view.attackProgress??0)>0);
+    const aiming=live&&!cinematic&&view.phase==='fight'&&!!view.slingReady;
+    el('combat-aim-panel').hidden=!aiming;
+    text('position-guidance',`${view.positionHint??'Find your position'}${view.distance!==undefined?' · '+view.distance.toFixed(1)+' m':''}`);
+    text('angle-guidance',view.aimHint??'Aim towards the forehead');
+    el('combat-aim-panel').toggleAttribute('data-aligned',view.aimed);
+    el('forehead-target').hidden=!aiming||!view.foreheadVisible;
+    el('forehead-target').style.left=`${(view.foreheadX??.5)*100}%`;el('forehead-target').style.top=`${(view.foreheadY??.3)*100}%`;
+    el('forehead-target').toggleAttribute('data-aligned',view.aimed);
+  }
   if (inspect && session) canvas.dataset.duel = JSON.stringify({ review, started, paused, muted, busy, run: session.run, inventory: preparation(session.run), objective: currentObjective(session.run)?.id });
 }
 async function save(operation: () => Promise<void>, done: () => void) {
@@ -76,8 +88,8 @@ function render(next: InteractionView) {
   const previous = view; view = next.battle;
   const instruction = matchMedia('(any-pointer: coarse), (hover: none)').matches
     ? view.instruction.replace('Dodge (Shift)', 'tap Dodge').replace('Click or F to throw · Shift to dodge', 'Tap Throw · Tap Dodge').replace('Shift / Dodge','Tap Dodge') : view.instruction;text('objective',instruction);
-  el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches?(view.slingReady?'Aim: drag · Throw or Jump Shot':view.attackHeight==='low'?'Move away from the red circle · Hold a direction + Dodge':'Move away from the red circle · Hold a direction + Dodge'):(view.slingReady?'Aim: mouse · F: Throw · Q: Jump Shot':view.attackHeight==='low'?'Move: WASD / arrows · Direction + Shift: quick Dodge':'Move: WASD / arrows · Direction + Shift: quick Dodge');
-  if(view.cinematic)el('battle-instructions').textContent='David’s jump shot · Pause any time';
+  el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches?(view.slingReady?'Drag to aim · Tap Throw · Dots show the stone’s arc':'Move with the left controls · Hold a direction + Dodge'):(view.slingReady?'Mouse / IJKL: aim · F: Throw · Q: Jump Shot':'WASD / arrows: move · Direction + Shift: Dodge · Space: Jump');
+  if(view.cinematic)el('battle-instructions').textContent='The decisive throw · Cinematic replay · Pause any time';
   text('stone-count',`${view.stones} ${view.stones === 1 ? 'stone' : 'stones'}`);
   text('battle-caption',view.caption); el('battle-caption').hidden = !view.caption;
   el('sling-aim').style.left = `${view.aimX * 100}%`; el('sling-aim').style.top = `${view.aimY * 100}%`;
@@ -95,7 +107,7 @@ function render(next: InteractionView) {
   }
   if (view.result === 'defeat') {
     el('battle-result').hidden = false; el('battle-result-title').textContent = 'David fell';
-    el('battle-result-detail').textContent = 'Goliath’s spear struck David. Your earlier preparation is safe. Retry from the battle entrance.';
+    el('battle-result-detail').textContent = `${view.weaponHit?`Goliath’s ${view.weaponHit} struck David.`:'David was struck by Goliath.'} Your earlier preparation is safe. Retry the sword and spear encounter from the battle checkpoint.`;
     button('battle-replay').textContent = 'Retry Battle';
     if (previous?.result !== 'defeat' && !busy) button('battle-replay').focus();
   } else el('battle-result').hidden = true;
@@ -159,6 +171,6 @@ async function main() {
   el('save-status').textContent = localStatus();
   if (hasHit()) { started = true; gate(); }
   else if (session.run.status === 'defeated') { started = true; el('entry').hidden = true; controls(); button('battle-replay').focus(); }
-  else {button('enter').textContent=session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = `${session.run.attempt>1?'Return directly to the battle.':'Watch David step forward, then approach Goliath.'} Three evasions ready the sling. Move forward, back or sideways away from the red landing circle. Hold a direction and use Shift / Dodge for a quick step. Without a held direction, Dodge follows the warning arrow. Aim at his forehead; F / Throw or Q / Jump Shot releases one stone. Inaccurate throws miss.`; button('enter').hidden = false; }
+  else {button('enter').textContent=session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = `${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move in any direction with WASD / arrows or the left controls; hold a direction + Shift / Dodge for a quick step. Then find your distance, aim above the forehead to account for the stone’s fall, and use F / Throw. The dotted arc shows your actual aim; inaccurate throws miss.`; button('enter').hidden = false; }
 }
 void main().catch(error => { console.error(error); el('entry-message').textContent = error instanceof Error ? error.message : 'The duel could not load.'; button('retry').hidden = false; });

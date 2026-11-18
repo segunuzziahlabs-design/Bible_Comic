@@ -4,7 +4,8 @@ import { createSceneSpeech, mouthEnvelope } from './scene-speech';
 import type { ElahBattleState } from '../gameplay/elah-battle';
 import type { loadDavid } from './david-character';
 import davidUrl from '../assets/david-adventure.glb?url';
-import goliathUrl from '../assets/goliath-ranged.glb?url';
+import goliathUrl from '../assets/goliath-duel.glb?url';
+import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
 import actorUrl from '../assets/challenge-soldier.glb?url';
 import oldLines from '../assets/duel-dialogue/dialogue.json';
 import encounterLines from '../assets/encounter-dialogue/dialogue.json';
@@ -18,7 +19,7 @@ import faith from '../assets/duel-dialogue/david-faith.wav?url';
 import battle from '../assets/duel-dialogue/david-battle.wav?url';
 import watch from '../assets/duel-dialogue/soldier-watch.wav?url';
 
-export const duelVersion = 'cinematic-duel-2';
+export const duelVersion = 'cinematic-duel-3';
 export const confrontationDuration = 28;
 type David = Awaited<ReturnType<typeof loadDavid>>;
 
@@ -82,7 +83,21 @@ export async function createDuelPresentation(app: Application) {
   }
   const canvasPortrait=()=>app.graphicsDevice.canvas.clientHeight>app.graphicsDevice.canvas.clientWidth;
   function frame(state: ElahBattleState, david: Entity, dt: number) {
-    if(state.phase==='fight'&&state.jumpShotTime!==undefined){
+    if(state.phase==='finisher'&&state.decisiveThrow){
+      const t=state.time,replay=state.decisiveThrow,g=world.champion.forehead.getPosition(),p=david.getPosition();
+      const u=Math.max(0,Math.min(1,(t-decisiveReplay.release)/(decisiveReplay.impact-decisiveReplay.release)));
+      const stone=stoneAt(replay.origin,replay.velocity,replay.flightSeconds*u);
+      let destination:Vec3,focus:Vec3;
+      if(t<decisiveReplay.release){shot='earned-jump-and-sling-replay';destination=new Vec3(p.x+2.3,p.y+1.8,p.z+2.7);focus=new Vec3(p.x,p.y+1.15,p.z);}
+      else if(t<decisiveReplay.impact){shot='follow-the-earned-stone';destination=new Vec3(stone.x+1.2,stone.y+.55,stone.z+1.6);focus=new Vec3(stone.x,stone.y,stone.z);}
+      else{shot='forehead-impact';destination=new Vec3(g.x+1.3,g.y+.22,g.z+2.7);focus=g.clone();}
+      eye.lerp(world.camera.getPosition(),destination,1-Math.exp(-12*dt));world.camera.setPosition(eye);world.camera.lookAt(focus);world.camera.camera!.fov=canvasPortrait()?57:48;return true;
+    }
+    if(state.cinematicCombat&&state.phase==='fight'&&state.combatStage==='spear'&&state.spearEvasions===0&&state.attack==='windup'&&state.attackTime<.4){
+      shot='spear-direction-establish';const p=david.getPosition(),g=world.champion.forehead.getPosition();
+      eye.lerp(world.camera.getPosition(),new Vec3(p.x+2.2,p.y+2.8,p.z+4.4),1-Math.exp(-6*dt));world.camera.setPosition(eye);world.camera.lookAt(g.x,g.y-1,g.z);world.camera.camera!.fov=canvasPortrait()?64:57;return true;
+    }
+    if(state.phase==='fight'&&state.jumpShotTime!==undefined&&!state.cinematicCombat){
       shot='david-jump-and-sling';const p=david.getPosition(),g=world.champion.forehead.getPosition(),angle=Math.atan2(p.x-g.x,p.z-g.z),t=state.jumpShotTime;
       const side=1.8*Math.min(1,t/.3),distance=canvasPortrait()?4.7:4.2;
       const destination=new Vec3(p.x+Math.sin(angle)*distance+Math.cos(angle)*side,p.y+1.9,p.z+Math.cos(angle)*distance-Math.sin(angle)*side);
