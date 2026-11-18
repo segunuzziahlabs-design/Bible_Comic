@@ -17,15 +17,18 @@ export const objectives = [
   { id: 'victory.witnessed', chapter: 5, label: 'Witness the Philistine retreat', anchor: 'battle.aftermath', area: 'battle' },
 ] as const;
 export type ObjectiveId = typeof objectives[number]['id'];
+export type BattleCheckpoint = { schemaVersion: 1; revision: number; stage: 'combat'|'fallen'|'sword_taken'|'finished' };
+export type BattleAction = 'begin'|'take_sword'|'finish';
 export type Run = {
   schemaVersion: 1; episodeId: typeof episodeId; contentVersion: typeof contentVersion;
   runId: string; revision: number; completed: ObjectiveId[];
   status: 'active' | 'defeated' | 'completed'; attempt: number; defeats: number;
   startedAt: string; updatedAt: string;
+  battle?: BattleCheckpoint;
 };
 export type EpisodeEvent = { type: 'objective'; id: ObjectiveId }
   | { type: 'defeat'; reason: 'david_killed_by_goliath' }
-  | { type: 'retry' };
+  | { type: 'retry' } | { type: 'battle'; action: BattleAction };
 export type RunSummary = Pick<Run, 'runId' | 'startedAt' | 'updatedAt' | 'status' | 'attempt' | 'defeats'>;
 
 export function freshRun(now = new Date().toISOString()): Run {
@@ -40,13 +43,14 @@ export function preparation(run: Run) {
     slingReady: run.completed.includes('sling.practised') };
 }
 export function checkpoint(run: Run) { return currentObjective(run)?.anchor ?? 'episode.complete'; }
+export function requiresBattleFinish(run: Run) { return !!run.battle && run.battle.stage !== 'finished' && run.completed.includes('goliath.struck'); }
 export function episodePage(run: Run) {
   if (currentObjective(run)?.id === 'valley.surveyed') return 'valley.html';
   if (['provisions.delivered', 'brothers.met'].includes(currentObjective(run)?.id ?? '')) return 'camp.html';
   if (['challenge.heard', 'eliab.answered'].includes(currentObjective(run)?.id ?? '')) return 'challenge.html';
   if (currentObjective(run)?.chapter === 3) return 'preparation.html';
   if (currentObjective(run)?.chapter === 4) return 'duel.html';
-  if (currentObjective(run)?.id === 'victory.witnessed') return 'victory.html';
+  if (currentObjective(run)?.id === 'victory.witnessed') return requiresBattleFinish(run)?'duel.html':'victory.html';
   const area = currentObjective(run)?.area;
   return area === 'saul' ? 'saul.html?episode=1' : area === 'battle' ? 'elah.html?episode=1' : 'episode.html';
 }
@@ -54,6 +58,21 @@ export function reduceEpisode(run: Run, event: EpisodeEvent, now = new Date().to
   if (event.type === 'objective' && run.completed.includes(event.id)) return run;
   if (run.status === 'completed') throw new Error('This run is complete. Replay starts a new run.');
   const next = structuredClone(run);
+  if(event.type==='battle'){
+    if(run.status!=='active')throw new Error('The battle checkpoint is not active.');
+    if(event.action==='begin'){
+      if(run.battle)return run;
+      if(currentObjective(run)?.id!=='goliath.struck')throw new Error('Prepare for the battle first.');
+      next.battle={schemaVersion:1,revision:0,stage:'combat'};
+    }else{
+      if(!run.completed.includes('goliath.struck')||!run.battle)throw new Error('Goliath must be confirmed fallen first.');
+      const wanted=event.action==='take_sword'?'sword_taken':'finished';
+      if(run.battle.stage===wanted)return run;
+      if(event.action==='take_sword'&&run.battle.stage!=='fallen'||event.action==='finish'&&run.battle.stage!=='sword_taken')throw new Error('Complete the current sword action first.');
+      next.battle={schemaVersion:1,revision:run.battle.revision+1,stage:wanted};
+    }
+    next.updatedAt=now;return next;
+  }
   if (event.type === 'retry') {
     if (run.status !== 'defeated') throw new Error('Retry is available after Goliath defeats David.');
     next.status = 'active'; next.attempt++;
@@ -63,7 +82,9 @@ export function reduceEpisode(run: Run, event: EpisodeEvent, now = new Date().to
     next.status = 'defeated'; next.defeats++;
   } else {
     if (run.status !== 'active' || currentObjective(run)?.id !== event.id) throw new Error('Complete the current objective first.');
+    if(event.id==='victory.witnessed'&&requiresBattleFinish(run))throw new Error('Finish the final sword action before Victory.');
     next.completed.push(event.id);
+    if(event.id==='goliath.struck'&&next.battle)next.battle={schemaVersion:1,revision:1,stage:'fallen'};
     if (next.completed.length === objectives.length) next.status = 'completed';
   }
   next.revision++; next.updatedAt = now;
@@ -86,5 +107,11 @@ export function validateRun(value: unknown): Run {
   if ((run.status === 'completed') !== (run.completed.length === objectives.length) ||
     (run.status === 'defeated' && (currentObjective(run)?.id !== 'goliath.struck' || run.defeats !== run.attempt)) ||
     (run.status !== 'defeated' && run.defeats !== run.attempt - 1) || run.revision !== run.completed.length + run.defeats + run.attempt - 1) throw new Error('The local checkpoint contains inconsistent progress.');
+  if(run.battle){
+    const stages=['combat','fallen','sword_taken','finished'];
+    if(run.battle.schemaVersion!==1||!Number.isSafeInteger(run.battle.revision)||run.battle.revision<0||stages.indexOf(run.battle.stage)!==run.battle.revision||
+      (run.battle.stage==='combat')===run.completed.includes('goliath.struck')||
+      run.completed.includes('victory.witnessed')&&run.battle.stage!=='finished')throw new Error('The battle checkpoint is inconsistent.');
+  }
   return structuredClone(run);
 }

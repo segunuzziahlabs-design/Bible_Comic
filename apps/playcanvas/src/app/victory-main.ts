@@ -1,7 +1,7 @@
 import { checkpointSaved } from './account-game-bootstrap';
 import { readEpisodeMuted, writeEpisodeMuted, setEpisodeSoundButton } from './episode-sound';
 import {Vec3} from 'playcanvas';
-import {currentObjective,episodePage,freshRun,objectives,reduceEpisode} from '../gameplay/episode-rules';
+import {currentObjective,episodePage,freshRun,objectives,reduceEpisode,requiresBattleFinish} from '../gameplay/episode-rules';
 import {openEpisodeSession,type CueToken,type EpisodeSaveAdapter} from '../gameplay/episode-session';
 import {createWebGLApp,observeCanvas,waitForFrame} from '../world/graphics';
 import {buildVictoryWorld,davidMark,israelMark,victoryVersion} from '../world/victory-world';
@@ -21,6 +21,7 @@ async function main(){
   let preview=freshRun();for(const objective of objectives.slice(0,11))preview=reduceEpisode(preview,{type:'objective',id:objective.id});
   let memory:Awaited<ReturnType<EpisodeSaveAdapter['read']>>={current:preview,history:[]};
   const session=await openEpisodeSession(review?{async read(){return memory;},async write(value){memory=structuredClone(value);}}:undefined);
+  if(!review&&requiresBattleFinish(session.run)){location.replace(link('duel.html'));return;}
   if(session.run.status!=='completed'&&currentObjective(session.run)?.id!=='victory.witnessed'){location.replace(link(episodePage(session.run)));return;}
   const app=await createWebGLApp(canvas,true);observeCanvas(app,canvas);
   const [world,audio]=await Promise.all([buildVictoryWorld(app),createVictoryAudio()]);

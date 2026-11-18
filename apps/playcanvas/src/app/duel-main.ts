@@ -1,7 +1,8 @@
 import { checkpointSaved } from './account-game-bootstrap';
 import { readEpisodeMuted, writeEpisodeMuted, setEpisodeSoundButton } from './episode-sound';
 import { createMovementInput } from '../gameplay/movement-input';
-import { contentVersion, currentObjective, episodeId, episodePage, freshRun, objectives, preparation, reduceEpisode } from '../gameplay/episode-rules';
+import { contentVersion, currentObjective, episodeId, episodePage, freshRun, objectives, preparation, reduceEpisode, requiresBattleFinish } from '../gameplay/episode-rules';
+import { aftermathMovement } from '../gameplay/elah-battle';
 import { openEpisodeSession, type EpisodeSaveAdapter } from '../gameplay/episode-session';
 import { loadSavedAppearance } from '../world/david-appearance';
 import { openMovementArea, type BattleView, type InteractionView } from '../world/movement-area';
@@ -29,7 +30,9 @@ const help = mountSlingHelp(stage, document.querySelector('.actions')!, true, va
 function controls() {
   const live = started && !paused && !busy && !view?.result;
   const cinematic=!!view?.cinematic;
-  const moving = live && (view?.phase === 'approach' || view?.phase === 'fight');
+  const moving = live && !!view && (view.phase === 'approach' || view.phase === 'fight'||aftermathMovement(view.phase));
+  button('battle-interact').hidden=!moving||!view?.actionPrompt;button('battle-interact').disabled=!view?.canInteract;
+  button('battle-interact').textContent=(view?.actionPrompt??'Interact')+' · E';
   stage.toggleAttribute('data-running', moving);
   stage.toggleAttribute('data-aiming', live && view?.phase === 'fight'&&!!view.slingReady);
   el('battle-hud').hidden = !moving;
@@ -48,10 +51,11 @@ function controls() {
   el('pause-notice').hidden = !started || !paused || busy || !!view?.result;
   el('instructions').hidden = view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
   el('battle-instructions').hidden = view?.phase !== 'fight';
-  el('spear-guide').hidden=!live||view?.phase!=='fight'||!!view.slingReady;
+  el('spear-guide').hidden=!live||view?.phase!=='fight'||!!view.slingReady&&!(view.attackProgress!>0||view.instruction.startsWith('Incoming'));
+  stage.toggleAttribute('data-threat',!el('spear-guide').hidden&&!!view?.slingReady);
   if(view){
-    text('combat-stage-label',view.phase==='approach'?'The confrontation':view.combatStage==='sword'?'I · Survive the sword':view.combatStage==='spear'?`II · Survive the spear · ${view.spearEvasions??0}/2`:`III · David’s counterattack · ${view.stones} stones`);
-    text('spear-guide',view.combatStage==='sword'?'Sword strike · Leave the marked ground':`Spear ${Math.min(2,(view.spearEvasions??0)+1)} of 2 · Watch the landing circle`);
+    text('combat-stage-label',aftermathMovement(view.phase)?'IV · Goliath’s sword':view.phase==='approach'?'The confrontation':view.combatStage==='sword'?'I · Survive the sword':view.combatStage==='spear'?`II · Survive the spear · ${view.spearEvasions??0}/2`:`III · Dodge and counterattack · ${view.stones} stones`);
+    text('spear-guide',view.combatStage==='sword'?'Sword strike · Leave the marked ground':view.slingReady?'Incoming spear · Leave the landing circle':`Spear ${Math.min(2,(view.spearEvasions??0)+1)} of 2 · Watch the landing circle`);
     el('spear-guide').style.setProperty('--attack-progress',`${(view.attackProgress??0)*100}%`);el('spear-guide').toggleAttribute('data-warning',(view.attackProgress??0)>0);
     const aiming=live&&!cinematic&&view.phase==='fight'&&!!view.slingReady;
     el('combat-aim-panel').hidden=!aiming;
@@ -89,21 +93,25 @@ function render(next: InteractionView) {
   const instruction = matchMedia('(any-pointer: coarse), (hover: none)').matches
     ? view.instruction.replace('Dodge (Shift)', 'tap Dodge').replace('Click or F to throw · Shift to dodge', 'Tap Throw · Tap Dodge').replace('Shift / Dodge','Tap Dodge') : view.instruction;text('objective',instruction);
   el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches?(view.slingReady?'Drag to aim · Tap Throw · Dots show the stone’s arc':'Move with the left controls · Hold a direction + Dodge'):(view.slingReady?'Mouse / IJKL: aim · F: Throw · Q: Jump Shot':'WASD / arrows: move · Direction + Shift: Dodge · Space: Jump');
-  if(view.cinematic)el('battle-instructions').textContent='The decisive throw · Cinematic replay · Pause any time';
+  if(view.cinematic)el('battle-instructions').textContent=view.phase==='finisher'?'The decisive throw · Cinematic replay · Pause any time':'Watch the scene · Pause any time';
   text('stone-count',`${view.stones} ${view.stones === 1 ? 'stone' : 'stones'}`);
   text('battle-caption',view.caption); el('battle-caption').hidden = !view.caption;
   el('sling-aim').style.left = `${view.aimX * 100}%`; el('sling-aim').style.top = `${view.aimY * 100}%`;
   el('sling-aim').toggleAttribute('data-aimed', view.aimed);
   if (session && !busy) {
-    if (view.phase === 'fall' && !hasHit()) {
+    if (view.phase === 'fall_checkpoint' && !hasHit()) {
       void save(() => session.commit({ type: 'objective', id: 'goliath.struck' }), () => {
-        paused = document.hidden; area?.setPaused(paused);
+        area?.confirmCheckpoint();paused = document.hidden; area?.setPaused(paused);
       });
+    } else if(view.phase==='sword_checkpoint'&&session.run.battle?.stage==='fallen'){
+      void save(()=>session.commit({type:'battle',action:'take_sword'}),()=>{area?.confirmCheckpoint();paused=document.hidden;area?.setPaused(paused);});
+    } else if(view.phase==='finish_checkpoint'&&session.run.battle?.stage==='sword_taken'){
+      void save(()=>session.commit({type:'battle',action:'finish'}),()=>{area?.confirmCheckpoint();paused=document.hidden;area?.setPaused(paused);});
     } else if (view.result === 'defeat' && session.run.status !== 'defeated') {
       void save(() => session.commit({ type: 'defeat', reason: 'david_killed_by_goliath' }), () => {
         paused = true; area?.setPaused(true); button('battle-replay').focus();
       });
-    } else if (view.result === 'victory' && hasHit()) gate();
+    } else if (view.result === 'victory' && hasHit()&&!requiresBattleFinish(session.run)) gate();
   }
   if (view.result === 'defeat') {
     el('battle-result').hidden = false; el('battle-result-title').textContent = 'David fell';
@@ -119,16 +127,18 @@ async function pause(value: boolean) {
   paused = value; area?.setPaused(value); controls(); if (!value) canvas.focus();
 }
 async function restart() {
-  if (!area || busy || hasHit()) return;
+  if (!area || busy) return;
+  if(hasHit()){location.reload();return;}
   area.setPaused(true);
   const reset = () => { paused = document.hidden; area!.reset({ attempt: session.run.attempt }); area!.setPaused(paused); controls(); canvas.focus(); };
-  if (session.run.status === 'defeated') await save(() => session.commit({ type: 'retry' }), reset);
+  if (session.run.status === 'defeated') await save(async () => {await session.commit({ type: 'retry' });if(!session.run.battle)await session.commit({type:'battle',action:'begin'});}, reset);
   else reset();
 }
 function throwStone() { if (started && !paused && !busy && area?.throwStone()) canvas.focus(); }
 button('enter').addEventListener('click', () => { started = true; el('entry').hidden = true; void pause(false); });
 const playerControls=mountPlayerControls(canvas,input,value=>{void pause(value);},()=>paused);
 input.bindActions({
+  interact:{run:()=>{area?.interact();},available:()=>started&&!paused&&!busy&&!!view?.canInteract},
   jump:{run:()=>{area?.jump();},available:()=>started&&!paused&&!busy&&!!area?.canJump()},
   jumpShot:{run:()=>{area?.jumpShot();},available:()=>started&&!paused&&!busy&&!!view?.canJumpShot},
   sling:{run:throwStone,available:()=>started&&!paused&&!busy&&!!view?.canThrow},
@@ -136,6 +146,7 @@ input.bindActions({
   pause:{run:()=>{void pause(!paused);},available:()=>!button('pause').disabled&&!help.open&&!playerControls.open},
 });
 input.bindButton(button('pause'),'pause');
+input.bindButton(button('battle-interact'),'interact');
 button('reset').addEventListener('click', () => { void restart(); });
 button('battle-replay').addEventListener('click', () => { void restart(); });
 input.bindButton(button('jump-shot'),'jumpShot');input.bindButton(button('throw-stone'),'sling');input.bindButton(button('dodge'),'dodge');
@@ -144,7 +155,7 @@ button('retry-save').addEventListener('click', () => { if (!retryWrite) return; 
 button('reload-save').addEventListener('click', () => location.reload());
 button('retry').addEventListener('click', () => location.reload());
 button('replay-chapter').addEventListener('click', () => location.assign('duel.html?review=1' + (inspect ? '&inspect=1' : '')));
-button('continue-victory').addEventListener('click', () => { if (hasHit() && !busy) location.assign('victory.html' + (review ? '?review=1' : '') + (inspect ? (review ? '&' : '?') + 'inspect=1' : '')); });
+button('continue-victory').addEventListener('click', () => { if (hasHit() && !busy&&!requiresBattleFinish(session.run)) location.assign('victory.html' + (review ? '?review=1' : '') + (inspect ? (review ? '&' : '?') + 'inspect=1' : '')); });
 window.addEventListener('blur', () => { void pause(true); });
 document.addEventListener('visibilitychange', () => { if (document.hidden) void pause(true); });
 window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });
@@ -161,16 +172,18 @@ async function main() {
   session = await openEpisodeSession(review ? { async read() { return temporary; }, async write(value) { temporary = structuredClone(value); } } : undefined);
   const goal = currentObjective(session.run)?.id;
   if (goal !== 'goliath.struck' && goal !== 'victory.witnessed') { location.replace(episodePage(session.run)); return; }
+  if(goal==='goliath.struck'&&!session.run.battle&&session.run.status==='active')await session.commit({type:'battle',action:'begin'});
   area = await openMovementArea(canvas, input, loadSavedAppearance(), render, 'elah', {
     episodeId, contentVersion, preparation: preparation(session.run), attempt: session.run.attempt,
     anchor: hasHit() ? 'battle.aftermath' : 'battle.entry', defeated: session.run.status === 'defeated',
+    aftermath:session.run.battle?.stage??'combat',
   }, { chapter: 'duel' });
   area.setMuted(muted); setEpisodeSoundButton(button('sound'),muted);
   button('sound').setAttribute('aria-pressed', String(!muted));
   canvas.dataset.renderer = area.backend;
   el('save-status').textContent = localStatus();
-  if (hasHit()) { started = true; gate(); }
+  if (hasHit()&&!requiresBattleFinish(session.run)) { started = true; gate(); }
   else if (session.run.status === 'defeated') { started = true; el('entry').hidden = true; controls(); button('battle-replay').focus(); }
-  else {button('enter').textContent=session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = `${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move in any direction with WASD / arrows or the left controls; hold a direction + Shift / Dodge for a quick step. Then find your distance, aim above the forehead to account for the stone’s fall, and use F / Throw. The dotted arc shows your actual aim; inaccurate throws miss.`; button('enter').hidden = false; }
+  else {button('enter').textContent=hasHit()?'Resume at Goliath’s sword':session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = hasHit()?'Goliath’s fall is saved. Follow the arrow. Use E / the action button to take his sword, then approach and ready it. Press Finish battle yourself. The final blow is shown off-screen.':`${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move with WASD / arrows or left controls; direction + Shift / Dodge is a quick step. Goliath keeps throwing while you aim and use F / Throw. After his fall, retrieve his sword and finish the battle through the action button.`; button('enter').hidden = false; }
 }
 void main().catch(error => { console.error(error); el('entry-message').textContent = error instanceof Error ? error.message : 'The duel could not load.'; button('retry').hidden = false; });

@@ -3,8 +3,8 @@ import { buildValleyOpening } from './valley-opening';
 import { createSceneSpeech, mouthEnvelope } from './scene-speech';
 import type { ElahBattleState } from '../gameplay/elah-battle';
 import type { loadDavid } from './david-character';
-import davidUrl from '../assets/david-adventure.glb?url';
-import goliathUrl from '../assets/goliath-duel.glb?url';
+import davidUrl from '../assets/david-aftermath.glb?url';
+import goliathUrl from '../assets/goliath-continuous.glb?url';
 import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
 import actorUrl from '../assets/challenge-soldier.glb?url';
 import oldLines from '../assets/duel-dialogue/dialogue.json';
@@ -19,7 +19,7 @@ import faith from '../assets/duel-dialogue/david-faith.wav?url';
 import battle from '../assets/duel-dialogue/david-battle.wav?url';
 import watch from '../assets/duel-dialogue/soldier-watch.wav?url';
 
-export const duelVersion = 'cinematic-duel-3';
+export const duelVersion = 'continuous-duel-4';
 export const confrontationDuration = 28;
 type David = Awaited<ReturnType<typeof loadDavid>>;
 
@@ -61,7 +61,8 @@ export async function createDuelPresentation(app: Application) {
     const line = audio.lineAt();
     const mouth = line ? mouthEnvelope(line, line.local) : [0, 0];
     david.speech(line?.speaker === 'David' ? mouth[0] : 0, line?.speaker === 'David' ? mouth[1] : 0);
-    world.champion.face(line?.speaker === 'Goliath' ? mouth[0] : 0, line?.speaker === 'Goliath' ? mouth[1] : 0);
+    const groan=phase==='stagger'?Math.max(0,Math.sin(state.time*5.4))*.65:0;
+    world.champion.face(line?.speaker === 'Goliath' ? mouth[0] : groan, line?.speaker === 'Goliath' ? mouth[1] : groan*.3);
     world.patrol.face(line?.speaker === 'Soldier' ? mouth[0] : 0, line?.speaker === 'Soldier' ? mouth[1] : 0, 0, .35, 0);
     for (const actor of [world.patrol, world.sentinel]) {
       const clip = (phase === 'challenge' && state.time < 4)||(phase==='entrance'&&state.time>=1&&state.time<8) ? 'react_alarm' : 'listen';
@@ -83,6 +84,18 @@ export async function createDuelPresentation(app: Application) {
   }
   const canvasPortrait=()=>app.graphicsDevice.canvas.clientHeight>app.graphicsDevice.canvas.clientWidth;
   function frame(state: ElahBattleState, david: Entity, dt: number) {
+    if(state.phase==='stagger'){
+      shot=state.time<1.4?'forehead-reaction':state.time<5.2?'stagger-and-turn':'knees-give-way';
+      const p=state.foe,g=world.champion.forehead.getPosition(),y=world.groundHeight(p.x,p.z),portrait=canvasPortrait();
+      eye.lerp(world.camera.getPosition(),new Vec3(p.x+3.2,y+1.8,p.z+(portrait?6.3:4.9)),1-Math.exp(-3*dt));world.camera.setPosition(eye);world.camera.lookAt(p.x,y+1.45,p.z);world.camera.camera!.fov=portrait?57:49;return true;
+    }
+    if(state.phase==='execution'){
+      // The player initiates the action. Keep blade contact and the body below frame.
+      shot=state.time<1.3?'david-lifts-the-sword':'final-action-off-screen';
+      const p=david.getPosition(),forward=david.forward;
+      const close=state.time>=1.25;
+      eye.lerp(world.camera.getPosition(),new Vec3(p.x-forward.x*1.65+.45,p.y+1.7,p.z-forward.z*1.65),1-Math.exp(-10*dt));world.camera.setPosition(eye);world.camera.lookAt(p.x,p.y+(close?1.42:1.3),p.z);world.camera.camera!.fov=close?32:47;return true;
+    }
     if(state.phase==='finisher'&&state.decisiveThrow){
       const t=state.time,replay=state.decisiveThrow,g=world.champion.forehead.getPosition(),p=david.getPosition();
       const u=Math.max(0,Math.min(1,(t-decisiveReplay.release)/(decisiveReplay.impact-decisiveReplay.release)));

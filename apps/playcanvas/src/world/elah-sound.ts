@@ -4,7 +4,7 @@ import { decisiveReplay } from '../gameplay/sling-ballistics';
 const rate = 22050;
 const durations = {
   wind: 3.2, ranks: 3.2, step: .18, armour: .32, whirl: .46, release: .18,
-  spear: .3, sword: .48, miss: .16, impact: .37, landing: .62, retreat: .75,
+  spear: .3, sword: .48, miss: .16, impact: .37, landing: .62, retreat: .75, groan:1.3,
 } as const;
 type Sound = keyof typeof durations;
 
@@ -45,6 +45,7 @@ function synthesize(context: AudioContext, sound: Sound) {
         * Math.exp(-p * 6.5); break;
       case 'retreat': sample = (middle * .36 + low * .53) * Math.sin(Math.PI * p) ** 2
         * (.55 + .26 * ring(7.0) + .16 * ring(12)); break;
+      case 'groan': {const hz=88-16*p+3*Math.sin(t*19);sample=(ring(hz)*.23+ring(hz*2)*.12+ring(hz*3)*.07+middle*.11)*Math.sin(Math.PI*p)**.6;break;}
     }
     data[i] = sample * burst * fade;
   }
@@ -148,6 +149,10 @@ export function createElahSound() {
         if(previous.time<decisiveReplay.impact&&time>=decisiveReplay.impact)source('impact',.9,false,.8);
       }
       if (phase === 'fall' && previous.phase === 'fall' && previous.time < 1.34 && time >= 1.34) source('landing', .84);
+      if(phase==='stagger')for(const at of [.08,2.1,4.35])if((previous.phase!==phase?0:previous.time)<at&&time>=at)source('groan',.83,false,at===2.1?.9:1);
+      if(phase==='stagger'&&previous.phase===phase)for(const at of[1.4,2.2,3.0,3.8,4.6,5.4])if(previous.time<at&&time>=at){source('step',.72,false,.65);source('armour',.35);}
+      if(phase==='pickup'&&previous.phase===phase&&previous.time<1.45&&time>=1.45)source('armour',.6);
+      if(phase==='execution'&&previous.phase===phase){if(previous.time<.8&&time>=.8)source('armour',.45);if(previous.time<1.5&&time>=1.5){source('sword',.48,false,.8);source('landing',.32,false,1.2);}}
       if (phase === 'defeat' && previous.phase === 'defeat' && previous.time < .42 && time >= .42) source('landing', .56);
       foeStride += Math.hypot(foe.x - previous.x, foe.z - previous.z);
     }

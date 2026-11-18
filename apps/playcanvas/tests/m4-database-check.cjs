@@ -8,12 +8,12 @@ async function createDatabase(){
  const db=new PGlite();await db.exec(`create role anon;create role authenticated;create schema auth;
  create function auth.jwt() returns jsonb language sql stable as $$ select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb $$;
  grant usage on schema auth to authenticated,anon;grant execute on function auth.jwt() to authenticated,anon;`);
- await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations/202611170001_game_accounts.sql'),'utf8'));return db;
+ for(const file of fs.readdirSync(path.join(__dirname,'../supabase/migrations')).filter(f=>f.endsWith('.sql')).sort())await db.exec(fs.readFileSync(path.join(__dirname,'../supabase/migrations',file),'utf8'));return db;
 }
 function apiFor(db,subject){
  async function rpc(name,args=[]){await db.exec('set role authenticated');await db.query("select set_config('request.jwt.claims',$1,false)",[JSON.stringify(subject?{sub:subject}:{})]);
  const {rows}=await db.query(`select public.${name}(${args.map((_,i)=>'$'+(i+1)).join(',')}) result`,args);return rows[0].result;}
- return {dashboard:()=>rpc('game_dashboard'),progress:c=>rpc('game_progress',[c.p_command,c.p_kind,c.p_run,c.p_revision,c.p_objective,c.p_version]),update:c=>rpc('game_update_account',[c.p_command,c.p_revision,c.p_name,JSON.stringify(c.p_settings)]),history:offset=>rpc('game_attempt_history',[offset??0])};
+ return {dashboard:()=>rpc('game_dashboard'),battle:c=>rpc('game_battle',[c.p_command,c.p_run,c.p_revision,c.p_battle_revision,c.p_action]),progress:c=>rpc('game_progress',[c.p_command,c.p_kind,c.p_run,c.p_revision,c.p_objective,c.p_version]),update:c=>rpc('game_update_account',[c.p_command,c.p_revision,c.p_name,JSON.stringify(c.p_settings)]),history:offset=>rpc('game_attempt_history',[offset??0])};
 }
 module.exports={createDatabase,apiFor};
 if(require.main===module)(async()=>{

@@ -1,5 +1,5 @@
 import './product.css';
-import { chapters, currentObjective, episodePage, objectives } from '../gameplay/episode-rules';
+import { chapters, currentObjective, episodePage, objectives, requiresBattleFinish } from '../gameplay/episode-rules';
 import { accountRuntime, localDevelopment, playerAccount, savePlayerSettings, shellLink } from './account-runtime';
 import { defaultSettings, type Account, type Settings } from './contracts';
 import { cloudEpisodeSaves } from './cloud-saves';
@@ -17,7 +17,7 @@ const link = (text: string, href: string, secondary=false) => `<a class="action$
 const status = (message: string, error=false) => `<p class="notice${error?' error':''}" role="${error?'alert':'status'}">${escape(message)}</p>`;
 function heading(eyebrow: string,title: string,copy='') { return `<p class="eyebrow">${eyebrow}</p><h1>${title}</h1>${copy?`<p class="lead">${copy}</p>`:''}`; }
 function chapterCards(account?: Account) {
-  const run = account?.episode?.current, active = run ? currentObjective(run)?.chapter ?? 5 : -1;
+  const run = account?.episode?.current, active = run ? requiresBattleFinish(run)?4:currentObjective(run)?.chapter ?? 5 : -1;
   return chapters.map((title,i)=>{
     const finished = account && canReviewChapter(account.episode,i);
     const available = run && i===active && run.status !== 'completed';
@@ -51,7 +51,7 @@ async function accountPage() {
   const runtime=await accountRuntime();await identityMenu(runtime);
   if(!runtime.clerk.user) {location.replace(shellLink('sign-in'));return;}
   const player=await playerAccount();let account=player.account;
-  const run=account.episode?.current,goal=run&&currentObjective(run);
+  const run=account.episode?.current,goal=run&&(requiresBattleFinish(run)?{chapter:4,label:run.battle?.stage==='fallen'?'Take Goliath’s sword':'Finish the battle'}:currentObjective(run));
   if(view==='settings'||view==='profile') {renderSettings(player.api,account);return;}
   if(view==='account') {content.innerHTML=heading('Account','Manage sign-in')+'<div id="clerk-panel"></div>';runtime.clerk.mountUserProfile(document.getElementById('clerk-panel')! as HTMLDivElement,{routing:'hash'});return;}
   if(view==='chapters') {content.innerHTML=heading('The story','Six chapters. One act of courage.','Revisiting completed chapters leaves your confirmed progress unchanged. An episode replay begins a separate run.')+`<div class="grid">${chapterCards(account)}</div>`;return;}

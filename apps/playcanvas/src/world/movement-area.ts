@@ -5,7 +5,8 @@ import {
 import { mountObjectiveGuide } from '../app/objective-guide';
 import { approachVelocity, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
 import { canInspectMarker, markerCueDuration, markerCueText, trailMarker } from '../gameplay/courtyard-cue';
-import { aimAssistRadius, challengeDuration, createElahBattle, fallDuration, slingWindup, type EpisodeBattleSetup } from '../gameplay/elah-battle';
+import { aimAssistRadius, challengeDuration, createElahBattle, fallDuration, slingWindup, aftermathMovement, fallenPhase, swordPickupDuration, type EpisodeBattleSetup } from '../gameplay/elah-battle';
+import { createBattleAftermath } from './battle-aftermath';
 import type { MovementInput } from '../gameplay/movement-input';
 import { loadDavid } from './david-character';
 import type { DavidAppearance } from './david-appearance';
@@ -52,6 +53,7 @@ export type BattleView = {
   dodgeCooldown?: number; slingReady?:boolean; dodges?:number; attackDirection?:number;attackName?:string;attackHeight?:'low'|'middle'|'high';attackProgress?:number;
   combatStage?: 'sword'|'spear'|'sling'; swordEvaded?:boolean; spearEvasions?:number; weaponHit?:'sword'|'spear';
   positionHint?:string; aimHint?:string; distance?:number; foreheadX?:number; foreheadY?:number; foreheadVisible?:boolean;
+  actionPrompt?:string; canInteract?:boolean;
 };
 export type InteractionView = { canInteract: boolean; cueText: string; battle?: BattleView };
 
@@ -137,6 +139,7 @@ function configureLocomotion(animator: AnimComponent, tracks: Map<string, AnimTr
         ...['jump_takeoff','jump_air','jump_land'].map(name=>({name,loop:false})),
         ...(tracks.has('dodge_left') ? [{name:'DodgeLeft',loop:false},{name:'DodgeRight',loop:false},{name:'March',loop:false}] : []),
         ...(tracks.has('speak_resolve') ? [{ name: 'Speak', loop: false }, { name: 'Listen', loop: true }] : []),
+        ...['pickup_provisions','sword_carry','sword_finish'].filter(name=>tracks.has(name)).map(name=>({name,loop:false})),
       ],
       transitions: [{ from: 'START', to: 'Locomotion' }],
     }],
@@ -144,6 +147,7 @@ function configureLocomotion(animator: AnimComponent, tracks: Map<string, AnimTr
   animator.assignAnimation('Locomotion.Idle', idle);
   animator.assignAnimation('Locomotion.Walk', walk);
   animator.assignAnimation(gestureState, gesture);
+  for(const name of ['pickup_provisions','sword_carry','sword_finish'])if(tracks.has(name))animator.assignAnimation(name,tracks.get(name)!);
   for(const clip of ['jump_takeoff','jump_air','jump_land'])animator.assignAnimation(clip,tracks.get(clip)!);
   if (tracks.has('speak_resolve')) {
     animator.assignAnimation('Speak', tracks.get('speak_resolve')!);
@@ -187,6 +191,7 @@ export async function openMovementArea(
     const { layer, gestureDuration } = configureLocomotion(animator, tracks);
     const sling = elah && createDavidSling(model, animator, tracks.get('sling_throw'));
     const sound = elah && createElahSound();
+    const aftermath=chapter&&elah?createBattleAftermath(app,model,elah.groundHeight):undefined;
     const stonePreview=chapter?createStonePreview(app):undefined;
     let guidance:SlingGuidance|undefined;
     const inspect = new URLSearchParams(location.search).has('inspect');
@@ -218,7 +223,7 @@ export async function openMovementArea(
     const smoothedRotation = new Quat();
 
     function battleControlsAvailable() {
-      return !battle || battle.state.phase === 'approach' || battle.state.phase === 'fight';
+      return !battle || battle.state.phase === 'approach' || battle.state.phase === 'fight' || aftermathMovement(battle.state.phase);
     }
 
     function canJumpShot(){return !!chapter&&!paused&&!jumpShotActive&&battle?.state.phase==='fight'&&battle.slingAvailable()&&battle.state.stones>0&&!battle.state.shot&&battle.state.throwTime===undefined&&jump.ready(position);}
@@ -251,18 +256,27 @@ export async function openMovementArea(
         if(battle.state.cinematicCombat){
           if(battle.state.combatStage==='sword')instruction=attack==='draw'?'Goliath draws his sword — stay ready':attack==='windup'?'Sword raised — move out of the marked strike':attack==='strike'?'Dodge the blade!':battle.state.swordEvaded?'Sword evaded — stay alert':'Keep moving — Goliath is closing in';
           else if(battle.state.combatStage==='spear')instruction=attack==='windup'?`Spear ${battle.state.spearEvasions+1}/2 — leave the marked landing point`:attack==='strike'?'Incoming spear — move now!':battle.state.feedbackTime>0?battle.state.feedback:'Keep your distance — watch for the spear';
-          else instruction=stones===0&&!shot?'Return to the brook for more stones':shot?'Stone away — watch its arc':battle.state.feedbackTime>0?battle.state.feedback:'Find your position · Aim at the forehead';
+          else instruction=attack==='windup'?'Spear raised — keep aiming and leave the landing circle':attack==='strike'?'Incoming spear — dodge while aiming!':stones===0&&!shot?'Return to the brook for more stones':shot?'Stone away — stay alert for the next spear':battle.state.feedbackTime>0?battle.state.feedback:'Move and aim · Goliath will throw again';
         }
       }
       if(phase==='finisher')caption='Decisive shot · Cinematic replay';
+      if(phase==='stagger')caption=time<1.4?'The stone struck his forehead.':time<5.2?'Goliath groans and struggles to keep his balance.':'His knees begin to give way.';
       if (phase === 'fall') caption = 'The stone struck Goliath.';
+      let actionPrompt='';
+      const afterTarget=battle.aftermathTarget(),near=Math.hypot(position.x-afterTarget.x,position.z-afterTarget.z)<=1.15;
+      if(phase==='retrieve'){instruction='Take Goliath’s sword · Follow the arrow';actionPrompt='Take sword';}
+      if(phase==='pickup')caption='David takes Goliath’s sword.';
+      if(phase==='finish_approach'){instruction='Finish the battle · Approach the fallen champion';actionPrompt='Ready sword';}
+      if(phase==='finish_ready'){instruction='Use Goliath’s sword · Press Finish battle when ready';actionPrompt='Finish battle';}
+      if(phase==='execution')caption='David uses Goliath’s own sword. · The final blow is shown off-screen.';
+      if(phase.endsWith('_checkpoint'))instruction='Saving the battle checkpoint…';
       if (phase === 'retreat') caption = time < 1.7
         ? 'The Philistines saw their champion fall.'
         : 'They turned and fled. David prevailed.';
       const result = phase === 'victory' || (phase === 'defeat' && time >= defeatDuration) ? phase : '';
       const forehead=chapter?camera.camera!.worldToScreen(battle.target()):undefined;
       return { phase, instruction, caption, stones, canThrow: phase === 'fight' && !jumpShotActive && !jump.active() && battle.slingAvailable() && throwTime === undefined && !shot && stones > 0,
-        aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive||phase==='finisher',
+        aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive||['finisher','stagger','fall','pickup','execution'].includes(phase),actionPrompt,canInteract:!!actionPrompt&&near,
         combatStage:battle.state.combatStage,swordEvaded:battle.state.swordEvaded,spearEvasions:battle.state.spearEvasions,weaponHit:battle.state.weaponHit,
         positionHint:guidance?.position,aimHint:guidance?.aiming,distance:guidance?.distance,
         foreheadX:forehead?forehead.x/canvas.clientWidth:undefined,foreheadY:forehead?forehead.y/canvas.clientHeight:undefined,
@@ -271,7 +285,7 @@ export async function openMovementArea(
     }
 
     function updateInteraction() {
-      const canInteract = !elah && !paused && !cue && canInspectMarker(position, walls);
+      const canInteract = !paused && (battle?!!describeBattle()?.canInteract:!cue&&canInspectMarker(position,walls));
       const cueText = cue ? markerCueText(cue.elapsed) : '';
       const nextBattle = describeBattle();
       if (canInteract !== view.canInteract || cueText !== view.cueText ||
@@ -323,7 +337,7 @@ export async function openMovementArea(
       if (!battle || !elah) return;
       if (chapter?.frame(battle.state, model, dt)) return;
       const swordStage=battle.state.cinematicCombat&&battle.state.combatStage==='sword'&&battle.state.phase==='fight';
-      const spearStage=battle.state.cinematicCombat&&battle.state.combatStage==='spear'&&battle.state.phase==='fight';
+      const spearStage=battle.state.cinematicCombat&&battle.state.combatStage!=='sword'&&battle.state.phase==='fight';
       camera.camera!.fov = swordStage?(canvas.clientWidth<canvas.clientHeight?70:63):spearStage?(canvas.clientWidth<canvas.clientHeight?66:62):chapter?(battle?.state.ranged?(canvas.clientWidth<canvas.clientHeight?61:55):battle&&!battle.slingAvailable()?61:58):52;
       const { phase, time, foe } = battle.state;
       const narrow = canvas.clientWidth < canvas.clientHeight;
@@ -421,8 +435,18 @@ export async function openMovementArea(
         layer.activeStateCurrentTime=clip==='Listen'?time%david.tracks.get('listen')!.duration:Math.min(tracks.get(clip)!.duration,time<.18?time/.18*tracks.get(clip)!.duration:time<.65?(time-.18)/.47*tracks.get(clip)!.duration:(time-.65)/.3*tracks.get(clip)!.duration);
         animator.update(0);sling.pose(time<1.4?Math.max(0,time-decisiveReplay.release+slingWindup):undefined);
       }
+      if(chapter&&fallenPhase(phase)){
+        if(phase==='pickup'||phase==='execution'||phase==='finish_ready'){
+          animator.playing=false;animator.speed=1;
+          const clip=phase==='pickup'?'pickup_provisions':phase==='execution'?'sword_finish':'sword_carry';
+          if(layer.activeState!==clip)layer.transition(clip,.12);
+          layer.activeStateCurrentTime=phase==='pickup'?Math.min(1,time/swordPickupDuration)*tracks.get(clip)!.duration:Math.min(time,tracks.get(clip)!.duration);
+          animator.update(0);
+        }
+      }
+      aftermath?.update(battle.state);
       sound?.step(battle.state, dt, jump.active()?0:speed);
-      if (phase === 'approach') placeCamera(dt);
+      if (phase === 'approach'||aftermathMovement(phase)) placeCamera(dt);
       else {
         const shot = battle.state.shot;
         const replayWindup=phase==='finisher'&&time>=decisiveReplay.release-slingWindup&&time<decisiveReplay.release;
@@ -430,6 +454,7 @@ export async function openMovementArea(
         frameBattle(dt);
       }
       chapter?.step(battle.state, dt, david);
+      if(phase==='execution')chapter?.frame(battle.state,model,dt);
       if((jumpShotActive||battle.state.cinematicCombat&&battle.state.jumpShotTime!==undefined)&&phase==='fight'&&!jump.active()&&battle.state.jumpShotTime!>1.3&&!battle.state.shot){jumpShotActive=false;battle.state.jumpShotTime=undefined;input.clear();input.setEnabled(!paused);}
       if (phase === 'fight') aimAt();
       stonePreview?.update(phase==='fight'&&battle.slingAvailable()&&!battle.state.shot?guidance:undefined);
@@ -448,6 +473,7 @@ export async function openMovementArea(
         groundY: model.getPosition().y, eyeY: eye.y,
         battlefieldReached: !!battleState && battleState.phase !== 'approach',
         presentation: chapter?.sample(), davidMouth: david.mouthWeights(), dodgeRemaining, dodgeCooldown,
+        aftermath:aftermath?.sample(),aftermathTarget:battle&&fallenPhase(battle.state.phase)?battle.aftermathTarget():undefined,
         battle: battleState && {
           ...battleState, preparation: battle.checkpoint.preparation, aimX, aimY, aimed,
           target: battle.target(),
@@ -485,6 +511,7 @@ export async function openMovementArea(
       sling?.pose(undefined);
       animator.update(.001);
       if (battle) elah?.renderBattle(battle.state, 0);
+      if(battle)aftermath?.update(battle.state);
       placeCamera(1);
       if (chapter && battle?.state.phase === 'victory') frameBattle(1);
       updateInteraction();
@@ -508,6 +535,10 @@ export async function openMovementArea(
     }
 
     function interact() {
+      if(chapter&&battle&&!paused&&battle.interact(position)){
+        const head=elah!.champion.forehead.getPosition();heading=Math.atan2(head.x-position.x,head.z-position.z);model.setEulerAngles(0,heading*math.RAD_TO_DEG,0);
+        input.clear();velocity={x:0,z:0};speed=0;input.setEnabled(battleControlsAvailable());updateInteraction();showSample();return true;
+      }
       if (elah || paused || cue || !canInspectMarker(position, walls)) return false;
       const offset = { x: trailMarker.x - position.x, z: trailMarker.z - position.z };
       if (Math.hypot(offset.x, offset.z) > .05) heading = Math.atan2(offset.x, offset.z);
@@ -545,7 +576,7 @@ export async function openMovementArea(
     function jumpShot(){
       if(!canJumpShot()||!battle)return false;const pointer=input.pointerAim();if(pointer){aimX=pointer.x;aimY=pointer.y;}const point=aimAt().clone();
       if(!jump.request(position))return false;if(!battle.startThrow(point,false,true)){jump.reset(position);return false;}
-      jumpShotActive=!battle.state.cinematicCombat;velocity={x:0,z:0};input.clear();input.setEnabled(!jumpShotActive);updateInteraction();showSample();return true;
+      jumpShotActive=!battle.state.cinematicCombat;if(jumpShotActive){velocity={x:0,z:0};input.clear();}input.setEnabled(!jumpShotActive);updateInteraction();showSample();return true;
     }
     function dodge() {
       if (!chapter || paused || jumpShotActive || jump.active() || battle?.state.phase !== 'fight' || dodgeCooldown > 0) return false;
@@ -631,12 +662,16 @@ export async function openMovementArea(
       if (chapter && controls.fire) throwStone();
       if(chapter&&battle&&elah){
         const state=battle.state,refill=state.phase==='fight'&&state.stones===0&&!state.shot;
+        if(aftermathMovement(state.phase)){
+          const target=battle.aftermathTarget();destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(target.x,elah.groundHeight(target.x,target.z)+.25,target.z),state.phase==='retrieve'?'Goliath’s sword':'Finish the battle','Walk to the arrow · E / action button',true);
+        }else{
         const away=!state.ranged&&Math.hypot(position.x-state.foe.x,position.z-state.foe.z)>6.2;
         const x=refill?0:state.foe.x,z=refill?elah.brookZ:state.foe.z;
         destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(x,elah.groundHeight(x,z)+(refill?.3:1.4),z),
           refill?'More stones · Brook':state.phase==='approach'||away?'Approach Goliath':'Aim at his forehead',
           refill?'Walk into the shallow brook to refill':'Move towards the marker',
           state.phase==='approach'||state.phase==='fight'&&(refill||away));
+        }
       }
       updateInteraction();
       showSample();
@@ -650,6 +685,7 @@ export async function openMovementArea(
     return {
       backend: app.graphicsDevice.deviceType,
       interact,
+      confirmCheckpoint:()=>{const ok=battle?.confirmCheckpoint();if(ok){input.setEnabled(!paused&&battleControlsAvailable());layer.transition('Locomotion',.12);animator.playing=!paused;updateInteraction();showSample();}return ok;},
       throwStone, jumpShot, canJumpShot,
       jump:()=>{if(!paused&&!cue&&!jumpShotActive&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot){const accepted=jump.request(position);if(accepted)battle?.registerJump();return accepted;}return false;},
       canJump:()=>!paused&&!cue&&!jumpShotActive&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot&&jump.ready(position),

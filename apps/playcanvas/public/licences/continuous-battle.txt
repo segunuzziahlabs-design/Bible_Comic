@@ -1,0 +1,13 @@
+David and Goliath continuous combat and aftermath, 18 November 2026.
+
+goliath-continuous.glb is derived from the retained goliath-duel.glb.
+david-aftermath.glb is derived from the retained david-adventure.glb.
+Existing rigged geometry, speech morphs, appearance vertex colours, clips and
+underlying Quaternius/project notices remain applicable. No new external model,
+recording, likeness, voice service or music was introduced.
+
+The staged stagger/turn/heavy fall, David sword poses, detached prop using the
+existing duel sword design, and nonverbal groan/weapon sound synthesis are
+original project work. Reproducible source: source-assets/characters/continuous_battle.py,
+world/battle-aftermath.ts and world/elah-sound.ts. No gore or separated head mesh.
+See docs/assets/continuous-battle-manifest.json for hashes and retained resources.

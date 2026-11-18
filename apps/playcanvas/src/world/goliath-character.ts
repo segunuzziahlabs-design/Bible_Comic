@@ -25,7 +25,7 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
     if (!track) throw new Error(`Missing Goliath animation: ${clip}`);
     animator.assignAnimation(clip, track, undefined, 1, false);
   }
-  for(const clip of ['goliath_spear_1','goliath_spear_2','goliath_spear_3','goliath_throw','goliath_draw_sword','goliath_sword_strike','goliath_hit'])if(tracks.has(clip))animator.assignAnimation(clip,tracks.get(clip)!,undefined,1,false);
+  for(const clip of ['goliath_spear_1','goliath_spear_2','goliath_spear_3','goliath_throw','goliath_draw_sword','goliath_sword_strike','goliath_hit','goliath_stagger','goliath_heavy_fall'])if(tracks.has(clip))animator.assignAnimation(clip,tracks.get(clip)!,undefined,1,false);
   if (tracks.has('goliath_speak')) animator.assignAnimation('goliath_speak', tracks.get('goliath_speak')!, undefined, 1, false);
   animator.playing = false;
   const baseLayer = animator.baseLayer;
@@ -47,7 +47,7 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
       for (const [instance, index] of morphs.get(name) ?? []) instance.setWeight(index, value);
   }
   function mouthWeights() { return (morphs.get('SpeakOpen') ?? []).map(([instance, index]) => instance.getWeight(index)); }
-  function pose(clip: Clip | 'goliath_speak' | 'goliath_spear_1' | 'goliath_spear_2' | 'goliath_spear_3' | 'goliath_throw' | 'goliath_draw_sword' | 'goliath_sword_strike' | 'goliath_hit', time: number, dt: number, cut = false) {
+  function pose(clip: Clip | 'goliath_speak' | 'goliath_spear_1' | 'goliath_spear_2' | 'goliath_spear_3' | 'goliath_throw' | 'goliath_draw_sword' | 'goliath_sword_strike' | 'goliath_hit' | 'goliath_stagger' | 'goliath_heavy_fall', time: number, dt: number, cut = false) {
     if (layer.activeState !== clip || cut) {
       if (!dt || cut) { layer.play(clip); animator.update(.0001); }
       else layer.transition(clip, .10);

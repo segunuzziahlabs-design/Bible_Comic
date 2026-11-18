@@ -4,7 +4,7 @@ export const episodeStorageKey = 'bible-comic.episode.local.v1';
 export type Envelope = { current: Run; history: RunSummary[] };
 export interface EpisodeSaveAdapter {
   read(): Promise<Envelope | undefined>;
-  write(next: Envelope, expected?: { runId: string; revision: number }): Promise<void | Envelope>;
+  write(next: Envelope, expected?: { runId: string; revision: number; battleRevision?: number }): Promise<void | Envelope>;
 }
 export function browserEpisodeSaves(storage: Storage = localStorage): EpisodeSaveAdapter {
   async function read(): Promise<Envelope | undefined> {
@@ -23,6 +23,7 @@ export function browserEpisodeSaves(storage: Storage = localStorage): EpisodeSav
       async function perform() {
         const existing = await read();
         if (expected && (existing?.current.runId !== expected.runId || existing.current.revision !== expected.revision)) throw new Error('Progress changed in another tab. Reload the checkpoint.');
+        if(expected&&existing?.current.battle?.revision!==expected.battleRevision)throw new Error('Battle progress changed in another tab. Reload the checkpoint.');
         if (!expected && existing) throw new Error('A local run already exists. Reload its checkpoint.');
         // One storage write commits objectives, inventory-derived flags and checkpoint together.
         storage.setItem(episodeStorageKey, JSON.stringify(next));
@@ -53,7 +54,7 @@ export async function openEpisodeSession(adapter?: EpisodeSaveAdapter) {
     busy = true;
     try {
       const pending = { ...envelope!, current: next };
-      const confirmed = await storage.write(pending, { runId: before.runId, revision: before.revision });
+      const confirmed = await storage.write(pending, { runId: before.runId, revision: before.revision, battleRevision:before.battle?.revision });
       envelope = confirmed ?? pending; ownedCue = undefined;
     } finally { busy = false; }
   }
@@ -79,7 +80,7 @@ export async function openEpisodeSession(adapter?: EpisodeSaveAdapter) {
         const before = envelope!.current;
         const { runId, startedAt, updatedAt, status, attempt, defeats } = before;
         const next = { current: freshRun(), history: [...envelope!.history, { runId, startedAt, updatedAt, status, attempt, defeats }].slice(-20) };
-        const confirmed = await storage.write(next, { runId: before.runId, revision: before.revision });
+        const confirmed = await storage.write(next, { runId: before.runId, revision: before.revision, battleRevision:before.battle?.revision });
         envelope = confirmed ?? next; ownedCue = undefined;
       } finally { busy = false; }
     },

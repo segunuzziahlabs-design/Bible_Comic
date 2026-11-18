@@ -13,7 +13,7 @@ async function createDriver(context,page,touch){
   async function release(){if(touch){await end(1);stick=undefined;}else{for(const key of keys)await page.keyboard.up(key);keys.clear();}}
   async function direction(x,forward){if(touch){if(!points.has(1)){stick=centre(await page.locator('#move-pad').boundingBox());await start(1,stick);}await move(1,{x:stick.x+x*42,y:stick.y-forward*42});}else{const desired=new Set([...(Math.abs(x)>.15?[x>0?'d':'a']:[]),...(Math.abs(forward)>.15?[forward>0?'w':'s']:[])]);for(const key of keys)if(!desired.has(key)){await page.keyboard.up(key);keys.delete(key);}for(const key of desired)if(!keys.has(key)){await page.keyboard.down(key);keys.add(key);}}}
   async function aim(name,x,y){const box=await page.locator('canvas').boundingBox();if(touch){const state=await page.locator('canvas').evaluate((e,n)=>JSON.parse(e.dataset[n]),name),current=state.battle??state,at={x:box.x+box.width*.55,y:box.y+box.height*.42};await start(3,at);await move(3,{x:at.x+(x-current.aimX)*box.width,y:at.y+(y-current.aimY)*box.height});await end(3);}else await page.mouse.move(box.x+x*box.width,box.y+y*box.height);}
-  async function action(name){if(touch)await tap({jump:'#jump',dodge:'#dodge',sling:'#throw-stone',jumpShot:'#jump-shot',practiceThrow:'#throw'}[name]);else await page.keyboard.press({jump:'Space',dodge:'Shift',sling:'f',jumpShot:'q',practiceThrow:'f'}[name]);}
+  async function action(name){if(touch)await tap({interact:'#battle-interact',jump:'#jump',dodge:'#dodge',sling:'#throw-stone',jumpShot:'#jump-shot',practiceThrow:'#throw'}[name]);else await page.keyboard.press({interact:'e',jump:'Space',dodge:'Shift',sling:'f',jumpShot:'q',practiceThrow:'f'}[name]);}
   return{tap,direction,release,aim,action,cdp,touch};
 }
 

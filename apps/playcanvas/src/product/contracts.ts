@@ -5,11 +5,13 @@ export type Settings = { schemaVersion: 1; muted: boolean; captions: boolean; gr
 export const defaultSettings: Settings = { schemaVersion: 1, muted: false, captions: true, graphics: 'balanced', movement: 'auto', labels: 'wasd', appearance: null };
 export type Account = { id: string; displayName: string; revision: number; settings: Settings; episode: { current: Run; history: RunSummary[] } | null };
 export type ProgressCommand = { p_command: string; p_kind: 'start' | 'objective' | 'defeat' | 'retry' | 'replay'; p_run: string | null; p_revision: number | null; p_objective: string | null; p_version: string };
+export type BattleCommand = {p_command:string;p_run:string;p_revision:number;p_battle_revision:number|null;p_action:'begin'|'take_sword'|'finish'};
 export type Attempt = { run_id: string; attempt: number; outcome: 'defeated' | 'completed'; recorded_at: string };
 export interface AccountApi {
   dashboard(): Promise<Account>;
   history(offset?: number): Promise<Attempt[]>;
   progress(command: ProgressCommand): Promise<Account['episode']>;
+  battle(command: BattleCommand): Promise<Account['episode']>;
   update(command: { p_command: string; p_revision: number; p_name: string; p_settings: Settings }): Promise<Account>;
 }
 export function validateSettings(value: unknown): Settings {

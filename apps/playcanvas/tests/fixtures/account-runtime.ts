@@ -11,7 +11,7 @@ const clerk={user,mountUserButton(el:HTMLDivElement){el.textContent='Fixture pla
 async function apiForPlayer():Promise<AccountApi>{
  if(!user)throw new Error('Sign in to open your saved story.');const owner=user.id;
  async function call(method:string,args?:unknown){if(identity()!==owner)throw new Error('The account changed. Reload before continuing.');const response=await fetch('http://127.0.0.1:4212/'+method,{method:'POST',headers:{'Content-Type':'application/json','X-Test-Identity':owner},body:JSON.stringify(args??{})});const result=await response.json();if(!response.ok)throw new Error(result.error??'Request failed.');return result;}
- return {dashboard:()=>call('dashboard'),history:(offset=0)=>call('history',offset),progress:c=>call('progress',c),update:c=>call('update',c)};
+ return {dashboard:()=>call('dashboard'),history:(offset=0)=>call('history',offset),progress:c=>call('progress',c),battle:c=>call('battle',c),update:c=>call('update',c)};
 }
 export async function accountRuntime(){return{clerk,apiForPlayer,onIdentityChange(callback:()=>void){callbacks.add(callback);return()=>callbacks.delete(callback);}};}
 export async function playerAccount(){const runtime=await accountRuntime();const api=await apiForPlayer();const account:Account=await api.dashboard();useAccountSettings(account.settings,account.id,account.revision);return{...runtime,api,account};}

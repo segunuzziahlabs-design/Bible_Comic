@@ -51,6 +51,7 @@ async function initialise() {
       async dashboard() { return validateAccount(await rpc('game_dashboard')); },
       async history(offset=0) { return await rpc('game_attempt_history',{p_offset:offset}); },
       async progress(command) { return (await rpc('game_progress',command)) as Account['episode']; },
+      async battle(command) { return (await rpc('game_battle',command)) as Account['episode']; },
       async update(command) { return validateAccount(await rpc('game_update_account',command)); },
     };
   }

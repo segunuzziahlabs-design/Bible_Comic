@@ -3,7 +3,7 @@ import {
   type Application,
 } from 'playcanvas';
 import {
-  fallDuration, retreatDuration, spearPatterns, spearStrike, spearWindup, strikeHalfWidth, strikeReach,
+  fallDuration, heavyFallDuration, fallenPhase, retreatDuration, spearPatterns, spearStrike, spearWindup, strikeHalfWidth, strikeReach,
   type ElahBattleState, type SpearPoseState,
 } from '../gameplay/elah-battle';
 import { spearSegments, copyPoint, type SpearSample, type Point3 } from '../gameplay/spear-collision';
@@ -325,7 +325,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   function poseChampion(state:SpearPoseState,dt:number):SpearSample {
     if(posedState===state&&posedFrame===state.poseFrame&&posedSpear)return posedSpear;
     const { foe, foeYaw, attackYaw, attack, attackTime, phase, time } = state;
-    const fallen = phase === 'retreat' || phase === 'victory';
+    const fallen = phase === 'retreat' || phase === 'victory' || fallenPhase(phase);
     const active = phase === 'fight';
     const telegraph = active && attack === 'windup';
     const thrusting = active && attack === 'strike';
@@ -335,12 +335,13 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
     champion.model.setPosition(foe.x, groundHeight(foe.x, foe.z), foe.z);
     champion.model.setEulerAngles(0, (telegraph||thrusting?attackYaw:foeYaw) * math.RAD_TO_DEG, 0);
     const swordStage=state.cinematicCombat&&state.combatStage==='sword';
-    champion.heldWeapon(!swordStage&&!(state.ranged&&state.spear));
+    champion.heldWeapon(!swordStage&&!fallen&&phase!=='stagger'&&phase!=='fall'&&phase!=='finisher'&&!(state.ranged&&state.spear));
     champion.heldSword(!!swordStage&&(attack!=='advance')&&(attack!=='draw'||attackTime>.55));
     if(swordStage&&(active||phase==='defeat')){
       if(attack==='draw')champion.pose('goliath_draw_sword',attackTime,dt);
       else if(attack==='advance')champion.pose(walked>.001?'goliath_advance':'goliath_ready',walked>.001?(distanceWalked%1.84)/1.84*(32/24):time%2.083,dt);
       else champion.pose('goliath_sword_strike',telegraph?attackTime/swordTiming.windup*(26/24):thrusting?26/24+attackTime:phase==='defeat'?26/24+(state.impactAttackTime??0):26/24+swordTiming.strike+attackTime,dt);
+    }else if(phase==='stagger'){champion.pose('goliath_stagger',time,dt);
     }else if(phase==='finisher'){champion.pose(time>=decisiveReplay.impact?'goliath_hit':'goliath_ready',time>=decisiveReplay.impact?time-decisiveReplay.impact:time%2.083,dt);
     }else if(state.ranged&&active&&attack!=='advance'&&attack!=='exposed'){champion.pose('goliath_throw',telegraph?attackTime/spearPatterns[state.attackIndex].windup:1+attackTime,dt);
     }else if(phase==='entrance'){champion.pose(time<4.5?'goliath_advance':'goliath_ready',time<4.5?(time*1.03)%1.333:time%2.083,dt);
@@ -348,7 +349,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
       distanceWalked = 0;
       champion.pose('goliath_ready', 0, 0, true);
     } else if (phase === 'fall' || fallen) {
-      champion.pose('goliath_fall', fallen ? fallDuration : time, dt);
+      champion.pose(state.cinematicCombat?'goliath_heavy_fall':'goliath_fall', fallen ? state.cinematicCombat?heavyFallDuration:fallDuration : time, dt);
     } else if(active&&attack==='exposed'){champion.pose('goliath_ready',time%2.083,dt);
     } else if ((active && attack !== 'advance') || phase === 'defeat') {
       const spearTime = telegraph ? state.dodgesRequired?attackTime/spearPatterns[state.attackIndex].windup*spearWindup:attackTime : thrusting ? spearWindup + attackTime
@@ -379,7 +380,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
     if (fallen || phase === 'approach') stageRetreat(phase === 'victory' ? retreatDuration : phase === 'retreat' ? time : 0);
 
     const swordStage=state.cinematicCombat&&state.combatStage==='sword';
-    const rangedWarning=state.cinematicCombat&&state.combatStage==='spear';
+    const rangedWarning=state.cinematicCombat&&state.combatStage!=='sword';
     const showLane = (!state.ranged||swordStage||rangedWarning) && phase === 'fight' && (telegraph || thrusting);
     const length = (rangedWarning&&state.aimLock?Math.hypot(state.aimLock.x-foe.x,state.aimLock.z-foe.z):strikeReach + playerRadius) / lane.length;
     const dx = Math.sin(attackYaw);
@@ -432,7 +433,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   }
 
   function battleObstacles(state: ElahBattleState) {
-    if (state.phase === 'fall' || state.phase === 'retreat' || state.phase === 'victory') return obstacles;
+    if (state.phase === 'fall' || state.phase === 'retreat' || state.phase === 'victory' || fallenPhase(state.phase)) return obstacles;
     const { x, z } = state.foe;
     return [...obstacles, { minX: x - .45, maxX: x + .45, minZ: z - .32, maxZ: z + .32 }];
   }

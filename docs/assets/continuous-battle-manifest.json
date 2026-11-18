@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "basis": "Derived GLBs retain existing geometry, joint counts, vertex colours, animations and underlying licences. New poses are original project work.",
+  "assets": [
+    {
+      "source": {
+        "file": "apps/playcanvas/src/assets/goliath-duel.glb",
+        "sha256": "b74222d89230d817c3c53c450e5215e903c64e94f3fbf10360e3ce420d240fa4"
+      },
+      "output": {
+        "file": "apps/playcanvas/src/assets/goliath-continuous.glb",
+        "sha256": "486f8feb4f942bebe728a05bb001fc30ed772969d96a93ec441322ab7627a9ef",
+        "bytes": 1633972,
+        "triangles": 11859,
+        "joints": 70,
+        "animations": [
+          "goliath_advance",
+          "goliath_challenge",
+          "goliath_draw_sword",
+          "goliath_fall",
+          "goliath_heavy_fall",
+          "goliath_hit",
+          "goliath_ready",
+          "goliath_speak",
+          "goliath_spear",
+          "goliath_spear_1",
+          "goliath_spear_2",
+          "goliath_spear_3",
+          "goliath_stagger",
+          "goliath_sword_strike",
+          "goliath_throw"
+        ]
+      }
+    },
+    {
+      "source": {
+        "file": "apps/playcanvas/src/assets/david-adventure.glb",
+        "sha256": "869d6e0c1abe22268d2548f440507c267d0d0091d87551353b148adb3629b484"
+      },
+      "output": {
+        "file": "apps/playcanvas/src/assets/david-aftermath.glb",
+        "sha256": "f36c043406e70daff9bd5339163b5b936a7a1e5f24b9ce3419d832a06ba87f21",
+        "bytes": 1542120,
+        "triangles": 9893,
+        "joints": 65,
+        "animations": [
+          "acknowledge",
+          "care_for_lamb",
+          "deliver_provisions",
+          "dodge_left",
+          "dodge_right",
+          "idle_relaxed",
+          "listen",
+          "listen_to_provisions",
+          "pickup_provisions",
+          "sling_throw",
+          "speak_resolve",
+          "sword_carry",
+          "sword_finish",
+          "walk_forward"
+        ]
+      }
+    }
+  ]
+}
