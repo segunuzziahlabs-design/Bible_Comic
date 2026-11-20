@@ -1,6 +1,10 @@
 import { Vec3, type Application, type Entity } from 'playcanvas';
 import { buildValleyOpening } from './valley-opening';
 import { createSceneSpeech, mouthEnvelope } from './scene-speech';
+import {dialogueGestureTime} from '../gameplay/story-motion';
+import {createSpeechFaceMotion} from '../gameplay/speech-face-motion';
+import {castBlink,listenerNodStart} from '../gameplay/cast-performance';
+import {createAudiencePerformance,reactionNod} from './audience-performance';
 import type { ElahBattleState } from '../gameplay/elah-battle';
 import type { loadDavid } from './david-character';
 import davidUrl from '../assets/david-aftermath.glb?url';
@@ -8,14 +12,15 @@ import goliathUrl from '../assets/goliath-continuous.glb?url';
 import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
 import actorUrl from '../assets/challenge-soldier.glb?url';
 import oldLines from '../assets/duel-dialogue/dialogue.json';
+import performanceLines from '../assets/battle-performance-dialogue/dialogue.json';
 import encounterLines from '../assets/encounter-dialogue/dialogue.json';
 import concern from '../assets/encounter-dialogue/soldier-concern.wav?url';
 import forward from '../assets/encounter-dialogue/step-forward.wav?url';
 import steady from '../assets/encounter-dialogue/steady.wav?url';
-const lines=[...oldLines,...encounterLines];
+const lines=[...oldLines.filter(line=>line.id!=='david-faith'),...performanceLines,...encounterLines];
 import contempt from '../assets/duel-dialogue/goliath-contempt.wav?url';
 import threat from '../assets/duel-dialogue/goliath-threat.wav?url';
-import faith from '../assets/duel-dialogue/david-faith.wav?url';
+import faith from '../assets/battle-performance-dialogue/david-faith.wav?url';
 import battle from '../assets/duel-dialogue/david-battle.wav?url';
 import watch from '../assets/duel-dialogue/soldier-watch.wav?url';
 
@@ -37,11 +42,12 @@ export async function createDuelPresentation(app: Application) {
     { id: 'goliath-contempt', start: 1.4 }, { id: 'goliath-threat', start: 6 },
     { id: 'david-faith', start: 9.5 }, { id: 'david-battle', start: 16.5 },
     { id: 'soldier-watch', start: 22.2 },
-  ] }, [], 7);
+  ] }, [], 7,{cinematicDialogue:['departure','confrontation','opportunity']});
   let phase = '', starts = 0, shot = 'approach', previousShot = '', elapsed = 0;
-  const eye = new Vec3();let opportunity=false,entranceGap=0;const beats=new Set<number>();
-  function reset() { audio.reset(); world.resetActivity(); phase = ''; shot = 'approach'; elapsed = 0;opportunity=false;entranceGap=0;beats.clear(); }
+  const eye = new Vec3();let opportunity=false,entranceGap=0,lastDavid:David|undefined;const beats=new Set<number>(),speechFace=createSpeechFaceMotion(),performances=[world.patrol,world.sentinel].map(createAudiencePerformance);
+  function reset() { performances.forEach(p=>p.restore());audio.reset();speechFace.reset(audio.context.currentTime);lastDavid?.speech(0,0);world.patrol.face(0,0,0,.1,0);world.sentinel.face(0,0,0,.1,0);world.champion.face(0,0);world.resetActivity(); phase = ''; shot = 'approach';previousShot=''; elapsed = 0;opportunity=false;entranceGap=0;beats.clear(); }
   function step(state: ElahBattleState, dt: number, david: David) {
+    lastDavid=david;performances.forEach(p=>p.restore());
     elapsed += dt;
     if (state.phase !== phase) {
       phase = state.phase;
@@ -59,15 +65,19 @@ export async function createDuelPresentation(app: Application) {
     for(const actor of[world.patrol,world.sentinel]){const p=actor.model.getPosition();actor.model.setPosition(p.x+(p.x<0?-1:1)*entranceGap,p.y,p.z);}
     if(phase==='fight'&&state.dodges>=3&&!opportunity){opportunity=true;audio.begin('opportunity',{David:david.model.getPosition()});}
     const line = audio.lineAt();
-    const mouth = line ? mouthEnvelope(line, line.local) : [0, 0];
+    const mouth = speechFace.step(line ? mouthEnvelope(line, line.local) : [0, 0],audio.context.currentTime);
     david.speech(line?.speaker === 'David' ? mouth[0] : 0, line?.speaker === 'David' ? mouth[1] : 0);
     const groan=phase==='stagger'?Math.max(0,Math.sin(state.time*5.4))*.65:0;
     world.champion.face(line?.speaker === 'Goliath' ? mouth[0] : groan, line?.speaker === 'Goliath' ? mouth[1] : groan*.3);
-    world.patrol.face(line?.speaker === 'Soldier' ? mouth[0] : 0, line?.speaker === 'Soldier' ? mouth[1] : 0, 0, .35, 0);
+    world.patrol.face(line?.speaker === 'Soldier' ? mouth[0] : 0, line?.speaker === 'Soldier' ? mouth[1] : 0, 0, .35, castBlink(elapsed,2));
+    world.sentinel.face(0,0,0,.22,castBlink(elapsed,3));
     for (const actor of [world.patrol, world.sentinel]) {
-      const clip = (phase === 'challenge' && state.time < 4)||(phase==='entrance'&&state.time>=1&&state.time<8) ? 'react_alarm' : 'listen';
+      const alarmAge=phase==='entrance'?state.time-1:state.time,alarmed=(phase==='challenge'||phase==='entrance')&&alarmAge>=0&&alarmAge<(actor.tracks.get('react_alarm')?.duration??0);
+      const speaking=actor===world.patrol&&line?.speaker==='Soldier';
+      const clip = alarmed?'react_alarm':speaking?'speak_concern':'listen';
       const actual = actor.tracks.has(clip) ? clip : 'listen';
-      actor.pose(actual, elapsed % actor.tracks.get(actual)!.duration, dt);
+      actor.pose(actual,alarmed?alarmAge:speaking?dialogueGestureTime(line!.local,line!.duration,actor.tracks.get(actual)!.duration):elapsed%actor.tracks.get(actual)!.duration,dt);
+      if((phase==='challenge'||phase==='entrance')&&!alarmed){const i=actor===world.patrol?0:1;performances[i].apply(elapsed,speaking,line&&!speaking?reactionNod(line.local,listenerNodStart(line.duration,i),.9,1.8):0,i*1.7);}
     }
     if (phase === 'challenge') {
       if (line?.speaker === 'Goliath') world.champion.pose('goliath_speak', line.local, 0);
@@ -76,8 +86,8 @@ export async function createDuelPresentation(app: Application) {
       const clip = line?.speaker === 'David' ? 'Speak' : 'Listen';
       if (layer.activeState !== clip) layer.transition(clip,.12);
       layer.activeStateCurrentTime = line?.speaker === 'David'
-        ? Math.min(line.local, david.tracks.get('speak_resolve')!.duration)
-        : elapsed % david.tracks.get('listen')!.duration;
+        ? Math.max(0,dialogueGestureTime(line.local,line.duration,david.tracks.get('speak_resolve')!.duration)-dt)
+        : Math.max(0,elapsed % david.tracks.get('listen')!.duration-dt);
       david.animator.update(dt);
     }
     audio.update(world.camera.getPosition(), world.camera.forward);

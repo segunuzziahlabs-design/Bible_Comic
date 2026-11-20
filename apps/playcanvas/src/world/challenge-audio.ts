@@ -12,4 +12,4 @@ import {createSceneSpeech} from './scene-speech';
 export const arrivalDuration=8,challengeDuration=30,exchangeDuration=28;
 export function createChallengeAudio(){return createSceneSpeech(lines,{summon,terms,defiance,'fall-back':fallBack,fear,'david-question':question,'eliab-rebuke':rebuke,'david-answer':answer,'report-to-saul':report},
   {challenge:[{id:'summon',start:2},{id:'fall-back',start:7.7},{id:'terms',start:10.6},{id:'fear',start:16},{id:'defiance',start:18.6}],
-    exchange:[{id:'david-question',start:2},{id:'eliab-rebuke',start:7},{id:'david-answer',start:14.5},{id:'report-to-saul',start:20}]},[],7);}
+    exchange:[{id:'david-question',start:2},{id:'eliab-rebuke',start:7},{id:'david-answer',start:14.5},{id:'report-to-saul',start:20}]},[],7,{cinematicDialogue:['challenge','exchange']});}

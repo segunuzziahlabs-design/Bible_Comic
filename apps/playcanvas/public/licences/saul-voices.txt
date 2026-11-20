@@ -10,3 +10,17 @@ The generator and voice model are not shipped in the browser build.
 See the repository docs/assets/saul-generated-voices.md and
 docs/assets/saul-voice-provenance.json for generation settings and hashes.
 Companion Apache-2.0 and runtime MIT notices are included in this directory.
+
+MSR-03 intonation revision (20 November 2026): the canonical Chapter 4 audience
+uses new sentence-directed takes of the same am_puck/am_michael voices and words.
+Declared model/runtime licences were rechecked against the sources above.
+The original recordings remain in the repository. Exact delivery settings,
+phrase boundaries and final-file hashes are in
+docs/assets/msr03-saul-voice-provenance.json and
+docs/assets/msr03-saul-performance.md.
+
+MSR-06 battle response (20 November 2026): one new am_puck sentence-directed
+David faith take preserves the original words and voice identity. Model/runtime
+licences and cached model/voice-bank hashes were rechecked. The original remains
+in duel-dialogue. Settings and hashes: docs/assets/msr06-battle-voice-provenance.json
+and docs/assets/msr06-battle-performance.md.

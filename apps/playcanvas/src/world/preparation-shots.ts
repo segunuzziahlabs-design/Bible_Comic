@@ -1,16 +1,18 @@
 import type {ValleyShot} from './valley-shots';
+import type {AudienceScore} from '../gameplay/saul-audience-score';
 export type PreparationCue='audience'|'fitting'|'decline'|'brook'|'pickup'|'ready';
-export function preparationShot(kind:PreparationCue,t:number,position:{x:number;z:number}):ValleyShot{
+export function preparationShot(kind:PreparationCue,t:number,position:{x:number;z:number},score?:AudienceScore):ValleyShot{
   if(kind==='audience'){
     // Keep the camera on the same side of the David–Saul eyeline. Each move
     // settles before the next line; close-ups preserve eye level and headroom.
     if(t<5)return{id:'pavilion-wide',eye:[3.05-t*.045,2.10-t*.025,3.65-t*.07],focus:[.05,1.08,-.35],fov:51-t*.35};
-    if(t<9)return{id:'audience-two-shot',eye:[.20+(t-5)*.02,1.72,1.82-(t-5)*.025],focus:[.46,1.48,-1.0],fov:48};
-    if(t<14)return{id:'saul-concern',eye:[1.02,1.82,.76-(t-9)*.025],focus:[.70,1.65,-1.2],fov:37};
-    if(t<24)return{id:'david-resolve',eye:[.78-(t-14)*.012,1.58,-.18+(t-14)*.006],focus:[-.65,1.39,.65],fov:37-(t-14)*.12};
-    if(t<27)return{id:'guard-reaction',eye:[-.80,1.78,-.35],focus:[-2.8,1.52,-2.7],fov:38};
-    if(t<30)return{id:'saul-listens',eye:[1.02,1.80,.63],focus:[.70,1.65,-1.2],fov:36};
-    return{id:'saul-blessing',eye:[2.55-(t-30)*.025,1.90,2.5-(t-30)*.025],focus:[.02,1.38,-.30],fov:44};
+    if(!score)throw new Error('Audience camera needs its recording-derived score');
+    if(t<score.concernStart-.25)return{id:'audience-two-shot',eye:[.20+(t-5)*.02,1.72,1.82-(t-5)*.025],focus:[.46,1.48,-1.0],fov:48};
+    if(t<score.answerStart-.35)return{id:'saul-concern',eye:[1.02,1.82,.76-(t-score.concernStart)*.025],focus:[.70,1.65,-1.2],fov:37};
+    if(t<score.answerEnd+.35)return{id:'david-resolve',eye:[.78-(t-score.answerStart)*.012,1.58,-.18+(t-score.answerStart)*.006],focus:[-.65,1.39,.65],fov:37-(t-score.answerStart)*.12};
+    if(t<score.guardEnd+.35)return{id:'guard-reaction',eye:[-.80,1.78,-.35],focus:[-2.8,1.52,-2.7],fov:38};
+    if(t<score.blessingStart)return{id:'saul-listens',eye:[1.02,1.80,.63],focus:[.70,1.65,-1.2],fov:36};
+    return{id:'saul-blessing',eye:[2.55-(t-score.blessingStart)*.025,1.90,2.5-(t-score.blessingStart)*.025],focus:[.02,1.38,-.30],fov:44};
   }
   if(kind==='fitting'){
     if(t<4)return{id:'armour-offered',eye:[-.9,2.0,2.7],focus:[1.15,1.3,.25],fov:46};

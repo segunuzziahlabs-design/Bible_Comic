@@ -16,4 +16,4 @@ export function createCampAudio(){return createSceneSpeech(lines,{
   'delivery-david':deliveryDavid,'delivery-keeper':deliveryKeeper,'directions-david':directionsDavid,'directions-keeper':directionsKeeper,
   'greeting-eliab':greetingEliab,'greeting-david':greetingDavid,'answer-eliab':answerEliab,'answer-david':answerDavid,hold,ready,
 },{delivery:[{id:'delivery-david',start:3},{id:'delivery-keeper',start:9},{id:'directions-david',start:18},{id:'directions-keeper',start:22}],
-  greeting:[{id:'greeting-eliab',start:2},{id:'greeting-david',start:7},{id:'answer-eliab',start:15},{id:'answer-david',start:22}]},['hold','ready']);}
+  greeting:[{id:'greeting-eliab',start:2},{id:'greeting-david',start:7},{id:'answer-eliab',start:15},{id:'answer-david',start:22}]},['hold','ready'],3,{cinematicDialogue:['delivery','greeting']});}

@@ -1,4 +1,6 @@
 import { checkpointSaved } from './account-game-bootstrap';
+import {consumeStoryRouteHint,readStoryRouteHint,storyRoutes} from '../gameplay/story-route';
+import {navigationStorage} from '../gameplay/pavilion-route';
 import { readEpisodeMuted, writeEpisodeMuted, setEpisodeSoundButton } from './episode-sound';
 import { createMovementInput } from '../gameplay/movement-input';
 import { contentVersion, currentObjective, episodeId, episodePage, freshRun, objectives, preparation, reduceEpisode, requiresBattleFinish } from '../gameplay/episode-rules';
@@ -18,6 +20,8 @@ const button = (id: string) => el(id) as HTMLButtonElement;
 const text=(id:string,value:string)=>{const node=el(id);if(node.textContent!==value)node.textContent=value;};
 const canvas = el('stage') as HTMLCanvasElement, stage = canvas.parentElement!;
 const params = new URLSearchParams(location.search), review = params.has('review'), inspect = params.has('inspect');
+const offeredArrival=params.get('arrival')==='r11'?readStoryRouteHint(navigationStorage()):undefined;
+let connectedArrival=false,autoEntry='not_requested';
 const input = createMovementInput(canvas, el('move-pad'), true);
 let area: Awaited<ReturnType<typeof openMovementArea>> | undefined;
 let session: Awaited<ReturnType<typeof openEpisodeSession>>;
@@ -66,7 +70,7 @@ function controls() {
     el('forehead-target').style.left=`${(view.foreheadX??.5)*100}%`;el('forehead-target').style.top=`${(view.foreheadY??.3)*100}%`;
     el('forehead-target').toggleAttribute('data-aligned',view.aimed);
   }
-  if (inspect && session) canvas.dataset.duel = JSON.stringify({ review, started, paused, muted, busy, run: session.run, inventory: preparation(session.run), objective: currentObjective(session.run)?.id });
+  if (inspect && session) canvas.dataset.duel = JSON.stringify({ review, started, paused, muted, busy, arrival:{route:connectedArrival?'r11':null,autoEntry}, run: session.run, inventory: preparation(session.run), objective: currentObjective(session.run)?.id });
 }
 async function save(operation: () => Promise<void>, done: () => void) {
   if (busy && el('save-error').hidden) return;
@@ -120,7 +124,7 @@ function render(next: InteractionView) {
     if (previous?.result !== 'defeat' && !busy) button('battle-replay').focus();
   } else el('battle-result').hidden = true;
   controls();
-  if (inspect && session) canvas.dataset.duel = JSON.stringify({ review, started, paused, muted, busy, run: session.run, inventory: preparation(session.run), objective: currentObjective(session.run)?.id });
+  if (inspect && session) canvas.dataset.duel = JSON.stringify({ review, started, paused, muted, busy, arrival:{route:connectedArrival?'r11':null,autoEntry}, run: session.run, inventory: preparation(session.run), objective: currentObjective(session.run)?.id });
 }
 async function pause(value: boolean) {
   if (!started || busy || view?.result) return;
@@ -135,7 +139,8 @@ async function restart() {
   else reset();
 }
 function throwStone() { if (started && !paused && !busy && area?.throwStone()) canvas.focus(); }
-button('enter').addEventListener('click', () => { started = true; el('entry').hidden = true; void pause(false); });
+function startBattle(){input.clear();started=true;if(connectedArrival)autoEntry='entered';el('entry').hidden=true;void pause(false);}
+button('enter').addEventListener('click',startBattle);
 const playerControls=mountPlayerControls(canvas,input,value=>{void pause(value);},()=>paused);
 input.bindActions({
   interact:{run:()=>{area?.interact();},available:()=>started&&!paused&&!busy&&!!view?.canInteract},
@@ -168,10 +173,12 @@ window.addEventListener('pagehide', () => { area?.dispose(); input.dispose(); },
 
 async function main() {
   let run = freshRun(); for (const objective of objectives.slice(0, 10)) run = reduceEpisode(run, { type: 'objective', id: objective.id });
+  if(review&&offeredArrival?.review&&offeredArrival.route==='r11'&&offeredArrival.revision===run.revision&&offeredArrival.contentVersion===run.contentVersion)run.runId=offeredArrival.runId;
   let temporary: Awaited<ReturnType<EpisodeSaveAdapter['read']>> = { current: run, history: [] };
   session = await openEpisodeSession(review ? { async read() { return temporary; }, async write(value) { temporary = structuredClone(value); } } : undefined);
   const goal = currentObjective(session.run)?.id;
   if (goal !== 'goliath.struck' && goal !== 'victory.witnessed') { location.replace(episodePage(session.run)); return; }
+  connectedArrival=params.get('arrival')==='r11'&&consumeStoryRouteHint(navigationStorage(),storyRoutes.r11,session.run,review);
   if(goal==='goliath.struck'&&!session.run.battle&&session.run.status==='active')await session.commit({type:'battle',action:'begin'});
   area = await openMovementArea(canvas, input, loadSavedAppearance(), render, 'elah', {
     episodeId, contentVersion, preparation: preparation(session.run), attempt: session.run.attempt,
@@ -185,5 +192,6 @@ async function main() {
   if (hasHit()&&!requiresBattleFinish(session.run)) { started = true; gate(); }
   else if (session.run.status === 'defeated') { started = true; el('entry').hidden = true; controls(); button('battle-replay').focus(); }
   else {button('enter').textContent=hasHit()?'Resume at Goliath’s sword':session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = hasHit()?'Goliath’s fall is saved. Follow the arrow. Use E / the action button to take his sword, then approach and ready it. Press Finish battle yourself. The final blow is shown off-screen.':`${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move with WASD / arrows or left controls; direction + Shift / Dodge is a quick step. Goliath keeps throwing while you aim and use F / Throw. After his fall, retrieve his sword and finish the battle through the action button.`; button('enter').hidden = false; }
+  if(connectedArrival&&!started){autoEntry='pending';button('enter').textContent='Enter the battlefield';el('entry-message').textContent='You have reached the battlefield. Goliath’s entrance comes first; follow the arrows when David returns to your control.';void area.prepareAudio().then(()=>{if(!started&&!document.hidden)startBattle();else if(!started)autoEntry='tap_required';}).catch(()=>{if(!started)autoEntry='tap_required';});}
 }
 void main().catch(error => { console.error(error); el('entry-message').textContent = error instanceof Error ? error.message : 'The duel could not load.'; button('retry').hidden = false; });

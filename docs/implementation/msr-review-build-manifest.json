@@ -1,0 +1,985 @@
+{
+  "date": "2026-11-20",
+  "status": "Engineering verified; human acceptance pending",
+  "toolchain": {
+    "node": "v24.14.1",
+    "@clerk/clerk-js": "6.44.0",
+    "@clerk/ui": "1.43.0",
+    "@supabase/supabase-js": "2.119.0",
+    "playcanvas": "2.24.0",
+    "@clerk/testing": "2.3.1",
+    "@electric-sql/pglite": "0.3.14",
+    "typescript": "7.0.2",
+    "vite": "8.3.7"
+  },
+  "sourceTextNormalisation": "UTF-8 text with CRLF normalised to LF; WAV hashes use raw bytes",
+  "sourceDigestSha256": "25d58cb0aca58afd8bd4901e27b19a568bb0a4479be81b4ea6c14dda8da48af0",
+  "sourceFiles": [
+    {
+      "path": "apps/playcanvas/camp.html",
+      "bytes": 2809,
+      "sha256": "895c6ca138cc9ce647756e7b72124e2c58e37da5f03b1f532012d84d990bf1a8"
+    },
+    {
+      "path": "apps/playcanvas/challenge.html",
+      "bytes": 3304,
+      "sha256": "cd641cc2489353de6a05ad2213f54d639d02b4ad4990510bbd05a47e58e6727c"
+    },
+    {
+      "path": "apps/playcanvas/david-preview.html",
+      "bytes": 2707,
+      "sha256": "0c79e3b1123155f3bd4daa9e012d9320a97fbda6322016cf5fc9596d5c944aef"
+    },
+    {
+      "path": "apps/playcanvas/duel.html",
+      "bytes": 4761,
+      "sha256": "43720cb25f2b5bd72b469ccae320ac0f84ce5b3fd1361d8e12fdc58354f1e59d"
+    },
+    {
+      "path": "apps/playcanvas/elah.html",
+      "bytes": 3261,
+      "sha256": "63cea1b64716c53623cfe1d1ff894204916dc66bf150148ebe812f194a8dc1b1"
+    },
+    {
+      "path": "apps/playcanvas/episode.html",
+      "bytes": 1974,
+      "sha256": "f41a50f547006a47661b22090a4acce39bde8cb5a207e1db3dc08182f9a53e47"
+    },
+    {
+      "path": "apps/playcanvas/index.html",
+      "bytes": 1324,
+      "sha256": "18146f44810e8353950b3c94e3504e7c460af4e2e9cf8c0993c14d58132f299f"
+    },
+    {
+      "path": "apps/playcanvas/movement.html",
+      "bytes": 2370,
+      "sha256": "83a8f2f4da82e7bed68715d01a3b8b1c2053c7b7b44eec7a80c29b50c78d5d08"
+    },
+    {
+      "path": "apps/playcanvas/package-lock.json",
+      "bytes": 101767,
+      "sha256": "6a2db8e5e1f9a449ea1d82cbad60fe82765b7ec5eb7c6f142323766615bf82da"
+    },
+    {
+      "path": "apps/playcanvas/package.json",
+      "bytes": 658,
+      "sha256": "48f2baabbb4ba50c111f243ce698bf7b2bcb90968ee8d4d23b6b305ed3e708fc"
+    },
+    {
+      "path": "apps/playcanvas/preparation.html",
+      "bytes": 3331,
+      "sha256": "9d41da4ea12b71550aad98cc2679ec4c71c9e485a0cf1f6d687422144cb2d75f"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/camp-arrival.txt",
+      "bytes": 1041,
+      "sha256": "37e878b418310bb2737f5f67944d01670caa983137e224cfadb921e1d043f086"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/challenge.txt",
+      "bytes": 1062,
+      "sha256": "a5ac27aad5cb5a38d1402311b85fae010a57cf7649f96ab61916a1d717a0c3b1"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/cinematic-battle.txt",
+      "bytes": 754,
+      "sha256": "5b2705f6d279c01dd30fd0491c1d4ff9e0ede8242319a95e2d2c379fbdd29b01"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/cinematic-engagement.txt",
+      "bytes": 700,
+      "sha256": "fee78bb1562bb280769c6721e29ab5170ae14265f109af47f690c62973a943e6"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/continuous-battle.txt",
+      "bytes": 840,
+      "sha256": "77790511ceb5ed265159c113be877874c14bbeaeca2cf17f7c6123b632618a0e"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/duel.txt",
+      "bytes": 995,
+      "sha256": "74e25a56ef2d402983e754c74930f635dc678c7bad3a46641afe316c263095ba"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/jesse-courtyard.txt",
+      "bytes": 763,
+      "sha256": "6767fc71f93e90cab1abc3cb74791dc6af3d2806f229e7b1f0165c2198c22079"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/kokoro-apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/kokoro-onnx-mit.txt",
+      "bytes": 1080,
+      "sha256": "f61fdd0217de9ece8fa699912848d91187d84879fc2e689f0906d0c1299e955e"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/opening-messenger-audio.txt",
+      "bytes": 789,
+      "sha256": "c02f65059bcf02041b888c7c6d729418ffc0db41c0ddb9d1d3cf1510a183ddca"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/preparation.txt",
+      "bytes": 1190,
+      "sha256": "73696b6c14051dae699492bab85e132d7dbe80bc1021b42f86a96a5b6cde41f9"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/saul-voices.txt",
+      "bytes": 1471,
+      "sha256": "bbfdf1c26688e0166f52666726ea8f13d61bbfeca10fa45d3cb4b8acefdb31c5"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/valley-opening.txt",
+      "bytes": 833,
+      "sha256": "46e9817c36564e098acb1e5e043e8032851c9b9f739a77655a5d79f769b2a335"
+    },
+    {
+      "path": "apps/playcanvas/public/licences/victory.txt",
+      "bytes": 1180,
+      "sha256": "a8cf7a7f7579deac2971e6733dd67f2f5ac5c1ede90679ef568007b8a3ffdc83"
+    },
+    {
+      "path": "apps/playcanvas/saul.html",
+      "bytes": 2018,
+      "sha256": "805a9a597f86012b5b6acb09c107baad5f0eabd66c241d0cf8d092331d51c661"
+    },
+    {
+      "path": "apps/playcanvas/src/app/account-game-bootstrap.ts",
+      "bytes": 1695,
+      "sha256": "cb062e188888b1977cf5deecbb4adb1c66fc9ccc9b5669e11ba73b4012f6f4af"
+    },
+    {
+      "path": "apps/playcanvas/src/app/camp-main.ts",
+      "bytes": 23428,
+      "sha256": "782eb0f03ccb1f46d1baa7474df9e747e5fc544b64da23ea2f61d95f7c4f9931"
+    },
+    {
+      "path": "apps/playcanvas/src/app/challenge-main.ts",
+      "bytes": 25029,
+      "sha256": "effd09dfca1b255a0c8cb6032c0316a9d9e2a750659d13ce0c6ae4237a3ccd9f"
+    },
+    {
+      "path": "apps/playcanvas/src/app/duel-main.ts",
+      "bytes": 17743,
+      "sha256": "2fdd6e904ef372e1cf4ce5a786e9a2ed428345c2fd6c772f3c8cbfed494cd34c"
+    },
+    {
+      "path": "apps/playcanvas/src/app/duel.css",
+      "bytes": 3519,
+      "sha256": "5de7869cccb0651d1388e34cb5c4d3013ef622698d042e2196112afbe84851b8"
+    },
+    {
+      "path": "apps/playcanvas/src/app/episode-main.ts",
+      "bytes": 3275,
+      "sha256": "6dfc627c850cb9bdb2b9f76a48a880ee94560ff9559e7d83967c2a5cbcdc5810"
+    },
+    {
+      "path": "apps/playcanvas/src/app/episode-route.ts",
+      "bytes": 3291,
+      "sha256": "30577658d072ad6550675256ffd57d4ec922318d696a54646a2a248cad535f27"
+    },
+    {
+      "path": "apps/playcanvas/src/app/episode-sound.ts",
+      "bytes": 1054,
+      "sha256": "721f6d74097cfa0f184f0eaf810a3ed90c54fbcbb05384382da6636de7a61c48"
+    },
+    {
+      "path": "apps/playcanvas/src/app/episode.css",
+      "bytes": 1781,
+      "sha256": "f07be3293962e751a07a2c306c9f6c18deea2c5245f28bec2aafa0d7713a585f"
+    },
+    {
+      "path": "apps/playcanvas/src/app/guided-handoff.ts",
+      "bytes": 1938,
+      "sha256": "de22ded1874f528f3112357754d8c0f4987e4258e4ca60d6906b10181d065c19"
+    },
+    {
+      "path": "apps/playcanvas/src/app/guided-route.css",
+      "bytes": 563,
+      "sha256": "1be8099888e52934e84e77344c7a6b7c7373968abc2ce74e73275e6f0ff11c2d"
+    },
+    {
+      "path": "apps/playcanvas/src/app/main.ts",
+      "bytes": 5175,
+      "sha256": "053bee971138298a5e27e5d134f13e8d4412519ff4f9defea71c829325a946c4"
+    },
+    {
+      "path": "apps/playcanvas/src/app/movement-main.ts",
+      "bytes": 10543,
+      "sha256": "2bd16df075c4843062c589e5f4daafc67b4e497ba897dfaec35b259b8b3ec788"
+    },
+    {
+      "path": "apps/playcanvas/src/app/movement.css",
+      "bytes": 3402,
+      "sha256": "d96e69955a42fe77cb56c34d3b3b071fed178853d0aaa290b5562f8ac19ce403"
+    },
+    {
+      "path": "apps/playcanvas/src/app/objective-guide.css",
+      "bytes": 1092,
+      "sha256": "11e843650ec42df2a2969346238d313aca7303cf525faaee211c65d86c56aa1d"
+    },
+    {
+      "path": "apps/playcanvas/src/app/objective-guide.ts",
+      "bytes": 3169,
+      "sha256": "19ddbcc8d0307e9f7ea2e14ab78750d72815903cf389d89678872d1634288117"
+    },
+    {
+      "path": "apps/playcanvas/src/app/player-controls-ui.ts",
+      "bytes": 8241,
+      "sha256": "4d71d9aa0ebc9de5f7e8e5c59a187dd7e3cb5e269394cfd05650c0e613f68aab"
+    },
+    {
+      "path": "apps/playcanvas/src/app/player-controls.css",
+      "bytes": 5103,
+      "sha256": "20cae4f2e4c336faf993b1dd7d1c429b93ad5ee6254dc3e0b9f37512d7467e28"
+    },
+    {
+      "path": "apps/playcanvas/src/app/preparation-main.ts",
+      "bytes": 42828,
+      "sha256": "a1aee477937c5ee710dfbc9a8c7fad2c74d6c6fee439af6a3e23f79f5c9d7177"
+    },
+    {
+      "path": "apps/playcanvas/src/app/preparation.css",
+      "bytes": 1131,
+      "sha256": "406b066b065bd03664bc15ba70101baa0b15c882566078e44128c333843de1cb"
+    },
+    {
+      "path": "apps/playcanvas/src/app/saul-main.ts",
+      "bytes": 17558,
+      "sha256": "17621792d05cdc702a770a8e37de1bff81786a9c0c3a5d2974047968654ecd6d"
+    },
+    {
+      "path": "apps/playcanvas/src/app/saul.css",
+      "bytes": 4315,
+      "sha256": "fa191fa0965555d0328e6a89ddfd85bcbf765db06c67f14d46344d8139fb4577"
+    },
+    {
+      "path": "apps/playcanvas/src/app/sling-controls-ui.ts",
+      "bytes": 4101,
+      "sha256": "87033b3dd3379a9b3fa486184e68566953db6f52bc4a98e966820fe8a951963f"
+    },
+    {
+      "path": "apps/playcanvas/src/app/sling-controls.css",
+      "bytes": 2449,
+      "sha256": "36e2c75d837070aa1ea1e5069855dc065960c1f633e763bfa89a0eb431d12c38"
+    },
+    {
+      "path": "apps/playcanvas/src/app/story-departure.ts",
+      "bytes": 4503,
+      "sha256": "cbafabd119ea9a9fe7afc2b110522850b1a36c3df9acec104aa8d8dbec633e25"
+    },
+    {
+      "path": "apps/playcanvas/src/app/style.css",
+      "bytes": 3990,
+      "sha256": "9f3c4774811f46b00fb883f1567ede4f36424ae59a9f5b17b71aa5ccd3177a31"
+    },
+    {
+      "path": "apps/playcanvas/src/app/valley-main.ts",
+      "bytes": 25038,
+      "sha256": "387ae1f44ee76e6742f7f2b5eff7d9a7e7872829f296789f1af3aeb1648912e3"
+    },
+    {
+      "path": "apps/playcanvas/src/app/valley.css",
+      "bytes": 751,
+      "sha256": "171a58fc1d5c09e01f3846078c1458f3c7bd2b82ca23c0c3d09de0eb5b537e8f"
+    },
+    {
+      "path": "apps/playcanvas/src/app/victory-main.ts",
+      "bytes": 12139,
+      "sha256": "31348fdc3ac820896bc889055c5a85799402ee92519b08f6a228b5920e564782"
+    },
+    {
+      "path": "apps/playcanvas/src/app/victory.css",
+      "bytes": 1010,
+      "sha256": "c7422744cce72898aeed9b587983e11e541b4e1b3c35689081358b69c6eecd18"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/battle-performance-dialogue/david-faith.wav",
+      "bytes": 288940,
+      "sha256": "1f23eef812a841d6d40279d55164569873acfb48fd97c247a705db957a49a414"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/battle-performance-dialogue/dialogue.json",
+      "bytes": 11782,
+      "sha256": "ca74105ed249237bfc7c6aefc71eb8f9cc8c54858cfa1e457df39711705012e9"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/camp-dialogue/dialogue.json",
+      "bytes": 52265,
+      "sha256": "c60e412e0960c0d9176b2cc6e31311f6671b0b344cfa2c962adabe930ce45786"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/challenge-dialogue/dialogue.json",
+      "bytes": 67076,
+      "sha256": "c26c48a3870ba84f5d6420702cf89a1c9937b153678df0fd1147ce72e7381524"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/courtyard-dialogue/dialogue.json",
+      "bytes": 59665,
+      "sha256": "4502d02643e4b38d3bd93f4f715e2b9d3d21612a8e2a9065945c4ec32dc202ce"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/duel-dialogue/dialogue.json",
+      "bytes": 37015,
+      "sha256": "0ae4acbfb646ddc448d1764c25de9ebc1ed2561bc1e0dc724065f7c58bb14444"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/encounter-dialogue/dialogue.json",
+      "bytes": 13512,
+      "sha256": "b735d3a7b2958236df383a644326d4d4cc3fe43f5377106befada5e395e5c5f4"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/messenger-dialogue/dialogue.json",
+      "bytes": 24110,
+      "sha256": "4b4ce5e60d6efc9ce506c459eb2880b6ba9a832b0b14d2407412416daeeac841"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/preparation-armour.json",
+      "bytes": 199,
+      "sha256": "b70354f4d4d52cc0e207e358f2d2760f2fb03f2f2511862e84686ac606c5c672"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/preparation-dialogue/dialogue.json",
+      "bytes": 50553,
+      "sha256": "8cc4c5e3fca13a342b919899529a13c14a6338d3e185d1079a34fbca8e6eca8e"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/saul-dialogue/dialogue.json",
+      "bytes": 21465,
+      "sha256": "3bca3070cb51c8423809cee8f05906568b6643c7f8035f2c4ad849c8eed18c6c"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/saul-performance-dialogue/david-answer.wav",
+      "bytes": 291244,
+      "sha256": "148f7abd7668f3917e3fa6d46691364d2fa355a33c00fd32be4cf641c09f55c3"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/saul-performance-dialogue/dialogue.json",
+      "bytes": 24745,
+      "sha256": "d487958c45165337228fd7e5ebf6c4ef9bdb0be9f0032381986086eb50010024"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/saul-performance-dialogue/saul-blessing.wav",
+      "bytes": 129196,
+      "sha256": "30df288a1ccb9d82336e00e9851582ee8e1d2e3b360e61a54243e89b296d84a0"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/saul-performance-dialogue/saul-concern.wav",
+      "bytes": 168236,
+      "sha256": "9e45bf5f689aa55f3c010f3127b7e47487b29ea3602ba8a32da1c84e70f141fb"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/shepherd-dialogue/dialogue.json",
+      "bytes": 75792,
+      "sha256": "4f9e951de3d3cd189e4e88db09f38495c983c304c84e4e41ac7f7c98eb06a788"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/valley-dialogue/dialogue.json",
+      "bytes": 49812,
+      "sha256": "08f5cf3cb441d7e82b80e44872d7292f60cbbf3ed54adc7df1615ed36d55a058"
+    },
+    {
+      "path": "apps/playcanvas/src/assets/victory-dialogue/dialogue.json",
+      "bytes": 38261,
+      "sha256": "5cb17315f31c8078ed3833958d2b51563681fa9045c0ab70363602b461c527cd"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/action-router.ts",
+      "bytes": 3135,
+      "sha256": "ceb457e18c655db2a0242c5577e19b35bc7f74b6d6d39ac5dd49cbc3d116c9bc"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/cast-performance.ts",
+      "bytes": 851,
+      "sha256": "6aec75ebb43254f29cf5b0dbfdd1aa0a5c8c98e98d8f4a5fedb3d75b48ad9e3f"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/courtyard-arrival.ts",
+      "bytes": 1192,
+      "sha256": "8e3d5f7032304d012408ba6cddad18006c766780e3eb6d0e71919a3ee9a23837"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/courtyard-cue.ts",
+      "bytes": 656,
+      "sha256": "9166623bb255040bb9ede522a20ae970cd8ff10021b6f45f1af996eb26b7ac05"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/elah-battle.ts",
+      "bytes": 28941,
+      "sha256": "f5a075fd207df63fb3ef897fe547728daa83c2eaddd01fd5697dc0b63252f2b6"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/episode-rules.ts",
+      "bytes": 8713,
+      "sha256": "fcb831ca4b9057e0d37a8df79f65fcd872f8f1df120d55668af507324e172349"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/episode-session.ts",
+      "bytes": 5212,
+      "sha256": "39ccb12e59df00b797cc0c3018aa5392df2961565c3bc39f149814dfa60e6951"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/ground-motion.ts",
+      "bytes": 2254,
+      "sha256": "9186e6bbff4c32c3917d8cda810e50d2394d029b52e3212f8c778f5fc12a32c9"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/jump-motion.ts",
+      "bytes": 2524,
+      "sha256": "a3cda67b230afe734bf45c35530b071a53d59561187684dc334f57886b041094"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/movement-input.ts",
+      "bytes": 9740,
+      "sha256": "5a795dbda2f1790b8ec2ed2f23b755d9119f6cfc35006239df94ac9c933b77c6"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/pavilion-route.ts",
+      "bytes": 2753,
+      "sha256": "54d5b006776f949aa7fe31f898022e9d5f38f6f14132874ff588d4d75866e6a8"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/route-path.ts",
+      "bytes": 1116,
+      "sha256": "01721835f343d96ba786d30bee97c6e7d6b4d5df5444826608f805d5a74f402a"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/saul-audience-score.ts",
+      "bytes": 2100,
+      "sha256": "a90fd4119f85ab1041080e1445953e25044e0699fc6152c4a6e01b25da0b6dd2"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/sling-ballistics.ts",
+      "bytes": 3552,
+      "sha256": "fbf811b98ce24cbac1898ad902092cd0ddcc639682154fb4d3f0832caf66b698"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/spear-collision.ts",
+      "bytes": 5110,
+      "sha256": "66f5224ba516d39b22fb046b8c57790e7da0d89952cc2b952d209bbd70ea4d96"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/speech-face-motion.ts",
+      "bytes": 724,
+      "sha256": "df231a3912eed3bd80d43a7d6ce5d40f1542dfb81fd5fcfc1be7d7184f8f845a"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/story-motion.ts",
+      "bytes": 952,
+      "sha256": "cad06221fb98e63f8041af5dfc1b702059ba1efee8f4f2e55631e3a3fe3af671"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/story-route.ts",
+      "bytes": 3348,
+      "sha256": "3e59afcb5b9d27c9fda4ee03f5fa95b12222755df32c9768f97e51a74d003d54"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/sword-combat.ts",
+      "bytes": 2334,
+      "sha256": "d02fb71300e42ef76c01591709c4795f20100cf3df45c566af76bab052dbe723"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/thrown-spear.ts",
+      "bytes": 1543,
+      "sha256": "aea140c78844bf288d1c5952b0977a8a980222c302955d0b2daadbfbc69b789f"
+    },
+    {
+      "path": "apps/playcanvas/src/product/account-runtime.ts",
+      "bytes": 5186,
+      "sha256": "aaa6469ca2dde7c930441dbd46fc0f056458adef3a166c8c0401a710a503dffc"
+    },
+    {
+      "path": "apps/playcanvas/src/product/chapter-access.ts",
+      "bytes": 623,
+      "sha256": "48755554c7079a6dd4018bbc730dc77f811074e6e62d8843824bc86bf357e038"
+    },
+    {
+      "path": "apps/playcanvas/src/product/cloud-saves.ts",
+      "bytes": 4085,
+      "sha256": "85f79f137e37ebe344853e7ee62a510c60916706711038787fc43c0e951931af"
+    },
+    {
+      "path": "apps/playcanvas/src/product/contracts.ts",
+      "bytes": 3403,
+      "sha256": "0fe2f21a4ca8452e40d1115524c5004520edc8923a7d65513b8c03bb1caddfcc"
+    },
+    {
+      "path": "apps/playcanvas/src/product/game-account.css",
+      "bytes": 751,
+      "sha256": "206e92f6a524bbc45c08eec1c76326dd60fb9ace6fd4385462c2a6a2b0fd5d72"
+    },
+    {
+      "path": "apps/playcanvas/src/product/preferences.ts",
+      "bytes": 1711,
+      "sha256": "e8b46e5158e41bebd121384a224fa0b5c3bd7261dbc17dd62deb5b9549836468"
+    },
+    {
+      "path": "apps/playcanvas/src/product/product-main.ts",
+      "bytes": 17850,
+      "sha256": "fc04d0f1ad054cc80c838074d8e6c93ab212151610e320c667c8008c3ad57b04"
+    },
+    {
+      "path": "apps/playcanvas/src/product/product.css",
+      "bytes": 6041,
+      "sha256": "0813ef49555a8d51f9f18b88d7ef84e82bf50df9c7beede9cc3b9f7b5d7edf69"
+    },
+    {
+      "path": "apps/playcanvas/src/world/audience-performance.ts",
+      "bytes": 2081,
+      "sha256": "597e9c0dedc7c5d3edbfa58e603215bc80593ce72680fb5b5f76c9e10faf3f52"
+    },
+    {
+      "path": "apps/playcanvas/src/world/battle-aftermath.ts",
+      "bytes": 3288,
+      "sha256": "f5d3938a38315665937f8721b907c1c7ca389f8ef20f0033c6e5e80c1bdd5a44"
+    },
+    {
+      "path": "apps/playcanvas/src/world/camp-arrival.ts",
+      "bytes": 10303,
+      "sha256": "c7d8beb23ba128a3bb711e4f077b7fbd692ba88b54cc1538d3c4733ab6b4181b"
+    },
+    {
+      "path": "apps/playcanvas/src/world/camp-audio.ts",
+      "bytes": 1669,
+      "sha256": "6051110fbe4add14cd4366187e81f96435d2e5513c04a6d58fac4fff72a5ddbf"
+    },
+    {
+      "path": "apps/playcanvas/src/world/camp-shots.ts",
+      "bytes": 1144,
+      "sha256": "072aab195ff83c6fbf76395dd7e0744a67516c08cab4ac8425875afc418b8e0e"
+    },
+    {
+      "path": "apps/playcanvas/src/world/challenge-audio.ts",
+      "bytes": 1355,
+      "sha256": "478f23d7f546c1ee72d1ff90d94d143f1745c649b5f73747746b30cbfce79405"
+    },
+    {
+      "path": "apps/playcanvas/src/world/challenge-shots.ts",
+      "bytes": 1983,
+      "sha256": "831aa6578cbda7bd7cfc394859dc4a23680dd384dc2c23a250c91600ae88f589"
+    },
+    {
+      "path": "apps/playcanvas/src/world/challenge-world.ts",
+      "bytes": 2149,
+      "sha256": "b209e297bdbacff014d324013eac71f86009befa4adde1b1cfb10bf9b566d298"
+    },
+    {
+      "path": "apps/playcanvas/src/world/chapter-audio-start.ts",
+      "bytes": 844,
+      "sha256": "b683b3245a87c075968008070987a66a36c1449eeac039af3d01bdb9ec9720db"
+    },
+    {
+      "path": "apps/playcanvas/src/world/character-jump.ts",
+      "bytes": 3016,
+      "sha256": "ee31c8faa707a51dfc24026c646b8702bdc301c9be2fee60e64055b8df9eca28"
+    },
+    {
+      "path": "apps/playcanvas/src/world/conversation-actor.ts",
+      "bytes": 5830,
+      "sha256": "215e67a6917aebe3e7840bdc4c1afe2472220812c4323b8e4f47bebe88a96969"
+    },
+    {
+      "path": "apps/playcanvas/src/world/david-appearance.ts",
+      "bytes": 2241,
+      "sha256": "fbf84562e543fcaeb882e0b2f5493039a69394c51dba0fe33d5bcd919d20029b"
+    },
+    {
+      "path": "apps/playcanvas/src/world/david-character.ts",
+      "bytes": 3947,
+      "sha256": "e897404efbce120e59fcf65f99540c4a78bd28a7403dd052aff38b07b1ebae30"
+    },
+    {
+      "path": "apps/playcanvas/src/world/david-preview.ts",
+      "bytes": 3170,
+      "sha256": "72ea0ff5f194fdefc77e30351922f492a83cdf529710d456ce4b259d8892b18f"
+    },
+    {
+      "path": "apps/playcanvas/src/world/david-sling.ts",
+      "bytes": 2456,
+      "sha256": "2ed589816ea684cc827144d7518eff2fa439c34adc1b0724ab03c6f3bf99c003"
+    },
+    {
+      "path": "apps/playcanvas/src/world/duel-presentation.ts",
+      "bytes": 13548,
+      "sha256": "bcc0618a6b938ea1b6cc799998ecb88cf15fdefd69d59e4baeb72b96b7320cd3"
+    },
+    {
+      "path": "apps/playcanvas/src/world/elah-area.ts",
+      "bytes": 24800,
+      "sha256": "21701e4c3a74bd64a3953393ea334ae52aa09eb269cb233ddb85ef0e0c7285d4"
+    },
+    {
+      "path": "apps/playcanvas/src/world/elah-sound.ts",
+      "bytes": 8339,
+      "sha256": "ecf2650146ed31e29fc23901a1f2f8decede8c168e693b9d2153f704e62ac4ba"
+    },
+    {
+      "path": "apps/playcanvas/src/world/episode-outline.ts",
+      "bytes": 5229,
+      "sha256": "9bc2835f681d0c8ef41fc25051d800c07faeadcc4782812b3a2899f748a3f940"
+    },
+    {
+      "path": "apps/playcanvas/src/world/goliath-character.ts",
+      "bytes": 4415,
+      "sha256": "e33cfa5afaffdb4e64bf5485b3dddec2144034bc44b3ba4456f9a3b85144ffb1"
+    },
+    {
+      "path": "apps/playcanvas/src/world/graphics.ts",
+      "bytes": 1501,
+      "sha256": "9a5491241c35fe7f6214de85a6f871ad75ec6f38dc0646925bb2a0e08aebd3a7"
+    },
+    {
+      "path": "apps/playcanvas/src/world/jesse-courtyard.ts",
+      "bytes": 4578,
+      "sha256": "07ee3316dd451060feee9a173b77b6f296892115a0cef745d4542be6bf28ef44"
+    },
+    {
+      "path": "apps/playcanvas/src/world/jump-animations.ts",
+      "bytes": 1049,
+      "sha256": "23f75548f1b7833eb86ce8336bc676792a625d8b2592e12e3b2c819eeafec958"
+    },
+    {
+      "path": "apps/playcanvas/src/world/movement-area.ts",
+      "bytes": 43592,
+      "sha256": "8f8b97d9fa0e299e56b3424129989d6f8d1f0b3beba8d10df26ebf0f4ac0c39b"
+    },
+    {
+      "path": "apps/playcanvas/src/world/pavilion-approach.ts",
+      "bytes": 1842,
+      "sha256": "7524ba88a7c510e52304b4a4bf6fa630b34d4ba06e58adb45c0e33d9ca0d2020"
+    },
+    {
+      "path": "apps/playcanvas/src/world/preparation-audio.ts",
+      "bytes": 3030,
+      "sha256": "859534663590c3ee7ba1ac69c9d8f9e58765310807bb2e940da916bdcb94284a"
+    },
+    {
+      "path": "apps/playcanvas/src/world/preparation-shots.ts",
+      "bytes": 2509,
+      "sha256": "a09f783a691d7093c9a9007db796441e23458c260ba3cbe141f46adc57ac1301"
+    },
+    {
+      "path": "apps/playcanvas/src/world/preparation-world.ts",
+      "bytes": 9670,
+      "sha256": "217ea6da4ea85d2b7e797c67ba8ca86a459033b7726110d883ca445881f0d390"
+    },
+    {
+      "path": "apps/playcanvas/src/world/provisions-carry.ts",
+      "bytes": 1321,
+      "sha256": "7ed7eb30d4144b1667fc954e2aeef43c9efbffdab88b71fe41d2d1dd92d7bd7e"
+    },
+    {
+      "path": "apps/playcanvas/src/world/saul-audio.ts",
+      "bytes": 2717,
+      "sha256": "fcbbc4e0edb8ff57461e3384a91ac76dd6de10522b1320e2396c04b843d0276e"
+    },
+    {
+      "path": "apps/playcanvas/src/world/saul-pavilion.ts",
+      "bytes": 10308,
+      "sha256": "3001bb9524fd0067921e96206baa3f19c2da158b42aab6f0c55ba2e5018a978d"
+    },
+    {
+      "path": "apps/playcanvas/src/world/scene-speech.ts",
+      "bytes": 7132,
+      "sha256": "4d0039aff16646e66176cca7de4060ecf04734640a57832dcb0148d2211a3947"
+    },
+    {
+      "path": "apps/playcanvas/src/world/shepherd-opening.ts",
+      "bytes": 23975,
+      "sha256": "438bbd8fb1f0c2e61cb3b3102fcde2d1f3e566366a761ba3e5fb848cf3de30e2"
+    },
+    {
+      "path": "apps/playcanvas/src/world/shepherd-world.ts",
+      "bytes": 10156,
+      "sha256": "2158f52d52fc0d56ce3fe7bba6058fb0fdb7d274503161c7bc54c532015cc556"
+    },
+    {
+      "path": "apps/playcanvas/src/world/stone-preview.ts",
+      "bytes": 1076,
+      "sha256": "09435ddd66ca9d6da928e4c32e3aa6f4171c7b9060c044b8e7b3eef4eddc7dd8"
+    },
+    {
+      "path": "apps/playcanvas/src/world/story-route-dressing.ts",
+      "bytes": 1693,
+      "sha256": "01b5e7c511af9f56bf2db86d7aef1caae7deec6a5f1ce6c9e1c97c6ea720f776"
+    },
+    {
+      "path": "apps/playcanvas/src/world/valley-audio.ts",
+      "bytes": 7154,
+      "sha256": "a647a5ddeb88045ff5ef437a5c791bb05221603b2e7964bc7e6e3a26066c2f10"
+    },
+    {
+      "path": "apps/playcanvas/src/world/valley-opening.ts",
+      "bytes": 17727,
+      "sha256": "d915ce11b03a5d8771b2b88f00174030f5fd7869adbe87a65e11429204bc5693"
+    },
+    {
+      "path": "apps/playcanvas/src/world/valley-shots.ts",
+      "bytes": 1190,
+      "sha256": "2f89d77e4ee6232d3a48904ecb5585261f410ff6da2e476b9e07f29f251775c9"
+    },
+    {
+      "path": "apps/playcanvas/src/world/victory-audio.ts",
+      "bytes": 3882,
+      "sha256": "51dc2577a22166bb8f56718041a29d45b8cdfe21a5518d9c83ab3cb371d632b3"
+    },
+    {
+      "path": "apps/playcanvas/src/world/victory-shots.ts",
+      "bytes": 972,
+      "sha256": "958a2e2e16bec1f4fea6e1ec3c4fca3db8bfde7b9fcc560733a86d87322e4e37"
+    },
+    {
+      "path": "apps/playcanvas/src/world/victory-world.ts",
+      "bytes": 5591,
+      "sha256": "aa2165ff541480337d9f06199db1aea9f14a408a37904c3589825e69f45122cb"
+    },
+    {
+      "path": "apps/playcanvas/valley.html",
+      "bytes": 2814,
+      "sha256": "7068a7c59492cb440edf3dfa88ec56905e5ccdb7d6daa6d15d3fe26a54e47095"
+    },
+    {
+      "path": "apps/playcanvas/victory.html",
+      "bytes": 2253,
+      "sha256": "f2bb5c48248b146cf79b4a1c6df4009155365ad29594b8308eb83e0597e5224c"
+    },
+    {
+      "path": "apps/playcanvas/vite.config.ts",
+      "bytes": 387,
+      "sha256": "86ac9a00b2aefdf657d50c8bacf085f7cc89112b4d85a02ff6e077bb12472071"
+    }
+  ],
+  "builds": {
+    "local": {
+      "directory": "build/msr-final-local",
+      "files": 436,
+      "totalBytes": 36443779,
+      "contentManifestSha256": "80794c3fd09339ec0b2d48495bb4945ac9851a50f2daa836c1cdb0d913230170",
+      "entryPages": [
+        {
+          "path": "camp.html",
+          "bytes": 5169,
+          "sha256": "009a3415039c170a952c7334e8ff51969d4ebda839bde18e17b72231bb0867d8"
+        },
+        {
+          "path": "challenge.html",
+          "bytes": 5904,
+          "sha256": "cd2a7ff51469a1e023e7051b70107a98cb72b1ef97b2f8e01ade184f77816b19"
+        },
+        {
+          "path": "david-preview.html",
+          "bytes": 3664,
+          "sha256": "d933868d6b703dc9ea7fb75547039e95512fc6d443bbcd7038fdc3d95f9ce191"
+        },
+        {
+          "path": "duel.html",
+          "bytes": 7212,
+          "sha256": "634446417d49ffae70ad78a830d19a337e1b566b431f834d23fa2ea83481c32a"
+        },
+        {
+          "path": "elah.html",
+          "bytes": 5296,
+          "sha256": "51192604bb95875ae93e38bd879bd14396e27682415b5a9b2e5ddb4217be25b9"
+        },
+        {
+          "path": "episode.html",
+          "bytes": 2750,
+          "sha256": "ce679710c45347416946837498396f733eb45908cc609a20a5cdeabe9e1d1212"
+        },
+        {
+          "path": "index.html",
+          "bytes": 1912,
+          "sha256": "87a022cf4ef685621e080aa91166e8a9bf0d5568f1760ae5122551262e34f919"
+        },
+        {
+          "path": "movement.html",
+          "bytes": 4405,
+          "sha256": "1b7ef9c3c5956c7c8e11f8d50b76b81c1750cb7544b3844664711cf32875982b"
+        },
+        {
+          "path": "preparation.html",
+          "bytes": 6009,
+          "sha256": "be1bc2ac4ce299fb65c52eb2a0475ec942debd150519aa11a44e211e85d9392b"
+        },
+        {
+          "path": "saul.html",
+          "bytes": 3439,
+          "sha256": "eebcfd7ac083e3765517d567f42166186c970edcf21c22d7249ac92b8da6580d"
+        },
+        {
+          "path": "valley.html",
+          "bytes": 5506,
+          "sha256": "e802733850b45cce4c4e5573cfd6c4078dac2a0768dac146f28f7fe69282caa8"
+        },
+        {
+          "path": "victory.html",
+          "bytes": 4254,
+          "sha256": "55e855a0bd882e0e063a4ebf5d49fa7d77591f92a720cc10ca035ec1c942263c"
+        }
+      ]
+    },
+    "cloud": {
+      "directory": "build/msr-final-cloud",
+      "files": 436,
+      "totalBytes": 36455300,
+      "contentManifestSha256": "cd1981436335488ab18df7a53a89db75f29d2ef48924a9028da76739b63636a9",
+      "entryPages": [
+        {
+          "path": "camp.html",
+          "bytes": 5169,
+          "sha256": "d4db6a303d54ccedde3485e89dbdc30401f6859dafd74f19856a461a94bc072d"
+        },
+        {
+          "path": "challenge.html",
+          "bytes": 5904,
+          "sha256": "d230c571672c37218b17679161088436b3ba266aab6647010b0a7a385b03015f"
+        },
+        {
+          "path": "david-preview.html",
+          "bytes": 3664,
+          "sha256": "4acb70ee87723854cdfd91c961375322ae962714bfd045e5a5495a064274d0d4"
+        },
+        {
+          "path": "duel.html",
+          "bytes": 7212,
+          "sha256": "1243904c8d6a3017a49508636c72bebc33a49b2147fc1dd9282f6af940dd3d76"
+        },
+        {
+          "path": "elah.html",
+          "bytes": 5296,
+          "sha256": "c4e8a6dad68c2af575e696987f775b67c7173f0da9d5068b296554459d4166f6"
+        },
+        {
+          "path": "episode.html",
+          "bytes": 2750,
+          "sha256": "9287ad37e98493d5dcf8dba47904c86533b0cefba835e4cfbb93ca763c87836c"
+        },
+        {
+          "path": "index.html",
+          "bytes": 1912,
+          "sha256": "fd28cb25217c1e3a38740710baa597dc8015e1a3d53ecce9990125150d8cd143"
+        },
+        {
+          "path": "movement.html",
+          "bytes": 4405,
+          "sha256": "ae39a12c09085803e2efb08941bc8fee3ebcb032884ec12762cfe0643438e1f0"
+        },
+        {
+          "path": "preparation.html",
+          "bytes": 6009,
+          "sha256": "9fd910b5bb5d6a1fdc1cea89c26871e6feb3213405613d4531f169c429a37f63"
+        },
+        {
+          "path": "saul.html",
+          "bytes": 3439,
+          "sha256": "7d59be29400fe4b5ee760ab5bec883a9f37eca9fef5fdda134588b85261bd677"
+        },
+        {
+          "path": "valley.html",
+          "bytes": 5506,
+          "sha256": "4e76c60517e8f7d1a7568ded957f3d1e0afc5ff7af6ae5e02fed31064f733698"
+        },
+        {
+          "path": "victory.html",
+          "bytes": 4254,
+          "sha256": "10d83f7d7f834766528617a82725632fd760ac5db0d067f2a51c59c963b46025"
+        }
+      ]
+    }
+  },
+  "sharedModelFiles": [
+    {
+      "path": "assets/challenge-soldier-D37bmlzf.glb",
+      "bytes": 1254564,
+      "sha256": "53e613aaefd7c2de15eb4b94b826469f2fb9dc8bc5a056e7f6f3de732d3fd6e5"
+    },
+    {
+      "path": "assets/david-adventure-BJLOiAxM.glb",
+      "bytes": 1388116,
+      "sha256": "869d6e0c1abe22268d2548f440507c267d0d0091d87551353b148adb3629b484"
+    },
+    {
+      "path": "assets/david-aftermath-BsZz-6nJ.glb",
+      "bytes": 1542120,
+      "sha256": "f36c043406e70daff9bd5339163b5b936a7a1e5f24b9ce3419d832a06ba87f21"
+    },
+    {
+      "path": "assets/david-camp-X_MgRLCn.glb",
+      "bytes": 1262092,
+      "sha256": "1361dbfac69451b0f706deeb2c7461766c60d5629c36913538f4e9bcefc9ca23"
+    },
+    {
+      "path": "assets/david-dialogue-Di0ZLdUc.glb",
+      "bytes": 1211436,
+      "sha256": "e74f64c411acddd4dc7b3bc7278fa2fe1785456af9dc9e6351bd033e2e06efec"
+    },
+    {
+      "path": "assets/david-jump-DAmELca0.glb",
+      "bytes": 161592,
+      "sha256": "8ab23fc9d3553c1a71c592da6d994808a58826560e7bffa2315ef9ba15d3b55e"
+    },
+    {
+      "path": "assets/david-KpForAwL.glb",
+      "bytes": 1103148,
+      "sha256": "62d72ff675b1c25fe921bb5432bf095c389cecf70f6f8b3c19535ec6ae4aaf3f"
+    },
+    {
+      "path": "assets/david-preparation-CS_L1LTb.glb",
+      "bytes": 1453472,
+      "sha256": "ff9e77136c4f3b18f59e8f6aadd1c65dc9e4fcf086062f1641635ccda6666074"
+    },
+    {
+      "path": "assets/goliath-collision-BTd-7QH5.glb",
+      "bytes": 1168172,
+      "sha256": "cd8a573f93b06220e1b2f8c42f25282bf4f4e15aeba30fb2fc8571f8e82990fa"
+    },
+    {
+      "path": "assets/goliath-continuous-CWqOpV7U.glb",
+      "bytes": 1633972,
+      "sha256": "486f8feb4f942bebe728a05bb001fc30ed772969d96a93ec441322ab7627a9ef"
+    },
+    {
+      "path": "assets/goliath-encounter-BGeqfMb8.glb",
+      "bytes": 1165612,
+      "sha256": "0d6de74a681eb4a5020b43388ddf76687770a96ebdfce80a817ada606e0c0dc0"
+    },
+    {
+      "path": "assets/goliath-speaking-qNn1jcs4.glb",
+      "bytes": 953108,
+      "sha256": "76338583ba33b807ef60cf6bd82c4a6775c5454e490261d1d63dab095dc3315c"
+    },
+    {
+      "path": "assets/jesse-courtyard-Dn0hx77u.glb",
+      "bytes": 829508,
+      "sha256": "5dbfa5fc8db387ed04a48939635c7e64e0b25a40f1c7357d48a80b8310f400f2"
+    },
+    {
+      "path": "assets/preparation-armour-BzzhFtze.glb",
+      "bytes": 48156,
+      "sha256": "3385f3200472fa3f3b196a2d7d866d1a5c935167a8661f47118a00e9e3eeccf3"
+    },
+    {
+      "path": "assets/saul-BRerOY0-.glb",
+      "bytes": 1132992,
+      "sha256": "49e483d8742f105e8ab40dd0c1299dd729f45cbecc9419dd576f9cae19686abd"
+    },
+    {
+      "path": "assets/soldier-standing-lod-CKkKg3vv.glb",
+      "bytes": 223904,
+      "sha256": "dc31499bbd23090601b5940049f2406905cff9d21eb76c99ccd35f62f21a4e2c"
+    },
+    {
+      "path": "assets/victory-crowd-BRWPzrto.glb",
+      "bytes": 429316,
+      "sha256": "7bc9a21d314006d64987f5b4ada2ebf417e8e86f4fe181ba076a0f7f2202642c"
+    },
+    {
+      "path": "assets/victory-soldier-BffBNG64.glb",
+      "bytes": 1296744,
+      "sha256": "af2c846a7ec93f3e15e72548ccab57a8d20c7c854ef50da8eb7fa20838264794"
+    }
+  ],
+  "evidencePolicy": "Raw browser evidence, full build inventories and credentials remain local/ignored; source test drivers, this compact manifest and written findings are committed."
+}

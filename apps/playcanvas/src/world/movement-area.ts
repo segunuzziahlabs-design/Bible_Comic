@@ -3,6 +3,7 @@ import {
   type AnimComponent, type AnimTrack, type Application,
 } from 'playcanvas';
 import { mountObjectiveGuide } from '../app/objective-guide';
+import {resumeChapterAudio} from './chapter-audio-start';
 import { approachVelocity, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
 import { canInspectMarker, markerCueDuration, markerCueText, trailMarker } from '../gameplay/courtyard-cue';
 import { aimAssistRadius, challengeDuration, createElahBattle, fallDuration, slingWindup, aftermathMovement, fallenPhase, swordPickupDuration, type EpisodeBattleSetup } from '../gameplay/elah-battle';
@@ -692,6 +693,8 @@ export async function openMovementArea(
       dodge,
       reset,
       setPaused,
+      // A connected page entry can check audio without advancing the battle.
+      prepareAudio:()=>chapter?resumeChapterAudio(chapter.audio.context):Promise.resolve(),
       setMuted: (value: boolean) => { sound?.setMuted(value); chapter?.audio.mute(value); },
       dispose() {
         sound?.dispose();

@@ -31,9 +31,10 @@ export function createCharacterJump(app: Application, ground: (x: number, z: num
     bodyY: () => motor.sample().feet,
     cameraY(base: number, x: number, z: number) { return Math.max(ground(x, z) + .5, Math.min(base + motor.sample().cameraLift, ceiling(x, z) - .12)); },
     cameraFocus: () => motor.sample().height * .72,
-    pose(actor: { tracks: Map<string, AnimTrack>; pose: (clip: string, time: number, dt: number) => void }, clip: string, time: number, dt: number) {
+    pose(actor: { tracks: Map<string, AnimTrack>; pose: (clip: string, time: number, dt: number) => void; locomote?: (speed: number, dt: number) => void }, clip: string, time: number, dt: number, speed?: number) {
       const animation = motor.animation();
       if (animation) actor.pose(animation.clip, animation.progress * actor.tracks.get(animation.clip)!.duration, dt);
+      else if (speed !== undefined && actor.locomote) actor.locomote(speed, dt);
       else actor.pose(clip, time, dt);
     },
     sample: () => ({ ...motor.sample(), ceiling: Number.isFinite(ceiling(position.x, position.z)) ? ceiling(position.x, position.z) : null }),

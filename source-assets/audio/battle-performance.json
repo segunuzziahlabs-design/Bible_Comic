@@ -1,0 +1,25 @@
+{
+  "task": "MSR-06",
+  "direction": "David answers with quiet conviction: acknowledge the weapons, take a thought, then state his faith. Preserve the existing synthetic cast and every word. Listening acceptance remains with the owner.",
+  "lines": [
+    {
+      "id": "david-faith",
+      "speaker": "David",
+      "voice": "am_puck",
+      "text": "You come with sword and spear. I come in the name of the Lord, the God of the armies of Israel.",
+      "maxDuration": 6.8,
+      "phrases": [
+        {
+          "text": "You come with sword and spear.",
+          "speed": 0.86,
+          "pauseAfter": 0.28
+        },
+        {
+          "text": "I come in the name of the Lord, the God of the armies of Israel.",
+          "speed": 0.84,
+          "pauseAfter": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "task": "MSR-03",
+  "checked": "2026-11-20",
+  "generator": "kokoro-onnx",
+  "generatorVersion": "0.6.1",
+  "model": "Kokoro-82M v1.0",
+  "modelLicence": "Apache-2.0",
+  "runtimeLicence": "MIT",
+  "modelCard": "https://huggingface.co/hexgrad/Kokoro-82M",
+  "runtimeLicenceSource": "https://github.com/thewh1teagle/kokoro-onnx/blob/main/LICENSE",
+  "modelSha256": "7d5df8ecf7d4b1878015a32686053fd0eebe2bc377234608764cc0ef3636a6c5",
+  "voicesSha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "script": "source-assets/audio/saul-performance.json",
+  "generatorScript": "tools/generate-saul-performance.py",
+  "mouthTiming": "Final PCM amplitude/spectral envelopes at 30 Hz; not phoneme alignment",
+  "processing": "Complete sentence takes, directed punctuation/pace, explicit pauses, 8 ms edge fades; no pitch shifting or cloning",
+  "acceptance": "Candidate for owner listening review; measurements do not approve intonation or acting",
+  "lines": [
+    {
+      "id": "saul-concern",
+      "speaker": "Saul",
+      "voice": "am_michael",
+      "text": "You are young. Goliath has fought for years.",
+      "delivery": "Measured concern, with a thought between David's youth and Goliath's experience.",
+      "phrases": [
+        {
+          "text": "You are young...",
+          "speed": 0.91,
+          "pauseAfter": 0.24,
+          "start": 0.0,
+          "end": 1.3226666666666667
+        },
+        {
+          "text": "Goliath has fought for years.",
+          "speed": 0.93,
+          "pauseAfter": 0,
+          "start": 1.5626666666666666,
+          "end": 3.504
+        }
+      ],
+      "duration": 3.504,
+      "sha256": "9e45bf5f689aa55f3c010f3127b7e47487b29ea3602ba8a32da1c84e70f141fb"
+    },
+    {
+      "id": "david-answer",
+      "speaker": "David",
+      "voice": "am_puck",
+      "text": "I have guarded my father's sheep. The Lord who delivered me from lions and bears will help me face him.",
+      "delivery": "A matter-of-fact first sentence, then a deliberate statement of faith. Confidence without shouting.",
+      "phrases": [
+        {
+          "text": "I have guarded my father's sheep.",
+          "speed": 0.99,
+          "pauseAfter": 0.2,
+          "start": 0.0,
+          "end": 1.6853333333333333
+        },
+        {
+          "text": "The Lord, who delivered me from lions and bears, will help me face him.",
+          "speed": 0.96,
+          "pauseAfter": 0,
+          "start": 1.8853333333333333,
+          "end": 6.066666666666666
+        }
+      ],
+      "duration": 6.066666666666666,
+      "sha256": "148f7abd7668f3917e3fa6d46691364d2fa355a33c00fd32be4cf641c09f55c3"
+    },
+    {
+      "id": "saul-blessing",
+      "speaker": "Saul",
+      "voice": "am_michael",
+      "text": "Go. May the Lord be with you.",
+      "delivery": "A firm permission followed by a calmer, unhurried benediction.",
+      "phrases": [
+        {
+          "text": "Go.",
+          "speed": 0.94,
+          "pauseAfter": 0.28,
+          "start": 0.0,
+          "end": 0.768
+        },
+        {
+          "text": "May the Lord be with you.",
+          "speed": 0.9,
+          "pauseAfter": 0,
+          "start": 1.048,
+          "end": 2.6906666666666665
+        }
+      ],
+      "duration": 2.6906666666666665,
+      "sha256": "30df288a1ccb9d82336e00e9851582ee8e1d2e3b360e61a54243e89b296d84a0"
+    }
+  ]
+}

@@ -9,14 +9,16 @@ import closing from '../assets/victory-dialogue/closing.wav?url';
 import {createSceneSpeech,type Point3} from './scene-speech';
 export const victoryDuration=38;
 const cheers=[
-  {id:'cheer-israel',at:15.2,rate:.96,x:-5,z:-10},{id:'cheer-david',at:15.8,rate:1.04,x:-8,z:-13},
-  {id:'cheer-victory',at:17.1,rate:1,x:-3.5,z:-8.2},{id:'cheer-israel',at:18.4,rate:1.05,x:-6,z:-14},
+  // The foreground soldier keeps bm_george for both his call and his chant.
+  // The existing am_michael victory chant belongs to a different crowd position.
+  {id:'cheer-victory',at:15.2,rate:.96,x:-5,z:-10},{id:'cheer-david',at:15.8,rate:1.04,x:-8,z:-13},
+  {id:'cheer-israel',at:17.1,rate:1,x:-3.5,z:-8.2},{id:'cheer-israel',at:18.4,rate:1.05,x:-6,z:-14},
   {id:'cheer-david',at:19,rate:.95,x:-9,z:-15},{id:'cheer-victory',at:20.4,rate:.94,x:-4,z:-11},
   {id:'cheer-israel',at:21.2,rate:1.02,x:-7,z:-13},{id:'cheer-david',at:21.8,rate:1.07,x:-5,z:-10},
 ];
 export async function createVictoryAudio(){
   const speech=await createSceneSpeech(lines,{'retreat-call':retreat,'israel-call':israel,'cheer-israel':cheerIsrael,'cheer-victory':cheerVictory,'cheer-david':cheerDavid,'david-thanks':david,closing},
-    {victory:[{id:'retreat-call',start:3.2},{id:'israel-call',start:12.4},{id:'david-thanks',start:23},{id:'closing',start:29.2}]},[],8);
+    {victory:[{id:'retreat-call',start:3.2},{id:'israel-call',start:12.4},{id:'david-thanks',start:23},{id:'closing',start:29.2}]},[],8,{cinematicDialogue:['victory']});
   const ctx=speech.context,music=ctx.createGain();music.gain.value=.15;music.connect(ctx.destination);
   const notes=new Set<OscillatorNode>();let fired=new Set<number>(),lastFoot=0,muted=false;
   function score(){
@@ -37,7 +39,7 @@ export async function createVictoryAudio(){
       if(t>=3.4&&t<12&&t-lastFoot>.22){lastFoot=t;speech.footstep({x:4,y:ground(4,-17),z:-17});speech.equipment({x:5,y:ground(5,-17)+1,z:-17});}
       speech.update(eye,forward);
     },
-    crowdLine(){const t=speech.cueTime(),cue=cheers.find(c=>t>=c.at&&t<c.at+lines.find(l=>l.id===c.id)!.duration/c.rate);return cue&&{...lines.find(l=>l.id===cue.id)!,local:(t-cue.at)*cue.rate};},
+    crowdLine(at?:{x:number;z:number}){const t=speech.cueTime(),cue=cheers.find(c=>(!at||c.x===at.x&&c.z===at.z)&&t>=c.at&&t<c.at+lines.find(l=>l.id===c.id)!.duration/c.rate);return cue&&{...lines.find(l=>l.id===cue.id)!,local:(t-cue.at)*cue.rate};},
     sample:()=>({cheers:fired.size,scoreSources:notes.size,muted,audio:ctx.state}),
     dispose(){cancel();music.disconnect();speech.dispose();},
   };

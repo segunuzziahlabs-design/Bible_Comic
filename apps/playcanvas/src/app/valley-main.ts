@@ -1,7 +1,12 @@
+import {smoothStoryHeading} from '../gameplay/story-motion';
+import {routeAllowed,storyRoutes} from '../gameplay/story-route';
+import {mountStoryDeparture} from './story-departure';
+import {buildStoryRouteDressing} from '../world/story-route-dressing';
+import {resumeChapterAudio} from '../world/chapter-audio-start';
 import './account-game-bootstrap';
 import { readEpisodeMuted, writeEpisodeMuted, setEpisodeSoundButton } from './episode-sound';
 import { Vec3 } from 'playcanvas';
-import { currentObjective, episodePage } from '../gameplay/episode-rules';
+import { currentObjective, episodePage, freshRun, reduceEpisode } from '../gameplay/episode-rules';
 import { openEpisodeSession, type CueToken } from '../gameplay/episode-session';
 import { createMovementInput } from '../gameplay/movement-input';
 import { approachVelocity, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
@@ -24,14 +29,15 @@ const button=(id:string)=>element(id) as HTMLButtonElement;
 const canvas=element('stage') as HTMLCanvasElement, stage=canvas.parentElement!;
 const input=createMovementInput(canvas,element('move-pad'));
 const guide=mountObjectiveGuide(stage,canvas),guidePoint=new Vec3();
-const params=new URLSearchParams(location.search), review=params.has('review'), inspect=params.has('inspect');
+const params=new URLSearchParams(location.search), review=params.has('review'), inspect=params.has('inspect'),routeReview=review&&params.get('route')==='camp';
 const smooth=(v:number)=>{const t=Math.max(0,Math.min(1,v));return t*t*(3-2*t);};
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 
 async function main(){
   let temporary:Awaited<ReturnType<import('../gameplay/episode-session').EpisodeSaveAdapter['read']>>;
+  if(routeReview)temporary={current:reduceEpisode(freshRun(),{type:'objective',id:'valley.surveyed'}),history:[]};
   const session=await openEpisodeSession(review?{async read(){return temporary;},async write(value){temporary=structuredClone(value);}}:undefined);
-  if(currentObjective(session.run)?.id!=='valley.surveyed') {location.replace(episodePage(session.run));return;}
+  if(currentObjective(session.run)?.id!=='valley.surveyed'&&!(routeReview&&routeAllowed(storyRoutes.r03,session.run))) {location.replace(episodePage(session.run)+(inspect?'?inspect=1':''));return;}
   const app=await createWebGLApp(canvas,true);observeCanvas(app,canvas);
   const world=await buildValleyOpening(app), audio=await createValleyAudio();
   const david=await loadConversationActor(app,davidUrl,'David');
@@ -40,23 +46,28 @@ async function main(){
   david.tint('Hair',hairColours[appearance.hairColour].tint);david.tint('Brows',hairColours[appearance.hairColour].tint);
   david.morph('FullerHair',hairStyles[appearance.hairStyle].fullness);
   const camera=world.camera, eye=new Vec3(),focus=new Vec3();
-  let mode:'entry'|'prologue'|'intro'|'explore'|'survey'|'complete'='entry';
+  let mode:'entry'|'prologue'|'intro'|'explore'|'survey'|'departure'|'complete'='entry';
   let paused=true,muted=readEpisodeMuted(),busy=false,time=0,yaw=0,pitch=.29,heading=180,walk=0,idle=0;
   let position={x:0,z:12},velocity={x:0,z:0},lastShot='',shot='entry',captionId='';
   const jump=createCharacterJump(app,world.groundHeight);jump.reset(position);
   let owner:CueToken|undefined, stepDistance=0, patrolDistance=0, surveyCount=0;
   let startPending=false,soundBlocked=false;
   let oldDavid=new Vec3(),oldPatrol=new Vec3(),retryWrite:(()=>Promise<void>)|undefined;
+  const departure=mountStoryDeparture(stage,{run:()=>session.run,review,inspect,lock:()=>{input.clear();velocity={x:0,z:0};controls();},summary:()=>{void pause(true);element('review-gate').hidden=false;}});
+  const pathDressing=buildStoryRouteDressing(app,world.root,storyRoutes.r03.departure,world.groundHeight);
+  function beginDeparture(){mode='departure';input.clear();velocity={x:0,z:0};yaw=storyRoutes.r03.yaw;departure.start(storyRoutes.r03);element('review-gate').hidden=true;element('objective').textContent=storyRoutes.r03.title;element('save-status').textContent=review?'Chapter 1 review · Saved episode unchanged':'Survey saved · Follow the camp path';controls();}
 
   function setActorPosition(){david.model.setPosition(position.x,world.groundHeight(position.x,position.z)+jump.sample().height,position.z);david.model.setEulerAngles(0,heading,0);}
   function canSurvey(){return mode==='explore'&&!jump.active()&&!paused&&!busy&&Math.hypot(position.x-overlook.x,position.z-overlook.z)<=1.65;}
   function controls(){
-    const moving=(mode==='explore'||mode==='prologue'&&opening.moving())&&!paused&&!busy;input.setEnabled(moving);stage.toggleAttribute('data-moving',moving);
+    const moving=(mode==='explore'||mode==='departure'&&departure.walking()||mode==='prologue'&&opening.moving())&&!paused&&!busy;input.setEnabled(moving);stage.toggleAttribute('data-moving',moving);
     stage.classList.toggle('cinematic',mode==='intro'||mode==='survey'||mode==='prologue'&&!opening.moving());element('pause-notice').hidden=!paused||mode==='entry'||mode==='complete';
     button('pause').textContent=paused?'Resume':'Pause';button('survey').hidden=mode==='prologue'?paused||!opening.canInteract():!canSurvey();button('survey').textContent=mode==='prologue'?opening.action():'Survey the valley';
     button('reset').disabled=busy||startPending||mode==='entry'||mode==='complete';button('pause').disabled=startPending||mode==='entry'||mode==='complete';
+    if(departure.covered())button('reset').disabled=true;
     setEpisodeSoundButton(button('sound'),muted||soundBlocked);
     if(mode==='prologue'){element('instructions').querySelector('.keyboard-hint')!.textContent=opening.moving()?(opening.pathWalking()?'WASD / arrows · Follow the path arrows · Arrival starts automatically':`WASD / arrows · Drag to look · E: ${opening.action()}`):'Watch the scene · Escape to pause';element('instructions').querySelector('.touch-hint')!.textContent=opening.moving()?(opening.pathWalking()?'Left controls · Follow the path arrows · Arrival starts automatically':`Left controls to move · Drag to look · Tap ${opening.action()}`):'Watch the scene · Tap Pause';element('save-status').textContent=opening.moving()?'Follow the arrows · First checkpoint after the Elah survey':'Watch the scene · Pause or restart at any time';}else{element('instructions').querySelector('.keyboard-hint')!.textContent='WASD / arrows · Drag to look · E to survey';element('instructions').querySelector('.touch-hint')!.textContent='Left controls to move · Drag to look · Tap Survey';}
+    if(mode==='departure'){element('instructions').querySelector('.keyboard-hint')!.textContent=departure.covered()?'Following the camp path · Pause any time':'WASD / arrows · Follow the path to the camp';element('instructions').querySelector('.touch-hint')!.textContent=departure.covered()?'Following the camp path · Tap Pause':'Left controls · Follow the arrows to the camp';}
     world.marker.enabled=mode==='explore';if(!moving)guide.hide();
   }
   function frame(value:ValleyShot,dt:number,blend=false){
@@ -100,16 +111,17 @@ async function main(){
   async function finish(){
     if(!owner||busy)return;busy=true;controls();const token=owner;
     const operation=async()=>{
-      await session.finishCue(token);owner=undefined;busy=false;mode='complete';paused=true;await audio.pause();clearFaces();
-      element('caption').hidden=true;element('save-error').hidden=true;element('review-gate').hidden=false;
-      element('review-message').textContent=review?'Preview complete. Continue to Chapter 2 without changing your saved episode progress.':'Chapter 1 saved. Continue to the baggage camp to deliver the provisions.';
-      element('save-status').textContent=review?'Review preview · Progress unchanged':'Chapter 1 checkpoint saved';controls();
+      await session.finishCue(token);owner=undefined;busy=false;paused=paused||document.hidden;audio.cancel();if(paused)await audio.pause();clearFaces();
+      element('caption').hidden=true;element('save-error').hidden=true;
+      element('review-message').textContent=review?'The survey review is complete. Follow the path; your saved episode is unchanged.':'Chapter 1 saved. Walk to the baggage camp to deliver the provisions.';
+      beginDeparture();
     };
     retryWrite=operation;
     try{await operation();retryWrite=undefined;}catch(error){await audio.pause();paused=true;controls();element('save-error').hidden=false;element('save-error-message').textContent=error instanceof Error?error.message:'The last checkpoint is preserved.';}
   }
   const opening=await createShepherdOpening(app,world,david,input,canvas,guide,controls,()=>{void beginValley();});
   async function start(){
+    if(routeAllowed(storyRoutes.r03,session.run)){if(busy||startPending)return;startPending=true;try{await resumeChapterAudio(audio.context);departure.stop();opening.prepareValleyRender();opening.setValleyCarry();position={...storyRoutes.r03.departure[0]};jump.reset(position);heading=180;paused=document.hidden;document.querySelector('header h1')!.textContent='The Valley of Elah';document.querySelector('header .chapter')!.textContent='Two armies. One valley. A young shepherd.';document.querySelector('.objective span')!.textContent='THE ISRAELITE APPROACH';setActorPosition();oldDavid.copy(david.model.getPosition());element('entry').hidden=true;button('sound').disabled=false;beginDeparture();follow(0);canvas.focus();}finally{startPending=false;controls();}return;}
     if(busy||startPending)return;startPending=true;paused=true;mode='entry';input.clear();session.cancelCue();owner=undefined;audio.cancel();
     // Unlock BOTH Chapter 1 contexts in this user gesture. The automatic Elah
     // handoff must not be their first resume request. Keep preloaded sound silent.
@@ -129,16 +141,16 @@ async function main(){
   button('enter').addEventListener('click',()=>{void start();});button('reset').addEventListener('click',()=>{void start();});
   const playerControls=mountPlayerControls(canvas,input,value=>{void pause(value);},()=>paused);
   jump.connect(input,controls);
-  input.bindActions({jump:{run:()=>{if(mode==='prologue')opening.jump();else jump.request(position);},available:()=>!paused&&!busy&&(mode==='prologue'?opening.canJump():mode==='explore'&&jump.ready(position))},interact:{run:survey,available:()=>mode==='prologue'?opening.canInteract()&&!paused&&!busy:canSurvey()},pause:{run:()=>{void pause(!paused);},available:()=>!button('pause').disabled&&!playerControls.open}});
+  input.bindActions({jump:{run:()=>{if(mode==='prologue')opening.jump();else jump.request(position);},available:()=>!paused&&!busy&&(mode==='prologue'?opening.canJump():(mode==='explore'||mode==='departure'&&departure.walking())&&jump.ready(position))},interact:{run:survey,available:()=>mode==='prologue'?opening.canInteract()&&!paused&&!busy:canSurvey()},pause:{run:()=>{void pause(!paused);},available:()=>!button('pause').disabled&&!playerControls.open}});
   input.bindButton(button('survey'),'interact');input.bindButton(button('pause'),'pause');
   button('sound').addEventListener('click',()=>{if(soundBlocked){muted=false;writeEpisodeMuted(false);audio.mute(false);opening.mute(false);if(mode==='entry')void start();else void pause(false);return;}muted=!muted;writeEpisodeMuted(muted);audio.mute(muted);opening.mute(muted);setEpisodeSoundButton(button('sound'),muted);});
   button('replay').addEventListener('click',()=>location.assign('valley.html?review=1'+(inspect?'&inspect=1':'')));
-  button('continue-camp').addEventListener('click',()=>location.assign('camp.html'+(review?'?review=1'+(inspect?'&inspect=1':''):inspect?'?inspect=1':'')));
+  button('continue-camp').textContent='Back to the path';button('continue-camp').addEventListener('click',()=>{element('review-gate').hidden=true;void pause(false);});
   button('retry-save').addEventListener('click',()=>{if(retryWrite)void retryWrite().catch(error=>{element('save-error-message').textContent=String(error);});});
   button('reload-save').addEventListener('click',()=>location.reload());
   window.addEventListener('blur',()=>{void pause(true);});document.addEventListener('visibilitychange',()=>{if(document.hidden)void pause(true);});
   window.addEventListener('storage',event=>{if(!review&&event.key==='bible-comic.episode.local.v1'){void pause(true);busy=true;controls();element('save-error').hidden=false;element('save-error-message').textContent='Progress changed in another tab. Reload its checkpoint.';button('retry-save').hidden=true;}});
-  window.addEventListener('pagehide',()=>{session.cancelCue();audio.dispose();opening.dispose();input.dispose();app.destroy();},{once:true});
+  window.addEventListener('pagehide',()=>{session.cancelCue();departure.dispose();pathDressing.dispose();audio.dispose();opening.dispose();input.dispose();app.destroy();},{once:true});
 
   app.on('update',rawDt=>{
     const dt=Math.min(rawDt,.05);
@@ -162,24 +174,25 @@ async function main(){
         world.sentinel.pose(soldierClip,speakingGesture?Math.min(time-2.4,world.sentinel.tracks.get(soldierClip)!.duration):time%world.sentinel.tracks.get(soldierClip)!.duration,dt);
         if(time<8)frame(surveyShot(time,world.groundHeight),dt);else follow(dt,true);
         speaking=speech('survey',time);if(time>=surveyDuration)void finish();
-      }else if(mode==='explore'){
+      }else if(mode==='explore'||mode==='departure'&&departure.walking()){
         const movement=input.read();yaw-=movement.lookX*.004;pitch=Math.max(.1,Math.min(.6,pitch+movement.lookY*.003));
         const desired={x:(movement.x*Math.cos(yaw)-movement.forward*Math.sin(yaw))*1.35,z:(-movement.x*Math.sin(yaw)-movement.forward*Math.cos(yaw))*1.35};
         velocity=approachVelocity(velocity,desired,(movement.x||movement.forward?5:8)*(jump.active()?.6:1)*dt);
         const next=slideAlongWalls(position,{x:velocity.x*dt,z:velocity.z*dt},world.walls);const distance=Math.hypot(next.x-position.x,next.z-position.z),speed=distance/Math.max(.0001,dt);position=next;walk+=distance/.93;
-        if(speed>.03){const desiredHeading=Math.atan2(velocity.x,velocity.z)*180/Math.PI;heading+=(((desiredHeading-heading+540)%360)-180)*(1-Math.exp(-12*dt));}
-        jump.step(dt,position);const clip=speed>.06?'walk_forward':'idle_relaxed';jump.pose(david,clip,(speed>.06?walk:idle)%david.tracks.get(clip)!.duration,dt);
+        if(speed>.03){const desiredHeading=Math.atan2(velocity.x,velocity.z)*180/Math.PI;heading=smoothStoryHeading(heading,desiredHeading,dt);}
+        jump.step(dt,position);const clip=speed>.06?'walk_forward':'idle_relaxed';jump.pose(david,clip,(speed>.06?walk:idle)%david.tracks.get(clip)!.duration,dt,speed);
         world.sentinel.pose('idle_relaxed',idle%world.sentinel.tracks.get('idle_relaxed')!.duration,dt);setActorPosition();follow(dt,true);
-        button('survey').hidden=!canSurvey();button('survey').textContent='Survey the valley';element('distance').textContent=`${Math.round(Math.hypot(position.x-overlook.x,position.z-overlook.z))} m to the overlook`;
+        button('survey').hidden=!canSurvey();button('survey').textContent='Survey the valley';const at=mode==='departure'?departure.target()!:overlook;element('distance').textContent=`${Math.round(Math.hypot(position.x-at.x,position.z-at.z))} m · Follow the arrows`;
       }
-      if(mode!=='prologue'){opening.updateCarry();guide.update(camera.camera!,david.model.getPosition(),guidePoint.set(overlook.x,world.groundHeight(overlook.x,overlook.z)+.6,overlook.z),'Survey the valley','E / tap Survey',mode==='explore');}
+      if(mode==='departure'){const previousPhase=departure.sample()?.phase;departure.step(dt,position,!jump.active());if(previousPhase!==departure.sample()?.phase)controls();}
+      if(mode!=='prologue'){opening.updateCarry();const at=mode==='departure'?departure.target()!:overlook;guide.update(camera.camera!,david.model.getPosition(),guidePoint.set(at.x,world.groundHeight(at.x,at.z)+.6,at.z),mode==='departure'?'Baggage camp':'Survey the valley',mode==='departure'?'Follow the arrows':'E / tap Survey',mode==='explore'||mode==='departure'&&departure.walking(),mode==='departure'?storyRoutes.r03.departure.map(p=>({...p,y:world.groundHeight(p.x,p.z)})):undefined);}
       if(!jump.active()&&mode!=='prologue')stepDistance+=oldDavid.distance(david.model.getPosition());patrolDistance+=oldPatrol.distance(world.patrol.model.getPosition());
       oldDavid.copy(david.model.getPosition());oldPatrol.copy(world.patrol.model.getPosition());
       if(stepDistance>.46){stepDistance=0;audio.footstep(oldDavid);}if(patrolDistance>.53){patrolDistance=0;audio.footstep(oldPatrol);}
       if(mode==='intro'&&time>25.9&&time<26.0)audio.gear(world.patrol.model.getPosition());
       if(mode!=='prologue')audio.update(camera.getPosition(),camera.forward,speaking);
     }
-    if(inspect)canvas.dataset.valley=JSON.stringify({version:valleyPresentationVersion,prologue:opening.sample(),mode,time,paused,muted,busy,startPending,soundBlocked,position,shot,canSurvey:canSurvey(),surveyCount,jump:jump.sample(),run:session.run,review,
+    if(inspect)canvas.dataset.valley=JSON.stringify({version:valleyPresentationVersion,prologue:opening.sample(),mode,time,paused,muted,busy,startPending,soundBlocked,position,yaw,heading,route:departure.sample(),shot,canSurvey:canSurvey(),surveyCount,jump:jump.sample(),run:session.run,review,
       audio:audio.context.state,speakers:captionId,soldiers:world.soldierCount,davidMouth:david.mouthWeights(),soldierMouth:world.sentinel.mouthWeights(),patrol:world.patrol.model.getPosition(),frameMs:app.stats.frame.ms,
       championHead:world.champion.forehead.getPosition(),championRoot:world.champion.model.getPosition()});
   });
@@ -202,6 +215,7 @@ async function main(){
   if(inspect)canvas.dataset.elahWarmup=JSON.stringify({milliseconds:performance.now()-warmStart,shots:3,clock:'Suspended before Begin'});
   element('entry-message').textContent='Watch David tending the flock as a messenger arrives automatically. Follow the pasture path when control returns. David then arrives at Jesse’s separate courtyard automatically; speak with him and collect the supplies. Sound starts with Begin Chapter 1. Unfinished Chapter 1 actions restart from its entry.';
   button('enter').hidden=false;
+  if(routeReview){element('entry-message').textContent='The survey is confirmed in this isolated preview. Follow the camp path and deliver the provisions.';button('enter').textContent='Walk from Elah to the camp';}
 }
 void main().catch(error=>{console.error(error);element('entry-message').textContent=error instanceof Error?error.message:'The valley could not load.';button('retry').hidden=false;});
 button('retry').addEventListener('click',()=>location.reload());

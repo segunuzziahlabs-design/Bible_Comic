@@ -1,0 +1,4 @@
+.route-cover{position:absolute;inset:0;z-index:7;background:#172124;color:#f4e8cd;display:grid;place-content:center;text-align:center;pointer-events:none;padding:20px}.route-cover[hidden]{display:none}.route-cover p{font:17px Georgia,serif;margin:0}.route-cover small{display:block;font:12px system-ui;color:#c7bea7;margin-top:12px}.route-failure{z-index:8}.route-failure .entry-card{max-width:480px}
+.stage[data-route-transfer] .pause-notice{z-index:9}
+.stage[data-route-transfer] #save-error{z-index:10}
+@media(max-width:600px){footer .actions{flex-wrap:wrap}}

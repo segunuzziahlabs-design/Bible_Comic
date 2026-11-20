@@ -1,6 +1,8 @@
 const { chromium } = require(process.argv[2]);
 const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
 const { createDriver } = require('./ctrl07-browser-driver.cjs');
+const { createAudienceScore } = require('../src/gameplay/saul-audience-score.ts');
+const score = createAudienceScore(require('../src/assets/saul-performance-dialogue/dialogue.json'));
 const origin = process.argv[3], out = path.resolve(process.argv[4]);
 const layout = process.argv[5] || 'desktop';
 const direct = process.argv.includes('--direct'), restart = process.argv.includes('--restart');
@@ -45,7 +47,7 @@ fs.mkdirSync(out, { recursive: true });
       await wait(() => { const s = JSON.parse(document.querySelector('canvas').dataset.preparation); return s.mode === 'audience' && s.time < 1 && s.starts.audience === 2; });
       assert.equal((await state()).run.completed.length, 5, 'Restart cannot commit the interrupted audience');
     }
-    for (const [time, name] of [[3, 'wide'], [10.2, 'saul-concern'], [18, 'david-answer'], [27.8, 'saul-listens'], [32, 'blessing']]) {
+    for (const [time, name] of [[3, 'wide'], [score.concernStart + 1.2, 'saul-concern'], [score.answerStart + 2, 'david-answer'], [(score.guardEnd + .35 + score.blessingStart) / 2, 'saul-listens'], [score.blessingStart + 1, 'blessing']]) {
       await p.waitForFunction(time => { const s = JSON.parse(document.querySelector('canvas').dataset.preparation); return s.mode === 'audience' && s.time >= time; }, time);
       await driver.tap('#pause'); const before = await state();
       const bones = await p.evaluate(() => window.saulSamples.at(-1).actors);

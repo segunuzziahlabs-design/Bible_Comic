@@ -1,0 +1,533 @@
+{
+  "assessment": "MSR-01 baseline / MSR-02–08 engineering and handover",
+  "date": "2026-11-20",
+  "baselineCommit": "2e96ba61051cf6fce3fb7b5fc12dcc8ad3746857",
+  "status": "MSR-07 engineering verification and MSR-08 handover complete. Hosted desktop and both local touch full journeys, 21 route recoveries, six audio recoveries, laptop combat, Edge resume and fifteen local checks passed. Human player/owner/native review and formal sole-contact acceptance remain open; release recommendation is conditional.",
+  "gameplayChanged": true,
+  "confirmedP0Count": 0,
+  "defects": [
+    {
+      "id": "MSR-D01",
+      "priority": "P1",
+      "status": "Resolved technically in MSR-02; owner performance review pending",
+      "chapter": 1,
+      "title": "Jesse instruction and David listening settle into long held poses",
+      "reproduce": "Follow the automatic messenger/path/arrival, Speak to Jesse, then watch jesse-provisions through its middle and end.",
+      "observed": "Jesse sampled-joint hold about 8.91 seconds; David about 7.03 seconds during a 9.579-second line. Captured at normal clocks.",
+      "evidence": [
+        "evidence/msr01-2026-11-19/focused/opening-audit.json",
+        "evidence/msr01-2026-11-19/focused/opening-jesse-point-3s.png",
+        "evidence/msr01-2026-11-19/focused/opening-jesse-point-6s.png"
+      ],
+      "sourceCorroboration": [
+        "apps/playcanvas/src/world/shepherd-opening.ts",
+        "apps/playcanvas/src/world/conversation-actor.ts"
+      ],
+      "nextTasks": [],
+      "acceptance": "Natural instruction/listening beats without accidental long end-pose holds; same messenger, arrival, Speak/Take and checkpoint order.",
+      "originalPlannedTasks": [
+        "MSR-02",
+        "MSR-03"
+      ],
+      "resolution": {
+        "task": "MSR-02",
+        "date": "2026-11-20",
+        "report": "msr02-motion-foundation.md",
+        "evidence": [
+          "evidence/msr02-2026-11-20/candidate/motion-summary.json",
+          "evidence/msr02-2026-11-20/candidate/desktop-results.json",
+          "evidence/msr02-2026-11-20/candidate/portrait-results.json",
+          "evidence/msr02-2026-11-20/candidate/landscape-results.json",
+          "evidence/msr02-2026-11-20/full-episode/desktop/results.json"
+        ],
+        "observed": "Jesse completes pointing/rest/second pointing; David continues listening. No multi-second exact body hold reproduced in any tested layout.",
+        "ownerReviewPending": true
+      }
+    },
+    {
+      "id": "MSR-D02",
+      "priority": "P1",
+      "status": "Resolved technically in MSR-02; owner performance review pending",
+      "chapter": 2,
+      "title": "Keeper and Eliab speech outlasts their speaking gestures",
+      "reproduce": "Deliver provisions, watch directions-keeper, then greet brothers and watch answer-eliab.",
+      "observed": "3.208-second speak_concern reaches its end; keeper hold 1.56 seconds, Eliab contiguous hold 1.87 seconds while their lines continue.",
+      "evidence": [
+        "evidence/msr01-2026-11-19/focused/camp-delivery-audit.json",
+        "evidence/msr01-2026-11-19/focused/camp-complete-audit.json"
+      ],
+      "sourceCorroboration": [
+        "apps/playcanvas/src/app/camp-main.ts",
+        "apps/playcanvas/src/world/conversation-actor.ts"
+      ],
+      "nextTasks": [],
+      "acceptance": "Both complete exchanges sustain appropriate motion and preserve carry/prop contact and independent delivery/greeting saves.",
+      "originalPlannedTasks": [
+        "MSR-02",
+        "MSR-03",
+        "MSR-06"
+      ],
+      "resolution": {
+        "task": "MSR-02",
+        "date": "2026-11-20",
+        "report": "msr02-motion-foundation.md",
+        "evidence": [
+          "evidence/msr02-2026-11-20/candidate/motion-summary.json",
+          "evidence/msr02-2026-11-20/candidate/desktop-results.json",
+          "evidence/msr02-2026-11-20/candidate/portrait-results.json",
+          "evidence/msr02-2026-11-20/candidate/landscape-results.json",
+          "evidence/msr02-2026-11-20/full-episode/desktop/results.json"
+        ],
+        "observed": "Keeper and Eliab sustain forward gestures across their full long lines; both camp objectives complete once and the basket release/carry remain working.",
+        "ownerReviewPending": true
+      }
+    },
+    {
+      "id": "MSR-D03",
+      "priority": "P1",
+      "status": "Resolved technically in MSR-04/05; owner journey presentation review pending",
+      "chapters": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "title": "Five inter-location links lack a player walking connection",
+      "routes": [
+        "R03",
+        "R05",
+        "R07",
+        "R09",
+        "R11"
+      ],
+      "reproduce": "Use the normal chapter progression from survey to camp, brothers to challenge, Eliab to Saul, armour refusal to brook and practice to battle.",
+      "observed": "Chapter buttons/new entry scenes or immediate covered root transfer supply the connection. No player departure bridges those locations.",
+      "evidence": [
+        "evidence/msr01-2026-11-19/full-journey-reviewed/desktop/complete-episode.webm",
+        "evidence/msr01-2026-11-19/full-journey-reviewed/desktop/results.json"
+      ],
+      "nextTasks": [],
+      "acceptance": "R07 pilot first; then brief obstacle-valid guided departures/arrivals, without new objectives, lost save state or exposed relocation.",
+      "partialResolution": {
+        "task": "MSR-04",
+        "report": "msr04-eliab-to-saul-connection.md",
+        "routesAddressed": [
+          "R07"
+        ],
+        "routesRemaining": [
+          "R03",
+          "R05",
+          "R09",
+          "R11"
+        ],
+        "evidence": [
+          "evidence/msr04-2026-11-20/frozen/desktop/results.json",
+          "evidence/msr04-2026-11-20/frozen/portrait/results.json",
+          "evidence/msr04-2026-11-20/frozen/landscape/results.json",
+          "evidence/msr04-2026-11-20/recovery-final/",
+          "evidence/msr04-2026-11-20/full-episode-isolated/desktop/results.json"
+        ],
+        "ownerReviewPending": true
+      },
+      "resolution": {
+        "task": "MSR-05",
+        "date": "2026-11-20",
+        "report": "msr05-connected-journeys.md",
+        "routesAddressed": [
+          "R03",
+          "R05",
+          "R09",
+          "R11"
+        ],
+        "retainedPilot": "R07 implemented and verified in MSR-04; retained in the fresh normal journey.",
+        "routesRemaining": [],
+        "evidence": [
+          "evidence/msr05-2026-11-20/verified/",
+          "evidence/msr05-2026-11-20/recovery/",
+          "evidence/msr05-2026-11-20/recovery-final/",
+          "evidence/msr05-2026-11-20/full-episode/desktop/results.json"
+        ],
+        "ownerReviewPending": true
+      }
+    },
+    {
+      "id": "MSR-D04",
+      "priority": "P2",
+      "status": "Resolved technically in MSR-06; owner performance/listening review pending",
+      "chapter": 5,
+      "title": "David's faith response outlasts the expressive part of its clip",
+      "reproduce": "Enter Chapter 5, approach Goliath and watch david-faith near its end.",
+      "observed": "The 5.888-second response outlasts a 4.417-second clip. Matched one-second samples (10 frames each) vary by about 6.27 degrees earlier and 0.77 degrees near the end. This is not an exact all-joints freeze claim.",
+      "evidence": [
+        "evidence/msr01-2026-11-19/focused/duel-audit.json",
+        "evidence/msr01-2026-11-19/focused/duel-david-early.png",
+        "evidence/msr01-2026-11-19/focused/duel-david-late.png"
+      ],
+      "nextTasks": [],
+      "acceptance": "A reviewed sustained response/return while preserving every existing combat timing, stage and aftermath rule.",
+      "originalPlannedTasks": [
+        "MSR-03",
+        "MSR-06"
+      ],
+      "resolution": {
+        "task": "MSR-06",
+        "date": "2026-11-20",
+        "report": "msr06-cast-performance.md",
+        "observed": "Final desktop late one-second joint excursion 4.130° versus 0.434° in the fresh MSR-05 baseline; forward-fitted gesture covers the 6.019-second same-word/same-cast recording. All original confrontation/physical combat timings retained.",
+        "evidence": [
+          "evidence/msr06-2026-11-20/baseline/cast-summary.json",
+          "evidence/msr06-2026-11-20/final/cast-summary.json",
+          "evidence/msr06-2026-11-20/verification-matrix.json",
+          "evidence/msr06-2026-11-20/full-episode/desktop/results.json"
+        ],
+        "ownerReviewPending": true
+      }
+    },
+    {
+      "id": "MSR-D05",
+      "priority": "P2",
+      "status": "Resolved technically in MSR-04/05: contextual camp and challenge cinematic/movement hints",
+      "chapters": [
+        2,
+        3
+      ],
+      "title": "Movement hints remain visible during non-playable dialogue",
+      "reproduce": "Start a camp dialogue or Goliath's challenge and read the footer while the owned cinematic runs.",
+      "observed": "WASD/arrows, look and interact hints remain although the sequence has intentionally disabled those controls.",
+      "evidence": [
+        "evidence/msr01-2026-11-19/full-journey-reviewed/desktop/06-provisions-delivery.png",
+        "evidence/msr01-2026-11-19/full-journey-reviewed/desktop/07-goliath-challenge.png"
+      ],
+      "nextTasks": [],
+      "acceptance": "Watch/Pause cues while cinematic; accurate movement hints return with control in desktop and both touch orientations.",
+      "partialResolution": {
+        "task": "MSR-04",
+        "report": "msr04-eliab-to-saul-connection.md",
+        "chapterAddressed": 3,
+        "chapterRemaining": 2,
+        "observed": "Chapter 3 footer switches to Watch/Pause during arrival, challenge, exchange and transfer; returns to movement hints on the guided departure.",
+        "evidence": [
+          "evidence/msr04-2026-11-20/full-episode-isolated/desktop/07-goliath-challenge.png"
+        ]
+      },
+      "resolution": {
+        "task": "MSR-05",
+        "report": "msr05-connected-journeys.md",
+        "chapters": [
+          2,
+          3
+        ],
+        "evidence": [
+          "evidence/msr05-2026-11-20/verified/portrait/r03/next-action.png",
+          "evidence/msr05-2026-11-20/verified/landscape/r05/next-action.png",
+          "evidence/msr05-2026-11-20/full-episode/desktop/07-goliath-challenge.png"
+        ]
+      }
+    },
+    {
+      "id": "MSR-D06",
+      "priority": "P1",
+      "chapter": 4,
+      "title": "Audience David voice emitter remained behind his settled speaking position",
+      "observed": "Baseline actual browser graph and positions showed a 2.15 m planar mismatch during the response.",
+      "resolution": "Pilot audience uses an opt-in centered dialogue bus; actual voice paths contain no PannerNode, while other scene mixes retain defaults.",
+      "status": "Resolved technically in MSR-03; owner performance review pending",
+      "evidence": [
+        "evidence/msr03-2026-11-20/baseline/audit.json",
+        "evidence/msr03-2026-11-20/final/speech-summary.json"
+      ],
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D07",
+      "priority": "P2",
+      "chapter": 4,
+      "title": "Audience speaking gesture reverses and guard acknowledgement repeats",
+      "observed": "Baseline normal-clock trace recorded 29 backward David gesture steps and one guard clip reset.",
+      "resolution": "Forward line fitting and a recording-derived one-shot reaction score; final core traces record zero reverse steps and zero guard resets.",
+      "status": "Resolved technically in MSR-03; owner performance review pending",
+      "evidence": [
+        "evidence/msr03-2026-11-20/baseline/audit.json",
+        "evidence/msr03-2026-11-20/final/speech-summary.json"
+      ],
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D08",
+      "priority": "P1",
+      "status": "Resolved and browser verified in MSR-05",
+      "chapter": 4,
+      "title": "Practice-bank footer clipped its summary button in portrait",
+      "observed": "At 390×844 the new five-button footer placed part of Chapter summary outside the viewport; the browser geometry check and screenshot reproduced it.",
+      "resolution": {
+        "task": "MSR-05",
+        "report": "msr05-connected-journeys.md",
+        "change": "Wrap footer actions at widths up to 600 px; retain readable rows and action sizes.",
+        "evidence": [
+          "evidence/msr05-2026-11-20/frozen/portrait/r11/failure.json",
+          "evidence/msr05-2026-11-20/verified/portrait/r11/results.json",
+          "evidence/msr05-2026-11-20/verified/portrait/r11/path-bend.png"
+        ]
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D09",
+      "priority": "P2",
+      "status": "Resolved and browser verified in MSR-05",
+      "title": "Shared loading failure message named the pavilion for other destinations",
+      "observed": "The camp route failure screenshot displayed The pavilion page could not load beneath the generic next-location heading.",
+      "resolution": {
+        "task": "MSR-05",
+        "report": "msr05-connected-journeys.md",
+        "change": "Five error-message text literals now describe the next location and files in plain language. No conditions, state transitions or timing changed.",
+        "evidence": [
+          "evidence/msr05-2026-11-20/recovery/r03-retry-covered.png",
+          "evidence/msr05-2026-11-20/recovery-copy-final/r03-retry.json",
+          "evidence/msr05-2026-11-20/recovery-copy-final/r07/module-retry.json"
+        ]
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D10",
+      "priority": "P2",
+      "chapter": 1,
+      "title": "Messenger stop-facing turn snapped in one observed step",
+      "status": "Resolved technically and browser verified in MSR-06; owner presentation review pending",
+      "observed": "Baseline 82° root step; final 12.93° maximum sampled step with a 0.9-second deterministic ease.",
+      "evidence": [
+        "evidence/msr06-2026-11-20/baseline/desktop/opening/audit.json",
+        "evidence/msr06-2026-11-20/final/desktop/opening/audit.json"
+      ],
+      "resolution": {
+        "task": "MSR-06",
+        "report": "msr06-cast-performance.md",
+        "ownerReviewPending": true
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D11",
+      "priority": "P2",
+      "chapter": 6,
+      "title": "Foreground retreat changed facing abruptly",
+      "status": "Resolved technically and browser verified in MSR-06; owner presentation review pending",
+      "observed": "Baseline 174.41° sampled root step; final 30.78° with a 0.85-second shortest-direction turn and existing alarm/run clips.",
+      "evidence": [
+        "evidence/msr06-2026-11-20/baseline/desktop/victory/audit.json",
+        "evidence/msr06-2026-11-20/final/desktop/victory/audit.json"
+      ],
+      "resolution": {
+        "task": "MSR-06",
+        "report": "msr06-cast-performance.md",
+        "ownerReviewPending": true
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D12",
+      "priority": "P2",
+      "chapter": 6,
+      "title": "Foreground crowd mouth followed other soldiers’ shouts",
+      "status": "Resolved technically and browser verified in MSR-06; owner presentation review pending",
+      "observed": "Baseline 45/85 sampled crowd-window frames opened the foreground mouth without his own emitter; final 0/84. Location ownership now filters the chant; foreground call/chant share the existing bm_george voice.",
+      "evidence": [
+        "evidence/msr06-2026-11-20/baseline/desktop/victory/audit.json",
+        "evidence/msr06-2026-11-20/final/desktop/victory/audit.json"
+      ],
+      "resolution": {
+        "task": "MSR-06",
+        "report": "msr06-cast-performance.md",
+        "ownerReviewPending": true
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D13",
+      "priority": "P2",
+      "chapter": 3,
+      "title": "Goliath’s staged voice emitter stayed at the pre-entrance position",
+      "status": "Resolved technically and browser verified in MSR-06; owner presentation review pending",
+      "observed": "Baseline actual voice panner was 7.91 m behind the arrived rig. Main staged dialogue now uses the opt-in cinematic bus; final main voice graphs contain no PannerNode. Subjective mix acceptance remains open.",
+      "evidence": [
+        "evidence/msr06-2026-11-20/baseline/desktop/challenge/audit.json",
+        "evidence/msr06-2026-11-20/final/desktop/challenge/audit.json"
+      ],
+      "resolution": {
+        "task": "MSR-06",
+        "report": "msr06-cast-performance.md",
+        "ownerReviewPending": true
+      },
+      "nextTasks": []
+    },
+    {
+      "id": "MSR-D14",
+      "priority": "P1",
+      "chapter": 6,
+      "title": "Victory audio startup had no deadline/retry recovery",
+      "status": "Resolved and browser verified in MSR-07",
+      "observed": "Standalone profiles timed out without an established platform cause. Separately, an injected non-resolving AudioContext.resume reproduced Begin disabled beyond 9.2 seconds; the source awaited indefinitely.",
+      "resolution": {
+        "task": "MSR-07",
+        "report": "msr07-integrated-validation.md",
+        "change": "Existing eight-second resume helper, start guard, paused old timeline, cue cancellation, visible retry and rejection handling. Late request completion cannot replay the scene.",
+        "evidence": [
+          "evidence/msr07-2026-11-20/victory-audio-baseline/baseline.json",
+          "evidence/msr07-2026-11-20/victory-audio-recovery/",
+          "evidence/msr07-2026-11-20/final-validation-matrix.json"
+        ]
+      },
+      "nextTasks": []
+    }
+  ],
+  "unverifiedOrDecisionItems": [
+    {
+      "id": "MSR-R01",
+      "status": "Owner confirmed latest previews not yet reviewed on 20 November",
+      "item": "MSR-03 provides three directed David/Saul takes and MSR-06 one David faith response with the same casts and words. Owner listening must judge intonation, pace and naturalness; output/morph data cannot approve them."
+    },
+    {
+      "id": "MSR-R02",
+      "status": "Known capability limit / optional scope",
+      "item": "Two waveform-driven mouth shapes do not establish phoneme-specific lip sync; extra facial morphs require a separate decision."
+    },
+    {
+      "id": "MSR-R03",
+      "status": "Not established as a game defect",
+      "item": "Instrumented 1116.9/628.9 ms frame gaps are confounded by capture. Two clean armour-refusal probes peaked at 29.8/27.8 ms. No shader/logic cause assigned."
+    },
+    {
+      "id": "MSR-R04",
+      "status": "Local browser input measured; formal planted-sole acceptance remains open",
+      "item": "Eighteen final-build trusted browser event-to-rendered-root trials measured 4.4–29.9 ms. This is not physical input-to-photon certification. Earlier ankle-proxy movement included about 9.1 cm; actual sole contact within the proposed 8 cm across starts/stops, pivots and terrain is unverified."
+    },
+    {
+      "id": "MSR-R05",
+      "status": "Modest variation implemented/verified in MSR-06; owner preference review pending",
+      "item": "Existing crowd instances now stagger cheer/rest beats, and the foreground soldier listens during the conclusion. The distant crowd still uses three economical baked cheer poses; further art/rig scope is a separate decision."
+    },
+    {
+      "id": "MSR-R06",
+      "status": "Native lifecycle unverified",
+      "item": "Automated tab probing did not establish trusted visibility events/audio suspension. Windows Computer Use stopped at the new-tab action because the current browser URL could not be determined confidently. Regular Chrome tab-away/return during the reply remains a manual check; no app input continued after the block."
+    },
+    {
+      "id": "MSR-R07",
+      "status": "No participant available today",
+      "item": "Owner confirmed on 20 November that no unaided first-time player is available; prepared task sheet awaits an actual session."
+    },
+    {
+      "id": "MSR-R08",
+      "status": "Measured startup advisory / budget decision",
+      "item": "Opening cold loading varies; paired medians 9512/9507 ms did not reproduce the initial >10% regression. Hosted-network startup budget and minimum-phone performance are not approved or certified."
+    }
+  ],
+  "baselineAssessmentDate": "2026-11-19",
+  "followUps": [
+    {
+      "task": "MSR-02",
+      "date": "2026-11-20",
+      "report": "msr02-motion-foundation.md",
+      "layouts": [
+        "desktop keyboard",
+        "portrait CDP touch",
+        "landscape CDP touch"
+      ],
+      "fullEpisode": "PASS: fresh desktop Chapters 1–6, all twelve objectives, checkpoints/reload, defeat/retry, victory and replay",
+      "baselineWasReadOnly": true
+    },
+    {
+      "task": "MSR-03",
+      "date": "2026-11-20",
+      "report": "msr03-speech-and-reactions.md",
+      "ownerDirection": "No, just improve the intonation",
+      "voiceTakes": 3,
+      "coreLayouts": [
+        "desktop",
+        "portrait CDP touch",
+        "landscape CDP touch"
+      ],
+      "fullEpisode": "PASS: all twelve objectives, checkpoint/reload, defeat/retry, aftermath, Victory and replay",
+      "intonation": "Owner listening acceptance pending",
+      "nativeLifecycle": "Unverified: automation focus probe insufficient; regular Chrome new-tab action blocked by automatic approval review due to uncertain current browser URL"
+    },
+    {
+      "task": "MSR-04",
+      "date": "2026-11-20",
+      "report": "msr04-eliab-to-saul-connection.md",
+      "route": "R07",
+      "coreLayouts": [
+        "desktop",
+        "portrait CDP touch",
+        "landscape CDP touch"
+      ],
+      "fullEpisode": "PASS: fresh desktop Chapters 1–6, all twelve objectives, checkpoints, defeat/retry and replay",
+      "rolloutAuthorised": "Owner instruction to proceed with MSR-05"
+    },
+    {
+      "task": "MSR-05",
+      "date": "2026-11-20",
+      "report": "msr05-connected-journeys.md",
+      "routes": [
+        "R03",
+        "R05",
+        "R09",
+        "R11"
+      ],
+      "routeLayoutChecks": 12,
+      "recoveryScenarios": 14,
+      "fullEpisode": "PASS: fresh normal desktop, twelve ordered objectives, checkpoints/reload, defeat/retry, aftermath, Victory and replay",
+      "finalCopyChecks": "PASS: R03/R05/R11 page failures and retained R07 module failure/retry after text-only correction",
+      "ownerReviewPending": true,
+      "earlierOpenGates": [
+        "Owner intonation listening",
+        "Native tab-away/resume",
+        "Formal planted-foot/input-latency thresholds"
+      ]
+    },
+    {
+      "task": "MSR-06",
+      "date": "2026-11-20",
+      "report": "msr06-cast-performance.md",
+      "focusedCases": 15,
+      "layouts": [
+        "desktop",
+        "portrait",
+        "landscape"
+      ],
+      "voiceTakes": 1,
+      "fullEpisode": "PASS: twelve ordered objectives, guided handoffs, checkpoint/reload, defeat/retry, genuine misses/hit, player sword aftermath, Victory and replay",
+      "buildUnchanged": true,
+      "ownerReviewPending": true,
+      "remainingGates": [
+        "Owner intonation/performance listening",
+        "Native tab-away/resume",
+        "Formal planted-foot/input-latency targets",
+        "MSR-07 integrated performance and first-time-player review"
+      ]
+    },
+    {
+      "task": "MSR-07",
+      "date": "2026-11-20",
+      "report": "msr07-integrated-validation.md",
+      "engineeringStatus": "Complete",
+      "humanAcceptance": "Pending: participant unavailable, owner not yet reviewed, manual native lifecycle and formal sole-contact target open",
+      "freshFullJourneys": 3,
+      "hostedDesktop": true,
+      "routeRecoveryCases": 21,
+      "audioRecoveryCases": 6,
+      "localChecks": 15,
+      "edgeResume": true,
+      "laptopCombat": true
+    },
+    {
+      "task": "MSR-08",
+      "date": "2026-11-20",
+      "report": "../implementation/motion-speech-and-guided-routes.md",
+      "status": "Engineering handover complete; conditional review candidate",
+      "githubPushRequested": true
+    }
+  ]
+}

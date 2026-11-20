@@ -1,0 +1,33 @@
+{
+  "chapter": "saul-performance",
+  "direction": "MSR-03 intonation sample: Saul weighs the danger, David answers with quiet conviction, Saul gives a considered blessing. Keep the original cast and words; no voice imitation or pitch shifting.",
+  "lines": [
+    {
+      "id": "saul-concern", "speaker": "Saul", "voice": "am_michael",
+      "text": "You are young. Goliath has fought for years.",
+      "delivery": "Measured concern, with a thought between David's youth and Goliath's experience.",
+      "phrases": [
+        { "text": "You are young...", "speed": 0.91, "pauseAfter": 0.24 },
+        { "text": "Goliath has fought for years.", "speed": 0.93, "pauseAfter": 0 }
+      ]
+    },
+    {
+      "id": "david-answer", "speaker": "David", "voice": "am_puck",
+      "text": "I have guarded my father's sheep. The Lord who delivered me from lions and bears will help me face him.",
+      "delivery": "A matter-of-fact first sentence, then a deliberate statement of faith. Confidence without shouting.",
+      "phrases": [
+        { "text": "I have guarded my father's sheep.", "speed": 0.99, "pauseAfter": 0.20 },
+        { "text": "The Lord, who delivered me from lions and bears, will help me face him.", "speed": 0.96, "pauseAfter": 0 }
+      ]
+    },
+    {
+      "id": "saul-blessing", "speaker": "Saul", "voice": "am_michael",
+      "text": "Go. May the Lord be with you.",
+      "delivery": "A firm permission followed by a calmer, unhurried benediction.",
+      "phrases": [
+        { "text": "Go.", "speed": 0.94, "pauseAfter": 0.28 },
+        { "text": "May the Lord be with you.", "speed": 0.90, "pauseAfter": 0 }
+      ]
+    }
+  ]
+}
