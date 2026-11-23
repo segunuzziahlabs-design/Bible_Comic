@@ -10,6 +10,7 @@ import { loadSavedAppearance } from '../world/david-appearance';
 import { openMovementArea, type BattleView, type InteractionView } from '../world/movement-area';
 import { mountSlingHelp } from './sling-controls-ui';
 import { mountPlayerControls } from './player-controls-ui';
+import { mountSwordSwingControls } from './sword-swing-controls';
 import './style.css';
 import './movement.css';
 import './duel.css';
@@ -30,10 +31,14 @@ let retryWrite: (() => Promise<void>) | undefined;
 const hasHit = () => session?.run.completed.includes('goliath.struck');
 const localStatus = () => review ? 'Chapter 5 preview · Saved episode unchanged' : checkpointSaved();
 const help = mountSlingHelp(stage, document.querySelector('.actions')!, true, value => { void pause(value); }, () => paused);
+const swordControls=mountSwordSwingControls(stage,target=>area?.setSwordSwing(target));
 
 function controls() {
   const live = started && !paused && !busy && !view?.result;
   const cinematic=!!view?.cinematic;
+  const swinging=live&&!!view&&['finish_ready','execution'].includes(view.phase)&&(view.swordSwing??0)<1;
+  stage.toggleAttribute('data-sword-control',swinging||live&&view?.phase==='execution');
+  swordControls.update(swinging,view?.swordSwing);
   const moving = live && !!view && (view.phase === 'approach' || view.phase === 'fight'||aftermathMovement(view.phase));
   button('battle-interact').hidden=!moving||!view?.actionPrompt;button('battle-interact').disabled=!view?.canInteract;
   button('battle-interact').textContent=(view?.actionPrompt??'Interact')+' · E';
@@ -53,7 +58,7 @@ function controls() {
   button('dodge').textContent = view?.dodgeReady ? (view.slingReady?'Dodge':`Dodge ${view.attackDirection!<0?'← left':'right →'}`) : `Dodge · ${view?.dodgeCooldown?.toFixed(1) ?? '0.0'}s`;
   button('pause').textContent = paused ? 'Resume' : 'Pause';
   el('pause-notice').hidden = !started || !paused || busy || !!view?.result;
-  el('instructions').hidden = view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
+  el('instructions').hidden = swinging||view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
   el('battle-instructions').hidden = view?.phase !== 'fight';
   el('spear-guide').hidden=!live||view?.phase!=='fight'||!!view.slingReady&&!(view.attackProgress!>0||view.instruction.startsWith('Incoming'));
   stage.toggleAttribute('data-threat',!el('spear-guide').hidden&&!!view?.slingReady);
@@ -169,7 +174,7 @@ window.addEventListener('storage', event => {
   busy = true; paused = true; area?.setPaused(true); controls(); el('save-error').hidden = false;
   el('save-error-message').textContent = 'Progress changed in another tab. Reload its checkpoint.'; button('retry-save').hidden = true; retryWrite = undefined;
 });
-window.addEventListener('pagehide', () => { area?.dispose(); input.dispose(); }, { once: true });
+window.addEventListener('pagehide', () => { swordControls.dispose();area?.dispose(); input.dispose(); }, { once: true });
 
 async function main() {
   let run = freshRun(); for (const objective of objectives.slice(0, 10)) run = reduceEpisode(run, { type: 'objective', id: objective.id });
@@ -191,7 +196,7 @@ async function main() {
   el('save-status').textContent = localStatus();
   if (hasHit()&&!requiresBattleFinish(session.run)) { started = true; gate(); }
   else if (session.run.status === 'defeated') { started = true; el('entry').hidden = true; controls(); button('battle-replay').focus(); }
-  else {button('enter').textContent=hasHit()?'Resume at Goliath’s sword':session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = hasHit()?'Goliath’s fall is saved. Follow the arrow. Use E / the action button to take his sword, then approach and ready it. Press Finish battle yourself. The final blow is shown off-screen.':`${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move with WASD / arrows or left controls; direction + Shift / Dodge is a quick step. Goliath keeps throwing while you aim and use F / Throw. After his fall, retrieve his sword and finish the battle through the action button.`; button('enter').hidden = false; }
+  else {button('enter').textContent=hasHit()?'Resume at Goliath’s sword':session.run.attempt>1?'Resume battle':'Begin Chapter 5';el('entry-message').textContent = hasHit()?'Goliath’s fall is saved. Follow the arrow. Use E / the action button to take his sword, then approach and ready it. Drag the sword grip down and hold, or hold E to swing. Releasing stops the swing. The final action is non-graphic.':`${session.run.attempt>1?'Return to the battle checkpoint.':'Watch David step forward, then approach Goliath.'} Evade the sword, then two spear throws. Move with WASD / arrows or left controls; direction + Shift / Dodge is a quick step. Goliath keeps throwing while you aim and use F / Throw. After his fall, retrieve and ready his sword, then drag the sword grip down or hold E to finish.`; button('enter').hidden = false; }
   if(connectedArrival&&!started){autoEntry='pending';button('enter').textContent='Enter the battlefield';el('entry-message').textContent='You have reached the battlefield. Goliath’s entrance comes first; follow the arrows when David returns to your control.';void area.prepareAudio().then(()=>{if(!started&&!document.hidden)startBattle();else if(!started)autoEntry='tap_required';}).catch(()=>{if(!started)autoEntry='tap_required';});}
 }
 void main().catch(error => { console.error(error); el('entry-message').textContent = error instanceof Error ? error.message : 'The duel could not load.'; button('retry').hidden = false; });

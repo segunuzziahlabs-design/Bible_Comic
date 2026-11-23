@@ -14,7 +14,14 @@ async function completeAftermath(page,driver){
  await walkTarget(page,driver);await driver.action('interact');
  await wait(page,()=>JSON.parse(document.querySelector('canvas').dataset.movement).battle.phase==='finish_approach');
  await walkTarget(page,driver);await driver.action('interact');await wait(page,()=>JSON.parse(document.querySelector('canvas').dataset.movement).battle.phase==='finish_ready');
- await page.waitForTimeout(300);assert.equal((await sample(page)).battle.phase,'finish_ready');await driver.action('interact');
+ await page.waitForTimeout(300);assert.equal((await sample(page)).battle.phase,'finish_ready');await swingSword(page,driver);
  await page.locator('#review-gate').waitFor({timeout:20000});
 }
-module.exports={evadeNextSpear,walkTarget,completeAftermath};
+async function swingSword(page,driver){
+ if(!driver.touch){await page.keyboard.down('e');try{await wait(page,()=>JSON.parse(document.querySelector('canvas').dataset.movement).battle.swordSwing>=1);}finally{await page.keyboard.up('e');}return;}
+ const box=await page.locator('#sword-grip').boundingBox(),stage=await page.locator('.stage').boundingBox();
+ const x=box.x+box.width/2,y=box.y+box.height/2,travel=Math.min(130,Math.max(64,stage.height*.23));
+ await driver.cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{id:8,x,y}]});
+ try{for(let i=1;i<=24;i++){await driver.cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{id:8,x,y:y+travel*i/24+2}]});await page.waitForTimeout(80);}await wait(page,()=>JSON.parse(document.querySelector('canvas').dataset.movement).battle.swordSwing>=1);}finally{await driver.cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});}
+}
+module.exports={evadeNextSpear,walkTarget,completeAftermath,swingSword};

@@ -1,4 +1,4 @@
-import { Color, Entity, Mesh, MeshInstance, StandardMaterial, Vec3, calculateNormals, type Application } from 'playcanvas';
+import { Color, Entity, Mesh, MeshInstance, Quat, StandardMaterial, Vec3, calculateNormals, type Application } from 'playcanvas';
 import { fallenPhase, swordPickupDuration, type ElahBattleState } from '../gameplay/elah-battle';
 
 /** The original duel sword design, carried as a separate prop after the champion falls. */
@@ -15,14 +15,19 @@ export function createBattleAftermath(app:Application,david:Entity,height:(x:num
   box('Bronze cross guard',[0,.085,0],[.26,.05,.074],bronze);box('Hide grip',[0,-.035,0],[.042,.20,.046],hide);box('Bronze pommel',[0,-.16,0],[.064,.054,.06],bronze);
   const right=david.findByName('hand_r') as Entity,left=david.findByName('hand_l') as Entity;
   if(!right||!left)throw new Error('Sword performance requires David’s retained hand joints');
+  const palm=new Vec3(0,.055,0),gripPoint=new Vec3();
+  const fingers=['r','l'].flatMap(side=>['index','middle','ring','thumb'].flatMap(name=>[1,2,3].map(i=>({node:david.findByName(`${name}_0${i}_${side}`),curl:new Quat().setFromEulerAngles(name==='thumb'?20:i===1?35:55,0,0)}))));
   let carried=false;
   function update(state:ElahBattleState){
     sword.enabled=fallenPhase(state.phase)||state.phase==='victory';if(!sword.enabled)return;
     carried=state.swordTaken||['sword_checkpoint','execution','finish_checkpoint','victory'].includes(state.phase)||state.phase==='pickup'&&state.time>swordPickupDuration*.55;
     if(!carried){sword.setPosition(state.foe.x+1.35,height(state.foe.x+1.35,state.foe.z+.65)+.055,state.foe.z+.65);sword.setEulerAngles(88,35,-5);}
     else{
-      const hand=right.getPosition(),other=left.getPosition(),p=david.getPosition();
-      sword.setPosition(new Vec3().lerp(hand,other,.22));
+      const p=david.getPosition();
+      // The pommel no longer floats between open hands: seat the grip in the
+      // right palm and curl the existing weighted finger joints around it.
+      right.getWorldTransform().transformPoint(palm,gripPoint);sword.setPosition(gripPoint);
+      for(const finger of fingers)if(finger.node)finger.node.setLocalRotation(finger.node.getLocalRotation().clone().mul(finger.curl));
       const t=state.phase==='execution'?state.time:0,raise=t>0?Math.sin(Math.PI*Math.min(1,t/1.3)):0,down=Math.max(0,Math.min(1,(t-1.3)/.35));
       sword.setEulerAngles(18-75*raise+105*down,david.getEulerAngles().y,12);
       // Hand attachment follows the sampled rig; no root snapping or automatic walking.

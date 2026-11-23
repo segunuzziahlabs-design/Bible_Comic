@@ -3,10 +3,12 @@ import {buildValleyOpening} from './valley-opening';
 import goliathUrl from '../assets/goliath-speaking.glb?url';
 import actorUrl from '../assets/victory-soldier.glb?url';
 import atlasUrl from '../assets/victory-crowd.glb?url';
-import {cueTurn,crowdCheerPose,foregroundCheer} from '../gameplay/cast-performance';
+import pursuitUrl from '../assets/victory-pursuit.glb?url';
+import {cueTurn,foregroundCheer} from '../gameplay/cast-performance';
+import {victoryPursuit,type CrowdPose} from '../gameplay/victory-pursuit';
 import {dialogueGestureTime} from '../gameplay/story-motion';
 const ease=(v:number)=>{v=Math.max(0,Math.min(1,v));return v*v*(3-2*v);};
-export const victoryVersion='m3-victory-1';
+export const victoryVersion='victory-pursuit-2026-11-23';
 export const davidMark={x:1.4,z:-7},israelMark={x:-3.5,z:-8.2};
 export async function buildVictoryWorld(app:Application){
   const world=await buildValleyOpening(app,{goliathUrl,actorUrl,playableBattle:true});
@@ -16,10 +18,11 @@ export async function buildVictoryWorld(app:Application){
   const israel=world.sentinel,bearer=world.patrol;israel.model.name='Cheering Israelite';bearer.model.name='Fleeing shield-bearer';
   israel.tint('Cloth',[.9,1.05,.7]);bearer.tint('Cloth',[1.8,.68,.43]);
   const resource=await new Promise<ContainerResource>((resolve,reject)=>app.assets.loadFromUrl(atlasUrl,'container',(error,asset)=>error||!asset?.resource?reject(new Error('Victory crowd poses could not load.')):resolve(asset.resource as ContainerResource)));
-  const groups=[] as Array<{entity:Entity;data:Float32Array;buffer:VertexBuffer;meshes:ReturnType<typeof collectMeshes>;kind:'Run'|'Cheer';index:number}>;
+  const pursuit=await new Promise<ContainerResource>((resolve,reject)=>app.assets.loadFromUrl(pursuitUrl,'container',(error,asset)=>error||!asset?.resource?reject(new Error('Pursuit crowd poses could not load.')):resolve(asset.resource as ContainerResource)));
+  const groups=[] as Array<{entity:Entity;data:Float32Array;buffer:VertexBuffer;meshes:ReturnType<typeof collectMeshes>;kind:CrowdPose['kind'];index:number}>;
   function collectMeshes(node:Entity){return(node.findComponents('render')as RenderComponent[]).flatMap(r=>r.enabled?r.meshInstances:[]);}
-  for(const kind of['Run','Cheer']as const)for(let i=0;i<(kind==='Run'?6:3);i++){
-    const entity=resource.instantiateRenderEntity({castShadows:false});entity.name=`${kind} crowd pose ${i}`;world.root.addChild(entity);
+  for(const kind of['Run','Cheer','Pursue','Strike','Fall']as const)for(let i=0;i<({Run:6,Cheer:3,Pursue:6,Strike:5,Fall:6}[kind]);i++){
+    const entity=(kind==='Run'||kind==='Cheer'?resource:pursuit).instantiateRenderEntity({castShadows:false});entity.name=`${kind} crowd pose ${i}`;world.root.addChild(entity);
     for(const render of entity.findComponents('render')as RenderComponent[])render.enabled=render.entity.name===`${kind} ${i}`;
     const meshes=collectMeshes(entity);if(!meshes.length)throw new Error('A baked victory pose is missing.');
     for(const mesh of meshes)if(mesh.material instanceof StandardMaterial){const mat=mesh.material.clone();mat.diffuse=new Color(1,1,1);mat.update();mesh.material=mat;}
@@ -28,17 +31,16 @@ export async function buildVictoryWorld(app:Application){
   }
   app.once('destroy',()=>groups.forEach(g=>g.buffer.destroy()));
   const matrix=new Mat4(),rotation=new Quat(),position=new Vec3(),scale=new Vec3(.88,.88,.88);
-  let fleeing=0,raised=0,firstRunner={x:5.2,z:-13.7};
+  let fleeing=0,raised=0,pursuing=0,striking=0,fallen=0,firstRunner={x:5.2,z:-13.7},firstPursuer={x:-5.2,z:-13.7};
   function stage(t:number,dt:number,line?:{speaker:string;local:number;duration:number}){
     // Existing dressing activity runs without taking ownership of the actor rigs.
     world.stage(t,true,0,false);
-    const lists=new Map(groups.map(g=>[`${g.kind} ${g.index}`,[]as Array<{x:number;z:number;yaw:number}>]));fleeing=raised=0;
+    const lists=new Map(groups.map(g=>[`${g.kind} ${g.index}`,[]as Array<{x:number;z:number;yaw:number}>]));fleeing=raised=pursuing=striking=fallen=0;
     for(let i=0;i<24;i++){
-      const x=5.2+(i%8)*.73,z=-13.7-Math.floor(i/8)*.85,age=Math.max(0,t-3.4-(i%8)*.13-Math.floor(i/8)*.22),p=ease(age/8.5);
-      const at={x:x+(8+i%4*.4)*p,z:z-(15+i%3)*p,yaw:cueTurn(270,151,age/.85)};if(age>0)fleeing++;if(i===0)firstRunner={x:at.x,z:at.z};
-      lists.get(`Run ${age>0?Math.floor(age/.667*6+i)%6:0}`)!.push(at);
-      const pose=crowdCheerPose(t,i);if(pose>0)raised++;
-      lists.get(`Cheer ${pose}`)!.push({x:-x,z,yaw:cueTurn(90,50,(t-12.1-i%5*.13)/.7)});
+      const pair=victoryPursuit(t,i);if(pair.pursuing)pursuing++;if(pair.striking)striking++;if(pair.fallen)fallen++;
+      if(pair.enemy.kind==='Run'&&t>3.4)fleeing++;
+      if(i===0){firstRunner={x:pair.enemy.x,z:pair.enemy.z};firstPursuer={x:pair.ally.x,z:pair.ally.z};}
+      for(const at of[pair.enemy,pair.ally])lists.get(`${at.kind} ${at.index}`)!.push(at);
     }
     for(const group of groups){const actors=lists.get(`${group.kind} ${group.index}`)!;actors.forEach((at,i)=>{rotation.setFromEulerAngles(0,at.yaw,0);position.set(at.x,world.groundHeight(at.x,at.z),at.z);matrix.setTRS(position,rotation,scale);group.data.set(matrix.data,i*16);});group.buffer.setData(group.data);for(const mesh of group.meshes)mesh.instancingCount=actors.length;}
     const age=Math.max(0,t-3.2),p=ease(age/8.4),x=-1.45+11*p-4*Math.sin(Math.PI*p),z=-9.8-16*p;
@@ -48,5 +50,5 @@ export async function buildVictoryWorld(app:Application){
     const cheer=foregroundCheer(t),speaking=line?.speaker==='Soldier'&&israel.tracks.has('speak_concern'),clip=speaking?'speak_concern':cheer!==undefined?'victory_cheer':'listen';israel.pose(clip,speaking?dialogueGestureTime(line.local,line.duration,israel.tracks.get(clip)!.duration):cheer!==undefined?cheer:t%israel.tracks.get(clip)!.duration,dt);
   }
   stage(0,0);
-  return{...world,israel,bearer,stageVictory:stage,sample:()=>({fleeing,raised,firstRunner,instances:groups.map(g=>({pose:`${g.kind} ${g.index}`,count:g.meshes[0].instancingCount}))})};
+  return{...world,israel,bearer,stageVictory:stage,sample:()=>({fleeing,raised,pursuing,striking,fallen,firstRunner,firstPursuer,instances:groups.map(g=>({pose:`${g.kind} ${g.index}`,count:g.meshes[0].instancingCount}))})};
 }

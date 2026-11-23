@@ -19,3 +19,8 @@ docs/assets/victory-asset-manifest.json and docs/assets/victory-assets.md.
 
 Story context: 1 Samuel 17:50-53, adapted to the approved non-graphic treatment.
 Choreography, dialogue and closing reflection are original game adaptations.
+
+23 November 2026: victory-pursuit.glb adds original pursuit/strike/collapse
+pose bakes using the same retained CC0-derived soldier. No new external art,
+recording, model licence or dependency. Authoring: victory_pursuit.py.
+See docs/assets/victory-pursuit-assets.md for the build and source records.

@@ -100,11 +100,15 @@ export async function createDuelPresentation(app: Application) {
       eye.lerp(world.camera.getPosition(),new Vec3(p.x+3.2,y+1.8,p.z+(portrait?6.3:4.9)),1-Math.exp(-3*dt));world.camera.setPosition(eye);world.camera.lookAt(p.x,y+1.45,p.z);world.camera.camera!.fov=portrait?57:49;return true;
     }
     if(state.phase==='execution'){
-      // The player initiates the action. Keep blade contact and the body below frame.
-      shot=state.time<1.3?'david-lifts-the-sword':'final-action-off-screen';
-      const p=david.getPosition(),forward=david.forward;
-      const close=state.time>=1.25;
-      eye.lerp(world.camera.getPosition(),new Vec3(p.x-forward.x*1.65+.45,p.y+1.7,p.z-forward.z*1.65),1-Math.exp(-10*dt));world.camera.setPosition(eye);world.camera.lookAt(p.x,p.y+(close?1.42:1.3),p.z);world.camera.camera!.fov=close?32:47;return true;
+      // The camera follows the player's blade progress, not an independent timer.
+      // At contact, frame David above the fallen champion: no graphic wound detail.
+      const u=state.swordSwing,p=david.getPosition(),forward=david.forward,right=david.right;
+      const contact=u>=.60;
+      shot=contact?'player-sword-contact-reaction':u<.28?'player-sword-lift':'player-sword-downswing';
+      const side=contact?-1.3:1.6,back=canvasPortrait()?2.8:2.4;
+      const destination=new Vec3(p.x-forward.x*back+right.x*side,p.y+(contact?1.62:1.9),p.z-forward.z*back+right.z*side);
+      eye.lerp(world.camera.getPosition(),destination,1-Math.exp(-(contact?14:6)*dt));
+      world.camera.setPosition(eye);world.camera.lookAt(p.x,p.y+(contact?1.46:1.23),p.z);world.camera.camera!.fov=contact?(canvasPortrait()?45:35):(canvasPortrait()?59:49);return true;
     }
     if(state.phase==='finisher'&&state.decisiveThrow){
       const t=state.time,replay=state.decisiveThrow,g=world.champion.forehead.getPosition(),p=david.getPosition();

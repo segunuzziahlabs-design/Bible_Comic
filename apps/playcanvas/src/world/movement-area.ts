@@ -54,7 +54,7 @@ export type BattleView = {
   dodgeCooldown?: number; slingReady?:boolean; dodges?:number; attackDirection?:number;attackName?:string;attackHeight?:'low'|'middle'|'high';attackProgress?:number;
   combatStage?: 'sword'|'spear'|'sling'; swordEvaded?:boolean; spearEvasions?:number; weaponHit?:'sword'|'spear';
   positionHint?:string; aimHint?:string; distance?:number; foreheadX?:number; foreheadY?:number; foreheadVisible?:boolean;
-  actionPrompt?:string; canInteract?:boolean;
+  actionPrompt?:string; canInteract?:boolean; swordSwing?:number;
 };
 export type InteractionView = { canInteract: boolean; cueText: string; battle?: BattleView };
 
@@ -268,8 +268,8 @@ export async function openMovementArea(
       if(phase==='retrieve'){instruction='Take Goliath’s sword · Follow the arrow';actionPrompt='Take sword';}
       if(phase==='pickup')caption='David takes Goliath’s sword.';
       if(phase==='finish_approach'){instruction='Finish the battle · Approach the fallen champion';actionPrompt='Ready sword';}
-      if(phase==='finish_ready'){instruction='Use Goliath’s sword · Press Finish battle when ready';actionPrompt='Finish battle';}
-      if(phase==='execution')caption='David uses Goliath’s own sword. · The final blow is shown off-screen.';
+      if(phase==='finish_ready')instruction='Drag the sword grip down, or hold E to swing';
+      if(phase==='execution')caption=battle.state.swordSwing<.66?'Guide Goliath’s sword · Drag down or hold E':'David finishes the battle with Goliath’s own sword.';
       if(phase.endsWith('_checkpoint'))instruction='Saving the battle checkpoint…';
       if (phase === 'retreat') caption = time < 1.7
         ? 'The Philistines saw their champion fall.'
@@ -278,7 +278,7 @@ export async function openMovementArea(
       const forehead=chapter?camera.camera!.worldToScreen(battle.target()):undefined;
       return { phase, instruction, caption, stones, canThrow: phase === 'fight' && !jumpShotActive && !jump.active() && battle.slingAvailable() && throwTime === undefined && !shot && stones > 0,
         aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive||['finisher','stagger','fall','pickup','execution'].includes(phase),actionPrompt,canInteract:!!actionPrompt&&near,
-        combatStage:battle.state.combatStage,swordEvaded:battle.state.swordEvaded,spearEvasions:battle.state.spearEvasions,weaponHit:battle.state.weaponHit,
+        combatStage:battle.state.combatStage,swordEvaded:battle.state.swordEvaded,spearEvasions:battle.state.spearEvasions,weaponHit:battle.state.weaponHit,swordSwing:battle.state.swordSwing,
         positionHint:guidance?.position,aimHint:guidance?.aiming,distance:guidance?.distance,
         foreheadX:forehead?forehead.x/canvas.clientWidth:undefined,foreheadY:forehead?forehead.y/canvas.clientHeight:undefined,
         foreheadVisible:!!forehead&&forehead.z>0&&forehead.x>0&&forehead.x<canvas.clientWidth&&forehead.y>0&&forehead.y<canvas.clientHeight,
@@ -441,8 +441,9 @@ export async function openMovementArea(
           animator.playing=false;animator.speed=1;
           const clip=phase==='pickup'?'pickup_provisions':phase==='execution'?'sword_finish':'sword_carry';
           if(layer.activeState!==clip)layer.transition(clip,.12);
-          layer.activeStateCurrentTime=phase==='pickup'?Math.min(1,time/swordPickupDuration)*tracks.get(clip)!.duration:Math.min(time,tracks.get(clip)!.duration);
-          animator.update(0);
+          const poseTime=phase==='pickup'?Math.min(1,time/swordPickupDuration)*tracks.get(clip)!.duration:Math.min(time,tracks.get(clip)!.duration);
+          layer.activeStateCurrentTime=Math.max(0,poseTime-dt);
+          animator.update(dt);
         }
       }
       aftermath?.update(battle.state);
@@ -527,6 +528,7 @@ export async function openMovementArea(
       input.setEnabled(!paused && !cue && !jumpShotActive && battleControlsAvailable());
       animator.playing = !paused && !cue && !jump.active() && dodgeAge<0 && battle?.state.phase !== 'defeat' && battle?.state.phase !== 'finisher' && !(chapter && (battle?.state.phase === 'challenge'||battle?.state.phase==='entrance'));
       if (paused) {
+        battle?.setSwordSwing();
         destinationGuide?.hide();
         velocity = { x: 0, z: 0 };
         speed = 0;
@@ -686,6 +688,7 @@ export async function openMovementArea(
     return {
       backend: app.graphicsDevice.deviceType,
       interact,
+      setSwordSwing:(target?:number)=>!paused&&!!battle?.setSwordSwing(target),
       confirmCheckpoint:()=>{const ok=battle?.confirmCheckpoint();if(ok){input.setEnabled(!paused&&battleControlsAvailable());layer.transition('Locomotion',.12);animator.playing=!paused;updateInteraction();showSample();}return ok;},
       throwStone, jumpShot, canJumpShot,
       jump:()=>{if(!paused&&!cue&&!jumpShotActive&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot){const accepted=jump.request(position);if(accepted)battle?.registerJump();return accepted;}return false;},

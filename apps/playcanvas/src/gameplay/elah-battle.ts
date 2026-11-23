@@ -79,6 +79,7 @@ export function createElahBattle(
       attempt, anchor,
       phase: (defeated ? 'defeat' : anchor === 'battle.aftermath' ? (episode?.aftermath==='fallen'?'retrieve':episode?.aftermath==='sword_taken'?'finish_approach':presentation.stopAfterFall ? 'victory' : 'retreat') : presentation.requiredDodges&&attempt>1?'fight':presentation.entranceSeconds ? 'entrance' : 'approach') as Phase, time: defeated ? .65 : 0,
       swordTaken:episode?.aftermath==='sword_taken'||episode?.aftermath==='finished', finalPerformed:episode?.aftermath==='finished',
+      swordSwing: 0, swordSettle: 0,
       ranged: !!presentation.rangedSpear, spear: undefined as ThrownSpear|undefined, aimLock: undefined as Point3|undefined, jumpShotTime: undefined as number|undefined,
       cinematicCombat: !!presentation.cinematicCombat,
       combatStage: (presentation.cinematicCombat ? 'sword' : undefined) as 'sword'|'spear'|'sling'|undefined,
@@ -98,6 +99,7 @@ export function createElahBattle(
   }
 
   let state = freshAttempt(episode?.attempt ?? 0, episode?.anchor, episode?.defeated);
+  let swordDemand = 0;
   const head = new Vec3();
   const travel = new Vec3();
   const nearest = new Vec3();
@@ -343,8 +345,15 @@ export function createElahBattle(
       const target=this.aftermathTarget();if(Math.hypot(target.x-david.x,target.z-david.z)>1.15)return false;
       if(state.phase==='retrieve'&&!state.swordTaken){state.phase='pickup';state.time=0;return true;}
       if(state.phase==='finish_approach'&&state.swordTaken){state.phase='finish_ready';state.time=0;return true;}
-      if(state.phase==='finish_ready'&&state.swordTaken&&!state.finalPerformed){state.phase='execution';state.time=0;return true;}
       return false;
+    },
+    // Pointer travel or a held key drives the existing authored animation. Releasing
+    // freezes the blade; elapsed time alone cannot perform the final action.
+    setSwordSwing(target = state.swordSwing) {
+      if(!state.swordTaken||state.finalPerformed||!['finish_ready','execution'].includes(state.phase))return false;
+      swordDemand=Number.isFinite(target)?Math.max(state.swordSwing,Math.min(1,target)):state.swordSwing;
+      if(state.phase==='finish_ready'&&swordDemand>0){state.phase='execution';state.time=0;}
+      return true;
     },
     confirmCheckpoint() {
       if(state.phase==='fall_checkpoint')state.phase='retrieve';
@@ -353,7 +362,7 @@ export function createElahBattle(
       else return false;
       state.time=0;return true;
     },
-    reset(attempt = state.attempt + 1) { state = freshAttempt(attempt);previousFeet=previousSpear=previousSword=undefined;strikeWindow=undefined; },
+    reset(attempt = state.attempt + 1) { state = freshAttempt(attempt);swordDemand=0;previousFeet=previousSpear=previousSword=undefined;strikeWindow=undefined; },
     update(dt: number, david: Vec3, releasePoint: () => Vec3) {
       strikeWindow=undefined;state.poseFrame++;
       state.time += dt;if(state.jumpShotTime!==undefined)state.jumpShotTime+=dt; state.feedbackTime = Math.max(0, state.feedbackTime - dt);
@@ -383,7 +392,10 @@ export function createElahBattle(
         state.phase = state.cinematicCombat&&episode?.aftermath ? 'fall_checkpoint' : presentation.stopAfterFall ? 'victory' : 'retreat';
         state.time = 0;
       } else if(state.phase==='pickup'&&state.time>=swordPickupDuration){state.phase='sword_checkpoint';state.time=0;
-      } else if(state.phase==='execution'&&state.time>=finalActionDuration){state.phase='finish_checkpoint';state.time=0;
+      } else if(state.phase==='execution'){
+        state.swordSwing=Math.min(swordDemand,state.swordSwing+dt*.62);
+        state.time=state.swordSwing*finalActionDuration;
+        if(state.swordSwing>=1){state.swordSettle+=dt;if(state.swordSettle>=.65){state.phase='finish_checkpoint';state.time=0;}}
       } else if(state.phase==='finish_ready'&&Math.hypot(this.aftermathTarget().x-david.x,this.aftermathTarget().z-david.z)>1.4){state.phase='finish_approach';state.time=0;
       } else if (state.phase === 'retreat' && state.time >= retreatDuration) {
         state.phase = 'victory';

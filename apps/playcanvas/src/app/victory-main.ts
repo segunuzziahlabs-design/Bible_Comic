@@ -65,7 +65,7 @@ async function main(){
     performances[0].apply(time,davidSpeaking,line&&!davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,0),.9,1.8):0,1.6);performances[1].apply(time,line?.speaker==='Soldier',davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,1),.9,1.8):0,.4);
     const shot=victoryShot(time,world.groundHeight),cut=lastShot!==shot.id;lastShot=shot.id;const blend=cut?1:1-Math.exp(-5*dt);
     eye.lerp(eye,new Vec3(...shot.eye),blend);focus.lerp(focus,new Vec3(...shot.focus),blend);world.camera.setPosition(eye);world.camera.lookAt(focus);world.camera.camera!.fov=shot.fov*(canvas.clientHeight>canvas.clientWidth?1.12:1);
-    const key=line?.id??(time>=15.2&&time<23?'cheering':'');if(key!==captionKey){captionKey=key;el('caption').textContent=line?`${line.speaker}: ${line.text}`:key?'Israelite soldiers cheer.':'';el('caption').hidden=!key;}
+    const key=line?.id??(time>=6.5&&time<12.1?'pursuit':time>=16.6&&time<23?'battle':'');if(key!==captionKey){captionKey=key;el('caption').textContent=line?`${line.speaker}: ${line.text}`:key==='pursuit'?'The army of Israel pursues the Philistines.':key==='battle'?'Israel overtakes the fleeing army. Philistine soldiers fall along the road.':'';el('caption').hidden=!key;}
   }
   button('enter').addEventListener('click',()=>{void start();});button('reset').addEventListener('click',()=>{void start();});button('watch-again').addEventListener('click',()=>{void start();});
   button('pause').addEventListener('click',()=>{void pause(!paused);});button('sound').addEventListener('click',()=>{muted=!muted;writeEpisodeMuted(muted);audio.mute(muted);setEpisodeSoundButton(button('sound'),muted);});
@@ -83,6 +83,6 @@ async function main(){
     if(inspect)canvas.dataset.victory=JSON.stringify({version:victoryVersion,mode,time,paused,muted,busy,review,starts,shot:lastShot,speaker:audio.lineAt()?.speaker,audio:audio.sample(),activity:world.sample(),davidMouth:david.mouthWeights(),israelMouth:world.israel.mouthWeights(),bearer:world.bearer.model.getPosition(),cheeringArm:world.israel.model.findByName('hand_r')?.getPosition(),run:session.run,history:session.history});
   });
   time=session.run.status==='completed'?victoryDuration:0;render(0);audio.mute(muted);setEpisodeSoundButton(button('sound'),muted);await waitForFrame(app);canvas.dataset.renderer=app.graphicsDevice.deviceType;
-  if(session.run.status==='completed'){button('sound').disabled=false;results();}else{el('entry-message').textContent='Witness the Philistine retreat, the cheers of Israel and David’s closing response. You can pause or restart the conclusion.';button('enter').hidden=false;}
+  if(session.run.status==='completed'){button('sound').disabled=false;results();}else{el('entry-message').textContent='Witness Israel pursue the retreating Philistines, the victory cheers and David’s closing response. You can pause or restart the conclusion.';button('enter').hidden=false;}
 }
 void main().catch(error=>{console.error(error);el('entry-message').textContent=error instanceof Error?error.message:'The conclusion could not load.';button('retry').hidden=false;});button('retry').addEventListener('click',()=>location.reload());
