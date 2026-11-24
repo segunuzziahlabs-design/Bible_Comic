@@ -9,7 +9,12 @@ export function preparationShot(kind:PreparationCue,t:number,position:{x:number;
     if(!score)throw new Error('Audience camera needs its recording-derived score');
     if(t<score.concernStart-.25)return{id:'audience-two-shot',eye:[.20+(t-5)*.02,1.72,1.82-(t-5)*.025],focus:[.46,1.48,-1.0],fov:48};
     if(t<score.answerStart-.35)return{id:'saul-concern',eye:[1.02,1.82,.76-(t-score.concernStart)*.025],focus:[.70,1.65,-1.2],fov:37};
-    if(t<score.answerEnd+.35)return{id:'david-resolve',eye:[.78-(t-score.answerStart)*.012,1.58,-.18+(t-score.answerStart)*.006],focus:[-.65,1.39,.65],fov:37-(t-score.answerStart)*.12};
+    if(t<score.answerEnd+.35){
+      const local=t-score.answerStart;
+      if(local>3.5&&local<6.0)return{id:'over-saul-shoulder',eye:[2.25,1.88,-1.85+Math.min(2.5,local-3.5)*.025],focus:[-.65,1.43,.65],fov:43};
+      if(local>7.6&&local<9.3)return{id:'saul-hears-david',eye:[1.02,1.79,.64],focus:[.70,1.67,-1.2],fov:34};
+      return{id:'david-resolve',eye:[.78-local*.012,1.58,-.18+local*.006],focus:[-.65,1.42,.65],fov:37-local*.12};
+    }
     if(t<score.guardEnd+.35)return{id:'guard-reaction',eye:[-.80,1.78,-.35],focus:[-2.8,1.52,-2.7],fov:38};
     if(t<score.blessingStart)return{id:'saul-listens',eye:[1.02,1.80,.63],focus:[.70,1.65,-1.2],fov:36};
     return{id:'saul-blessing',eye:[2.55-(t-score.blessingStart)*.025,1.90,2.5-(t-score.blessingStart)*.025],focus:[.02,1.38,-.30],fov:44};

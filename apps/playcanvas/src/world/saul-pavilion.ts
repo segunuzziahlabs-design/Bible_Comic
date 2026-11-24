@@ -3,6 +3,7 @@ import {
   TONEMAP_NEUTRAL, calculateNormals, type Application,
 } from 'playcanvas';
 import type { WallBounds } from '../gameplay/ground-motion';
+import {surfaceGrain} from './surface-grain';
 
 function fabric(app: Application, colour: Color, scale: number) {
   const canvas = document.createElement('canvas');
@@ -46,6 +47,7 @@ export function buildSaulPavilion(app: Application) {
   const clay = material([.43, .23, .13]);
   const stone = material([.55, .49, .40]);
   const trim = material([.63, .43, .20]);
+  for(const mat of[sand,stone]){mat.diffuseMap=surfaceGrain(app);mat.diffuseMapTiling.set(7,7);mat.update();}
   const groundCanvas=document.createElement('canvas');groundCanvas.width=groundCanvas.height=256;
   const groundPaint=groundCanvas.getContext('2d')!,grain=groundPaint.createImageData(256,256);let seed=582;
   for(let i=0;i<256*256;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const c=220+(seed/4294967296)*32;grain.data.set([c,c*.98,c*.94,255],i*4);}

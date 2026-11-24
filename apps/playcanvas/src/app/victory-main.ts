@@ -9,6 +9,7 @@ import {Vec3} from 'playcanvas';
 import {currentObjective,episodePage,freshRun,objectives,reduceEpisode,requiresBattleFinish} from '../gameplay/episode-rules';
 import {openEpisodeSession,type CueToken,type EpisodeSaveAdapter} from '../gameplay/episode-session';
 import {createWebGLApp,observeCanvas,waitForFrame} from '../world/graphics';
+import {warmCharacterFaces} from '../world/character-face';
 import {buildVictoryWorld,davidMark,israelMark,victoryVersion} from '../world/victory-world';
 import {createVictoryAudio,victoryDuration} from '../world/victory-audio';
 import {victoryShot} from '../world/victory-shots';
@@ -62,7 +63,7 @@ async function main(){
     david.face(davidSpeaking?mouth[0]:0,davidSpeaking?mouth[1]:0,.18,.15,castBlink(time,0));
     world.israel.face(line?.speaker==='Soldier'?mouth[0]:crowd?cheer[0]:0,line?.speaker==='Soldier'?mouth[1]:crowd?cheer[1]:0,time>=12?.4:.05,.3,castBlink(time,2));
     world.bearer.face(line?.speaker==='Philistine'?mouth[0]:0,line?.speaker==='Philistine'?mouth[1]:0,0,.5,castBlink(time,3));
-    performances[0].apply(time,davidSpeaking,line&&!davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,0),.9,1.8):0,1.6);performances[1].apply(time,line?.speaker==='Soldier',davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,1),.9,1.8):0,.4);
+    performances[0].apply(time,davidSpeaking,line&&!davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,0),.9,1.8):0,1.6,world.israel.model.findByName('Head')!,'happiness');performances[1].apply(time,line?.speaker==='Soldier',davidSpeaking?reactionNod(line.local,listenerNodStart(line.duration,1),.9,1.8):0,.4,david.model.findByName('Head')!,'happiness');
     const shot=victoryShot(time,world.groundHeight),cut=lastShot!==shot.id;lastShot=shot.id;const blend=cut?1:1-Math.exp(-5*dt);
     eye.lerp(eye,new Vec3(...shot.eye),blend);focus.lerp(focus,new Vec3(...shot.focus),blend);world.camera.setPosition(eye);world.camera.lookAt(focus);world.camera.camera!.fov=shot.fov*(canvas.clientHeight>canvas.clientWidth?1.12:1);
     const key=line?.id??(time>=6.5&&time<12.1?'pursuit':time>=16.6&&time<23?'battle':'');if(key!==captionKey){captionKey=key;el('caption').textContent=line?`${line.speaker}: ${line.text}`:key==='pursuit'?'The army of Israel pursues the Philistines.':key==='battle'?'Israel overtakes the fleeing army. Philistine soldiers fall along the road.':'';el('caption').hidden=!key;}
@@ -80,9 +81,15 @@ async function main(){
   app.on('update',dt=>{
     if(mode==='playing'&&!paused&&!busy){time=Math.min(victoryDuration,audio.time());render(Math.min(dt,.05));audio.step(world.camera.getPosition(),world.camera.forward,world.groundHeight);
       if(time>=victoryDuration){if(owner){const token=owner;owner=undefined;void save(()=>session.finishCue(token),results);}else results();}}
-    if(inspect)canvas.dataset.victory=JSON.stringify({version:victoryVersion,mode,time,paused,muted,busy,review,starts,shot:lastShot,speaker:audio.lineAt()?.speaker,audio:audio.sample(),activity:world.sample(),davidMouth:david.mouthWeights(),israelMouth:world.israel.mouthWeights(),bearer:world.bearer.model.getPosition(),cheeringArm:world.israel.model.findByName('hand_r')?.getPosition(),run:session.run,history:session.history});
+    if(inspect)canvas.dataset.victory=JSON.stringify({version:victoryVersion,mode,time,paused,muted,busy,review,starts,shot:lastShot,speaker:audio.lineAt()?.speaker,audio:audio.sample(),activity:world.sample(),davidMouth:david.mouthWeights(),davidFace:david.faceSample(),israelMouth:world.israel.mouthWeights(),bearer:world.bearer.model.getPosition(),cheeringArm:world.israel.model.findByName('hand_r')?.getPosition(),run:session.run,history:session.history});
   });
   time=session.run.status==='completed'?victoryDuration:0;render(0);audio.mute(muted);setEpisodeSoundButton(button('sound'),muted);await waitForFrame(app);canvas.dataset.renderer=app.graphicsDevice.deviceType;
+  // Compile camera-dependent material/instancing variants behind the entry
+  // cover. No voice starts, cues or save writes occur during these samples.
+  const restoredTime=time,warmStarted=performance.now(),warmTimes=[3.1,7.5,12.3,18.4,21.4,22.6,29];
+  for(const sample of warmTimes){time=sample;render(0);const restore=warmCharacterFaces(app);await new Promise<void>(resolve=>app.once('frameend',()=>resolve()));restore();}
+  time=restoredTime;render(0);await new Promise<void>(resolve=>app.once('frameend',()=>resolve()));
+  if(inspect)canvas.dataset.victoryWarmup=JSON.stringify({milliseconds:performance.now()-warmStarted,samples:warmTimes,audio:audio.context.state,starts,restoredTime:time});
   if(session.run.status==='completed'){button('sound').disabled=false;results();}else{el('entry-message').textContent='Witness Israel pursue the retreating Philistines, the victory cheers and David’s closing response. You can pause or restart the conclusion.';button('enter').hidden=false;}
 }
 void main().catch(error=>{console.error(error);el('entry-message').textContent=error instanceof Error?error.message:'The conclusion could not load.';button('retry').hidden=false;});button('retry').addEventListener('click',()=>location.reload());

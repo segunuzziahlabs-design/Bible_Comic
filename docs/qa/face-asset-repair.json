@@ -1,0 +1,170 @@
+{
+  "revision": 2,
+  "records": [
+    {
+      "file": "challenge-soldier.glb",
+      "originalSha256": "53e613aaefd7c2de15eb4b94b826469f2fb9dc8bc5a056e7f6f3de732d3fd6e5",
+      "originalMouthY": 1.7264500856399536,
+      "lipAnchorY": 1.7451335794758052,
+      "offsetY": 0.01868349383585155,
+      "depthShift": -0.0039192711701616645,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "44396d1c12aed584ade68a13a4821c665f7c05d3683f1822dbbd40db4a2b6039",
+      "bytes": 1308416
+    },
+    {
+      "file": "david-adventure.glb",
+      "originalSha256": "869d6e0c1abe22268d2548f440507c267d0d0091d87551353b148adb3629b484",
+      "originalMouthY": 1.4319300055503845,
+      "lipAnchorY": 1.447471827501431,
+      "offsetY": 0.015541821951046586,
+      "depthShift": -0.003226562519557774,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "14f3aacf97b96568a9669051138d4596996373f9a360359b5ae05ac3f34c02cb",
+      "bytes": 1441988
+    },
+    {
+      "file": "david-aftermath.glb",
+      "originalSha256": "f36c043406e70daff9bd5339163b5b936a7a1e5f24b9ce3419d832a06ba87f21",
+      "originalMouthY": 1.4319300651550293,
+      "lipAnchorY": 1.447471827423821,
+      "offsetY": 0.01554176226879167,
+      "depthShift": -0.003226562791193525,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "087d76b7eb52d8b3f81ec2026be3eefa2cdbd6d282d1cceaf05001732ae29b8b",
+      "bytes": 1597384
+    },
+    {
+      "file": "david-camp.glb",
+      "originalSha256": "1361dbfac69451b0f706deeb2c7461766c60d5629c36913538f4e9bcefc9ca23",
+      "originalMouthY": 1.4319300055503845,
+      "lipAnchorY": 1.447471827501431,
+      "offsetY": 0.015541821951046586,
+      "depthShift": -0.003226562519557774,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "e965145b67f779067fbaeea021cba7ad9e9e7349b09ae20714ce13222187d7d6",
+      "bytes": 1315960
+    },
+    {
+      "file": "david-dialogue.glb",
+      "originalSha256": "e74f64c411acddd4dc7b3bc7278fa2fe1785456af9dc9e6351bd033e2e06efec",
+      "originalMouthY": 1.4319300055503845,
+      "lipAnchorY": 1.447471827501431,
+      "offsetY": 0.015541821951046586,
+      "depthShift": -0.003226562519557774,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "f5b27ebc4314ca737d9c179d8882f350a7af402cb5468f55a6afc4b0621c5f22",
+      "bytes": 1265304
+    },
+    {
+      "file": "david-preparation.glb",
+      "originalSha256": "ff9e77136c4f3b18f59e8f6aadd1c65dc9e4fcf086062f1641635ccda6666074",
+      "originalMouthY": 1.4319300055503845,
+      "lipAnchorY": 1.447471827501431,
+      "offsetY": 0.015541821951046586,
+      "depthShift": -0.003226562519557774,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "b327e6ad5220a8533598500a568c7c1c5a1ea4da55e1e1b90a833913db17282f",
+      "bytes": 1507348
+    },
+    {
+      "file": "goliath-collision.glb",
+      "originalSha256": "cd8a573f93b06220e1b2f8c42f25282bf4f4e15aeba30fb2fc8571f8e82990fa",
+      "originalMouthY": 2.5856605768203735,
+      "lipAnchorY": 2.613306990514199,
+      "offsetY": 0.027646413693825256,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "cd5e29be1f1f905baca138363426603a4513199b2ae532a0a5c31c3040f06e11",
+      "bytes": 1220744
+    },
+    {
+      "file": "goliath-continuous.glb",
+      "originalSha256": "486f8feb4f942bebe728a05bb001fc30ed772969d96a93ec441322ab7627a9ef",
+      "originalMouthY": 2.585660457611084,
+      "lipAnchorY": 2.6133067520956197,
+      "offsetY": 0.027646294484535705,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "594b9a7c20ad26d4565bec788c6c8518ec4934de3e018bc9a51c79c083479d17",
+      "bytes": 1686548
+    },
+    {
+      "file": "goliath-duel.glb",
+      "originalSha256": "b74222d89230d817c3c53c450e5215e903c64e94f3fbf10360e3ce420d240fa4",
+      "originalMouthY": 2.5856603384017944,
+      "lipAnchorY": 2.6133065136770406,
+      "offsetY": 0.027646175275246154,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "97a751d6936932426ad7c550aaba3606ce0cc71cc1b5dc80eb1520f6625098e0",
+      "bytes": 1439796
+    },
+    {
+      "file": "goliath-encounter.glb",
+      "originalSha256": "0d6de74a681eb4a5020b43388ddf76687770a96ebdfce80a817ada606e0c0dc0",
+      "originalMouthY": 2.5856600999832153,
+      "lipAnchorY": 2.6133065136770406,
+      "offsetY": 0.027646413693825256,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "f3edccd076f41aa3ac1de75d03555092bce3de5bac0ef098a2e74bc5ff245077",
+      "bytes": 1218112
+    },
+    {
+      "file": "goliath-ranged.glb",
+      "originalSha256": "b427eba8b13961b73c3273c29c513dde5b6c42f368f3d30653fa5f643cf9c3f2",
+      "originalMouthY": 2.5856608152389526,
+      "lipAnchorY": 2.6133067520956197,
+      "offsetY": 0.027645936856667053,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "d32c5bcbcd50b4e21abbf4f4ceb87840f4cee6a45e80caba5f60e8ff9de71310",
+      "bytes": 1283368
+    },
+    {
+      "file": "goliath-speaking.glb",
+      "originalSha256": "76338583ba33b807ef60cf6bd82c4a6775c5454e490261d1d63dab095dc3315c",
+      "originalMouthY": 2.5856600999832153,
+      "lipAnchorY": 2.6133065136770406,
+      "offsetY": 0.027646413693825256,
+      "depthShift": 0,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "108f9e46282f9004b60ff2291d1310e7c530e0481ac36c83f235f8b5c12834ac",
+      "bytes": 1005604
+    },
+    {
+      "file": "jesse-courtyard.glb",
+      "originalSha256": "5dbfa5fc8db387ed04a48939635c7e64e0b25a40f1c7357d48a80b8310f400f2",
+      "originalMouthY": 1.61899995803833,
+      "lipAnchorY": 1.623421715727697,
+      "offsetY": 0.004421757689366812,
+      "depthShift": -0.0025,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "7471ba5672e11cd5982afd3e74e25ed3df206c4397f095da30e51fd8e4434f16",
+      "bytes": 1124964
+    },
+    {
+      "file": "saul.glb",
+      "originalSha256": "49e483d8742f105e8ab40dd0c1299dd729f45cbecc9419dd576f9cae19686abd",
+      "originalMouthY": 1.7264500856399536,
+      "lipAnchorY": 1.7451335794758052,
+      "offsetY": 0.01868349383585155,
+      "depthShift": -0.0039192711701616645,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "1b132cba6c011452896ef3467a1d3ba1618d6ee24078c7abf34c848945389b99",
+      "bytes": 1186828
+    },
+    {
+      "file": "victory-soldier.glb",
+      "originalSha256": "af2c846a7ec93f3e15e72548ccab57a8d20c7c854ef50da8eb7fa20838264794",
+      "originalMouthY": 1.7264500856399536,
+      "lipAnchorY": 1.7451335794758052,
+      "offsetY": 0.01868349383585155,
+      "depthShift": -0.0039192711701616645,
+      "policy": "Aligned original lip crease; constrained opening; lower-lip jaw target; rig/UV/non-facial tracks unchanged",
+      "sha256": "c7d013e7676821e4ddfe2790ffa1b1fda35655abe8000bdda064b1d21ea0aa83",
+      "bytes": 1350592
+    }
+  ]
+}

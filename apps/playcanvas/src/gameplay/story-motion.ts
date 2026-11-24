@@ -1,8 +1,8 @@
 /** Shared story movement policy. Distances, collision and input stay with the chapter. */
 export function smoothStoryHeading(current: number, target: number, dt: number) {
   const delta = ((target - current) % 360 + 540) % 360 - 180;
-  const step = delta * (1 - Math.exp(-12 * Math.max(0, dt)));
-  const limit = 420 * Math.max(0, dt);
+  const step = delta * (1 - Math.exp(-10 * Math.max(0, dt)));
+  const limit = 300 * Math.max(0, dt);
   return current + Math.max(-limit, Math.min(limit, step));
 }
 

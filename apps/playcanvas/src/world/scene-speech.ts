@@ -19,10 +19,11 @@ export async function createSceneSpeech(lines:SpeechLine[],urls:Record<string,st
   let meter:AnalyserNode|undefined,meterData:Float32Array<ArrayBuffer>|undefined;
   function outputLevel(){if(!meter){meter=context.createAnalyser();meter.fftSize=512;master.connect(meter);meterData=new Float32Array(512);}meter.getFloatTimeDomainData(meterData!);let sum=0,peak=0;for(const value of meterData!){sum+=value*value;peak=Math.max(peak,Math.abs(value));}return{rms:Math.sqrt(sum/meterData!.length),peak};}
   const ambient=context.createGain();ambient.gain.value=.08;ambient.connect(master);
+  const decoded=new Map<string,Promise<AudioBuffer>>(),requests=new AbortController();
   const buffers=new Map(await Promise.all(Object.entries(urls).map(async([id,url])=>{
-    const response=await fetch(url);if(!response.ok)throw new Error('A chapter voice recording could not load.');
-    return[id,await context.decodeAudioData(await response.arrayBuffer())] as const;
-  })).catch(error=>{void context.close();throw error;}));
+    let buffer=decoded.get(url);if(!buffer){buffer=(async()=>{const response=await fetch(url,{signal:requests.signal});if(!response.ok)throw new Error('A chapter voice recording could not load.');return context.decodeAudioData(await response.arrayBuffer());})();decoded.set(url,buffer);}
+    return[id,await buffer] as const;
+  })).catch(error=>{requests.abort();void context.close();throw error;}));
   for(const cues of Object.values(timelines))for(let i=0;i<cues.length;i++){
     const line=lines.find(line=>line.id===cues[i].id);
     if(!line||!buffers.has(line.id)||cues[i].start<0||(i>0&&cues[i-1].start+lines.find(line=>line.id===cues[i-1].id)!.duration>cues[i].start))throw new Error('Chapter dialogue timing overlaps or references a missing line.');
@@ -59,6 +60,6 @@ export async function createSceneSpeech(lines:SpeechLine[],urls:Record<string,st
       const t=context.currentTime-origin;if(calls.length&&t-lastCall>20){lastCall=t;play(calls[Math.floor(t/20)%calls.length],context.currentTime,{x:5,y:1.5,z:-7},.3);}
       if(t-lastCloth>11){lastCloth=t;effect({x:-4,y:2,z:0},.2,220,.7);}
     },
-    dispose(){stop();wind.stop();dialogue?.disconnect();void context.close();},
+    dispose(){requests.abort();decoded.clear();buffers.clear();stop();wind.stop();dialogue?.disconnect();void context.close();},
   };
 }

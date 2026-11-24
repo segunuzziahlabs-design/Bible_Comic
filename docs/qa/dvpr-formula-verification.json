@@ -1,0 +1,27 @@
+{
+  "requirements": 71,
+  "tests": 118,
+  "expected": {
+    "Pass": 102,
+    "Fail": 0,
+    "Blocked": 4,
+    "Not Run": 12
+  },
+  "errorScan": "{\"kind\":\"notice\",\"message\":\"Cell search matched 0 entries.\"}",
+  "summary": "{\"kind\":\"table\",\"sheet\":\"Verification Summary\",\"address\":\"A5:B18\",\"rows\":14,\"cols\":2,\"values\":[[\"Measure\",\"Current total\"],[\"Requirements\",71],[\"Requirements verified\",61],[\"Test cases\",118],[\"Pass\",102],[\"Fail\",0],[\"Blocked\",4],[\"Not Run\",12],[\"Outstanding defects\",0],[\"Open Critical / High defects\",0],[\"Pass records missing evidence\",0],[\"Requirements without a test\",0],[null,null],[\"Overall status\",\"Verification incomplete\"]]}",
+  "inputMutationCheck": "PASS; restored before final recalculation/export",
+  "sheets": [
+    "Read Me",
+    "Requirements Register",
+    "DVP&R Test Plan",
+    "Test Execution",
+    "Visual and Animation Tests",
+    "Gameplay Tests",
+    "Authentication & Progress",
+    "Browser and Device Tests",
+    "Performance Tests",
+    "Defect Register",
+    "Evidence Register",
+    "Verification Summary"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "date": "2026-11-23",
+  "results": [
+    {
+      "test": "story-motion-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS short-path and bounded turns at 20/30/60/120 Hz, forward long-line timing, blocked idle and start/stop weights.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "cast-performance-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS bounded cue turns, staggered blinks/crowd rests, one-shot foreground cheering, unchanged cast/words, actual PCM/envelopes/hashes and existing confrontation window.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "saul-performance-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS recording hashes/durations/cast/words, ordered complete voice cues, authored silence closure, finite reactions and 30–45 s audience.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "story-route-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS four route checkpoint gates, complete ordered prefixes, presentation-only hints, route/run/revision/version/battle/review binding, expiry, consume-once and storage failure.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "pavilion-route-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS confirmed route gate; run/revision/version/battle/review/expiry checks; one-use and unavailable-storage recovery; collision-valid passage with original obstacles retained.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "audience-performance-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS 500 additive-pose restore cycles, finite joints, gesture continuity, continued long-line motion and explicit missing-rig failure.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "action-router-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: independent held sources, normalised movement, analog/aim ownership, action availability, pause and cinematic cancellation.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "jump-motion-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: takeoff/air/landing arc, step rates, single request, roof collision, terrain grounding and restart cancellation.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "ranged-spear-rules-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS ballistic release/arc/landing, lethal swept head/shaft, four clearance directions at 120/60/30/20 Hz, locked aim, natural movement credit, retry reset and route bends.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "spear-airborne-rules-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: physical jump credit, early/late lethal contacts, airborne middle hit, reset, no registration immunity, unrelated jump and first/last active boundaries at 120/60/30/20 Hz.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "cinematic-battle-rules-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS ballistic speed/gravity, swept forehead hits at 120/60/30/20 Hz, genuine misses and higher aiming, calculated range feedback, sword capsule sweep, required-stage guard and complete retry reset.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "episode-rules-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: ordered objectives, cue ownership, idempotency, failed/stale saves, reload, real preparation, defeat/retry, aftermath, completion, replay and invalid saves.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "m4-database-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: actual migration in local PostgreSQL WASM; ordered story, authoritative saves, lost-response idempotency, stale revisions, anonymous denial, two-identity RLS, defeat/retry, completion/history/replay, settings validation/isolation. Live Clerk/JWT verification is separate.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "continuous-battle-saves.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS: opt-in combat/fall/sword/finish checkpoints, legacy revisions, owner isolation, ordered actions, stale tabs, lost response retry, server Victory guard and replay.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation.",
+      "harnessCorrection": "Initial command named a non-existent -check suffix. Corrected filename and executed actual check."
+    },
+    {
+      "test": "battle-ending-rules-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS player-driven sword, no timer completion or stage bypass, bounded animation at 120/60/30/20 Hz, release/invalid input/retry, 24 converging pursuit paths and retained collapsed soldiers.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "communication-motion-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "PASS target-relative gaze, eyes leading head, bounded turns, expressions, unchanged roots and 20/30/60/120 Hz restore/pause behaviour.\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    },
+    {
+      "test": "communication-assets-check.cjs",
+      "status": "PASS",
+      "exit": 0,
+      "output": "{\"status\":\"PASS\",\"models\":15,\"basis\":\"Original Git baseline compared with current GLB definitions and actual animation/UV/skin/geometry accessors. Only documented facial data may change.\",\"results\":[{\"file\":\"challenge-soldier.glb\",\"offsetMillimetres\":18.68349383585155,\"animations\":9},{\"file\":\"david-adventure.glb\",\"offsetMillimetres\":15.541821951046586,\"animations\":12},{\"file\":\"david-aftermath.glb\",\"offsetMillimetres\":15.54176226879167,\"animations\":14},{\"file\":\"david-camp.glb\",\"offsetMillimetres\":15.541821951046586,\"animations\":9},{\"file\":\"david-dialogue.glb\",\"offsetMillimetres\":15.541821951046586,\"animations\":8},{\"file\":\"david-preparation.glb\",\"offsetMillimetres\":15.541821951046586,\"animations\":12},{\"file\":\"goliath-collision.glb\",\"offsetMillimetres\":27.646413693825256,\"animations\":9},{\"file\":\"goliath-continuous.glb\",\"offsetMillimetres\":27.646294484535705,\"animations\":15},{\"file\":\"goliath-duel.glb\",\"offsetMillimetres\":27.646175275246154,\"animations\":13},{\"file\":\"goliath-encounter.glb\",\"offsetMillimetres\":27.646413693825256,\"animations\":9},{\"file\":\"goliath-ranged.glb\",\"offsetMillimetres\":27.645936856667053,\"animations\":10},{\"file\":\"goliath-speaking.glb\",\"offsetMillimetres\":27.646413693825256,\"animations\":6},{\"file\":\"jesse-courtyard.glb\",\"offsetMillimetres\":4.421757689366812,\"animations\":3},{\"file\":\"saul.glb\",\"offsetMillimetres\":18.68349383585155,\"animations\":7},{\"file\":\"victory-soldier.glb\",\"offsetMillimetres\":18.68349383585155,\"animations\":11}]}\n",
+      "error": "",
+      "method": "Current-source executable checks; not a substitute for browser visual validation."
+    }
+  ]
+}

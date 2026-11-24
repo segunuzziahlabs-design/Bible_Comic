@@ -1,0 +1,3001 @@
+{
+  "executions": {
+    "TC-G01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G13": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G15": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G18": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual 1366×768 battle test passed moving aim/throw under live spears, deliberate sling-stage spear defeat/Retry, genuine forehead collision, groans/full authored turn/collapse, pickup and carried-sword reload, duplicate interaction guards and player final action.",
+        "evidence": [
+          "EV-CONTINUOUS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G24": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G26": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-G27": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-BR01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Final candidate 04 repeated the complete normal empty-session desktop journey through all twelve objectives, deliberate lethal defeat/Retry, controlled final action, completion reload and replay, without state repair. Prior touch journeys remain separately scoped.",
+        "evidence": [
+          "EV-FINAL-DESKTOP"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      }
+    },
+    "TC-BR03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-01",
+      "limitation": ""
+    },
+    "TC-BR04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Completed all twelve objectives from empty normal sessions in desktop/portrait/landscape. Automatic messenger, guided routes, Jesse/Takes, armour, automatic five-stone pickup, practice miss/hit, moving battle, lethal sword failure, Retry, inaccurate shots, physical forehead hit, controlled final action, Victory and replay passed. See each case’s relevant chapter/event and screenshots; no state repair.",
+        "evidence": [
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-01",
+      "limitation": ""
+    },
+    "TC-A01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-A09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-B03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-B04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-B05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-B06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-B09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-C01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-C05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-C06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-C07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-C10": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-D10": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-F01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-F03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-P07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-P08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Normal-clock audience retests show moving pupils and head joints, staggered blinks, gaze generally meeting the partner eyeline (median ~8–9°, p95 ~13°), restrained head/shoulder reactions, consistent speech weights on 3+ surfaces, neutral <0.015 after the voice, no expired/restarted dialogue overlap, paused clocks/faces, actual muted masters and returned movement. Target-movement/eyes-leading-head and bounded restore behavior additionally exercised at 20/30/60/120 Hz.",
+        "evidence": [
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 and Edge 158.0.4370.33"
+      },
+      "build": "COMM-20261123-02",
+      "limitation": ""
+    },
+    "TC-EM-surprise": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered surprise. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-anger": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered anger. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-fear": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered fear. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-confidence": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered confidence. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-sadness": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered sadness. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-determination": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered determination. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-EM-happiness": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual David GLB and production facial component rendered happiness. Controlled opening .4 / rounding .2 stays independent of the expression on all speech bindings; zero input hides the interior. Contextual game activation is recorded separately. This fixture does not assert real spoken-audio timing.",
+        "evidence": [
+          "EV-EXPRESSIONS",
+          "EV-ANALYSIS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "Current production source / isolated Vite fixture",
+      "limitation": ""
+    },
+    "TC-B01": {
+      "initial": {
+        "status": "Fail",
+        "actual": "Baseline screenshot shows detached mouth below the original lip crease. Asset inspection measures 4–28 mm discrepancies and David binding overwrites.",
+        "evidence": [
+          "EV-BASE-MOUTH",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "defects": [
+        "QA-D01",
+        "QA-D02"
+      ]
+    },
+    "TC-B02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-B07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-B08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-D01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-D07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-E06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-F02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-F07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Inspected the actual opening/Jesse, camp, challenge, audience and Victory captures alongside the original baseline. One aligned mouth and two tracking eyes; neutral interiors hidden. Contextual expressions, original period art, matte skin/cloth, warm key/sky fill, grounded shadows, grain/vegetation/fog and named shots remain. Actual recordings contain sound and finite visible actor joints; art/acting remain stylised rather than photorealistic.",
+        "evidence": [
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE",
+          "EV-ASSETS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-C02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Six real starts/stops, forward/reverse walking, pivots and jump/land executed in each viewport. Actual root responds within 150 ms; finite heading and grounded settled frames recorded. Walk timing remains distance-driven and shortest-path turning is rate bounded. Sole contact on every uneven surface is not certified.",
+        "evidence": [
+          "EV-MOTION-DESKTOP",
+          "EV-MOTION-PORTRAIT",
+          "EV-MOTION-LANDSCAPE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-C04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Six real starts/stops, forward/reverse walking, pivots and jump/land executed in each viewport. Actual root responds within 150 ms; finite heading and grounded settled frames recorded. Walk timing remains distance-driven and shortest-path turning is rate bounded. Sole contact on every uneven surface is not certified.",
+        "evidence": [
+          "EV-MOTION-DESKTOP",
+          "EV-MOTION-PORTRAIT",
+          "EV-MOTION-LANDSCAPE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-C08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Six real starts/stops, forward/reverse walking, pivots and jump/land executed in each viewport. Actual root responds within 150 ms; finite heading and grounded settled frames recorded. Walk timing remains distance-driven and shortest-path turning is rate bounded. Sole contact on every uneven surface is not certified.",
+        "evidence": [
+          "EV-MOTION-DESKTOP",
+          "EV-MOTION-PORTRAIT",
+          "EV-MOTION-LANDSCAPE",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G12": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Prepared isolated battle; actual initial required evasions then 45 seconds of sling-enabled combat. Repeated forward/back/left/right dodges, moving aim and inaccurate throw survive ongoing real spears. Distance/angle guidance remains calculated; no forehead hit from the bad aim.",
+        "evidence": [
+          "EV-BATTLE-PERF",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-P04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Prepared isolated battle; actual initial required evasions then 45 seconds of sling-enabled combat. Repeated forward/back/left/right dodges, moving aim and inaccurate throw survive ongoing real spears. Distance/angle guidance remains calculated; no forehead hit from the bad aim.",
+        "evidence": [
+          "EV-BATTLE-PERF",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G17": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual 1366×768 battle test passed moving aim/throw under live spears, deliberate sling-stage spear defeat/Retry, genuine forehead collision, groans/full authored turn/collapse, pickup and carried-sword reload, duplicate interaction guards and player final action.",
+        "evidence": [
+          "EV-CONTINUOUS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G19": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual 1366×768 battle test passed moving aim/throw under live spears, deliberate sling-stage spear defeat/Retry, genuine forehead collision, groans/full authored turn/collapse, pickup and carried-sword reload, duplicate interaction guards and player final action.",
+        "evidence": [
+          "EV-CONTINUOUS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G22": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual 1366×768 battle test passed moving aim/throw under live spears, deliberate sling-stage spear defeat/Retry, genuine forehead collision, groans/full authored turn/collapse, pickup and carried-sword reload, duplicate interaction guards and player final action.",
+        "evidence": [
+          "EV-CONTINUOUS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-BR02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual 1366×768 battle test passed moving aim/throw under live spears, deliberate sling-stage spear defeat/Retry, genuine forehead collision, groans/full authored turn/collapse, pickup and carried-sword reload, duplicate interaction guards and player final action.",
+        "evidence": [
+          "EV-CONTINUOUS",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G20": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual partial sword stroke freezes when released and stays frozen after pause/resume; resumed input completes it. Israel pursues, strikes and all 24 retreating soldiers collapse with matching impacts; completion and restart reset verified. Running phase follows measured path distance.",
+        "evidence": [
+          "EV-ENDING",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-G21": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual partial sword stroke freezes when released and stays frozen after pause/resume; resumed input completes it. Israel pursues, strikes and all 24 retreating soldiers collapse with matching impacts; completion and restart reset verified. Running phase follows measured path distance.",
+        "evidence": [
+          "EV-ENDING",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-C03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual partial sword stroke freezes when released and stays frozen after pause/resume; resumed input completes it. Israel pursues, strikes and all 24 retreating soldiers collapse with matching impacts; completion and restart reset verified. Running phase follows measured path distance.",
+        "evidence": [
+          "EV-ENDING",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-P03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Three unrecorded normal-clock Victory viewport runs; FPS/p95/max and all >250 ms gaps recorded. All three meet the laptop 30 FPS target.",
+        "evidence": [
+          "EV-FPS-DESKTOP",
+          "EV-FPS-PORTRAIT",
+          "EV-FPS-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-03 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Candidate 04 normal-clock desktop/portrait/landscape conclusion retests: ~50–51 FPS, largest gaps 24.9–27.2 ms, no >250 ms playback stalls. Audio/progress stay stopped during entry preparation.",
+        "evidence": [
+          "EV-FPS-WARMED-DESKTOP",
+          "EV-FPS-WARMED-PORTRAIT",
+          "EV-FPS-WARMED-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "defects": [
+        "QA-D12"
+      ]
+    },
+    "TC-F05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Unrecorded challenge/Eliab, interactive battle and Victory measured separately. FPS, p95/max and long frames are reported with no recording or clock manipulation; laptop GPU in all viewport sizes.",
+        "evidence": [
+          "EV-CHALLENGE-PERF",
+          "EV-BATTLE-PERF",
+          "EV-FPS-DESKTOP",
+          "EV-FPS-PORTRAIT",
+          "EV-FPS-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-03 → COMM-04",
+      "limitation": "",
+      "retest": {
+        "status": "Pass",
+        "actual": "Candidate 04 normal-clock desktop/portrait/landscape conclusion retests: ~50–51 FPS, largest gaps 24.9–27.2 ms, no >250 ms playback stalls. Audio/progress stay stopped during entry preparation.",
+        "evidence": [
+          "EV-FPS-WARMED-DESKTOP",
+          "EV-FPS-WARMED-PORTRAIT",
+          "EV-FPS-WARMED-LANDSCAPE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "defects": [
+        "QA-D12"
+      ]
+    },
+    "TC-F06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Five collected-heap samples across twenty real restart-button actions stay within the stated diagnostic growth allowance. Shared speech decodes, face ownership and texture/material cleanup retained. JS heap only; GPU/audio/process memory and long physical-mobile sessions remain unmeasured.",
+        "evidence": [
+          "EV-MEMORY"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-P05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Five collected-heap samples across twenty real restart-button actions stay within the stated diagnostic growth allowance. Shared speech decodes, face ownership and texture/material cleanup retained. JS heap only; GPU/audio/process memory and long physical-mobile sessions remain unmeasured.",
+        "evidence": [
+          "EV-MEMORY"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-20261123-03",
+      "limitation": ""
+    },
+    "TC-P01": {
+      "initial": {
+        "status": "Pass",
+        "actual": "All seven exported pages load with no missing assets; connected transitions already complete in the normal journeys. Fresh-process/local cold and warm timings/download bytes recorded separately. Facial shaders warm before entry; no warm-up mouth left in neutral.",
+        "evidence": [
+          "EV-LOAD",
+          "EV-LOAD-REPEAT",
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-P02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "All seven exported pages load with no missing assets; connected transitions already complete in the normal journeys. Fresh-process/local cold and warm timings/download bytes recorded separately. Facial shaders warm before entry; no warm-up mouth left in neutral.",
+        "evidence": [
+          "EV-LOAD",
+          "EV-LOAD-REPEAT",
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-F04": {
+      "initial": {
+        "status": "Pass",
+        "actual": "All seven exported pages load with no missing assets; connected transitions already complete in the normal journeys. Fresh-process/local cold and warm timings/download bytes recorded separately. Facial shaders warm before entry; no warm-up mouth left in neutral.",
+        "evidence": [
+          "EV-LOAD",
+          "EV-LOAD-REPEAT",
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-P09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "All seven exported pages load with no missing assets; connected transitions already complete in the normal journeys. Fresh-process/local cold and warm timings/download bytes recorded separately. Facial shaders warm before entry; no warm-up mouth left in neutral.",
+        "evidence": [
+          "EV-LOAD",
+          "EV-LOAD-REPEAT",
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03",
+      "limitation": ""
+    },
+    "TC-P06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-AU08": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-AU09": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-AU11": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-AU12": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-G23": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual current-source checks passed: all 15 speaking GLBs retain body/weapon animation/skin/UV accessors; PostgreSQL WASM migration exercises ordered progress, owner isolation, legacy aftermath revisions, failed/lost/stale updates, idempotent receipt retry and settings validation. Browser save reload evidence is separately linked.",
+        "evidence": [
+          "EV-UNIT",
+          "EV-ASSETS"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Node 24.14.1 / PlayCanvas Entity runtime / PostgreSQL WASM"
+      },
+      "build": "Current source",
+      "limitation": ""
+    },
+    "TC-AU02": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual Clerk development sign-in, owned Supabase dashboard, UI profile/appearance save, deliberately lost server response/retry, second-identity write denial, fresh Edge sign-in with no copied storage, protected route and cross-tab logout passed. Reserved test identities only; no owner state modified.",
+        "evidence": [
+          "EV-ACCOUNT",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 / Edge 158.0.4370.33; real development services"
+      },
+      "build": "COMM-CLOUD-20261123-03",
+      "limitation": ""
+    },
+    "TC-AU03": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual Clerk development sign-in, owned Supabase dashboard, UI profile/appearance save, deliberately lost server response/retry, second-identity write denial, fresh Edge sign-in with no copied storage, protected route and cross-tab logout passed. Reserved test identities only; no owner state modified.",
+        "evidence": [
+          "EV-ACCOUNT",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 / Edge 158.0.4370.33; real development services"
+      },
+      "build": "COMM-CLOUD-20261123-03",
+      "limitation": ""
+    },
+    "TC-AU05": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual Clerk development sign-in, owned Supabase dashboard, UI profile/appearance save, deliberately lost server response/retry, second-identity write denial, fresh Edge sign-in with no copied storage, protected route and cross-tab logout passed. Reserved test identities only; no owner state modified.",
+        "evidence": [
+          "EV-ACCOUNT",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 / Edge 158.0.4370.33; real development services"
+      },
+      "build": "COMM-CLOUD-20261123-03",
+      "limitation": ""
+    },
+    "TC-AU07": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Actual Clerk development sign-in, owned Supabase dashboard, UI profile/appearance save, deliberately lost server response/retry, second-identity write denial, fresh Edge sign-in with no copied storage, protected route and cross-tab logout passed. Reserved test identities only; no owner state modified.",
+        "evidence": [
+          "EV-ACCOUNT",
+          "EV-UNIT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79 / Edge 158.0.4370.33; real development services"
+      },
+      "build": "COMM-CLOUD-20261123-03",
+      "limitation": ""
+    },
+    "TC-AU06": {
+      "initial": {
+        "status": "Pass",
+        "actual": "After explicit one-objective fixture setup, actual Edge movement and complete voiced camp delivery earned the next hosted checkpoint. Reload retained the same owned run and confirmed prefix; this is not a full cloud six-chapter replay.",
+        "evidence": [
+          "EV-ACCOUNT"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Actual Edge / Clerk development / hosted Supabase"
+      },
+      "build": "COMM-CLOUD-20261123-03",
+      "limitation": ""
+    },
+    "TC-BR06": {
+      "initial": {
+        "status": "Blocked",
+        "actual": "Not executed: Firefox is not installed at either checked standard Windows path.",
+        "evidence": [
+          "EV-ENV"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Environment inspection"
+      },
+      "build": "Environment",
+      "limitation": "Firefox is not installed at either checked standard Windows path."
+    },
+    "TC-BR07": {
+      "initial": {
+        "status": "Blocked",
+        "actual": "Not executed: Windows workspace has no accessible Safari/macOS test environment.",
+        "evidence": [
+          "EV-ENV"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Environment inspection"
+      },
+      "build": "Environment",
+      "limitation": "Windows workspace has no accessible Safari/macOS test environment."
+    },
+    "TC-BR08": {
+      "initial": {
+        "status": "Blocked",
+        "actual": "Not executed: No physical Android browser connected to automation; laptop touch emulation is separately recorded.",
+        "evidence": [
+          "EV-ENV"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Environment inspection"
+      },
+      "build": "Environment",
+      "limitation": "No physical Android browser connected to automation; laptop touch emulation is separately recorded."
+    },
+    "TC-BR09": {
+      "initial": {
+        "status": "Blocked",
+        "actual": "Not executed: No physical iPhone/Safari browser connected to automation; emulation is not a device pass.",
+        "evidence": [
+          "EV-ENV"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Environment inspection"
+      },
+      "build": "Environment",
+      "limitation": "No physical iPhone/Safari browser connected to automation; emulation is not a device pass."
+    },
+    "TC-AU01": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "New users were provisioned as isolated fixtures through the Clerk development API, not the registration UI."
+    },
+    "TC-AU04": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Incorrect-credential UI case has not been executed in this pass."
+    },
+    "TC-AU10": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Explicit expired/revoked-session save and reauthentication case has not been executed."
+    },
+    "TC-G11": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Jump/landing and roof rules passed executable checks; current browser motion test exercises jump/landing but not a low roof."
+    },
+    "TC-G14": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Real spear flight and dodging are browser-verified; current-browser airborne jump-clearance case is not rerun."
+    },
+    "TC-G25": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Profile/appearance persistence is covered, but changing every appearance option and inspecting its rendered material across reload is not rerun."
+    },
+    "TC-G16": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Position/angle calculations passed executable checks and moving aim was browser-tested; explicit too-close/too-far guidance extremes are not rerun in this browser pass."
+    },
+    "TC-C09": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "Partial diagnostic only: actual ankle/toe traces and distance-driven phases recorded. Low-height proxy windows include foot roll/reversals and do not certify a planted sole, so the complete sliding criterion is not passed.",
+        "evidence": [
+          "EV-ANALYSIS",
+          "EV-MOTION-DESKTOP",
+          "EV-MOTION-PORTRAIT",
+          "EV-MOTION-LANDSCAPE"
+        ]
+      },
+      "limitation": "Distance-driven phase and contact traces are recorded; a quantitative sole-contact/uneven-ground sliding acceptance remains to be completed."
+    },
+    "TC-BR05": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Edge audience and account resume tested; full Edge battle/ending sample not executed."
+    },
+    "TC-BR10": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "WebGL-disabled fallback case not executed in this pass."
+    },
+    "TC-BR11": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "WASD/action shortcuts are exercised; complete keyboard-only focus traversal not executed."
+    },
+    "TC-D05": {
+      "initial": {
+        "status": "Fail",
+        "actual": "Candidate 01 Saul foreground blocks David’s speaking face.",
+        "evidence": [
+          "EV-OTS-FAIL"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "retest": {
+        "status": "Pass",
+        "actual": "Candidate 02 camera offset preserves David’s face with Saul on the foreground edge; checked desktop and touch views.",
+        "evidence": [
+          "EV-OTS-FIX",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 → 02",
+      "defects": [
+        "QA-D09"
+      ]
+    },
+    "TC-P10": {
+      "initial": {
+        "status": "Pass",
+        "actual": "Final normal complete desktop and prior complete touch journeys plus focused face/battle retests recorded no page/console errors, failed assets or observed corrupt meshes. Screenshot/video evidence retained.",
+        "evidence": [
+          "EV-FINAL-DESKTOP",
+          "EV-FULL-DESKTOP",
+          "EV-FULL-PORTRAIT",
+          "EV-FULL-LANDSCAPE",
+          "EV-CAST-OPENING",
+          "EV-CAST-CAMP",
+          "EV-CAST-CHALLENGE",
+          "EV-CAST-VICTORY",
+          "EV-FACE-DESKTOP",
+          "EV-FACE-PORTRAIT",
+          "EV-FACE-LANDSCAPE",
+          "EV-FACE-EDGE"
+        ],
+        "tester": "Codex — browser automation and visual inspection",
+        "date": "2026-11-23",
+        "browser": "Chrome 157.0.8103.79"
+      },
+      "build": "COMM-01 / 02 / 03 / 04",
+      "limitation": ""
+    },
+    "TC-G10": {
+      "initial": {
+        "status": "Not Run",
+        "actual": "",
+        "evidence": []
+      },
+      "limitation": "Execution/evidence for the complete stated case has not yet been recorded."
+    }
+  },
+  "evidence": [
+    {
+      "id": "EV-UNIT",
+      "title": "Current-source regression and database checks",
+      "kind": "Executable checks",
+      "path": "communication-unit-results.json",
+      "date": "2026-11-23",
+      "build": "Current source",
+      "scope": "17 executable checks. Includes actual PostgreSQL WASM migration/ownership/save tests; not browser visual or real Clerk authentication."
+    },
+    {
+      "id": "EV-ASSETS",
+      "title": "Fifteen speaking-model repair manifest",
+      "kind": "Asset audit",
+      "path": "face-asset-repair.json",
+      "date": "2026-11-23",
+      "build": "Current source",
+      "scope": "Actual original/current hashes, mouth offsets and preserved asset policy."
+    },
+    {
+      "id": "EV-BUILDS",
+      "title": "Export/source fingerprints",
+      "kind": "Build manifest",
+      "path": "communication-builds.json",
+      "date": "2026-11-23",
+      "build": "All candidates",
+      "scope": "Each export has an exact fingerprint and list of source hashes. Prior candidates are kept separately."
+    },
+    {
+      "id": "EV-ENV",
+      "title": "Available testing environments",
+      "kind": "Environment audit",
+      "path": "environment-availability.json",
+      "date": "2026-11-23",
+      "build": "Test environment",
+      "scope": "Windows, browser availability and physical/Safari limits."
+    },
+    {
+      "id": "EV-HARDWARE",
+      "title": "Measured laptop hardware",
+      "kind": "Environment audit",
+      "path": "hardware-baseline.json",
+      "date": "2026-11-23",
+      "build": "Test environment",
+      "scope": "Intel N150, Intel integrated graphics, 15.8 GiB RAM, Windows 11 Pro. No physical-mobile performance inference."
+    },
+    {
+      "id": "EV-ANALYSIS",
+      "title": "Rendered-state and motion evidence analysis",
+      "kind": "Evidence analysis",
+      "path": "communication-evidence-analysis.json",
+      "date": "2026-11-23",
+      "build": "Multiple recorded builds",
+      "scope": "Normal-game emotion activations, eye metrics and actual root/contact traces. Counts are not acting-quality ratings; foot markers are not sole contact."
+    },
+    {
+      "id": "EV-FULL-DESKTOP",
+      "title": "desktop fresh six-chapter journey",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/full/desktop/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-01",
+      "scope": "Normal empty local session, all twelve ordered objectives, real controls, defeat/retry, final action, completion/reload/replay. Recorded: not a clean FPS benchmark."
+    },
+    {
+      "id": "EV-FULL-PORTRAIT",
+      "title": "portrait fresh six-chapter journey",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/full/portrait/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-01",
+      "scope": "Normal empty local session, all twelve ordered objectives, real controls, defeat/retry, final action, completion/reload/replay. Recorded: not a clean FPS benchmark."
+    },
+    {
+      "id": "EV-FULL-LANDSCAPE",
+      "title": "landscape fresh six-chapter journey",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/full/landscape/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-01",
+      "scope": "Normal empty local session, all twelve ordered objectives, real controls, defeat/retry, final action, completion/reload/replay. Recorded: not a clean FPS benchmark."
+    },
+    {
+      "id": "EV-FACE-DESKTOP",
+      "title": "desktop rendered-eye and speech verification",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/faces02/desktop/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual pupil/head directions, mouth surfaces, AudioBufferSource intervals, pause/mute/restart and returned movement."
+    },
+    {
+      "id": "EV-FACE-PORTRAIT",
+      "title": "portrait rendered-eye and speech verification",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/faces02/portrait/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual pupil/head directions, mouth surfaces, AudioBufferSource intervals, pause/mute/restart and returned movement."
+    },
+    {
+      "id": "EV-FACE-LANDSCAPE",
+      "title": "landscape rendered-eye and speech verification",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/faces02/landscape/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual pupil/head directions, mouth surfaces, AudioBufferSource intervals, pause/mute/restart and returned movement."
+    },
+    {
+      "id": "EV-FACE-EDGE",
+      "title": "edge rendered-eye and speech verification",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/faces02/edge/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual pupil/head directions, mouth surfaces, AudioBufferSource intervals, pause/mute/restart and returned movement."
+    },
+    {
+      "id": "EV-CAST-OPENING",
+      "title": "opening actual cast/audio/pose capture",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/cast-final/desktop/opening/audit.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Actual scene controls, visible actor joints, speech/mute/pause and rendered output. Diagnostic portraits change only the camera while paused; normal story shots are separate."
+    },
+    {
+      "id": "EV-CAST-CAMP",
+      "title": "camp actual cast/audio/pose capture",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/cast03/desktop/camp/audit.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual scene controls, visible actor joints, speech/mute/pause and rendered output. Diagnostic portraits change only the camera while paused; normal story shots are separate."
+    },
+    {
+      "id": "EV-CAST-CHALLENGE",
+      "title": "challenge actual cast/audio/pose capture",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/cast-final/desktop/challenge/audit.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Actual scene controls, visible actor joints, speech/mute/pause and rendered output. Diagnostic portraits change only the camera while paused; normal story shots are separate."
+    },
+    {
+      "id": "EV-CAST-VICTORY",
+      "title": "victory actual cast/audio/pose capture",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/cast03/desktop/victory/audit.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Actual scene controls, visible actor joints, speech/mute/pause and rendered output. Diagnostic portraits change only the camera while paused; normal story shots are separate."
+    },
+    {
+      "id": "EV-EXPRESSIONS",
+      "title": "Seven rendered expression component tests",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/expressions-final/results.json",
+      "date": "2026-11-23",
+      "build": "Current production source / isolated Vite fixture",
+      "scope": "Isolated browser component fixture importing the exact production face adapter and David GLB, not a chapter or real spoken line. Controlled .4/.2 opening/rounding verifies expression independence; zero input verifies neutral. Contextual emotion activation and real audio-clock tests are separately recorded in normal game runs."
+    },
+    {
+      "id": "EV-MOTION-DESKTOP",
+      "title": "desktop actual root/foot motion trace",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/motion-final/desktop.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Trusted keyboard/CDP events, actual rendered root/ankle/ball traces, six starts/stops, reversal, pivot, jump and controls. Joint traces alone do not certify sole contact."
+    },
+    {
+      "id": "EV-MOTION-PORTRAIT",
+      "title": "portrait actual root/foot motion trace",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/motion-final/portrait.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Trusted keyboard/CDP events, actual rendered root/ankle/ball traces, six starts/stops, reversal, pivot, jump and controls. Joint traces alone do not certify sole contact."
+    },
+    {
+      "id": "EV-MOTION-LANDSCAPE",
+      "title": "landscape actual root/foot motion trace",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/motion-final/landscape.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Trusted keyboard/CDP events, actual rendered root/ankle/ball traces, six starts/stops, reversal, pivot, jump and controls. Joint traces alone do not certify sole contact."
+    },
+    {
+      "id": "EV-BATTLE-PERF",
+      "title": "Unrecorded active combat and four-direction defence",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/active-battle/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "1366×768 laptop viewport; prepared reducer fixture then actual inputs and normal clock. First 45 seconds of sling-enabled combat with repeated live spear dodges in four directions, moving aim and a genuine missed throw. No recording/screenshots during measurement; laptop GPU, not a phone."
+    },
+    {
+      "id": "EV-CONTINUOUS",
+      "title": "Continuous battle/fall/checkpoint regression",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/continuous-final/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Prepared retry fixture; real laptop controls thereafter. Ongoing spear during moving aim/throw, lethal spear, Retry, earned impact/staged turn/fall, sword pickup/reload/finish guards."
+    },
+    {
+      "id": "EV-ENDING",
+      "title": "Player-controlled final stroke and pursuit retest",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/ending-final/desktop-results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Fallen fixture; real pickup/movement/partial stroke/release/pause/complete, pursuit/casualties, conclusion/restart."
+    },
+    {
+      "id": "EV-FPS-DESKTOP",
+      "title": "desktop unrecorded Victory frame pacing",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-performance/desktop.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "id": "EV-FPS-PORTRAIT",
+      "title": "portrait unrecorded Victory frame pacing",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-performance/portrait.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "id": "EV-FPS-LANDSCAPE",
+      "title": "landscape unrecorded Victory frame pacing",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-performance/landscape.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "id": "EV-CHALLENGE-PERF",
+      "title": "Voiced challenge/Eliab frame pacing",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/challenge-performance/desktop.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "First 45 s after 2 s challenge warmup, voiced challenge, real keyboard/CDP touch walking and Eliab speech. Sequential browser; no screenshots, recording, rig observation or clock changes. Loopback desktop GPU in all viewport layouts, not physical phones."
+    },
+    {
+      "id": "EV-FPS-REPEAT-PORTRAIT",
+      "title": "portrait quiet sequential Victory repeat",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-repeat/portrait.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "id": "EV-FPS-REPEAT-LANDSCAPE",
+      "title": "landscape quiet sequential Victory repeat",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-repeat/landscape.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "id": "EV-MEMORY",
+      "title": "Twenty audience restarts and collected JS heap",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/memory-final/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Same normal-clock audience restarted 20 times with actual buttons. Chrome CDP JS heap after explicit collection; GPU/audio/process memory is not included. Diagnostic allowance: 2 MiB or 20% from warmed baseline, whichever is larger. No physical-device or long-session leak guarantee."
+    },
+    {
+      "id": "EV-LOAD",
+      "title": "Fresh-process and warm local loading",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/loading-final/loading-profile.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Local loopback, actual server caching, fresh Chrome process/profile per cold trial. OS/driver caches not flushed; no hosted-network claim."
+    },
+    {
+      "id": "EV-LOAD-REPEAT",
+      "title": "Fresh-process and warm local loading",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/loading-opening-repeat/loading-profile.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Local loopback, actual server caching, fresh Chrome process/profile per cold trial. OS/driver caches not flushed; no hosted-network claim."
+    },
+    {
+      "id": "EV-ACCOUNT",
+      "title": "Real development login/profile/save/resume/logout",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/accounts-final/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-CLOUD-20261123-03",
+      "scope": "Actual Clerk development UI, reserved test emails/testing token, hosted Supabase game project. No production CAPTCHA, real-email delivery or registration assertion; isolated QA identities only."
+    },
+    {
+      "id": "EV-BASE-MOUTH",
+      "title": "Baseline detached speaking opening",
+      "kind": "Screenshot",
+      "path": "evidence/communication-2026-11-23/baseline-saul/david-answer.png",
+      "date": "2026-11-23",
+      "build": "ce244a8",
+      "scope": "Observed below original lips before repair; baseline commit retained."
+    },
+    {
+      "id": "EV-OTS-FAIL",
+      "title": "Candidate 01 obscured over-shoulder shot",
+      "kind": "Screenshot",
+      "path": "evidence/communication-2026-11-23/full/desktop/08-before-saul.png",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-01",
+      "scope": "Saul obscures David and materials appear overly glossy."
+    },
+    {
+      "id": "EV-OTS-FIX",
+      "title": "Candidate 02 corrected shoulder shot",
+      "kind": "Screenshot",
+      "path": "evidence/communication-2026-11-23/faces02/desktop/over-shoulder.png",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "David remains visible and roughness is corrected."
+    },
+    {
+      "id": "EV-FACE-FIX",
+      "title": "Corrected David speaking close-up",
+      "kind": "Screenshot",
+      "path": "evidence/communication-2026-11-23/faces02/desktop/david-speaking.png",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Aligned lip opening, tracking eyes and matte cloth/skin."
+    },
+    {
+      "id": "EV-GOLIATH-OLD",
+      "title": "Candidate 02 retained static pupils",
+      "kind": "Diagnostic screenshot",
+      "path": "evidence/communication-2026-11-23/cast03/desktop/challenge/Goliath-face.png",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-02",
+      "scope": "Original irises/pupils are still joined to beard beneath tracking eyes."
+    },
+    {
+      "id": "EV-GOLIATH-FIX",
+      "title": "Candidate 03 replaced Goliath pupils",
+      "kind": "Diagnostic screenshot",
+      "path": "evidence/communication-2026-11-23/cast-final/desktop/challenge/Goliath-face.png",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Camera-only paused portrait after removing only eye-region beard triangles."
+    },
+    {
+      "id": "EV-FPS-WARMED-DESKTOP",
+      "title": "desktop camera/shader warmup retest",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-warmed/desktop.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-04",
+      "scope": "Final candidate 04; actual normal-clock conclusion after entry warmup. All measured gaps retained."
+    },
+    {
+      "id": "EV-FPS-WARMED-PORTRAIT",
+      "title": "portrait camera/shader warmup retest",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-warmed/portrait.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-04",
+      "scope": "Final candidate 04; actual normal-clock conclusion after entry warmup. All measured gaps retained."
+    },
+    {
+      "id": "EV-FPS-WARMED-LANDSCAPE",
+      "title": "landscape camera/shader warmup retest",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/victory-warmed/landscape.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-04",
+      "scope": "Final candidate 04; actual normal-clock conclusion after entry warmup. All measured gaps retained."
+    },
+    {
+      "id": "EV-SHADER-TRACE",
+      "title": "Repeated-hitch WebGL call trace",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/shader-trace/portrait.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-03",
+      "scope": "Actual synchronous getProgramParameter call took 486 ms at ~3 s. Instrumented profiling is for cause diagnosis, not a clean FPS benchmark."
+    },
+    {
+      "id": "EV-LOAD-WARMED",
+      "title": "Final opening/conclusion entry timings",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/loading-warmed/loading-profile.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-04",
+      "scope": "Candidate 04 loading after the entry-preparation fix, separate from candidate 03 all-page loading."
+    },
+    {
+      "id": "EV-FINAL-DESKTOP",
+      "title": "Final candidate fresh complete desktop episode",
+      "kind": "Result log",
+      "path": "evidence/communication-2026-11-23/full-final/desktop/results.json",
+      "date": "2026-11-23",
+      "build": "COMM-20261123-04",
+      "scope": "Candidate 04; empty normal session, actual controls and clocks, all 12 objectives, defeat/retry, final stroke, conclusion/reload/replay. Recorded, not a clean FPS benchmark."
+    }
+  ],
+  "defects": [
+    {
+      "id": "QA-D01",
+      "severity": "High",
+      "status": "Closed",
+      "requirements": [
+        "N-B01",
+        "N-B02"
+      ],
+      "tests": [
+        "TC-B01",
+        "TC-B02"
+      ],
+      "date": "2026-11-23",
+      "observation": "Detached speaking opening at chin/lower lip.",
+      "rootCause": "Overlay authored in pre-scaled proportions.",
+      "action": "Align original lip crease, constrain opening, hide neutral interior/teeth; repair 15 GLBs.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-BASE-MOUTH",
+        "EV-FACE-FIX",
+        "EV-ASSETS"
+      ]
+    },
+    {
+      "id": "QA-D02",
+      "severity": "High",
+      "status": "Closed",
+      "requirements": [
+        "N-B03"
+      ],
+      "tests": [
+        "TC-B03"
+      ],
+      "date": "2026-11-23",
+      "observation": "Only one David target binding retained per name.",
+      "rootCause": "Map overwrote skin/rim/interior instances.",
+      "action": "Shared facial adapter owns all matching morph instances and separate speech/expression channels.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-UNIT",
+        "EV-FACE-DESKTOP",
+        "EV-FACE-PORTRAIT",
+        "EV-FACE-LANDSCAPE",
+        "EV-FACE-EDGE"
+      ]
+    },
+    {
+      "id": "QA-D09",
+      "severity": "Medium",
+      "status": "Closed",
+      "requirements": [
+        "N-D05"
+      ],
+      "tests": [
+        "TC-D05"
+      ],
+      "date": "2026-11-23",
+      "observation": "New shoulder shot obstructed the speaker.",
+      "rootCause": "Camera too close to Saul on the eyeline.",
+      "action": "Shift shoulder camera laterally and widen distance; similarly offset camp coverage.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-OTS-FAIL",
+        "EV-OTS-FIX"
+      ]
+    },
+    {
+      "id": "QA-D10",
+      "severity": "Medium",
+      "status": "Closed",
+      "requirements": [
+        "N-E02"
+      ],
+      "tests": [
+        "TC-E02"
+      ],
+      "date": "2026-11-23",
+      "observation": "Candidate 01 skin/cloth became excessively glossy.",
+      "rootCause": "glTF glossInvert=true stores roughness; capping gloss made surfaces smoother.",
+      "action": "Use a roughness floor for glTF and gloss cap for legacy materials.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-OTS-FAIL",
+        "EV-OTS-FIX",
+        "EV-FACE-FIX"
+      ]
+    },
+    {
+      "id": "QA-D11",
+      "severity": "Medium",
+      "status": "Closed",
+      "requirements": [
+        "N-B02",
+        "N-A01"
+      ],
+      "tests": [
+        "TC-B02"
+      ],
+      "date": "2026-11-23",
+      "observation": "Old static pupil geometry remained under tracking eyes.",
+      "rootCause": "Goliath’s original irises/pupils share the beard mesh, separate from whites.",
+      "action": "Remove only triangles wholly within measured eye bounds at load time; retain beard/brows and original assets.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-GOLIATH-OLD",
+        "EV-GOLIATH-FIX"
+      ]
+    },
+    {
+      "id": "QA-D12",
+      "severity": "Medium",
+      "status": "Closed",
+      "requirements": [
+        "N-F05"
+      ],
+      "tests": [
+        "TC-P03",
+        "TC-F05"
+      ],
+      "date": "2026-11-23",
+      "observation": "Repeated ~600 ms portrait and ~320 ms landscape gaps at camera changes, despite ~50 FPS averages.",
+      "rootCause": "WebGL program linking on first camera-dependent material/instancing visibility; trace captured a 486 ms getProgramParameter call.",
+      "action": "Prewarm representative conclusion cameras and complete facial morph combinations under the entry cover while audio/story remain stopped; restore initial pose/time before entry.",
+      "retest": "Pass in linked corrective candidate and executable/browser evidence.",
+      "evidence": [
+        "EV-FPS-DESKTOP",
+        "EV-FPS-PORTRAIT",
+        "EV-FPS-LANDSCAPE",
+        "EV-SHADER-TRACE",
+        "EV-FPS-WARMED-DESKTOP",
+        "EV-FPS-WARMED-PORTRAIT",
+        "EV-FPS-WARMED-LANDSCAPE"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "name": "Active sling combat",
+      "value": 51.970107185595054,
+      "unit": "FPS",
+      "target": "30 FPS; 1366×768 laptop viewport",
+      "evidence": "EV-BATTLE-PERF",
+      "method": "1366×768 laptop viewport; prepared reducer fixture then actual inputs and normal clock. First 45 seconds of sling-enabled combat with repeated live spear dodges in four directions, moving aim and a genuine missed throw. No recording/screenshots during measurement; laptop GPU, not a phone."
+    },
+    {
+      "name": "Active combat p95",
+      "value": 21.5,
+      "unit": "ms",
+      "target": "Reported without excluding stalls",
+      "evidence": "EV-BATTLE-PERF",
+      "method": "First 45 seconds; no recording/screenshots"
+    },
+    {
+      "name": "Victory desktop",
+      "value": 51.45811904033805,
+      "unit": "FPS",
+      "target": "30 FPS on laptop GPU",
+      "evidence": "EV-FPS-DESKTOP",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Victory desktop p95",
+      "value": 21.899999976158142,
+      "unit": "ms",
+      "target": "All measured frames included",
+      "evidence": "EV-FPS-DESKTOP",
+      "method": "Normal-clock conclusion after 2 s warmup"
+    },
+    {
+      "name": "Victory portrait",
+      "value": 49.630549742962295,
+      "unit": "FPS",
+      "target": "30 FPS on laptop GPU",
+      "evidence": "EV-FPS-PORTRAIT",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Victory portrait p95",
+      "value": 22.5,
+      "unit": "ms",
+      "target": "All measured frames included",
+      "evidence": "EV-FPS-PORTRAIT",
+      "method": "Normal-clock conclusion after 2 s warmup"
+    },
+    {
+      "name": "Victory landscape",
+      "value": 50.313136732136776,
+      "unit": "FPS",
+      "target": "30 FPS on laptop GPU",
+      "evidence": "EV-FPS-LANDSCAPE",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Victory landscape p95",
+      "value": 22.399999976158142,
+      "unit": "ms",
+      "target": "All measured frames included",
+      "evidence": "EV-FPS-LANDSCAPE",
+      "method": "Normal-clock conclusion after 2 s warmup"
+    },
+    {
+      "name": "Challenge and Eliab",
+      "value": 51.39536641439296,
+      "unit": "FPS",
+      "target": "30 FPS on laptop",
+      "evidence": "EV-CHALLENGE-PERF",
+      "method": "First 45 s after 2 s challenge warmup, voiced challenge, real keyboard/CDP touch walking and Eliab speech. Sequential browser; no screenshots, recording, rig observation or clock changes. Loopback desktop GPU in all viewport layouts, not physical phones."
+    },
+    {
+      "name": "Repeat Victory portrait",
+      "value": 49.413819184875585,
+      "unit": "FPS",
+      "target": "30 FPS on same laptop",
+      "evidence": "EV-FPS-REPEAT-PORTRAIT",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Repeat Victory portrait maximum gap",
+      "value": 631.1999999284744,
+      "unit": "ms",
+      "target": "Reported without removing stalls",
+      "evidence": "EV-FPS-REPEAT-PORTRAIT",
+      "method": "Same production export; fresh browser"
+    },
+    {
+      "name": "Repeat Victory landscape",
+      "value": 50.559798983901366,
+      "unit": "FPS",
+      "target": "30 FPS on same laptop",
+      "evidence": "EV-FPS-REPEAT-LANDSCAPE",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Repeat Victory landscape maximum gap",
+      "value": 333.89999997615814,
+      "unit": "ms",
+      "target": "Reported without removing stalls",
+      "evidence": "EV-FPS-REPEAT-LANDSCAPE",
+      "method": "Same production export; fresh browser"
+    },
+    {
+      "name": "Retained JS heap growth",
+      "value": 913120,
+      "unit": "bytes",
+      "target": "Diagnostic: <=max(2 MiB, 20% warmed heap)",
+      "evidence": "EV-MEMORY",
+      "method": "Same normal-clock audience restarted 20 times with actual buttons. Chrome CDP JS heap after explicit collection; GPU/audio/process memory is not included. Diagnostic allowance: 2 MiB or 20% from warmed baseline, whichever is larger. No physical-device or long-session leak guarantee."
+    },
+    {
+      "name": "episode cold entry",
+      "value": 375,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "episode encoded resources",
+      "value": 12663,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "valley cold entry",
+      "value": 7856,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "valley encoded resources",
+      "value": 11266406,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "camp cold entry",
+      "value": 4130,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "camp encoded resources",
+      "value": 4907838,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "challenge cold entry",
+      "value": 5410,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "challenge encoded resources",
+      "value": 6475779,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "preparation cold entry",
+      "value": 6239,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "preparation encoded resources",
+      "value": 5600335,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "duel cold entry",
+      "value": 5288,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "duel encoded resources",
+      "value": 6875809,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "victory cold entry",
+      "value": 4290,
+      "unit": "ms",
+      "target": "Measured local ready UI; not a network SLA",
+      "evidence": "EV-LOAD",
+      "method": "Fresh Chrome process; one trial/page. Opening repeat is separately recorded."
+    },
+    {
+      "name": "victory encoded resources",
+      "value": 6775310,
+      "unit": "bytes",
+      "target": "Measured content bytes",
+      "evidence": "EV-LOAD",
+      "method": "Resource Timing, before the Enter button"
+    },
+    {
+      "name": "Warmed Victory desktop",
+      "value": 51.32710883241181,
+      "unit": "FPS",
+      "target": "30 FPS, same laptop GPU",
+      "evidence": "EV-FPS-WARMED-DESKTOP",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Warmed Victory desktop maximum gap",
+      "value": 24.899999976158142,
+      "unit": "ms",
+      "target": "Reported; target no >250 ms playback stall",
+      "evidence": "EV-FPS-WARMED-DESKTOP",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Warmed Victory portrait",
+      "value": 50.54872335285429,
+      "unit": "FPS",
+      "target": "30 FPS, same laptop GPU",
+      "evidence": "EV-FPS-WARMED-PORTRAIT",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Warmed Victory portrait maximum gap",
+      "value": 27.199999928474426,
+      "unit": "ms",
+      "target": "Reported; target no >250 ms playback stall",
+      "evidence": "EV-FPS-WARMED-PORTRAIT",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Warmed Victory landscape",
+      "value": 50.771719013099755,
+      "unit": "FPS",
+      "target": "30 FPS, same laptop GPU",
+      "evidence": "EV-FPS-WARMED-LANDSCAPE",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    },
+    {
+      "name": "Warmed Victory landscape maximum gap",
+      "value": 26,
+      "unit": "ms",
+      "target": "Reported; target no >250 ms playback stall",
+      "evidence": "EV-FPS-WARMED-LANDSCAPE",
+      "method": "Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated."
+    }
+  ]
+}

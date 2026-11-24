@@ -1,0 +1,368 @@
+{
+  "date": "2026-11-23",
+  "emotions": {
+    "neutral": 3285,
+    "confidence": 995,
+    "fear": 1455,
+    "determination": 1106,
+    "surprise": 45,
+    "anger": 256,
+    "sadness": 130,
+    "happiness": 401
+  },
+  "motions": {
+    "desktop": {
+      "maximumObservedInputResponseMs": 25.59999990463257,
+      "contactProxies": [
+        {
+          "mark": "straight-forward",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 6.925953596125647
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 24.30268938288491
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 13.193468089140461
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 4.542225638182457
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 0.08670669631602591
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 33.971683617293216
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 0.20579638622912677
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 24.762578984872654
+        }
+      ]
+    },
+    "portrait": {
+      "maximumObservedInputResponseMs": 11.100000023841858,
+      "contactProxies": [
+        {
+          "mark": "straight-forward",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 18.34721193118175
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 5.649291573323803
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 19.739018874126522
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 0.0760053452470997
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 3.241190040889212
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 9.337057253118115
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 10.172254685237112
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 2.2480829609260193
+        }
+      ]
+    },
+    "landscape": {
+      "maximumObservedInputResponseMs": 9.100000023841858,
+      "contactProxies": [
+        {
+          "mark": "straight-forward",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 18.136860217184392
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 5.579005187254739
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 18.44979056678588
+        },
+        {
+          "mark": "straight-forward",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 0.1921144515172958
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 3.0619598665450614
+        },
+        {
+          "mark": "straight-back",
+          "joint": "foot_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 10.48176469909746
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_l",
+          "windows": 1,
+          "maxHorizontalDriftCm": 9.157740843392478
+        },
+        {
+          "mark": "straight-back",
+          "joint": "ball_r",
+          "windows": 1,
+          "maxHorizontalDriftCm": 1.976040593487807
+        }
+      ]
+    }
+  },
+  "faces": {
+    "desktop": {
+      "browser": "157.0.8103.79",
+      "stats": {
+        "David": {
+          "eyeCount": 2,
+          "medianGazeError": 7.976683242208179,
+          "p95GazeError": 12.855257270133064,
+          "pupilPositions": 1490,
+          "emotions": [
+            "determination"
+          ]
+        },
+        "Saul": {
+          "eyeCount": 2,
+          "medianGazeError": 8.970954746258087,
+          "p95GazeError": 12.940666919330573,
+          "pupilPositions": 1489,
+          "emotions": [
+            "sadness",
+            "confidence"
+          ]
+        }
+      },
+      "actualVoices": 3,
+      "errors": []
+    },
+    "portrait": {
+      "browser": "157.0.8103.79",
+      "stats": {
+        "David": {
+          "eyeCount": 2,
+          "medianGazeError": 7.975020379916492,
+          "p95GazeError": 12.866042541986168,
+          "pupilPositions": 1487,
+          "emotions": [
+            "determination"
+          ]
+        },
+        "Saul": {
+          "eyeCount": 2,
+          "medianGazeError": 8.98066333638748,
+          "p95GazeError": 12.951206251878913,
+          "pupilPositions": 1487,
+          "emotions": [
+            "sadness",
+            "confidence"
+          ]
+        }
+      },
+      "actualVoices": 3,
+      "errors": []
+    },
+    "landscape": {
+      "browser": "157.0.8103.79",
+      "stats": {
+        "David": {
+          "eyeCount": 2,
+          "medianGazeError": 7.987502994851423,
+          "p95GazeError": 12.878578516561582,
+          "pupilPositions": 1485,
+          "emotions": [
+            "determination"
+          ]
+        },
+        "Saul": {
+          "eyeCount": 2,
+          "medianGazeError": 8.991967003113723,
+          "p95GazeError": 12.961300977352236,
+          "pupilPositions": 1485,
+          "emotions": [
+            "sadness",
+            "confidence"
+          ]
+        }
+      },
+      "actualVoices": 3,
+      "errors": []
+    },
+    "edge": {
+      "browser": "158.0.4370.33",
+      "stats": {
+        "David": {
+          "eyeCount": 2,
+          "medianGazeError": 7.995316500110294,
+          "p95GazeError": 12.854302685700386,
+          "pupilPositions": 1496,
+          "emotions": [
+            "determination"
+          ]
+        },
+        "Saul": {
+          "eyeCount": 2,
+          "medianGazeError": 8.994085289996677,
+          "p95GazeError": 12.931908562274236,
+          "pupilPositions": 1495,
+          "emotions": [
+            "sadness",
+            "confidence"
+          ]
+        }
+      },
+      "actualVoices": 3,
+      "errors": []
+    }
+  },
+  "shots": [
+    "a-shepherd-before-the-champion",
+    "a-voice-from-the-philistine-line",
+    "armour-offered",
+    "arrival",
+    "audience-two-shot",
+    "brook-arrival",
+    "brothers-two-shot",
+    "control-returns-to-david",
+    "david-and-eliab",
+    "david-answers",
+    "david-asks-directions",
+    "david-declines",
+    "david-faith",
+    "david-gives-thanks",
+    "david-greets-brothers",
+    "david-listens-to-eliab",
+    "david-questions",
+    "david-remains",
+    "david-resolve",
+    "david-steps-forward",
+    "david-turns-toward-the-call",
+    "delivery-david",
+    "earned-jump-and-sling-replay",
+    "eliab-rebukes",
+    "eliab-speaks",
+    "equipment-removed",
+    "faith-and-courage",
+    "fall_checkpoint",
+    "fight",
+    "follow",
+    "follow-the-earned-stone",
+    "forehead-impact",
+    "forehead-reaction",
+    "goliath-contempt",
+    "goliath-defies-israel",
+    "goliath-footsteps",
+    "goliath-terms",
+    "guard-reaction",
+    "helmet-and-coat-fitted",
+    "israel-overcomes-the-retreating-ranks",
+    "israel-pursues-the-philistines",
+    "israel-recognises-victory",
+    "keeper-directions",
+    "keeper-response",
+    "keeper-two-shot",
+    "knees-give-way",
+    "opposing-armies",
+    "over-keeper-shoulder",
+    "over-saul-shoulder",
+    "pavilion-wide",
+    "pickup",
+    "player-sword-contact-reaction",
+    "player-sword-downswing",
+    "player-sword-lift",
+    "practice-aim",
+    "provisions-set-down",
+    "pursuit-closes-in",
+    "ranks-flinch",
+    "ready-with-the-sling",
+    "saul-blessing",
+    "saul-concern",
+    "saul-listens",
+    "saul-sends-david",
+    "soldier-fear",
+    "soldier-reaction",
+    "soldier-recoils",
+    "soldier-speaking",
+    "soldier-will-report",
+    "soldiers-hold-their-breath",
+    "spear-direction-establish",
+    "stagger-and-turn",
+    "stone-to-bag",
+    "survey-guidance",
+    "survey-wide",
+    "sword_checkpoint",
+    "the-battle-is-over",
+    "the-champion-emerges",
+    "the-champion-falls",
+    "the-champion-walks-out",
+    "the-field-awaits",
+    "the-shield-bearer-turns",
+    "trial-steps",
+    "unfamiliar-armour",
+    "valley-reveal"
+  ],
+  "emotionBasis": "Sampled actual normal-game state activation counts, not distinct lines or an aesthetic rating; document collection can repeat frames.",
+  "contactLimit": "Diagnostic ankle/ball world motion within 12 mm of its local sampled minimum, >=50 ms and walk weight >0.95. This is not a sole/contact manifold or uneven-ground acceptance measurement."
+}

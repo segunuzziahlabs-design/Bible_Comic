@@ -4,6 +4,7 @@ import {
 } from 'playcanvas';
 import { loadJumpAnimations } from './jump-animations';
 import { storyWalkWeight } from '../gameplay/story-motion';
+import {createCharacterFace} from './character-face';
 
 export async function loadConversationActor(app: Application, url: string, name: string) {
   const resource = await new Promise<ContainerResource>((resolve, reject) => {
@@ -45,18 +46,6 @@ export async function loadConversationActor(app: Application, url: string, name:
   if (!base) throw new Error(`Missing ${name} animation layer`);
   const layer = base;
   let walkWeight = 0, locomotionTime = 0;
-  const morphs = new Map<string, Array<[MorphInstance, number]>>();
-  for (const render of model.findComponents('render') as RenderComponent[]) {
-    for (const mesh of render.meshInstances) {
-      const instance = mesh.morphInstance;
-      instance?.morph.targets.forEach((target, index) => {
-        const entries = morphs.get(target.name) ?? [];
-        entries.push([instance, index]);
-        morphs.set(target.name, entries);
-      });
-    }
-  }
-  if (!morphs.has('SpeakOpen')) throw new Error(`Missing ${name} mouth controls`);
 
   function pose(clip: string, time: number, dt: number) {
     const track = tracks.get(clip);
@@ -78,7 +67,7 @@ export async function loadConversationActor(app: Application, url: string, name:
       if (dt > 0) layer.transition('StoryLocomotion', .18);
       else layer.play('StoryLocomotion');
     }
-    walkWeight += (storyWalkWeight(actualSpeed) - walkWeight) * (1 - Math.exp(-18 * dt));
+    walkWeight += (storyWalkWeight(actualSpeed) - walkWeight) * (1 - Math.exp(-14 * dt));
     animator.setFloat('storyWalk', walkWeight);
     // .93 m/s is the imported in-place walk's calibrated reference speed.
     // Advance from actual travel, including acceleration and collision. At rest
@@ -88,16 +77,6 @@ export async function loadConversationActor(app: Application, url: string, name:
     animator.update(dt);
   }
 
-  function morph(name: string, value: number) {
-    for (const [instance, index] of morphs.get(name) ?? []) instance.setWeight(index, value);
-  }
-
-  function face(open: number, round: number, smile: number, brow: number, blink: number) {
-    for (const [name, value] of [['SpeakOpen', open], ['SpeakRound', round],
-      ['Smile', smile], ['BrowLift', brow], ['Blink', blink]] as const) {
-      morph(name, value);
-    }
-  }
 
   function tint(materialName: string, rgb: readonly [number, number, number]) {
     const clones = new Map<StandardMaterial, StandardMaterial>();
@@ -118,7 +97,9 @@ export async function loadConversationActor(app: Application, url: string, name:
   }
 
   pose('idle_relaxed', 0, 0);
-  function mouthWeights() { return (morphs.get('SpeakOpen') ?? []).map(([instance, index]) => instance.getWeight(index)); }
-  return { model, tracks, pose, locomote, face, tint, morph, mouthWeights,
+  const facial=createCharacterFace(app,model);
+  if(!facial.sample().speechBindings)throw new Error(`Missing ${name} mouth controls`);
+  return { model, tracks, pose, locomote, face:facial.set, tint, morph:facial.morph, mouthWeights:facial.mouthWeights,
+    gaze:facial.gaze,expression:facial.expression,faceSample:facial.sample,
     motion: () => ({ state: layer.activeState, walkWeight, locomotionTime }) };
 }

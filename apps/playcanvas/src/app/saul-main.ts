@@ -3,6 +3,7 @@ import { Vec3, type RenderComponent } from 'playcanvas';
 import { createMovementInput } from '../gameplay/movement-input';
 import { approachVelocity, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
 import { loadConversationActor } from '../world/conversation-actor';
+import {createAudiencePerformance,reactionNod} from '../world/audience-performance';
 import { createWebGLApp, observeCanvas, waitForFrame } from '../world/graphics';
 import { buildSaulPavilion } from '../world/saul-pavilion';
 import { dialogue, loadSaulAudio, mouthAt } from '../world/saul-audio';
@@ -180,6 +181,7 @@ async function main() {
       if (line) { const speaker = document.createElement('strong'); speaker.textContent = line.speaker; caption.append(speaker, document.createTextNode(line.text)); }
     }
   }
+  const performances=[david,saul,...soldiers].map(createAudiencePerformance);
   function act(t: number, dt: number) {
     const travel = Math.hypot(cueFrom.x - mark.x, cueFrom.z - mark.z);
     const travelTime = Math.max(.25, travel / .8);
@@ -210,12 +212,16 @@ async function main() {
       soldier.pose(clip, clipTime(soldier, clip, reacts ? t - 24 - i * .6 : t + i * .8), dt);
       soldier.face(0, 0, t > 30 ? .15 : 0, .1, blink(i * 1.9));
     });
+    performances[0].apply(t,currentSpeaker==='David',currentSpeaker==='Saul'?reactionNod(t,10.5,1.2,1.8):0,1.6,saul.model.findByName('Head')!,'determination');
+    performances[1].apply(t,currentSpeaker==='Saul',currentSpeaker==='David'?reactionNod(t,18,1.2,1.8):0,0,david.model.findByName('Head')!,t<15?'sadness':'confidence');
+    soldiers.forEach((s,i)=>performances[i+2].apply(t,false,0,i+2,david.model.findByName('Head')!,t<24?'fear':'happiness'));
     captionAt(t); shots(t, dt);
   }
 
   app.on('update', rawDt => {
     const dt = Math.min(rawDt, .05);
     if (!paused && !route?.pending) {
+      performances.forEach(p=>p.restore());
       idleTime += dt;
       if (equipment && route) {
         const time = audio.context.currentTime - equipment.start;

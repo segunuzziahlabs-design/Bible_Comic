@@ -1,0 +1,173 @@
+{
+  "date": "2026-11-23",
+  "runs": [
+    {
+      "id": "cast-final",
+      "file": "communication-cast-browser.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/cast-final",
+        "desktop",
+        "opening,challenge"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "PASS cast capture desktop opening\nPASS cast capture desktop challenge\n",
+      "error": ""
+    },
+    {
+      "id": "motion-final",
+      "file": "msr07-motion-probe.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/motion-final"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "PASS motion response desktop [{\"trial\":1,\"eventToObservedRootMs\":25.59999990463257},{\"trial\":2,\"eventToObservedRootMs\":6.800000071525574},{\"trial\":3,\"eventToObservedRootMs\":12.300000071525574},{\"trial\":4,\"eventToObservedRootMs\":13.800000071525574},{\"trial\":5,\"eventToObservedRootMs\":10.799999952316284},{\"trial\":6,\"eventToObservedRootMs\":4.700000047683716}]\nPASS motion response portrait [{\"trial\":1,\"eventToObservedRootMs\":5.399999976158142},{\"trial\":2,\"eventToObservedRootMs\":11.100000023841858},{\"trial\":3,\"eventToObservedRootMs\":7.100000023841858},{\"trial\":4,\"eventToObservedRootMs\":7.900000095367432},{\"trial\":5,\"eventToObservedRootMs\":4.399999976158142},{\"trial\":6,\"eventToObservedRootMs\":5.5}]\nPASS motion response landscape [{\"trial\":1,\"eventToObservedRootMs\":6.5},{\"trial\":2,\"eventToObservedRootMs\":9.100000023841858},{\"trial\":3,\"eventToObservedRootMs\":5.799999952316284},{\"trial\":4,\"eventToObservedRootMs\":7.5},{\"trial\":5,\"eventToObservedRootMs\":8.199999928474426},{\"trial\":6,\"eventToObservedRootMs\":4.799999952316284}]\n",
+      "error": ""
+    },
+    {
+      "id": "active-battle",
+      "file": "communication-battle-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/active-battle"
+      ],
+      "exit": 1,
+      "status": "HARNESS_OR_TEST_FAILURE",
+      "output": "",
+      "error": "The expression evaluated to a falsy value:\n\n  assert(directions.every(([name])=>dodges.some(d=>d.direction===name)))\n\n"
+    },
+    {
+      "id": "continuous-battle",
+      "file": "continuous-battle-browser.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/continuous-final",
+        "laptop"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "PASS laptop\n",
+      "error": ""
+    },
+    {
+      "id": "controlled-ending",
+      "file": "battle-ending-browser.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/ending-final",
+        "desktop"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"label\":\"desktop\",\"browser\":\"157.0.8103.79\",\"basis\":\"Local production build; reducer-built fallen checkpoint; real inputs and normal clock. Touch layouts emulated.\",\"bounds\":{\"width\":116,\"height\":92,\"inside\":true,\"clear\":true,\"overflow\":false},\"partialProgress\":0.3128520000000002,\"releasedSwingFreezes\":true,\"swordReload\":true,\"upwardDragIgnored\":false,\"controlledSwing\":true,\"victoryGated\":true,\"pursuing\":24,\"fallen\":24,\"impacts\":24,\"completion\":12,\"restartClearsPursuit\":true,\"errors\":[]}\n",
+      "error": ""
+    },
+    {
+      "id": "victory-desktop",
+      "file": "msr07-victory-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/victory-performance",
+        "desktop"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"basis\":\"Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated.\",\"layout\":\"desktop\",\"width\":1280,\"height\":720,\"touch\":false,\"browser\":\"157.0.8103.79\",\"fps\":51.45811904033805,\"p50Ms\":19.300000071525574,\"p95Ms\":21.899999976158142,\"maxMs\":25.899999976158142,\"over250\":0,\"renderer\":\"ANGLE (Intel, Intel(R) Graphics (0x000046D4) Direct3D11 vs_5_0 ps_5_0, D3D11)\",\"errors\":[]}\n",
+      "error": ""
+    },
+    {
+      "id": "victory-portrait",
+      "file": "msr07-victory-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/victory-performance",
+        "portrait"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"basis\":\"Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated.\",\"layout\":\"portrait\",\"width\":390,\"height\":844,\"touch\":true,\"browser\":\"157.0.8103.79\",\"fps\":49.630549742962295,\"p50Ms\":19.700000047683716,\"p95Ms\":22.5,\"maxMs\":605.8999999761581,\"over250\":1,\"renderer\":\"ANGLE (Intel, Intel(R) Graphics (0x000046D4) Direct3D11 vs_5_0 ps_5_0, D3D11)\",\"errors\":[]}\n",
+      "error": ""
+    },
+    {
+      "id": "victory-landscape",
+      "file": "msr07-victory-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/victory-performance",
+        "landscape"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"basis\":\"Unrecorded normal-clock Victory from 2 s through completion: retreat, crowd, foreground speech and conclusion. Same laptop GPU; mobile layouts are emulated.\",\"layout\":\"landscape\",\"width\":844,\"height\":390,\"touch\":true,\"browser\":\"157.0.8103.79\",\"fps\":50.313136732136776,\"p50Ms\":19.600000023841858,\"p95Ms\":22.399999976158142,\"maxMs\":314.39999997615814,\"over250\":1,\"renderer\":\"ANGLE (Intel, Intel(R) Graphics (0x000046D4) Direct3D11 vs_5_0 ps_5_0, D3D11)\",\"errors\":[]}\n",
+      "error": ""
+    },
+    {
+      "id": "challenge-performance",
+      "file": "msr07-sustained-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/challenge-performance",
+        "desktop"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"basis\":\"First 45 s after 2 s challenge warmup, voiced challenge, real keyboard/CDP touch walking and Eliab speech. Sequential browser; no screenshots, recording, rig observation or clock changes. Loopback desktop GPU in all viewport layouts, not physical phones.\",\"layout\":\"desktop\",\"width\":1280,\"height\":720,\"touch\":false,\"browser\":\"157.0.8103.79\",\"fps\":51.39536641439296,\"p50Ms\":19.300000071525574,\"p95Ms\":21.90000009536743,\"maxMs\":36.5,\"over250\":0,\"renderer\":\"ANGLE (Intel, Intel(R) Graphics (0x000046D4) Direct3D11 vs_5_0 ps_5_0, D3D11)\",\"errors\":[]}\n",
+      "error": ""
+    },
+    {
+      "id": "memory",
+      "file": "communication-memory-browser.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/memory-final"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "{\"status\":\"PASS\",\"samples\":[{\"restarts\":0,\"usedBytes\":19844624,\"totalBytes\":20561920},{\"restarts\":5,\"usedBytes\":19710880,\"totalBytes\":21348352},{\"restarts\":10,\"usedBytes\":20509408,\"totalBytes\":21086208},{\"restarts\":15,\"usedBytes\":20499336,\"totalBytes\":21348352},{\"restarts\":20,\"usedBytes\":20757744,\"totalBytes\":21610496}],\"growthBytes\":913120}\n",
+      "error": ""
+    },
+    {
+      "id": "load-pages",
+      "file": "msr07-load-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/loading-final",
+        "1",
+        "episode,valley,camp,challenge,preparation,duel,victory"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "PASS loading episode trial 1\nPASS loading valley trial 1\nPASS loading camp trial 1\nPASS loading challenge trial 1\nPASS loading preparation trial 1\nPASS loading duel trial 1\nPASS loading victory trial 1\n[{\"page\":\"episode\",\"cold\":{\"trials\":1,\"medianReadyMs\":375,\"medianTransferredBytes\":17466,\"medianEncodedResourceBytes\":12663},\"warm\":{\"trials\":1,\"medianReadyMs\":135,\"medianTransferredBytes\":3600,\"medianEncodedResourceBytes\":0}},{\"page\":\"valley\",\"cold\":{\"trials\":1,\"medianReadyMs\":7856,\"medianTransferredBytes\":11286527,\"medianEncodedResourceBytes\":11266406},\"warm\":{\"trials\":1,\"medianReadyMs\":2307,\"medianTransferredBytes\":18300,\"medianEncodedResourceBytes\":11266406}},{\"page\":\"camp\",\"cold\":{\"trials\":1,\"medianReadyMs\":4130,\"medianTransferredBytes\":4922737,\"medianEncodedResourceBytes\":4907838},\"warm\":{\"trials\":1,\"medianReadyMs\":1024,\"medianTransferredBytes\":13200,\"medianEncodedResourceBytes\":4296724}},{\"page\":\"challenge\",\"cold\":{\"trials\":1,\"medianReadyMs\":5410,\"medianTransferredBytes\":6491762,\"medianEncodedResourceBytes\":6475779},\"warm\":{\"trials\":1,\"medianReadyMs\":1317,\"medianTransferredBytes\":14100,\"medianEncodedResourceBytes\":5847868}},{\"page\":\"preparation\",\"cold\":{\"trials\":1,\"medianReadyMs\":6239,\"medianTransferredBytes\":5617536,\"medianEncodedResourceBytes\":5600335},\"warm\":{\"trials\":1,\"medianReadyMs\":1412,\"medianTransferredBytes\":15300,\"medianEncodedResourceBytes\":4968184}},{\"page\":\"duel\",\"cold\":{\"trials\":1,\"medianReadyMs\":5288,\"medianTransferredBytes\":6892853,\"medianEncodedResourceBytes\":6875809},\"warm\":{\"trials\":1,\"medianReadyMs\":1483,\"medianTransferredBytes\":15000,\"medianEncodedResourceBytes\":6231700}},{\"page\":\"victory\",\"cold\":{\"trials\":1,\"medianReadyMs\":4290,\"medianTransferredBytes\":6788712,\"medianEncodedResourceBytes\":6775310},\"warm\":{\"trials\":1,\"medianReadyMs\":1303,\"medianTransferredBytes\":12000,\"medianEncodedResourceBytes\":6161788}}]\n",
+      "error": ""
+    },
+    {
+      "id": "load-opening-repeat",
+      "file": "msr07-load-profile.cjs",
+      "arguments": [
+        "http://127.0.0.1:4230",
+        "../../docs/qa/evidence/communication-2026-11-23/loading-opening-repeat",
+        "3",
+        "valley"
+      ],
+      "exit": 0,
+      "status": "EXECUTED",
+      "output": "PASS loading valley trial 1\nPASS loading valley trial 2\nPASS loading valley trial 3\n[{\"page\":\"valley\",\"cold\":{\"trials\":3,\"medianReadyMs\":7797,\"medianTransferredBytes\":11286527,\"medianEncodedResourceBytes\":11266406},\"warm\":{\"trials\":3,\"medianReadyMs\":2286,\"medianTransferredBytes\":18300,\"medianEncodedResourceBytes\":11266406}}]\n",
+      "error": ""
+    },
+    {
+      "id": "live-accounts",
+      "file": "communication-account-browser.cjs",
+      "arguments": [
+        "http://127.0.0.1:4231",
+        "../../docs/qa/evidence/communication-2026-11-23/accounts-final"
+      ],
+      "exit": 1,
+      "status": "HARNESS_OR_TEST_FAILURE",
+      "output": "",
+      "error": "page.evaluate: Execution context was destroyed, most likely because of a navigation.\n"
+    }
+  ]
+}

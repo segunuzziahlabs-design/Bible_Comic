@@ -1,0 +1,2283 @@
+{
+  "title": "David and Goliath complete game DVP&R",
+  "asOf": "2026-11-23",
+  "baseline": "ce244a8277b77615e35371302cc6a8900786e4ee",
+  "requirements": [
+    {
+      "id": "G01",
+      "group": "Original game",
+      "text": "Six chapters remain playable",
+      "acceptance": "All six chapters complete in order from an empty normal run.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G02",
+      "group": "Original game",
+      "text": "Story and mission order",
+      "acceptance": "No unearned objective or chapter skip; all 12 existing objectives complete in sequence.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G03",
+      "group": "Original game",
+      "text": "Movement and wall collision",
+      "acceptance": "Actual keyboard/touch movement collides with walls; camera remains usable.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G04",
+      "group": "Original game",
+      "text": "Shared desktop and mobile controls",
+      "acceptance": "Movement, interaction, aiming, throwing and dodge controls remain reachable in both touch orientations.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G05",
+      "group": "Original game",
+      "text": "Jump and dodge",
+      "acceptance": "Space/touch Jump and Shift/touch Dodge work, including airborne spear clearance and grounded hits.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G06",
+      "group": "Original game",
+      "text": "Real-time sword and spear defence",
+      "acceptance": "Required sword/spear stages and telegraphs remain; actual collisions cause defeat.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G07",
+      "group": "Original game",
+      "text": "Physical sling aiming",
+      "acceptance": "Correct forehead shot can hit; inaccurate angles and distant throws miss; no automatic winning button.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G08",
+      "group": "Original game",
+      "text": "Controlled non-graphic finish",
+      "acceptance": "Earned impact/fall, single sword pickup and player-driven final stroke precede Victory.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G09",
+      "group": "Original game",
+      "text": "Pursuit and conclusion",
+      "acceptance": "Israel pursues retreating Philistines; strikes/collapses precede the existing story conclusion.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G10",
+      "group": "Original game",
+      "text": "Checkpoints and recovery",
+      "acceptance": "Confirmed checkpoints survive reload; interrupted actions and stale/failed writes do not incorrectly advance.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G11",
+      "group": "Original game",
+      "text": "Defeat and Retry Battle",
+      "acceptance": "A lethal Goliath hit permits Retry Battle without replaying preparation.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G12",
+      "group": "Original game",
+      "text": "Saved progress",
+      "acceptance": "Local and cloud progress resume at the correct checkpoint and belong to the signed-in player.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G13",
+      "group": "Original game",
+      "text": "Authentication and sessions",
+      "acceptance": "Registration/login/logout and protected routes work; account identity never leaks to another player.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G14",
+      "group": "Original game",
+      "text": "Profiles and David appearance",
+      "acceptance": "Profile and chosen hair, skin and clothing persist and are rendered correctly.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G15",
+      "group": "Original game",
+      "text": "Mission pass/fail rules",
+      "acceptance": "A missed practice/combat throw is not a defeat; only the established lethal Goliath condition causes failure.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G16",
+      "group": "Original game",
+      "text": "Sound and pause",
+      "acceptance": "Dialogue, captions, music and effects start after the required user gesture; pause/mute/restart work.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G17",
+      "group": "Original game",
+      "text": "Guided walking and automatic actions",
+      "acceptance": "Flock/messenger/Jesse, connected routes/arrows and automatic stone pickup remain intact.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G18",
+      "group": "Original game",
+      "text": "Browser application and performance",
+      "acceptance": "WebGL 2 launches with readable responsive controls; local laptop target is at least 30 FPS in the stated benchmark.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G19",
+      "group": "Original game",
+      "text": "Existing cast and visual direction",
+      "acceptance": "Retain the teenage David, character customisation, existing characters, period environment and established art style.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "G20",
+      "group": "Original game",
+      "text": "Completion, replay and history",
+      "acceptance": "Results occur after the conclusion; replay creates a new run while retaining completed history.",
+      "source": "Approved project scope, episode rules and preceding implementation reports",
+      "priority": "P0"
+    },
+    {
+      "id": "N-A01",
+      "group": "Gaze",
+      "text": "Mutual eye contact",
+      "acceptance": "Conversing characters orient their gaze towards one another.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A02",
+      "group": "Gaze",
+      "text": "Track the partner position",
+      "acceptance": "Gaze changes when the other character moves; it is not a fixed head pose.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A03",
+      "group": "Gaze",
+      "text": "Natural blinking",
+      "acceptance": "Visible blink/return cycles are staggered between actors.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A04",
+      "group": "Gaze",
+      "text": "Subtle eye movement",
+      "acceptance": "Small pupil movements occur between major gaze changes.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A05",
+      "group": "Gaze",
+      "text": "Look away and return",
+      "acceptance": "Occasional brief glances return towards the conversation partner.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A06",
+      "group": "Gaze",
+      "text": "Eyes before head",
+      "acceptance": "Eye response leads the slower head response on a new target.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A07",
+      "group": "Gaze",
+      "text": "Head and body orientation",
+      "acceptance": "Bounded head/torso movement supports the current speaker without turning the player root.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A08",
+      "group": "Gaze",
+      "text": "Listening reactions",
+      "acceptance": "Listeners show facial, nod and gesture responses.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-A09",
+      "group": "Gaze",
+      "text": "Avoid rigid staring",
+      "acceptance": "Long exchanges contain varied listening and idle motion.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B01",
+      "group": "Face and speech",
+      "text": "Remove the extra mouth",
+      "acceptance": "No detached second opening appears below the original lip line during dialogue.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B02",
+      "group": "Face and speech",
+      "text": "Only intended face geometry",
+      "acceptance": "Only the aligned mouth/rim and appropriate teeth are visible; neutral interior is hidden.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B03",
+      "group": "Face and speech",
+      "text": "Resolve face-controller conflicts",
+      "acceptance": "All intended jaw/lip/interior morph bindings receive consistent speech values.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B04",
+      "group": "Face and speech",
+      "text": "Lip-sync timing",
+      "acceptance": "Opening/rounding follows the actual paused dialogue audio clock.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B05",
+      "group": "Face and speech",
+      "text": "Smooth speech shapes",
+      "acceptance": "Mouth shapes interpolate smoothly without abrupt pops.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B06",
+      "group": "Face and speech",
+      "text": "Neutral after speech",
+      "acceptance": "Speech weights settle below 0.015 and interior/teeth hide after the line.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B07",
+      "group": "Face and speech",
+      "text": "Seven emotional expressions",
+      "acceptance": "Surprise, anger, fear, confidence, sadness, determination and happiness are visibly supported.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B08",
+      "group": "Face and speech",
+      "text": "Contextual expressions",
+      "acceptance": "Expressions match the current speaker/listener and narrative context.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-B09",
+      "group": "Face and speech",
+      "text": "Separate expression and speech",
+      "acceptance": "Changing an expression does not replace the spoken opening/rounding channel.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C01",
+      "group": "Motion",
+      "text": "Natural idles",
+      "acceptance": "Standing characters show restrained breathing/postural movement.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C02",
+      "group": "Motion",
+      "text": "Walking cadence",
+      "acceptance": "Walk phase responds to actual travel and stops when blocked.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C03",
+      "group": "Motion",
+      "text": "Running cadence",
+      "acceptance": "Foreground and crowd run poses follow actual travelled distance.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C04",
+      "group": "Motion",
+      "text": "Smooth turns and stops",
+      "acceptance": "Heading follows the short angular path with bounded turn rate and blended stops.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C05",
+      "group": "Motion",
+      "text": "Head, shoulders, arms and hands",
+      "acceptance": "Subtle body language supports retained hand gestures and prop ownership.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C06",
+      "group": "Motion",
+      "text": "Speaking gestures",
+      "acceptance": "Long lines retain forward gesture movement and do not freeze at a held tail.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C07",
+      "group": "Motion",
+      "text": "Listener body language",
+      "acceptance": "Listening includes occasional nods/reactions and posture variation.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C08",
+      "group": "Motion",
+      "text": "Posture and foot placement",
+      "acceptance": "Characters remain grounded and stable at rest and during route movements.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C09",
+      "group": "Motion",
+      "text": "Reduce foot sliding",
+      "acceptance": "Calibrated walk/run timing matches movement; visible sliding is investigated.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-C10",
+      "group": "Motion",
+      "text": "Animation transitions",
+      "acceptance": "Idle/listen/speak/walk/run/action changes blend without locked or duplicated actions.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D01",
+      "group": "Cameras",
+      "text": "Establishing shots",
+      "acceptance": "Wide shots establish each important location.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D02",
+      "group": "Cameras",
+      "text": "Medium shots",
+      "acceptance": "Medium framing supports speaking gestures without clipping.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D03",
+      "group": "Cameras",
+      "text": "Facial close-ups",
+      "acceptance": "Conversation close-ups show eyes and mouth clearly.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D04",
+      "group": "Cameras",
+      "text": "Two-character shots",
+      "acceptance": "Two-shots show the conversation relationship and spacing.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D05",
+      "group": "Cameras",
+      "text": "Over-the-shoulder shots",
+      "acceptance": "Shoulder coverage frames both participants without hiding the speaking face.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D06",
+      "group": "Cameras",
+      "text": "Reaction shots",
+      "acceptance": "The listener is shown at appropriate dialogue beats.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D07",
+      "group": "Cameras",
+      "text": "Goliath low angles",
+      "acceptance": "Goliath has appropriate low-angle/scale-establishing coverage.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D08",
+      "group": "Cameras",
+      "text": "Smooth camera presentation",
+      "acceptance": "Moves/FOV transitions are stable and controlled; authored cuts are intentional.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D09",
+      "group": "Cameras",
+      "text": "Story-responsive cameras",
+      "acceptance": "Shots correspond to actual dialogue or combat state.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-D10",
+      "group": "Cameras",
+      "text": "Preserve gameplay camera ownership",
+      "acceptance": "Cinematic cameras return control and do not obstruct movement or combat.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E01",
+      "group": "Environment",
+      "text": "Lighting and shadows",
+      "acceptance": "Warm key, reflected fill and grounded shadows improve character separation.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E02",
+      "group": "Environment",
+      "text": "Material treatment",
+      "acceptance": "Skin, cloth, hair, leather and terrain retain appropriate roughness/detail.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E03",
+      "group": "Environment",
+      "text": "Terrain, texture and vegetation",
+      "acceptance": "Original surface grain and restrained vegetation movement improve existing environments.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E04",
+      "group": "Environment",
+      "text": "Atmosphere",
+      "acceptance": "Sky/fog/breeze add depth without obscuring gameplay.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E05",
+      "group": "Environment",
+      "text": "Scene composition and depth",
+      "acceptance": "Characters and near/far environment remain distinguishable.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-E06",
+      "group": "Environment",
+      "text": "Important cinematic moments",
+      "acceptance": "Opening, audience, challenge, earned hit/fall and conclusion receive clear coverage.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F01",
+      "group": "Audio and performance",
+      "text": "Audio and face synchronisation",
+      "acceptance": "Dialogue and mouth states share one source clock across pause/resume.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F02",
+      "group": "Audio and performance",
+      "text": "Music and effects",
+      "acceptance": "Retained music, weapon, movement and environmental effects suit the active scene.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F03",
+      "group": "Audio and performance",
+      "text": "No duplicate dialogue",
+      "acceptance": "Restart/rapid input cannot leave overlapping old speech schedules.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F04",
+      "group": "Audio and performance",
+      "text": "Asset loading and transitions",
+      "acceptance": "Required assets load reliably; facial shaders warm before the first spoken line.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F05",
+      "group": "Audio and performance",
+      "text": "Rendering and animation performance",
+      "acceptance": "Measured unrecorded laptop scene maintains the agreed 30 FPS target; stalls are reported.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F06",
+      "group": "Audio and performance",
+      "text": "Processing and memory",
+      "acceptance": "Shared face ownership/detail textures, audio de-duplication and cleanup avoid unnecessary retained work.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    },
+    {
+      "id": "N-F07",
+      "group": "Audio and performance",
+      "text": "Quality with optimisation",
+      "acceptance": "Performance changes preserve faces, art direction, controls and rendering correctness.",
+      "source": "Owner improvement brief, 23 November 2026",
+      "priority": "P1"
+    }
+  ],
+  "tests": [
+    {
+      "id": "TC-G01",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 1: flock, messenger, Jesse and valley",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete flock, messenger, Jesse and valley\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G02",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 2: provisions and brothers",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete provisions and brothers\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G03",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 3: Goliath’s challenge and Eliab",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete Goliath’s challenge and Eliab\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G04",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 4: Saul, armour, five stones and practice",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete Saul, armour, five stones and practice\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G05",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 5: sword/spear/sling duel and final sword action",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete sword/spear/sling duel and final sword action\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G06",
+      "requirements": [
+        "G01",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Chapter 6: Israel’s pursuit and story conclusion",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a fresh normal episode or continue the preceding chapter\n2. Use the on-screen guidance and real controls to complete Israel’s pursuit and story conclusion\n3. Observe the next objective and saved prefix",
+      "expected": "Correct chapter completion; no manual state repair, skipped objective or broken transition.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G07",
+      "requirements": [
+        "G17"
+      ],
+      "category": "Gameplay",
+      "title": "Automatic flock and messenger",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Begin a fresh episode\n2. Leave Tend untouched and watch the messenger arrive\n3. Follow the path to Jesse",
+      "expected": "Story begins automatically; player walks; courtyard arrival is automatic.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G08",
+      "requirements": [
+        "G17",
+        "G02"
+      ],
+      "category": "Gameplay",
+      "title": "Jesse sends David and separate pickup",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Speak to Jesse once\n2. Let the complete voiced exchange finish\n3. Walk to the supplies and Take",
+      "expected": "One continuous errand exchange; control returns for a separate Take action.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G09",
+      "requirements": [
+        "G17"
+      ],
+      "category": "Gameplay",
+      "title": "All connected walking routes",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Follow the arrows through R03, R05, R07, R09 and R11\n2. Observe arrival covers and automatic continuations\n3. Check the chapter and objective after each route",
+      "expected": "Routes connect existing locations, preserve progress and give control back.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G10",
+      "requirements": [
+        "G03",
+        "G04"
+      ],
+      "category": "Gameplay",
+      "title": "Keyboard movement and wall collision",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move with WASD and arrows\n2. Walk towards camp walls/props\n3. Reverse and turn the camera",
+      "expected": "Actual root moves and collides; no wall pass-through or camera lock.",
+      "kind": "Positive",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G11",
+      "requirements": [
+        "G05"
+      ],
+      "category": "Gameplay",
+      "title": "Jump and landing",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Press Space while moving\n2. Observe takeoff/airborne/landing\n3. Repeat under a low roof",
+      "expected": "Jump/landing complete; overhead collision prevents an invalid jump.",
+      "kind": "Positive",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G12",
+      "requirements": [
+        "G05",
+        "G06"
+      ],
+      "category": "Gameplay",
+      "title": "Four-direction dodging",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Enter battle\n2. During warnings dodge forward, back, left and right\n3. Observe separation from the attack",
+      "expected": "Player movement genuinely leaves the collision region; no automatic safe teleport.",
+      "kind": "Positive",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G13",
+      "requirements": [
+        "G06"
+      ],
+      "category": "Gameplay",
+      "title": "Required sword stage and hit failure",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Enter battle\n2. Observe draw/warning/strike\n3. Deliberately stay in the strike then Retry",
+      "expected": "Sword is visible; collision causes defeat; Retry restores battle.",
+      "kind": "Negative",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G14",
+      "requirements": [
+        "G06",
+        "G05"
+      ],
+      "category": "Gameplay",
+      "title": "Visible spear and real clearance",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Survive sword\n2. Watch the thrown spear and landing warning\n3. Dodge or jump with sufficient clearance",
+      "expected": "Visible flight/impact and swept player capsule determine hit or miss.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G15",
+      "requirements": [
+        "G07",
+        "G15"
+      ],
+      "category": "Gameplay",
+      "title": "Inaccurate sling throw misses",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Unlock sling\n2. Aim away from forehead and throw\n3. Observe feedback and next attempt",
+      "expected": "The stone genuinely misses and does not cause Victory or mission defeat.",
+      "kind": "Negative",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G16",
+      "requirements": [
+        "G07"
+      ],
+      "category": "Gameplay",
+      "title": "Position and angle guidance",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move too close and too far\n2. Change aiming elevation/direction\n3. Return to an accurate position",
+      "expected": "Guidance follows measured distance/trajectory; forehead target is identifiable.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G17",
+      "requirements": [
+        "G06",
+        "G07"
+      ],
+      "category": "Gameplay",
+      "title": "Move, aim and throw under continued attacks",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Unlock sling\n2. Reposition and aim while another spear winds up\n3. Throw and evade, then deliberately accept a hit",
+      "expected": "Spears remain active during aiming; dodge succeeds and a real hit still defeats David.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G18",
+      "requirements": [
+        "G07",
+        "G08"
+      ],
+      "category": "Gameplay",
+      "title": "Earned forehead hit and staged fall",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Survive required stages\n2. Aim a physical forehead shot\n3. Watch replay, groans, turn and collapse",
+      "expected": "Only a real forehead collision triggers the earned staged sequence.",
+      "kind": "Positive",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G19",
+      "requirements": [
+        "G08",
+        "G10"
+      ],
+      "category": "Gameplay",
+      "title": "Sword pickup, interruption and reload",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Reach the fallen champion and Take sword\n2. Reload after its checkpoint\n3. Try repeated pickup input",
+      "expected": "Single pickup; restored carried sword and uncompleted final action.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G20",
+      "requirements": [
+        "G08"
+      ],
+      "category": "Gameplay",
+      "title": "Controlled sword stroke",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Ready the sword\n2. Hold E or drag down, then release partway\n3. Resume the input to complete the stroke",
+      "expected": "The blade follows player progress; release stops it; no timer-only win.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G21",
+      "requirements": [
+        "G09"
+      ],
+      "category": "Gameplay",
+      "title": "Pursuit and non-graphic casualties",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Complete the final sword action\n2. Watch Israel pursue and overtake the Philistines\n3. Observe the concluding shots",
+      "expected": "Converging pursuit, visible strikes/collapse and retained fallen soldiers; original conclusion remains.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G22",
+      "requirements": [
+        "G11",
+        "G10"
+      ],
+      "category": "Gameplay",
+      "title": "Defeat, reload and Retry Battle",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Accept a lethal spear hit\n2. Reload\n3. Retry Battle",
+      "expected": "Preparation is retained, defeat persists and battle restarts at its checkpoint.",
+      "kind": "Regression",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G23",
+      "requirements": [
+        "G10",
+        "G12"
+      ],
+      "category": "Gameplay",
+      "title": "Interrupted and failed saves",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Interrupt an action before confirmation\n2. Simulate a failed/lost response or stale revision in the stated fixture\n3. Retry/reload",
+      "expected": "No unearned progress; idempotent retry and stale-write protection preserve the last checkpoint.",
+      "kind": "Negative",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G24",
+      "requirements": [
+        "G20"
+      ],
+      "category": "Gameplay",
+      "title": "Completion and replay history",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Finish all chapters\n2. Reload results\n3. Replay the episode",
+      "expected": "Completed run remains stable; replay creates a new run and preserves history.",
+      "kind": "Regression",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G25",
+      "requirements": [
+        "G19",
+        "G14"
+      ],
+      "category": "Gameplay",
+      "title": "David appearance persistence",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Change hair, skin and tunic preferences\n2. Resume a chapter\n3. Reload the profile and scene",
+      "expected": "Selected teenage David appearance persists and renders consistently.",
+      "kind": "Positive",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G26",
+      "requirements": [
+        "G17"
+      ],
+      "category": "Gameplay",
+      "title": "Automatic five-stone collection",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Follow the arrow to the brook stones\n2. Do not press Interact\n3. Pause/reload an unfinished pickup and then complete it",
+      "expected": "Arrival starts the animation automatically; exactly five stones save after completion.",
+      "kind": "Regression",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-G27",
+      "requirements": [
+        "G15"
+      ],
+      "category": "Gameplay",
+      "title": "Sling practice miss and retry",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start practice\n2. Move and intentionally miss\n3. Aim at the centre and throw again",
+      "expected": "Controls remain active; a miss is recoverable and a true target hit advances.",
+      "kind": "Negative",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU01",
+      "requirements": [
+        "G13"
+      ],
+      "category": "Authentication",
+      "title": "New player registration",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Use a separate development test identity\n2. Register through the normal Clerk form\n3. Open the player dashboard",
+      "expected": "Verified test identity reaches a private dashboard; no owner account is modified.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU02",
+      "requirements": [
+        "G13"
+      ],
+      "category": "Authentication",
+      "title": "Login and session restoration",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Sign in with the dedicated development test account\n2. Reload a protected page\n3. Resume the same session",
+      "expected": "Correct identity persists through reload.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU03",
+      "requirements": [
+        "G13"
+      ],
+      "category": "Authentication",
+      "title": "Logout and protected route",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Sign out\n2. Open a protected game/dashboard URL\n3. Sign back in",
+      "expected": "Unauthenticated access is gated and the correct account is restored.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU04",
+      "requirements": [
+        "G13"
+      ],
+      "category": "Authentication",
+      "title": "Invalid credentials and form errors",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Use a deliberately invalid sign-in value\n2. Submit once\n3. Correct the input",
+      "expected": "A readable error appears; no private game state is disclosed.",
+      "kind": "Negative",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU05",
+      "requirements": [
+        "G14"
+      ],
+      "category": "Authentication",
+      "title": "Profile editing",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Edit the dedicated test profile/appearance\n2. Save\n3. Reload",
+      "expected": "Only that profile changes and the saved values return.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU06",
+      "requirements": [
+        "G12"
+      ],
+      "category": "Authentication",
+      "title": "Cloud checkpoint resume",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play to a confirmed checkpoint on a dedicated cloud test run\n2. Close and reopen\n3. Continue",
+      "expected": "Hosted save restores the correct run, objective, preparation and battle stage.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU07",
+      "requirements": [
+        "G12"
+      ],
+      "category": "Authentication",
+      "title": "Two-player progress isolation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Create fixture users A and B\n2. Save different progress and settings\n3. Attempt cross-user access",
+      "expected": "RLS/ownership prevents one identity reading or changing the other.",
+      "kind": "Negative",
+      "environment": "Local PostgreSQL WASM fixture",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU08",
+      "requirements": [
+        "G10"
+      ],
+      "category": "Authentication",
+      "title": "Lost cloud response and idempotency",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Commit a checkpoint in the local PostgreSQL fixture\n2. Lose the first response\n3. Retry the same command",
+      "expected": "One authoritative update is stored; retry returns the confirmed state.",
+      "kind": "Negative",
+      "environment": "Local PostgreSQL WASM fixture",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU09",
+      "requirements": [
+        "G10"
+      ],
+      "category": "Authentication",
+      "title": "Stale tab revision",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Open the same run in two fixture sessions\n2. Advance one\n3. Attempt a write with the old revision",
+      "expected": "Stale write is rejected without replacing newer progress.",
+      "kind": "Negative",
+      "environment": "Local PostgreSQL WASM fixture",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU10",
+      "requirements": [
+        "G13"
+      ],
+      "category": "Authentication",
+      "title": "Expired or revoked session",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Revoke/expire the dedicated development session\n2. Try a protected save\n3. Sign in again",
+      "expected": "Save is gated and recovery does not attribute data to another user.",
+      "kind": "Negative",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU11",
+      "requirements": [
+        "G14"
+      ],
+      "category": "Authentication",
+      "title": "Settings validation and isolation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Submit valid and out-of-range settings in the database fixture\n2. Read from another identity\n3. Reload owner settings",
+      "expected": "Invalid data is rejected and settings remain private.",
+      "kind": "Negative",
+      "environment": "Local PostgreSQL WASM fixture",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-AU12",
+      "requirements": [
+        "G12"
+      ],
+      "category": "Authentication",
+      "title": "Legacy battle checkpoint compatibility",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Load supported prior-schema saved progress\n2. Continue through fallen/sword/finished states\n3. Replay",
+      "expected": "Existing progress and ordered final-action guards remain valid.",
+      "kind": "Integration",
+      "environment": "Clerk/Supabase development browser",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A01",
+      "requirements": [
+        "N-A01"
+      ],
+      "category": "Visual and Animation",
+      "title": "Mutual eye contact",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Conversing characters orient their gaze towards one another.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A02",
+      "requirements": [
+        "N-A02"
+      ],
+      "category": "Visual and Animation",
+      "title": "Track the partner position",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Gaze changes when the other character moves; it is not a fixed head pose.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A03",
+      "requirements": [
+        "N-A03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Natural blinking",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Visible blink/return cycles are staggered between actors.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A04",
+      "requirements": [
+        "N-A04"
+      ],
+      "category": "Visual and Animation",
+      "title": "Subtle eye movement",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Small pupil movements occur between major gaze changes.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A05",
+      "requirements": [
+        "N-A05"
+      ],
+      "category": "Visual and Animation",
+      "title": "Look away and return",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Occasional brief glances return towards the conversation partner.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A06",
+      "requirements": [
+        "N-A06"
+      ],
+      "category": "Visual and Animation",
+      "title": "Eyes before head",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Eye response leads the slower head response on a new target.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A07",
+      "requirements": [
+        "N-A07"
+      ],
+      "category": "Visual and Animation",
+      "title": "Head and body orientation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Bounded head/torso movement supports the current speaker without turning the player root.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A08",
+      "requirements": [
+        "N-A08"
+      ],
+      "category": "Visual and Animation",
+      "title": "Listening reactions",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Listeners show facial, nod and gesture responses.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-A09",
+      "requirements": [
+        "N-A09"
+      ],
+      "category": "Visual and Animation",
+      "title": "Avoid rigid staring",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play Jesse, Saul and Eliab conversations\n2. Observe the actual eyes/head/body while the active partner moves or speaks\n3. Pause/resume and inspect the captured frames",
+      "expected": "Long exchanges contain varied listening and idle motion.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B01",
+      "requirements": [
+        "N-B01"
+      ],
+      "category": "Visual and Animation",
+      "title": "Remove the extra mouth",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "No detached second opening appears below the original lip line during dialogue.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B02",
+      "requirements": [
+        "N-B02"
+      ],
+      "category": "Visual and Animation",
+      "title": "Only intended face geometry",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Only the aligned mouth/rim and appropriate teeth are visible; neutral interior is hidden.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B03",
+      "requirements": [
+        "N-B03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Resolve face-controller conflicts",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "All intended jaw/lip/interior morph bindings receive consistent speech values.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B04",
+      "requirements": [
+        "N-B04",
+        "G16"
+      ],
+      "category": "Visual and Animation",
+      "title": "Lip-sync timing",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Opening/rounding follows the actual paused dialogue audio clock.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B05",
+      "requirements": [
+        "N-B05"
+      ],
+      "category": "Visual and Animation",
+      "title": "Smooth speech shapes",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Mouth shapes interpolate smoothly without abrupt pops.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B06",
+      "requirements": [
+        "N-B06"
+      ],
+      "category": "Visual and Animation",
+      "title": "Neutral after speech",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Speech weights settle below 0.015 and interior/teeth hide after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B07",
+      "requirements": [
+        "N-B07"
+      ],
+      "category": "Visual and Animation",
+      "title": "Seven emotional expressions",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Surprise, anger, fear, confidence, sadness, determination and happiness are visibly supported.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B08",
+      "requirements": [
+        "N-B08"
+      ],
+      "category": "Visual and Animation",
+      "title": "Contextual expressions",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Expressions match the current speaker/listener and narrative context.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-B09",
+      "requirements": [
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "Separate expression and speech",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play voiced close-ups for David, Jesse, Saul and Goliath\n2. Observe the requested mouth/expression behaviour through speech and silence\n3. Pause, resume and restart to check neutral and timing",
+      "expected": "Changing an expression does not replace the spoken opening/rounding channel.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C01",
+      "requirements": [
+        "N-C01",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Natural idles",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Standing characters show restrained breathing/postural movement.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C02",
+      "requirements": [
+        "N-C02",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Walking cadence",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Walk phase responds to actual travel and stops when blocked.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C03",
+      "requirements": [
+        "N-C03",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Running cadence",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Foreground and crowd run poses follow actual travelled distance.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C04",
+      "requirements": [
+        "N-C04",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Smooth turns and stops",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Heading follows the short angular path with bounded turn rate and blended stops.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C05",
+      "requirements": [
+        "N-C05",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Head, shoulders, arms and hands",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Subtle body language supports retained hand gestures and prop ownership.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C06",
+      "requirements": [
+        "N-C06",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Speaking gestures",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Long lines retain forward gesture movement and do not freeze at a held tail.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C07",
+      "requirements": [
+        "N-C07",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Listener body language",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Listening includes occasional nods/reactions and posture variation.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C08",
+      "requirements": [
+        "N-C08",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Posture and foot placement",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Characters remain grounded and stable at rest and during route movements.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C09",
+      "requirements": [
+        "N-C09",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Reduce foot sliding",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Calibrated walk/run timing matches movement; visible sliding is investigated.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-C10",
+      "requirements": [
+        "N-C10",
+        "G03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Animation transitions",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Move, stop and turn David on the existing routes\n2. Watch speaking/listening and running actors at gameplay/conversation distances\n3. Check joints, contacts and return to control",
+      "expected": "Idle/listen/speak/walk/run/action changes blend without locked or duplicated actions.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D01",
+      "requirements": [
+        "N-D01"
+      ],
+      "category": "Visual and Animation",
+      "title": "Establishing shots",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Wide shots establish each important location.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D02",
+      "requirements": [
+        "N-D02"
+      ],
+      "category": "Visual and Animation",
+      "title": "Medium shots",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Medium framing supports speaking gestures without clipping.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D03",
+      "requirements": [
+        "N-D03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Facial close-ups",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Conversation close-ups show eyes and mouth clearly.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D04",
+      "requirements": [
+        "N-D04"
+      ],
+      "category": "Visual and Animation",
+      "title": "Two-character shots",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Two-shots show the conversation relationship and spacing.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D05",
+      "requirements": [
+        "N-D05"
+      ],
+      "category": "Visual and Animation",
+      "title": "Over-the-shoulder shots",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Shoulder coverage frames both participants without hiding the speaking face.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D06",
+      "requirements": [
+        "N-D06"
+      ],
+      "category": "Visual and Animation",
+      "title": "Reaction shots",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "The listener is shown at appropriate dialogue beats.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D07",
+      "requirements": [
+        "N-D07"
+      ],
+      "category": "Visual and Animation",
+      "title": "Goliath low angles",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Goliath has appropriate low-angle/scale-establishing coverage.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D08",
+      "requirements": [
+        "N-D08"
+      ],
+      "category": "Visual and Animation",
+      "title": "Smooth camera presentation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Moves/FOV transitions are stable and controlled; authored cuts are intentional.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D09",
+      "requirements": [
+        "N-D09"
+      ],
+      "category": "Visual and Animation",
+      "title": "Story-responsive cameras",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Shots correspond to actual dialogue or combat state.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-D10",
+      "requirements": [
+        "N-D10"
+      ],
+      "category": "Visual and Animation",
+      "title": "Preserve gameplay camera ownership",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the opening, conversations and battle\n2. Inspect the named shot type and moving transitions\n3. Return to gameplay and operate the camera",
+      "expected": "Cinematic cameras return control and do not obstruct movement or combat.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E01",
+      "requirements": [
+        "N-E01"
+      ],
+      "category": "Visual and Animation",
+      "title": "Lighting and shadows",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Warm key, reflected fill and grounded shadows improve character separation.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E02",
+      "requirements": [
+        "N-E02"
+      ],
+      "category": "Visual and Animation",
+      "title": "Material treatment",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Skin, cloth, hair, leather and terrain retain appropriate roughness/detail.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E03",
+      "requirements": [
+        "N-E03"
+      ],
+      "category": "Visual and Animation",
+      "title": "Terrain, texture and vegetation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Original surface grain and restrained vegetation movement improve existing environments.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E04",
+      "requirements": [
+        "N-E04"
+      ],
+      "category": "Visual and Animation",
+      "title": "Atmosphere",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Sky/fog/breeze add depth without obscuring gameplay.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E05",
+      "requirements": [
+        "N-E05"
+      ],
+      "category": "Visual and Animation",
+      "title": "Scene composition and depth",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Characters and near/far environment remain distinguishable.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-E06",
+      "requirements": [
+        "N-E06"
+      ],
+      "category": "Visual and Animation",
+      "title": "Important cinematic moments",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Inspect the courtyard, valley, camp, pavilion and brook\n2. Compare daylight/shadows/materials/vegetation and depth with the retained baseline\n3. Play important moments and confirm visibility",
+      "expected": "Opening, audience, challenge, earned hit/fall and conclusion receive clear coverage.",
+      "kind": "Visual",
+      "environment": "Chrome desktop; captured rendered frames",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F01",
+      "requirements": [
+        "N-F01",
+        "G16"
+      ],
+      "category": "Performance",
+      "title": "Audio and face synchronisation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Dialogue and mouth states share one source clock across pause/resume.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F02",
+      "requirements": [
+        "N-F02"
+      ],
+      "category": "Performance",
+      "title": "Music and effects",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Retained music, weapon, movement and environmental effects suit the active scene.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F03",
+      "requirements": [
+        "N-F03"
+      ],
+      "category": "Performance",
+      "title": "No duplicate dialogue",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Restart/rapid input cannot leave overlapping old speech schedules.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F04",
+      "requirements": [
+        "N-F04"
+      ],
+      "category": "Performance",
+      "title": "Asset loading and transitions",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Required assets load reliably; facial shaders warm before the first spoken line.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F05",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "Rendering and animation performance",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Measured unrecorded laptop scene maintains the agreed 30 FPS target; stalls are reported.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F06",
+      "requirements": [
+        "N-F06"
+      ],
+      "category": "Performance",
+      "title": "Processing and memory",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Shared face ownership/detail textures, audio de-duplication and cleanup avoid unnecessary retained work.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-F07",
+      "requirements": [
+        "N-F07"
+      ],
+      "category": "Performance",
+      "title": "Quality with optimisation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the production build with real audio and normal clocks\n2. Record the relevant source, loading, frame or memory measurements\n3. Repeat pause/restart and inspect error logs",
+      "expected": "Performance changes preserve faces, art direction, controls and rendering correctness.",
+      "kind": "Performance",
+      "environment": "Chrome laptop, unrecorded production build",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-surprise",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "surprise expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for surprise\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-anger",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "anger expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for anger\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-fear",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "fear expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for fear\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-confidence",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "confidence expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for confidence\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-sadness",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "sadness expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for sadness\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-determination",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "determination expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for determination\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-EM-happiness",
+      "requirements": [
+        "N-B07",
+        "N-B08",
+        "N-B09"
+      ],
+      "category": "Visual and Animation",
+      "title": "happiness expression",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play the contextual conversation or isolated facial component test for happiness\n2. Observe eyes, brows and mouth corners during real speech or controlled component speech input\n3. Let the real line end or return controlled speech input to neutral",
+      "expected": "The intended expression is visible, speech values remain independent, and the mouth closes after the line.",
+      "kind": "Visual",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-BR01",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Desktop Chrome",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start fresh\n2. Complete all chapters with real controls\n3. Check errors and responsive UI",
+      "expected": "All six chapters complete without state repair.",
+      "kind": "Integration",
+      "environment": "Chrome 1280 × 720, keyboard/mouse",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR02",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Laptop Chrome",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch production\n2. Complete combat and final action\n3. Check UI geometry",
+      "expected": "Readable instructions; reachable controls; no overflow.",
+      "kind": "Integration",
+      "environment": "Chrome 1366 × 768, keyboard/mouse",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR03",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Portrait touch",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch production\n2. Use movement, dialogue, sling and sword touch controls\n3. Check target sizes and overflow",
+      "expected": "Touch actions work; essential buttons at least 44 px and inside viewport.",
+      "kind": "Integration",
+      "environment": "Chrome emulated 390 × 844, CDP touch",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR04",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Landscape touch",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch production\n2. Use movement, dialogue, sling and sword touch controls\n3. Pause/restart and rotate if supported",
+      "expected": "Control layout remains usable; no obscured required action.",
+      "kind": "Integration",
+      "environment": "Chrome emulated 844 × 390, CDP touch",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR05",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Edge desktop",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch production\n2. Play an audience and combat/ending sample\n3. Inspect console and rendering",
+      "expected": "Same controls, faces and progression operate without browser errors.",
+      "kind": "Integration",
+      "environment": "Installed Edge, WebGL 2",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR06",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Firefox desktop",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch a clean production session\n2. Play conversations and battle\n3. Inspect audio and rendering",
+      "expected": "Equivalent rendering, controls and progression.",
+      "kind": "Integration",
+      "environment": "Firefox, WebGL 2",
+      "priority": "P2"
+    },
+    {
+      "id": "TC-BR07",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Safari desktop",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch production\n2. Play voiced conversations and battle\n3. Check audio activation and WebGL",
+      "expected": "Equivalent tested behaviour on a real Safari browser.",
+      "kind": "Integration",
+      "environment": "Safari on macOS",
+      "priority": "P2"
+    },
+    {
+      "id": "TC-BR08",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Physical Android",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Open the same production build\n2. Play with touch in both orientations\n3. Measure frame rate and controls",
+      "expected": "Actual device evidence is recorded separately from emulation.",
+      "kind": "Integration",
+      "environment": "Android device and supported browser",
+      "priority": "P2"
+    },
+    {
+      "id": "TC-BR09",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Physical iPhone",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Open the same production build\n2. Play with touch in both orientations\n3. Check audio, lifecycle and performance",
+      "expected": "Actual device evidence is recorded separately from emulation.",
+      "kind": "Integration",
+      "environment": "iPhone Safari",
+      "priority": "P2"
+    },
+    {
+      "id": "TC-BR10",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "WebGL unavailable fallback",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Disable WebGL 2 for the isolated test\n2. Launch\n3. Read and use the recovery message",
+      "expected": "Clear error/recovery is shown rather than a blank or infinite loading screen.",
+      "kind": "Negative",
+      "environment": "Browser context with unavailable WebGL 2",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-BR11",
+      "requirements": [
+        "G18",
+        "G04"
+      ],
+      "category": "Browser and Device",
+      "title": "Keyboard focus and action labels",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Navigate available action controls\n2. Use focused buttons/keyboard shortcuts\n3. Pause and return",
+      "expected": "Required actions remain labelled, reachable and operable.",
+      "kind": "Integration",
+      "environment": "Chrome desktop, keyboard only",
+      "priority": "P0"
+    },
+    {
+      "id": "TC-P01",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "First production entry",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Use a fresh browser process and empty cache\n2. Measure navigation-to-ready for the opening\n3. Record bytes and timing",
+      "expected": "Actual cold local startup and download size are recorded; no arbitrary fabricated network guarantee.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P02",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "Scene transition loading",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Walk connected locations through all chapters\n2. Record navigation/arrival timing\n3. Inspect long frames and failed requests",
+      "expected": "No broken asset or progression-blocking transition; measured stalls are reported.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P03",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "Sustained Victory frame pacing",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the conclusion at normal clock without recording\n2. Measure from 2 seconds to completion\n3. Record FPS and p95/max gaps",
+      "expected": "At least 30 FPS on the stated laptop; no hidden stall exclusions.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P04",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "Sustained interactive battle",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Enter sling-enabled combat\n2. Continue real dodges for the measured interval\n3. Record frame pacing and responsiveness",
+      "expected": "Active combat remains responsive; actual FPS/stalls are recorded.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P05",
+      "requirements": [
+        "N-F06"
+      ],
+      "category": "Performance",
+      "title": "Memory and replay stability",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Measure heap after warm play\n2. Restart/replay repeatedly\n3. Measure after collection where available",
+      "expected": "No monotonic unexplained retained growth; browser heap limits and method are stated.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P06",
+      "requirements": [
+        "G19"
+      ],
+      "category": "Performance",
+      "title": "Animation/asset preservation",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Compare current GLBs with the recorded Git baseline\n2. Check animation, skin, UV and non-facial accessors\n3. Validate current facial metadata",
+      "expected": "Only documented facial data changes; all existing body/weapon tracks are preserved.",
+      "kind": "Regression",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P07",
+      "requirements": [
+        "N-F03"
+      ],
+      "category": "Performance",
+      "title": "Audio restart and duplicates",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Start a voiced sequence\n2. Rapidly restart and pause/resume\n3. Observe actual scheduled AudioBufferSources",
+      "expected": "No overlapping expired dialogue; one active intended speaker; cleared old schedules.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P08",
+      "requirements": [
+        "G16"
+      ],
+      "category": "Performance",
+      "title": "Mute and caption continuity",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Play dialogue\n2. Mute/unmute then pause/resume\n3. Read captions and observe faces",
+      "expected": "Output mutes while captions/face timing remain correct and resume at the retained clock.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P09",
+      "requirements": [
+        "N-F04"
+      ],
+      "category": "Performance",
+      "title": "First speaking-frame warm-up",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Launch the production scene\n2. Observe entry and first spoken close-up\n3. Record render gaps and neutral restoration",
+      "expected": "Facial shaders are warmed; first speech remains visible and does not leave warm-up mouth weights.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    },
+    {
+      "id": "TC-P10",
+      "requirements": [
+        "N-F05"
+      ],
+      "category": "Performance",
+      "title": "Rendering and console stability",
+      "prerequisites": "Use the recorded production build and stated account/checkpoint. Keep normal progress isolated from review previews.",
+      "steps": "1. Run the complete episode and focused views\n2. Collect console/page errors and failed assets\n3. Inspect all screenshots",
+      "expected": "No new errors, corrupt meshes, missing eyes or broken rendering.",
+      "kind": "Performance",
+      "environment": "Chrome desktop, WebGL 2",
+      "priority": "P1"
+    }
+  ]
+}

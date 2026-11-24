@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-23",
+  "cpu": [
+    {
+      "Name": "Intel(R) N150",
+      "NumberOfCores": 4,
+      "NumberOfLogicalProcessors": 4
+    }
+  ],
+  "gpu": [
+    {
+      "Name": "Intel(R) Graphics",
+      "DriverVersion": "32.0.101.7088"
+    }
+  ],
+  "memoryGiB": 15.8,
+  "os": [
+    {
+      "Caption": "Microsoft Windows 11 Pro",
+      "Version": "10.0.26200"
+    }
+  ]
+}

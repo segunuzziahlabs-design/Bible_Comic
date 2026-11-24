@@ -1,5 +1,6 @@
 import { type Application, type AnimTrack, type ContainerResource, type Entity, type MorphInstance, type RenderComponent } from 'playcanvas';
 import goliathUrl from '../assets/goliath-collision.glb?url';
+import {createCharacterFace} from './character-face';
 
 const clips = ['goliath_ready', 'goliath_challenge', 'goliath_advance', 'goliath_spear', 'goliath_fall'] as const;
 type Clip = typeof clips[number];
@@ -35,18 +36,6 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
   if (!baseLayer || !forehead || !grip || !tip) throw new Error('Goliath rig is missing its animation layer, forehead or spear markers');
   const layer = baseLayer;
 
-  const morphs = new Map<string, Array<[MorphInstance, number]>>();
-  for (const render of model.findComponents('render') as RenderComponent[]) for (const mesh of render.meshInstances) {
-    const instance = mesh.morphInstance;
-    instance?.morph.targets.forEach((target, index) => {
-      const entries = morphs.get(target.name) ?? []; entries.push([instance, index]); morphs.set(target.name, entries);
-    });
-  }
-  function face(open: number, round: number) {
-    for (const [name, value] of [['SpeakOpen', open], ['SpeakRound', round]] as const)
-      for (const [instance, index] of morphs.get(name) ?? []) instance.setWeight(index, value);
-  }
-  function mouthWeights() { return (morphs.get('SpeakOpen') ?? []).map(([instance, index]) => instance.getWeight(index)); }
   function pose(clip: Clip | 'goliath_speak' | 'goliath_spear_1' | 'goliath_spear_2' | 'goliath_spear_3' | 'goliath_throw' | 'goliath_draw_sword' | 'goliath_sword_strike' | 'goliath_hit' | 'goliath_stagger' | 'goliath_heavy_fall', time: number, dt: number, cut = false) {
     if (layer.activeState !== clip || cut) {
       if (!dt || cut) { layer.play(clip); animator.update(.0001); }
@@ -59,10 +48,12 @@ export async function loadGoliath(app: Application, url = goliathUrl) {
   // Establish a real initial pose before callers transition or sample the rig.
   // Transitioning directly from an unstarted controller leaves its skin bounds collapsed.
   pose('goliath_ready', 0, 0, true);
+  const facial=createCharacterFace(app,model);
   const weapon=model.findComponents('render').filter(r=>/Goliath spear (shaft|head)/.test(r.entity.name));
   const sword=model.findComponents('render').filter(r=>/Goliath drawn sword/.test(r.entity.name));
   const hilt=model.findComponents('render').filter(r=>/Goliath sheathed sword/.test(r.entity.name));
   return { heldWeapon(visible:boolean){for(const render of weapon)render.enabled=visible;},
     heldSword(visible:boolean){for(const render of sword)render.enabled=visible;for(const render of hilt)render.enabled=!visible;},
-    swordGrip,swordTip,model, pose, forehead, grip, tip, face, mouthWeights, tracks };
+    swordGrip,swordTip,model, pose, forehead, grip, tip, face:facial.set, mouthWeights:facial.mouthWeights, tracks,
+    gaze:facial.gaze,expression:facial.expression,faceSample:facial.sample };
 }

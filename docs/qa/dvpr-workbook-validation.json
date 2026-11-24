@@ -1,0 +1,164 @@
+{
+  "status": "PASS",
+  "date": "2026-11-23",
+  "worksheets": 12,
+  "nativeTables": 11,
+  "nativeCharts": 1,
+  "sheets": [
+    {
+      "part": "xl/worksheets/sheet1.xml",
+      "formulas": 0,
+      "validationRules": 0,
+      "conditionalFormats": 0,
+      "tables": 1,
+      "freezeX": "",
+      "freezeY": "",
+      "mergedRanges": [
+        "A2:B2",
+        "A3:B3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet2.xml",
+      "formulas": 213,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet3.xml",
+      "formulas": 236,
+      "validationRules": 2,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet4.xml",
+      "formulas": 354,
+      "validationRules": 2,
+      "conditionalFormats": 3,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet5.xml",
+      "formulas": 357,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet6.xml",
+      "formulas": 189,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet7.xml",
+      "formulas": 84,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet8.xml",
+      "formulas": 77,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet9.xml",
+      "formulas": 119,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet10.xml",
+      "formulas": 0,
+      "validationRules": 2,
+      "conditionalFormats": 0,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet11.xml",
+      "formulas": 46,
+      "validationRules": 0,
+      "conditionalFormats": 0,
+      "tables": 1,
+      "freezeX": "2",
+      "freezeY": "5",
+      "mergedRanges": [
+        "A2:E2",
+        "A3:E3"
+      ]
+    },
+    {
+      "part": "xl/worksheets/sheet12.xml",
+      "formulas": 16,
+      "validationRules": 0,
+      "conditionalFormats": 1,
+      "tables": 0,
+      "freezeX": "",
+      "freezeY": "",
+      "mergedRanges": []
+    }
+  ],
+  "visualReview": "All twelve worksheet previews inspected; evidence columns adjusted to one ID per line and sized for complete display.",
+  "formulaReview": "Recalculated, checked zero formula errors, changed a result input to exercise summary/missing-evidence gates, restored it, exported and checked native cached totals against execution JSON."
+}

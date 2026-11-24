@@ -117,7 +117,10 @@ export async function createShepherdOpening(app:Application,area:Area,david:Acto
       if(local<2.5||local>=second&&local<second+2.5){jesseClip='explain_point';jesseTime=local<2.5?local:local-second;}
     }
     world.courtyard.jesse.pose(jesseClip,jesseTime,dt);
-    if(stage==='errand'||stage==='handoff')for(const [i,speaker]of ['David','Keeper','Messenger','Jesse'].entries())performances[i].apply(elapsed,line?.speaker===speaker,line&&line.speaker!==speaker?reactionNod(line.local,listenerNodStart(line.duration,i),.9,1.8):0,i*1.7);
+    if(stage==='errand'||stage==='handoff')for(const [i,speaker]of ['David','Keeper','Messenger','Jesse'].entries()){
+      const partner=i===0?(stage==='errand'?world.courtyard.jesse:world.messenger):david;
+      performances[i].apply(elapsed,line?.speaker===speaker,line&&line.speaker!==speaker?reactionNod(line.local,listenerNodStart(line.duration,i),.9,1.8):0,i*1.7,partner.model.findByName('Head')!,speaker==='Jesse'?'confidence':speaker==='Messenger'?'surprise':speaker==='David'?'determination':'neutral');
+    }
     const at=target();world.marker.enabled=playable();world.marker.setPosition(at.x,world.ground(at.x,at.z)+.025,at.z);frame(locationChanged?0:dt,!playable());
     const route=stage==='pasture_path'?pasturePath.map(p=>[p.x,p.z]):stage==='courtyard'?[[arrivalEnd.x,arrivalEnd.z],[jesseMark.x,jesseMark.z]]:stage==='provisions'?[[-.6,-6.8],[0,-7.1],[bundleMark.x,bundleMark.z]]:!discovered?[[bundleMark.x,bundleMark.z+.8],[0,-7.1],[0,-11],[0,-14.2],[ridgeMark.x,ridgeMark.z]]:[[ridgeMark.x,ridgeMark.z],[0,-22],[valleyExit.x,valleyExit.z]];
     guide.update(area.camera.camera!,david.model.getPosition(),point.set(at.x,world.ground(at.x,at.z)+.65,at.z),action(),canInteract()?'E / tap action':stage==='pasture_path'?'Arrival starts at the end of the path':'Follow the arrows',playable(),route.map(([x,z])=>({x,y:world.ground(x,z),z})));

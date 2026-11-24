@@ -246,18 +246,19 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   for (const [name, anchor] of Object.entries(elahAnchors)) site(name, anchor.x, anchor.z);
 
   const sky = new Color(.63, .71, .72);
-  app.scene.ambientLight = new Color(.50, .51, .51);
+  app.scene.ambientLight = new Color(.35, .39, .43);
   app.scene.fog.type = FOG_LINEAR;
   app.scene.fog.color = sky;
   app.scene.fog.start = 19;
   app.scene.fog.end = 65;
   const sun = new Entity('Late-afternoon sun');
   sun.addComponent('light', {
-    type: 'directional', color: new Color(1, .92, .8), intensity: 1.35,
-    castShadows: true, shadowResolution: 1024, shadowDistance: 15, normalOffsetBias: .03,
+    type: 'directional', color: new Color(1, .91, .76), intensity: 1.42,
+    castShadows: true, shadowResolution: 1024, shadowDistance: 16, normalOffsetBias: .018,shadowBias:.035,
   });
   sun.setEulerAngles(38, -43, 0);
   app.root.addChild(sun);
+  const skyFill=new Entity('Elah sky bounce');skyFill.addComponent('light',{type:'directional',color:new Color(.72,.83,1),intensity:.25,castShadows:false});skyFill.setEulerAngles(65,135,0);app.root.addChild(skyFill);
 
   const camera = new Entity('Follow camera');
   camera.addComponent('camera', { fov: 52, nearClip: .05, farClip: 85, clearColor: sky });

@@ -2,6 +2,7 @@ import { StandardMaterial, type Application, type AnimTrack, type ContainerResou
 import davidUrl from '../assets/david.glb?url';
 import { hairColours, hairStyles, skinTones, tunicColours, type DavidAppearance } from './david-appearance';
 import { loadJumpAnimations } from './jump-animations';
+import {createCharacterFace} from './character-face';
 
 const clips = ['idle_relaxed', 'walk_forward', 'acknowledge', 'listen', 'listen_to_provisions', 'pickup_provisions'];
 const faces = ['Blink', 'BrowLift', 'Smile'] as const;
@@ -53,13 +54,6 @@ export async function loadDavid(app: Application, url = davidUrl) {
   const cloth = materials.get('Cloth');
   if (!hairShape || !skin || !hair || !brows || !cloth) throw new Error('Missing David appearance slots');
 
-  function setFace(acknowledge: number) {
-    const weights = [0, .7 * acknowledge, .75 * acknowledge];
-    faces.forEach((name, i) => {
-      const target = morphs.get(name);
-      if (target) target[0].setWeight(target[1], weights[i]);
-    });
-  }
 
   const [hairInstance, hairIndex] = hairShape;
   const appearanceMaterials = { skin, hair, brows, cloth };
@@ -72,11 +66,7 @@ export async function loadDavid(app: Application, url = davidUrl) {
     setTint(cloth, tunicColours[appearance.tunic].tint);
     hairInstance.setWeight(hairIndex, hairStyles[appearance.hairStyle].fullness);
   }
-  function speech(open: number, round: number) {
-    for (const [name, value] of [['SpeakOpen', open], ['SpeakRound', round]] as const) {
-      const target = morphs.get(name); target?.[0].setWeight(target[1], value);
-    }
-  }
-  function mouthWeights() { const target = morphs.get('SpeakOpen'); return target ? [target[0].getWeight(target[1])] : []; }
-  return { model, animator, tracks, setFace, setAppearance, speech, mouthWeights };
+  const facial=createCharacterFace(app,model);
+  return { model, animator, tracks, setFace:(ack:number)=>facial.set(0,0,.75*ack,.7*ack,0), setAppearance, speech:facial.speech, mouthWeights:facial.mouthWeights,
+    gaze:facial.gaze,expression:facial.expression,faceSample:facial.sample };
 }

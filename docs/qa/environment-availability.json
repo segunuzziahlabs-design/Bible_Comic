@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-23",
+  "os": "win32",
+  "node": "v24.14.1",
+  "firefoxPaths": [
+    {
+      "path": "C:/Program Files/Mozilla Firefox/firefox.exe",
+      "exists": false
+    },
+    {
+      "path": "C:/Program Files (x86)/Mozilla Firefox/firefox.exe",
+      "exists": false
+    }
+  ],
+  "safari": "Not available: Windows workspace; no accessible Safari/macOS test environment",
+  "physicalAndroid": "No physical Android browser connected to this automation session",
+  "physicalIPhone": "No physical iPhone/Safari browser connected to this automation session",
+  "limits": "Touch emulation uses the laptop GPU. Browser data do not certify physical mobile hardware."
+}

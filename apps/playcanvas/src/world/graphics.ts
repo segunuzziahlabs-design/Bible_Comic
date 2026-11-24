@@ -1,5 +1,6 @@
 import { Application, DEVICETYPE_WEBGL2, FILLMODE_NONE, RESOLUTION_FIXED, createGraphicsDevice } from 'playcanvas';
 import { currentAccountSettings } from '../product/preferences';
+import {warmCharacterFaces} from './character-face';
 
 export class WebGLUnavailable extends Error {}
 
@@ -30,8 +31,9 @@ export function observeCanvas(app: Application, canvas: HTMLCanvasElement) {
 }
 
 export function waitForFrame(app: Application) {
+  const restoreFaces=warmCharacterFaces(app);
   return new Promise<void>(resolve => {
-    app.once('frameend', resolve);
+    app.once('frameend',()=>{restoreFaces();resolve();});
     app.start();
   });
 }

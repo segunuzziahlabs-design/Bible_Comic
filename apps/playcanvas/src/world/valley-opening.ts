@@ -43,8 +43,8 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 128;
     const ctx = canvas.getContext('2d')!; const data = ctx.createImageData(128, 128);
     for (let i = 0; i < 128 * 128; i++) {
-      const grain = woven ? (i % 128 % 4 === 0 || Math.floor(i / 128) % 4 === 0 ? 12 : 0) : random() * 25;
-      const colour = 224 + grain + random() * 6;
+      const grain = woven ? (i % 128 % 4 === 0 || Math.floor(i / 128) % 4 === 0 ? 16 : -5) : random() * 25+7*Math.sin((i%128)*.23)*Math.cos(Math.floor(i/128)*.31);
+      const colour = 218 + grain + random() * 6;
       data.data.set([colour, colour, colour, 255], i * 4);
     }
     ctx.putImageData(data, 0, 0);
@@ -117,7 +117,7 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     trunks.push(at(x, z, .9, .16, 1.8, .18, 9));
     for (let i = 0; i < 4; i++) crowns.push(at(x + (i % 2 ? .5 : -.4), z + (i > 1 ? .35 : -.35), 2.1 + i * .08, 1.35, .68, 1.4));
   }
-  batch('Limestone outcrops', 'sphere', limestone, stones); batch('Dry valley scrub', 'sphere', olive, grasses);
+  batch('Limestone outcrops', 'sphere', limestone, stones);const scrub=batch('Dry valley scrub', 'sphere', olive, grasses,true);let lastBreeze=-1;
   batch('Olive trunks', 'cylinder', wood, trunks); batch('Olive canopies', 'sphere', olive, crowns);
 
   const posts: Placement[] = [], ropes: Placement[] = [], jars: Placement[] = [], shields: Placement[] = [];
@@ -178,7 +178,7 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   const sun = app.root.children.find(child => child instanceof Entity && child.light?.castShadows) as Entity | undefined;
   if (sun?.light) { sun.light.intensity = 1.4; sun.light.shadowResolution = 1024; sun.light.shadowDistance = 20; sun.light.color = new Color(1,.90,.73); }
   const bounce = new Entity('Warm camp bounce'); bounce.addComponent('light', { type: 'directional', intensity: .55, color: new Color(.83,.89,1) }); bounce.setEulerAngles(22,135,0); root.addChild(bounce);
-  app.scene.ambientLight = new Color(.52,.54,.56); app.scene.fog.color = new Color(.61,.68,.69); app.scene.fog.start = 38; app.scene.fog.end = 108;
+  app.scene.ambientLight = new Color(.36,.40,.44); app.scene.fog.color = new Color(.65,.70,.70); app.scene.fog.start = 32; app.scene.fog.end = 108;
   area.camera.camera!.farClip = 130; area.camera.camera!.clearColor = new Color(.61,.72,.77);
   const markerMaterial = surface('Overlook marker', [.76,.55,.22]);
   const marker = new Entity('Overlook survey point'); marker.addComponent('render', { type: 'cylinder', material: markerMaterial, castShadows: false });
@@ -188,6 +188,7 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   let lastTime=0, patrolTime=0, patrolWalk=0, patrolX=-4, patrolYaw=90;
   function stage(time: number, reacting = false, alarm = 0, automaticActors = true) {
     const dt=Math.max(0,Math.min(.05,time-lastTime)); lastTime=time;
+    if(lastBreeze<0||Math.abs(time-lastBreeze)>=1/12){lastBreeze=time;for(let i=0;i<grasses.length;i++){grasses[i].roll=Math.sin(time*1.15+i*.61)*2.6;grasses[i].sy=.14+Math.sin(time*.8+i)*.012;}scrub.update(grasses);}
     ranks.forEach(rank => rank.step(time,alarm));
     flags.forEach(({ entity, base, phase }) => entity.setLocalScale(base.x * (1 + .007 * Math.sin(time * 1.6 + phase)), base.y * (1 + .009 * Math.sin(time * 2 + phase)), base.z));
     sentinel.model.setPosition(2.4,area.groundHeight(2.4,9.3),9.3); sentinel.model.setEulerAngles(0,-65,0);

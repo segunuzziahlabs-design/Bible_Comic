@@ -1,6 +1,7 @@
 import { Color, Entity, StandardMaterial, type Application } from 'playcanvas';
 import { loadConversationActor } from './conversation-actor';
 import jesseUrl from '../assets/jesse-courtyard.glb?url';
+import {surfaceGrain} from './surface-grain';
 
 export const jesseMark = { x: -1.5, z: -8.2 };
 export const bundleMark = { x: 1.35, z: -8.3 };
@@ -23,6 +24,7 @@ export async function buildJesseCourtyard(app: Application, parent: Entity) {
   const dark = material('Dark doorway', [.13, .10, .065]);
   const clay = material('Household clay jars', [.51, .26, .13]);
   const olive = material('Dried herbs and olive leaves', [.28, .32, .16]);
+  for(const mat of[plaster,stone,floor]){mat.diffuseMap=surfaceGrain(app);mat.diffuseMapTiling.set(3,3);mat.update();}
   function shape(name: string, type: 'box'|'cylinder'|'sphere'|'torus', at: number[], size: number[], mat: StandardMaterial, cast = true) {
     const e = new Entity(name); e.addComponent('render', {type, material: mat, castShadows: cast});
     e.setLocalPosition(at[0], at[1], at[2]); e.setLocalScale(size[0], size[1], size[2]); root.addChild(e); return e;
