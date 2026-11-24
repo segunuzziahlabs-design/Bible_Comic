@@ -12,6 +12,7 @@ import { playerRadius, type WallBounds } from '../gameplay/ground-motion';
 import { loadGoliath } from './goliath-character';
 import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
 import { swordTiming } from '../gameplay/sword-combat';
+import { duelWalls } from '../gameplay/duel-field';
 
 export const elahAnchors = {
   'battle.entry': { x: 0, z: 8.5 },
@@ -135,7 +136,7 @@ function addScrub(app: Application) {
   app.root.addChild(scrub);
 }
 
-export async function buildElah(app: Application, options: { goliathUrl?: string; externalChallenge?: boolean } = {}) {
+export async function buildElah(app: Application, options: { goliathUrl?: string; externalChallenge?: boolean; playableBattle?: boolean } = {}) {
   terrain(app);
   addScrub(app);
   const clay = surface([.54, .33, .24]);
@@ -263,13 +264,13 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   const camera = new Entity('Follow camera');
   camera.addComponent('camera', { fov: 52, nearClip: .05, farClip: 85, clearColor: sky });
   app.root.addChild(camera);
-  const walls: WallBounds[] = [
+  const walls: WallBounds[] = options.playableBattle ? duelWalls : [
     { minX: -13, maxX: -8.3, minZ: -17, maxZ: 15 },
     { minX: 8.3, maxX: 13, minZ: -17, maxZ: 15 },
     { minX: -13, maxX: 13, minZ: -17, maxZ: -14.4 },
     { minX: -13, maxX: 13, minZ: 12.8, maxZ: 15 },
   ];
-  const obstacles = [...walls,
+  const obstacles = options.playableBattle ? walls : [...walls,
     { minX: bearer.x - .46, maxX: bearer.x + .31, minZ: bearer.z - .19, maxZ: bearer.z + .32 },
   ];
   const warning = surface([.72, .21, .075]);

@@ -3,6 +3,13 @@ export type WallBounds = { minX: number; maxX: number; minZ: number; maxZ: numbe
 
 export const playerRadius = .28;
 
+export function confineToField(point: GroundPoint, field: Readonly<WallBounds>, inset = 0): GroundPoint {
+  return {
+    x: Math.max(field.minX + inset, Math.min(field.maxX - inset, point.x)),
+    z: Math.max(field.minZ + inset, Math.min(field.maxZ - inset, point.z)),
+  };
+}
+
 function slab(position: number, change: number, min: number, max: number) {
   if (Math.abs(change) < 1e-8) {
     return position > min && position < max ? [-Infinity, Infinity] : undefined;

@@ -1,6 +1,7 @@
 import { Vec3, type Application, type Entity } from 'playcanvas';
 import { buildValleyOpening } from './valley-opening';
 import { createSceneSpeech, mouthEnvelope } from './scene-speech';
+import { createDuelSoundscape } from './duel-soundscape';
 import {dialogueGestureTime} from '../gameplay/story-motion';
 import {createSpeechFaceMotion} from '../gameplay/speech-face-motion';
 import {castBlink,listenerNodStart} from '../gameplay/cast-performance';
@@ -24,7 +25,7 @@ import faith from '../assets/battle-performance-dialogue/david-faith.wav?url';
 import battle from '../assets/duel-dialogue/david-battle.wav?url';
 import watch from '../assets/duel-dialogue/soldier-watch.wav?url';
 
-export const duelVersion = 'continuous-duel-4';
+export const duelVersion = 'continuous-duel-5';
 export const confrontationDuration = 28;
 type David = Awaited<ReturnType<typeof loadDavid>>;
 
@@ -43,9 +44,10 @@ export async function createDuelPresentation(app: Application) {
     { id: 'david-faith', start: 9.5 }, { id: 'david-battle', start: 16.5 },
     { id: 'soldier-watch', start: 22.2 },
   ] }, [], 7,{cinematicDialogue:['departure','confrontation','opportunity']});
+  const soundscape = await createDuelSoundscape(audio.context, world.groundHeight);
   let phase = '', starts = 0, shot = 'approach', previousShot = '', elapsed = 0;
   const eye = new Vec3();let opportunity=false,entranceGap=0,lastDavid:David|undefined,davidPerformance:ReturnType<typeof createAudiencePerformance>|undefined;const beats=new Set<number>(),speechFace=createSpeechFaceMotion(),performances=[world.patrol,world.sentinel].map(createAudiencePerformance),championPerformance=createAudiencePerformance(world.champion);
-  function reset() { performances.forEach(p=>p.restore());audio.reset();speechFace.reset(audio.context.currentTime);lastDavid?.speech(0,0);world.patrol.face(0,0,0,.1,0);world.sentinel.face(0,0,0,.1,0);world.champion.face(0,0);world.resetActivity(); phase = ''; shot = 'approach';previousShot=''; elapsed = 0;opportunity=false;entranceGap=0;beats.clear(); }
+  function reset() { performances.forEach(p=>p.restore());audio.reset();soundscape.reset();speechFace.reset(audio.context.currentTime);lastDavid?.speech(0,0);world.patrol.face(0,0,0,.1,0);world.sentinel.face(0,0,0,.1,0);world.champion.face(0,0);world.resetActivity(); phase = ''; shot = 'approach';previousShot=''; elapsed = 0;opportunity=false;entranceGap=0;beats.clear(); }
   function step(state: ElahBattleState, dt: number, david: David) {
     lastDavid=david;performances.forEach(p=>p.restore());davidPerformance??=createAudiencePerformance(david);davidPerformance.restore();championPerformance.restore();
     elapsed += dt;
@@ -56,15 +58,16 @@ export async function createDuelPresentation(app: Application) {
         starts++;
         audio.begin('confrontation', {
           David: david.model.getPosition(), Goliath: world.champion.forehead.getPosition(),
-          Soldier: { x: -4, y: world.groundHeight(-4, 7.4) + 1.5, z: 7.4 },
+          Soldier: world.patrol.model.getPosition().clone().add(new Vec3(0,1.5,0)),
         });
       } else audio.cancel();
     }
-    world.stage(elapsed,true,phase==='entrance'?Math.min(.8,state.time/5):phase==='challenge'?.7:.3,false);
-    if(phase==='entrance'){entranceGap=Math.min(.8,state.time/5);for(const beat of[.4,1.1,1.8,2.5,3.2,3.9])if(state.time>=beat&&!beats.has(beat)){beats.add(beat);audio.footstep(world.champion.model.getPosition());audio.equipment(world.champion.model.getPosition());}}
-    for(const actor of[world.patrol,world.sentinel]){const p=actor.model.getPosition();actor.model.setPosition(p.x+(p.x<0?-1:1)*entranceGap,p.y,p.z);}
     if(phase==='fight'&&state.dodges>=3&&!opportunity){opportunity=true;audio.begin('opportunity',{David:david.model.getPosition()});}
     const line = audio.lineAt();
+    const cheers = soundscape.step(state, !!line, dt);
+    world.stage(elapsed,true,phase==='entrance'?Math.min(.8,state.time/5):phase==='challenge'?.7:.3,false,cheers);
+    if(phase==='entrance'){entranceGap=Math.min(.8,state.time/5);for(const beat of[.4,1.1,1.8,2.5,3.2,3.9])if(state.time>=beat&&!beats.has(beat)){beats.add(beat);audio.footstep(world.champion.model.getPosition());audio.equipment(world.champion.model.getPosition());}}
+    for(const actor of[world.patrol,world.sentinel]){const p=actor.model.getPosition();actor.model.setPosition(p.x+(p.x<0?-1:1)*entranceGap,p.y,p.z);}
     const mouth = speechFace.step(line ? mouthEnvelope(line, line.local) : [0, 0],audio.context.currentTime);
     david.speech(line?.speaker === 'David' ? mouth[0] : 0, line?.speaker === 'David' ? mouth[1] : 0);
     const groan=phase==='stagger'?Math.max(0,Math.sin(state.time*5.4))*.65:0;
@@ -154,8 +157,11 @@ export async function createDuelPresentation(app: Application) {
     return true;
   }
   return { world, davidUrl, audio, step, frame, reset,
+    mute(value: boolean) { audio.mute(value); soundscape.mute(value); },
+    dispose() { soundscape.dispose(); audio.dispose(); },
     caption: () => { const line = audio.lineAt(); return line ? `${line.speaker}: ${line.text}` : ''; },
     sample: () => ({ version: duelVersion, starts, shot, speaker: audio.lineAt()?.speaker,
-      voiceTime: audio.cueTime(), audio: audio.context.state, goliathMouth: world.champion.mouthWeights(), soldierMouth: world.patrol.mouthWeights() }),
+      voiceTime: audio.cueTime(), audio: audio.context.state, soundscape: soundscape.sample(),
+      goliathMouth: world.champion.mouthWeights(), soldierMouth: world.patrol.mouthWeights() }),
   };
 }

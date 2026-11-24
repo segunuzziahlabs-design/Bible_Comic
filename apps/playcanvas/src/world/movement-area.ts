@@ -4,7 +4,8 @@ import {
 } from 'playcanvas';
 import { mountObjectiveGuide } from '../app/objective-guide';
 import {resumeChapterAudio} from './chapter-audio-start';
-import { approachVelocity, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
+import { approachVelocity, confineToField, firstWallHit, slideAlongWalls } from '../gameplay/ground-motion';
+import { duelCameraField, duelField, duelStoneField } from '../gameplay/duel-field';
 import { canInspectMarker, markerCueDuration, markerCueText, trailMarker } from '../gameplay/courtyard-cue';
 import { aimAssistRadius, challengeDuration, createElahBattle, fallDuration, slingWindup, aftermathMovement, fallenPhase, swordPickupDuration, type EpisodeBattleSetup } from '../gameplay/elah-battle';
 import { createBattleAftermath } from './battle-aftermath';
@@ -187,8 +188,8 @@ export async function openMovementArea(
     const spawn = elah?.anchors[chapter&&episode&&episode.attempt>1&&episode.anchor==='battle.entry'&&!episode.defeated?'battle.approach':episode?.anchor ?? 'battle.entry'] ?? start;
     const cameraWalls = elah?.walls ?? walls;
     const battle = elah && createElahBattle(elah.anchors['battle.approach'].z, elah.brookZ, elah.goliath, elah.groundHeight,
-      () => elah.champion.forehead.getPosition(), episode, {...(chapter?{challengeSeconds:28,stopAfterFall:true,requiredDodges:3,entranceSeconds:13,rangedSpear:true,cinematicCombat:true,sampleSword:elah.sampleSword,
-        stoneLanding:(p:{x:number;y:number;z:number})=>reachableStoneLanding(p,elah.groundHeight,elah.stoneObstacles()),
+      () => elah.champion.forehead.getPosition(), episode, {...(chapter?{challengeSeconds:28,stopAfterFall:true,requiredDodges:3,entranceSeconds:13,rangedSpear:true,cinematicCombat:true,field:duelField,sampleSword:elah.sampleSword,
+        stoneLanding:(p:{x:number;y:number;z:number})=>reachableStoneLanding(p,elah.groundHeight,elah.stoneObstacles(),duelStoneField),
         stoneBarrier:(from:{x:number;y:number;z:number},to:{x:number;y:number;z:number})=>{const hit=firstWallHit(from,{x:to.x-from.x,z:to.z-from.z},elah.walls,.05);if(hit){const t=Math.max(0,hit.time-.002);return{x:from.x+(to.x-from.x)*t,y:from.y+(to.y-from.y)*t,z:from.z+(to.z-from.z)*t};}}
       }:{}),sampleSpear:elah.poseChampion});
     const lookHeight = elah ? 1.46 : .91;
@@ -364,8 +365,9 @@ export async function openMovementArea(
       const distance=chapter&&phase==='fight'?requestedDistance:safeArm(angle,requestedDistance);
       const edgeLift=chapter&&phase==='fight'?1-math.smoothstep(requestedDistance*.35,requestedDistance*.85,safeArm(angle,requestedDistance)):0;
       const shoulder = (battle.state.ranged&&phase==='fight'?(narrow?.55:1.6):(narrow ? .31 : .53)) * (1 - exchange) * Math.min(1, distance / 2);
-      const eyeX = nearX + Math.sin(angle) * distance + Math.cos(angle) * shoulder;
-      const eyeZ = nearZ + Math.cos(angle) * distance - Math.sin(angle) * shoulder;
+      const desired = { x: nearX + Math.sin(angle) * distance + Math.cos(angle) * shoulder,
+        z: nearZ + Math.cos(angle) * distance - Math.sin(angle) * shoulder };
+      const {x:eyeX,z:eyeZ} = chapter ? confineToField(desired,duelCameraField) : desired;
       const y = elah.groundHeight(position.x,position.z);
       // Rise over the hillside ranks at arena edges rather than looking through soldiers.
       eyeGoal.set(eyeX,jump.cameraY(Math.max(y + (defence?3.1:1.92) + edgeLift*2.4 + .2 * exchange, elah.groundHeight(eyeX, eyeZ) + .75 + edgeLift*3.6),eyeX,eyeZ),eyeZ);
@@ -692,7 +694,7 @@ export async function openMovementArea(
           const target=battle.aftermathTarget();destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(target.x,elah.groundHeight(target.x,target.z)+.25,target.z),state.phase==='retrieve'?'Goliath’s sword':'Finish the battle','Walk to the arrow · E / action button',true);
         }else if(state.phase==='fight'&&state.stoneRecovery.guiding&&state.stoneRecovery.targetId){
           const token=state.stoneRecovery.stones.find(s=>s.id===state.stoneRecovery.targetId&&s.status==='ground');
-          if(token?.position){routeAge+=dt;if(routeAge>.4||routeTarget!==token.id){recoveryRoute=stoneRecoveryRoute(model.getPosition(),token.position,elah.stoneObstacles(),elah.groundHeight);routeAge=0;routeTarget=token.id;}
+          if(token?.position){routeAge+=dt;if(routeAge>.4||routeTarget!==token.id){recoveryRoute=stoneRecoveryRoute(model.getPosition(),token.position,elah.stoneObstacles(),elah.groundHeight,duelStoneField);routeAge=0;routeTarget=token.id;}
             destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(token.position.x,token.position.y+.22,token.position.z),`Stone ${token.id} · ${state.stones}/5 held`,state.stoneRecovery.pickup?'Collecting · Move / dodge cancels':'Follow arrows · Stop close to collect',true,recoveryRoute);
           }
         }else{
@@ -731,16 +733,16 @@ export async function openMovementArea(
       setPaused,
       // A connected page entry can check audio without advancing the battle.
       prepareAudio:()=>chapter?resumeChapterAudio(chapter.audio.context):Promise.resolve(),
-      setMuted: (value: boolean) => { sound?.setMuted(value); chapter?.audio.mute(value); },
+      setMuted: (value: boolean) => { sound?.setMuted(value); chapter?.mute(value); },
       dispose() {
         sound?.dispose();
-        chapter?.audio.dispose();
+        chapter?.dispose();
         input.setEnabled(false);
         app.destroy();
       },
     };
   } catch (error) {
-    chapter?.audio.dispose();
+    chapter?.dispose();
     app.destroy();
     throw error;
   }

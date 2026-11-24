@@ -1,7 +1,7 @@
 import { Vec3 } from 'playcanvas';
 import { copyPoint, copySpear, lerpPoint, playerCapsule, sweepSpear, type Point3, type SpearSample } from './spear-collision';
 import { spearFlightDuration, thrownSpearSample, type ThrownSpear } from './thrown-spear';
-import { playerRadius, type GroundPoint } from './ground-motion';
+import { confineToField, playerRadius, type GroundPoint, type WallBounds } from './ground-motion';
 import { decisiveReplay, slingPhysics, stoneAt, stoneContact, stoneVelocity, type DecisiveThrow } from './sling-ballistics';
 import { swordTiming, sweepSword } from './sword-combat';
 import {createBattleStones,heldStones,releaseBattleStone,landBattleStone,stepStoneRecovery,toggleStoneRoute,cancelStonePickup} from './battle-stones';
@@ -69,7 +69,7 @@ export function createElahBattle(
   groundHeight: (x: number, z: number) => number,
   forehead: () => Vec3,
   episode: EpisodeBattleSetup | undefined,
-  presentation: { challengeSeconds?: number; stopAfterFall?: boolean; requiredDodges?: number; entranceSeconds?: number; rangedSpear?: boolean; cinematicCombat?: boolean; stoneLanding?:(point:Point3)=>Point3;stoneBarrier?:(from:Point3,to:Point3)=>Point3|undefined;sampleSword?: (state: SpearPoseState, dt: number) => SpearSample; sampleSpear: (state: SpearPoseState, dt: number) => SpearSample },
+  presentation: { challengeSeconds?: number; stopAfterFall?: boolean; requiredDodges?: number; entranceSeconds?: number; rangedSpear?: boolean; cinematicCombat?: boolean; field?: Readonly<WallBounds>; stoneLanding?:(point:Point3)=>Point3;stoneBarrier?:(from:Point3,to:Point3)=>Point3|undefined;sampleSword?: (state: SpearPoseState, dt: number) => SpearSample; sampleSpear: (state: SpearPoseState, dt: number) => SpearSample },
 ) {
   if(!presentation?.sampleSpear)throw new Error('A visible spear-pose sampler is required.');
   if(presentation.cinematicCombat&&!presentation.sampleSword)throw new Error('Cinematic combat requires a rendered blade sampler.');
@@ -102,6 +102,12 @@ export function createElahBattle(
   }
 
   let state = freshAttempt(episode?.attempt ?? 0, episode?.anchor, episode?.defeated);
+
+  function advanceChampion(x: number, z: number) {
+    const next = { x: state.foe.x + x, z: state.foe.z + z };
+    // Leave room around the champion for a dodge and the final sword objective.
+    Object.assign(state.foe, presentation.field ? confineToField(next, presentation.field, 1.8) : next);
+  }
   let swordDemand = 0;
   const head = new Vec3();
   const travel = new Vec3();
@@ -224,7 +230,8 @@ export function createElahBattle(
         state.spear=undefined;state.dodgeFrom={x:david.x,z:david.z};state.dodgeRegistered=state.dodgeThreatened=state.jumpRegistered=state.jumpCleared=false;
       }else{
         const movement=Math.sign(distance-rangedBattleDistance)*Math.min(Math.abs(distance-rangedBattleDistance),1.3*dt);
-        state.foe.x=Math.max(-7,Math.min(7,state.foe.x+dx/distance*movement));state.foe.z=Math.max(-13.7,Math.min(10,state.foe.z+dz/distance*movement));
+        if(presentation.field) advanceChampion(dx/distance*movement,dz/distance*movement);
+        else {state.foe.x=Math.max(-7,Math.min(7,state.foe.x+dx/distance*movement));state.foe.z=Math.max(-13.7,Math.min(10,state.foe.z+dz/distance*movement));}
         if(state.attackTime>5){state.attackTime=0;state.attack='windup';state.attackIndex=Math.min(2,state.dodges);state.attackYaw=state.foeYaw;state.aimLock={x:david.x,y:groundHeight(david.x,david.z)+.07,z:david.z};state.spear=undefined;state.dodgeFrom={x:david.x,z:david.z};state.dodgeRegistered=state.dodgeThreatened=state.jumpRegistered=state.jumpCleared=false;}
       }
     }else if(state.attack==='windup'&&state.attackTime>=pattern().windup){
@@ -244,7 +251,7 @@ export function createElahBattle(
     if(state.attack==='advance'){
       state.foeYaw=Math.atan2(dx,dz);
       if(state.time<1)return;
-      if(distance>swordTiming.distance+.03){const step=Math.min(distance-swordTiming.distance,1.9*dt);state.foe.x+=dx/distance*step;state.foe.z+=dz/distance*step;}
+      if(distance>swordTiming.distance+.03){const step=Math.min(distance-swordTiming.distance,1.9*dt);advanceChampion(dx/distance*step,dz/distance*step);}
       else{state.attack='draw';state.attackTime=0;state.attackYaw=state.foeYaw;}
     }else if(state.attack==='draw'&&state.attackTime>=swordTiming.draw){
       state.attack='windup';state.attackTime=0;state.attackYaw=state.foeYaw=Math.atan2(dx,dz);
@@ -354,8 +361,10 @@ export function createElahBattle(
       if(recovered){state.feedback=`Stone collected · ${state.stones}/5 · Throw now or collect another`;state.feedbackTime=2.5;}
     },
     aftermathTarget() {
-      if(state.phase==='retrieve'||state.phase==='pickup'||state.phase==='fall_checkpoint')return {x:state.foe.x+1.35,z:state.foe.z+.65};
-      const p=forehead();return {x:Math.max(-7,Math.min(7,p.x+1.05)),z:Math.max(-13.7,Math.min(12,p.z+.35))};
+      const retrieve=state.phase==='retrieve'||state.phase==='pickup'||state.phase==='fall_checkpoint';
+      const p=retrieve ? {x:state.foe.x+1.35,z:state.foe.z+.65} : {x:forehead().x+1.05,z:forehead().z+.35};
+      if(presentation.field)return confineToField(p,presentation.field,.55);
+      return retrieve?p:confineToField(p,{minX:-7,maxX:7,minZ:-13.7,maxZ:12});
     },
     interact(david:GroundPoint) {
       const target=this.aftermathTarget();if(Math.hypot(target.x-david.x,target.z-david.z)>1.15)return false;

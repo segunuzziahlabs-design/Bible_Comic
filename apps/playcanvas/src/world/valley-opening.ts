@@ -3,6 +3,7 @@ import {
   Texture, Vec3, VertexBuffer, VertexFormat, calculateNormals, type Application, type ContainerResource, type RenderComponent,
 } from 'playcanvas';
 import { buildElah } from './elah-area';
+import { duelField, duelRankFrontX } from '../gameplay/duel-field';
 import { loadConversationActor } from './conversation-actor';
 import saulUrl from '../assets/saul.glb?url';
 import soldierUrl from '../assets/soldier-standing-lod.glb?url';
@@ -16,7 +17,9 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   // Exaggerate only the distant ridges; the playable approach/collision surface is unchanged.
   const groundHeight=(x:number,z:number)=>{
     const depth=Math.max(0,Math.min(1,(-z-(options.playableBattle ? 18 : 8))/10));
-    return area.groundHeight(x,z)*(1+.45*depth)+1.5*depth*(1-Math.exp(-x*x/20));
+    const shelf = options.playableBattle ? 2.2 * Math.max(0, Math.min(1, (Math.abs(x) - 14) / 3))
+      * Math.exp(-(((Math.abs(x) - 19) / 5.5) ** 2 + ((z + 17) / 16) ** 2)) : 0;
+    return area.groundHeight(x,z)*(1+.45*depth)+1.5*depth*(1-Math.exp(-x*x/20))+shelf;
   };
   // Retain the tested ground-height surface and champion, replacing this scene's old presentation.
   for (const child of [...app.root.children]) {
@@ -69,6 +72,13 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     const track = Math.max(0, 1 - Math.abs(x - .35 * Math.sin(z * .23)) / 1.65) * (z > -12 ? 1 : 0);
     const brook = Math.max(0, 1 - Math.abs(z + 2.8 + .24 * Math.sin(x * .65)) / 1.2);
     const rgb = [.55 + grain * .035 + track * .09 - brook * .10, .46 + grain * .04 + track * .04 - brook * .055, .30 + grain * .025 + track * .015 + brook * .005];
+    if (options.playableBattle) {
+      const edge = Math.min(x - duelField.minX, duelField.maxX - x, z - duelField.minZ, duelField.maxZ - z);
+      const clearing = Math.max(0, Math.min(1, (edge + 1.2) / 2.4));
+      rgb[0] += .028 * clearing; rgb[1] += .022 * clearing; rgb[2] += .014 * clearing;
+      const wornEdge = Math.max(0, 1 - Math.abs(edge) / 1.15);
+      rgb[0] -= .07 * wornEdge; rgb[1] -= .065 * wornEdge; rgb[2] -= .032 * wornEdge;
+    }
     colours.push(...rgb, 1);
     if (x < 50 && z < 25) { const i = (z + 75) * width + x + 50; indices.push(i, i + width, i + width + 1, i, i + width + 1, i + 1); }
   }
@@ -107,17 +117,38 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   const stones: Placement[] = [], grasses: Placement[] = [], trunks: Placement[] = [], crowns: Placement[] = [];
   for (let i = 0; i < 125; i++) {
     const x = (random() < .5 ? -1 : 1) * (2.3 + random() * 29), z = 13 - random() * 66;
-    const size = .19 + random() * .95; stones.push(at(x, z, size * .09, size * 1.35, size * .54, size, random() * 360));
+    const size = .19 + random() * .95, turn = random() * 360;
+    const inClearing = options.playableBattle && Math.abs(x)<duelField.maxX+1 && z>duelField.minZ-1 && z<duelField.maxZ+1;
+    if (!inClearing || i % 4 === 0) {
+      const scale = inClearing ? size * .42 : size;
+      stones.push(at(x, z, scale * .09, scale * 1.35, scale * .54, scale, turn));
+    }
   }
   for (let i = 0; i < 120; i++) {
     const x = (random() < .5 ? -1 : 1) * (2.3 + random() * 22), z = 13 - random() * 50;
     grasses.push(at(x, z, .09, .20 + random() * .2, .16, .20 + random() * .2));
   }
-  for (const [x, z] of [[-7.3, 10], [7.2, 9.4], [-10.5, -10], [13, -26], [-18, -32]]) {
+  const trees = options.playableBattle ? [[-19, 10], [21, 9.4], [-22, -10], [20, -30], [-23, -32]]
+    : [[-7.3, 10], [7.2, 9.4], [-10.5, -10], [13, -26], [-18, -32]];
+  for (const [x, z] of trees) {
     trunks.push(at(x, z, .9, .16, 1.8, .18, 9));
     for (let i = 0; i < 4; i++) crowns.push(at(x + (i % 2 ? .5 : -.4), z + (i > 1 ? .35 : -.35), 2.1 + i * .08, 1.35, .68, 1.4));
   }
   batch('Limestone outcrops', 'sphere', limestone, stones);const scrub=batch('Dry valley scrub', 'sphere', olive, grasses,true);let lastBreeze=-1;
+  if (options.playableBattle) {
+    const markers: Placement[] = [];
+    for (const x of [duelField.minX, duelField.maxX]) {
+      for (let z = duelField.minZ; z < duelField.maxZ; z += 1.55) {
+        markers.push(at(x, z, .095, .38 + random() * .19, .25, .55, random() * 180));
+      }
+    }
+    for (const z of [duelField.minZ, duelField.maxZ]) {
+      for (let x = duelField.minX + 1; x < duelField.maxX; x += 1.55) {
+        markers.push(at(x, z, .095, .49, .25, .34 + random() * .16, random() * 180));
+      }
+    }
+    batch('Duel field boundary stones', 'sphere', surface('Pale boundary limestone',[.83,.72,.54],mineral), markers);
+  }
   batch('Olive trunks', 'cylinder', wood, trunks); batch('Olive canopies', 'sphere', olive, crowns);
 
   const posts: Placement[] = [], ropes: Placement[] = [], jars: Placement[] = [], shields: Placement[] = [];
@@ -134,17 +165,20 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     for (const dz of [-1.5, 1.5]) posts.push(at(x, z + dz * scale, .86 * scale, .07, 1.75 * scale, .07));
     for (const side of [-1, 1]) ropes.push(at(x + side * 1.4 * scale, z + 1.7 * scale, .15, .055, .30, .055));
   }
-  tent(-4.3, 11.0, 1.0, canvas, 0); tent(4.9, 11.2, .95, canvas, 1);
+  tent(options.playableBattle ? -19 : -4.3, 11.0, 1.0, canvas, 0);
+  tent(options.playableBattle ? 19 : 4.9, 11.2, .95, canvas, 1);
   for (const side of [-1, 1]) for (let i = 0; i < 7; i++) {
-    tent(side * (8.0 + (i % 3) * 2.45), -15.8 - Math.floor(i / 3) * 4.0, .76 + (i % 2) * .1, side < 0 ? canvas : red, i + 2);
+    const campX = options.playableBattle ? 21.5 : 8;
+    tent(side * (campX + (i % 3) * 2.45), -15.8 - Math.floor(i / 3) * 4.0, .76 + (i % 2) * .1, side < 0 ? canvas : red, i + 2);
   }
-  for (const [x,z] of [[-3.0,10.2],[-3.5,10.3],[4.0,11.3]]) jars.push(at(x,z,.30,.37,.60,.37));
-  shields.push({ ...at(2.9, 9.3, .45, .68, .055, .86), pitch: 76 });
-  batch('Tent poles and guard spears', 'cylinder', wood, [...posts, at(2.9, 9.0, 1.15, .027, 2.3, .027)]);
+  for (const [x,z] of [[-3.0,10.2],[-3.5,10.3],[4.0,11.3]]) jars.push(at(options.playableBattle ? x + Math.sign(x)*15 : x,z,.30,.37,.60,.37));
+  const guardX = options.playableBattle ? -duelRankFrontX : 2.9;
+  shields.push({ ...at(guardX, 9.3, .45, .68, .055, .86), pitch: 76 });
+  batch('Tent poles and guard spears', 'cylinder', wood, [...posts, at(guardX, 9.0, 1.15, .027, 2.3, .027)]);
   batch('Tent stakes', 'cylinder', wood, ropes); batch('Camp water jars', 'sphere', red, jars);
   batch('Guard shield', 'cylinder', earth, shields);
-  batch('Guard spearhead', 'cone', bronze, [at(2.9, 9.0, 2.4, .09, .22, .035)]);
-  batch('Overlook ledge', 'sphere', limestone, [at(0, 7.6, .12, 2.2, .32, .65)]);
+  batch('Guard spearhead', 'cone', bronze, [at(guardX, 9.0, 2.4, .09, .22, .035)]);
+  if (!options.playableBattle) batch('Overlook ledge', 'sphere', limestone, [at(0, 7.6, .12, 2.2, .32, .65)]);
 
   // Baked, clothed low-detail meshes retain the character style without 48 skeletal controllers.
   const soldierResource=await new Promise<ContainerResource>((resolve,reject)=>app.assets.loadFromUrl(soldierUrl,'container',(error,asset)=>{
@@ -158,20 +192,34 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     }
   }
   const ranks = [-1, 1].map(side => {
-    const bases = Array.from({ length: 24 }, (_, i) => ({ x: side * (5.2 + (i % 8) * .73), z: -13.7 - Math.floor(i / 8) * .85, phase: i * 1.91 }));
+    const bases = Array.from({ length: 24 }, (_, i) => options.playableBattle
+      ? { x: side * (duelRankFrontX + Math.floor(i / 8) * .97 + (i % 8) * .19), z: -12 - (i % 8) * 1.45, phase: i * 1.91 }
+      : { x: side * (5.2 + (i % 8) * .73), z: -13.7 - Math.floor(i / 8) * .85, phase: i * 1.91 });
     const entity=soldierResource.instantiateRenderEntity({castShadows:false});entity.name=side<0?'Israelite ranks':'Philistine ranks';root.addChild(entity);tintSoldier(entity,side);
     const data=new Float32Array(bases.length*16);
     const buffer=new VertexBuffer(app.graphicsDevice,VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),bases.length,{data,usage:BUFFER_DYNAMIC});vertexBufferDisposals.push(buffer);
     for(const render of entity.findComponents('render') as RenderComponent[])for(const mesh of render.meshInstances)mesh.setInstancing(buffer,false);
-    return {step(time:number,alarm=0){fill(data,bases.map(base=>{const reaction=side<0?Math.max(0,Math.min(1,(alarm-base.phase%1*.28)*2)):0;return{...at(base.x,base.z,0,.88,.88,.88,side<0?90+reaction*22:-90),roll:Math.sin(time*1.6+base.phase)*.35+reaction*2.5};}));buffer.setData(data);}};
+    return {step(time: number, alarm: number, cheer: number) {
+      fill(data,bases.map(base => {
+        const reaction = side < 0 ? Math.max(0, Math.min(1, (alarm - base.phase % 1 * .28) * 2)) : 0;
+        const rise = cheer * Math.max(0, Math.sin(time * 7.5 + base.phase)) ** 2;
+        return { ...at(base.x,base.z,rise*.1,.88,.88,.88,side<0?90+reaction*22:-90),
+          roll: Math.sin(time*1.6+base.phase)*.35+reaction*2.5,
+          pitch: -rise * 9 };
+      }));
+      buffer.setData(data);
+    }};
   });
-  const bearer=soldierResource.instantiateRenderEntity({castShadows:true});bearer.name='Champion’s shield-bearer';root.addChild(bearer);tintSoldier(bearer,1);bearer.setLocalScale(.98,.98,.98);bearer.setPosition(-1.45,groundHeight(-1.45,-9.8),-9.8);
+  const bearer=soldierResource.instantiateRenderEntity({castShadows:true});bearer.name='Champion’s shield-bearer';root.addChild(bearer);tintSoldier(bearer,1);bearer.setLocalScale(.98,.98,.98);
+  const bearerX = options.playableBattle ? duelRankFrontX + .4 : -1.45;
+  bearer.setPosition(bearerX,groundHeight(bearerX,-9.8),-9.8);
+  if (options.playableBattle) bearer.setEulerAngles(0,-90,0);
   // Prime the shared container before cloning a second rig from it.
   const actors = [await loadConversationActor(app, options.actorUrl ?? saulUrl, 'Sentinel')];
   actors.push(await loadConversationActor(app, options.actorUrl ?? saulUrl, 'Patrolling soldier'));
   actors.forEach((actor, i) => {
     actor.model.setLocalScale(.95, .95, .95); actor.tint('Skin', i ? [.86,.86,.82] : [1,1,1]); actor.tint('Eyes',[1,1,1]);
-    actor.tint('Cloth', i ? [1.8,.72,.5] : [.9,1.05,.75]); actor.tint('Hair', [.75,.75,.75]);
+    actor.tint('Cloth', i && !options.playableBattle ? [1.8,.72,.5] : [.9,1.05,.75]); actor.tint('Hair', [.75,.75,.75]);
     for (const render of actor.model.findComponents('render') as RenderComponent[]) if (/Saul beard|Saul moustache|Saul circlet|mantle|Mantle clasp/i.test(render.entity.name)) render.enabled = false;
   });
   const sentinel = actors[0], patrol = actors[1];
@@ -186,12 +234,14 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   area.champion.model.setPosition(area.goliath.x,groundHeight(area.goliath.x,area.goliath.z),area.goliath.z);
   app.once('destroy', () => vertexBufferDisposals.forEach(buffer => buffer.destroy()));
   let lastTime=0, patrolTime=0, patrolWalk=0, patrolX=-4, patrolYaw=90;
-  function stage(time: number, reacting = false, alarm = 0, automaticActors = true) {
+  function stage(time: number, reacting = false, alarm = 0, automaticActors = true, cheers?: {israel: number; philistines: number}) {
     const dt=Math.max(0,Math.min(.05,time-lastTime)); lastTime=time;
     if(lastBreeze<0||Math.abs(time-lastBreeze)>=1/12){lastBreeze=time;for(let i=0;i<grasses.length;i++){grasses[i].roll=Math.sin(time*1.15+i*.61)*2.6;grasses[i].sy=.14+Math.sin(time*.8+i)*.012;}scrub.update(grasses);}
-    ranks.forEach(rank => rank.step(time,alarm));
+    ranks.forEach((rank,i) => rank.step(time,alarm,(i===0?cheers?.israel:cheers?.philistines)??0));
     flags.forEach(({ entity, base, phase }) => entity.setLocalScale(base.x * (1 + .007 * Math.sin(time * 1.6 + phase)), base.y * (1 + .009 * Math.sin(time * 2 + phase)), base.z));
-    sentinel.model.setPosition(2.4,area.groundHeight(2.4,9.3),9.3); sentinel.model.setEulerAngles(0,-65,0);
+    const sentinelX = options.playableBattle ? -duelRankFrontX-.9 : 2.4;
+    const sentinelZ = options.playableBattle ? 4.1 : 9.3;
+    sentinel.model.setPosition(sentinelX,groundHeight(sentinelX,sentinelZ),sentinelZ); sentinel.model.setEulerAngles(0,options.playableBattle ? 124 : -65,0);
     if (!reacting) patrolTime+=dt;
     const phase=patrolTime%16;
     const smooth=(x:number)=>{const t=Math.max(0,Math.min(1,x));return t*t*(3-2*t);};
@@ -199,7 +249,9 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
     const distance=Math.abs(nextX-patrolX); patrolWalk+=distance/.93;
     const targetYaw=reacting ? 170 : phase<8 ? 90 : -90;
     patrolYaw+=(((targetYaw-patrolYaw+540)%360)-180)*(1-Math.exp(-5*dt)); patrolX=nextX;
-    patrol.model.setPosition(patrolX, area.groundHeight(patrolX,7.4),7.4); patrol.model.setEulerAngles(0,patrolYaw,0);
+    const soldierX = options.playableBattle ? -duelRankFrontX : patrolX;
+    const soldierZ = options.playableBattle ? 2.2 : 7.4;
+    patrol.model.setPosition(soldierX, groundHeight(soldierX,soldierZ),soldierZ); patrol.model.setEulerAngles(0,options.playableBattle ? 126 : patrolYaw,0);
     const clip = reacting ? 'listen' : distance>.0005 ? 'walk_forward' : 'idle_relaxed';
     if (automaticActors) {
       patrol.pose(clip,(clip==='walk_forward'?patrolWalk:time)%patrol.tracks.get(clip)!.duration,dt);
@@ -208,9 +260,9 @@ export async function buildValleyOpening(app: Application, options: { goliathUrl
   }
   stage(0);
   function resetActivity(){lastTime=patrolTime=patrolWalk=0;patrolX=-4;patrolYaw=90;stage(0);}
-  return { ...area, groundHeight, root, sentinel, patrol, marker, stage, resetActivity, soldierCount: 51,
+  return { ...area, groundHeight, root, sentinel, patrol, bearer, marker, stage, resetActivity, soldierCount: 51,
     // The overlook's camera rail is not geometry in the playable battlefield.
     // Keeping it here shortened the battle camera behind a backward evasion.
-    walls: [...area.walls, ...(options.playableBattle?[]:[{minX:-10,maxX:10,minZ:3.4,maxZ:3.8}]),
+    walls: options.playableBattle ? area.walls : [...area.walls, {minX:-10,maxX:10,minZ:3.4,maxZ:3.8},
       {minX:1.98,maxX:2.82,minZ:8.9,maxZ:9.7}, {minX:-5.5,maxX:-3.1,minZ:9.4,maxZ:12.6}, {minX:3.7,maxX:6.1,minZ:9.7,maxZ:12.7}] };
 }
