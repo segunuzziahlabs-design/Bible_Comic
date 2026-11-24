@@ -45,7 +45,12 @@ function controls() {
   stage.toggleAttribute('data-running', moving);
   stage.toggleAttribute('data-aiming', live && view?.phase === 'fight'&&!!view.slingReady);
   el('battle-hud').hidden = !moving;
-  el('stone-count').hidden = true;
+  el('stone-count').hidden = !live||view?.phase!=='fight'||!view.slingReady;
+  button('collect-stones').hidden=!live||view?.phase!=='fight'||!view.slingReady;
+  button('collect-stones').disabled=!view?.canCollectStones;
+  button('collect-stones').textContent=view?.collectingStones?'Hide stone route':`Collect stones${view?.groundedStones?' · '+view.groundedStones:''}`;
+  button('collect-stones').setAttribute('aria-pressed',String(!!view?.collectingStones));
+  stage.toggleAttribute('data-stone-empty',view?.stones===0);
   el('sling-aim').hidden = button('throw-stone').hidden = cinematic || !live || view?.phase !== 'fight'||!view.slingReady;
   button('throw-stone').disabled = !live || !view?.canThrow;
   button('pause').disabled = button('reset').disabled = !started || busy || !!view?.result;
@@ -103,7 +108,7 @@ function render(next: InteractionView) {
     ? view.instruction.replace('Dodge (Shift)', 'tap Dodge').replace('Click or F to throw · Shift to dodge', 'Tap Throw · Tap Dodge').replace('Shift / Dodge','Tap Dodge') : view.instruction;text('objective',instruction);
   el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches?(view.slingReady?'Drag to aim · Tap Throw · Dots show the stone’s arc':'Move with the left controls · Hold a direction + Dodge'):(view.slingReady?'Mouse / IJKL: aim · F: Throw · Q: Jump Shot':'WASD / arrows: move · Direction + Shift: Dodge · Space: Jump');
   if(view.cinematic)el('battle-instructions').textContent=view.phase==='finisher'?'The decisive throw · Cinematic replay · Pause any time':'Watch the scene · Pause any time';
-  text('stone-count',`${view.stones} ${view.stones === 1 ? 'stone' : 'stones'}`);
+  text('stone-count',`${view.stones}/5 stones${view.groundedStones?' · '+view.groundedStones+' to collect':''}`);
   text('battle-caption',view.caption); el('battle-caption').hidden = !view.caption;
   el('sling-aim').style.left = `${view.aimX * 100}%`; el('sling-aim').style.top = `${view.aimY * 100}%`;
   el('sling-aim').toggleAttribute('data-aimed', view.aimed);
@@ -152,6 +157,7 @@ input.bindActions({
   jump:{run:()=>{area?.jump();},available:()=>started&&!paused&&!busy&&!!area?.canJump()},
   jumpShot:{run:()=>{area?.jumpShot();},available:()=>started&&!paused&&!busy&&!!view?.canJumpShot},
   sling:{run:throwStone,available:()=>started&&!paused&&!busy&&!!view?.canThrow},
+  collectStones:{run:()=>{if(area?.collectStones())canvas.focus();},available:()=>started&&!paused&&!busy&&!!view?.canCollectStones},
   dodge:{run:()=>{if(area?.dodge())canvas.focus();},available:()=>started&&!paused&&!busy&&!!view?.dodgeReady},
   pause:{run:()=>{void pause(!paused);},available:()=>!button('pause').disabled&&!help.open&&!playerControls.open},
 });
@@ -160,6 +166,7 @@ input.bindButton(button('battle-interact'),'interact');
 button('reset').addEventListener('click', () => { void restart(); });
 button('battle-replay').addEventListener('click', () => { void restart(); });
 input.bindButton(button('jump-shot'),'jumpShot');input.bindButton(button('throw-stone'),'sling');input.bindButton(button('dodge'),'dodge');
+input.bindButton(button('collect-stones'),'collectStones');
 button('sound').addEventListener('click', () => { muted = !muted; writeEpisodeMuted(muted); area?.setMuted(muted); setEpisodeSoundButton(button('sound'),muted); button('sound').setAttribute('aria-pressed', String(!muted)); });
 button('retry-save').addEventListener('click', () => { if (!retryWrite) return; button('retry-save').disabled = true; void retryWrite().catch(error => { el('save-error-message').textContent = String(error); button('retry-save').disabled = false; }); });
 button('reload-save').addEventListener('click', () => location.reload());

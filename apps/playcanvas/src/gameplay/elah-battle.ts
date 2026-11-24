@@ -4,6 +4,7 @@ import { spearFlightDuration, thrownSpearSample, type ThrownSpear } from './thro
 import { playerRadius, type GroundPoint } from './ground-motion';
 import { decisiveReplay, slingPhysics, stoneAt, stoneContact, stoneVelocity, type DecisiveThrow } from './sling-ballistics';
 import { swordTiming, sweepSword } from './sword-combat';
+import {createBattleStones,heldStones,releaseBattleStone,landBattleStone,stepStoneRecovery,toggleStoneRoute,cancelStonePickup} from './battle-stones';
 
 const preparation = { provisionsDelivered: true, armourDeclined: true, stonesGathered: 5 } as const;
 const entryCheckpoint = {
@@ -20,6 +21,7 @@ export const spearStrike = .28;
 export const spearRecovery = 1.25;
 export const challengeDuration = 6.2;
 export const slingWindup = 13 / 24;
+export const slingSpearRecovery=4.8;
 const slingDuration = 23 / 24;
 export const fallDuration = 46 / 24;
 export const staggerDuration = 6;
@@ -46,8 +48,8 @@ export const spearPatterns = [
   { name: 'Middle angled thrust', height: 'middle' as const, direction: 1, windup: 2.05, recovery: 1.6, yawOffset: .10, width: .60 },
   { name: 'High final thrust', height: 'high' as const, direction: -1, windup: 1.85, recovery: 1.8, yawOffset: 0, width: .68 },
 ] as const;
-type Shot = { kind: 'windup'; time: number; aim: Vec3; assisted: boolean }
-  | { kind: 'flight'; time: number; position: Vec3; velocity: Vec3; origin?: Vec3; launchVelocity?: Vec3 };
+type Shot = { kind: 'windup'; time: number; aim: Vec3; assisted: boolean;stoneId?:number }
+  | { kind: 'flight'; time: number; position: Vec3; velocity: Vec3; origin?: Vec3; launchVelocity?: Vec3;stoneId?:number };
 
 export type SpearPoseState = {
   phase: Phase; time: number; foe: GroundPoint; foeYaw: number; attackYaw: number;
@@ -67,7 +69,7 @@ export function createElahBattle(
   groundHeight: (x: number, z: number) => number,
   forehead: () => Vec3,
   episode: EpisodeBattleSetup | undefined,
-  presentation: { challengeSeconds?: number; stopAfterFall?: boolean; requiredDodges?: number; entranceSeconds?: number; rangedSpear?: boolean; cinematicCombat?: boolean; sampleSword?: (state: SpearPoseState, dt: number) => SpearSample; sampleSpear: (state: SpearPoseState, dt: number) => SpearSample },
+  presentation: { challengeSeconds?: number; stopAfterFall?: boolean; requiredDodges?: number; entranceSeconds?: number; rangedSpear?: boolean; cinematicCombat?: boolean; stoneLanding?:(point:Point3)=>Point3;stoneBarrier?:(from:Point3,to:Point3)=>Point3|undefined;sampleSword?: (state: SpearPoseState, dt: number) => SpearSample; sampleSpear: (state: SpearPoseState, dt: number) => SpearSample },
 ) {
   if(!presentation?.sampleSpear)throw new Error('A visible spear-pose sampler is required.');
   if(presentation.cinematicCombat&&!presentation.sampleSword)throw new Error('Cinematic combat requires a rendered blade sampler.');
@@ -94,6 +96,7 @@ export function createElahBattle(
       shot: undefined as Shot | undefined,
       throwTime: undefined as number | undefined,
       stones: supplies.stonesGathered as number, throws: 0, misses: 0, hits: anchor === 'battle.aftermath' ? 1 : 0, strikes: 0,
+      stoneRecovery:createBattleStones(supplies.stonesGathered),
       reason: (defeated ? 'david_killed_by_goliath' : undefined) as 'david_killed_by_goliath' | undefined,
     };
   }
@@ -122,7 +125,10 @@ export function createElahBattle(
   }
   function startThrow(aim: Vec3, assisted: boolean, cinematic = false) {
     if (state.phase !== 'fight' || state.shot || state.throwTime !== undefined || state.stones === 0 || !slingAvailable()) return false;
-    state.shot = { kind: 'windup', time: 0, aim: aim.clone(), assisted };
+    const stoneId=state.cinematicCombat?state.stoneRecovery.stones.find(s=>s.status==='held')?.id:undefined;
+    if(state.cinematicCombat&&stoneId===undefined)return false;
+    cancelStonePickup(state.stoneRecovery);
+    state.shot = { kind: 'windup', time: 0, aim: aim.clone(), assisted,stoneId };
     state.throwTime = 0;
     if(cinematic)state.jumpShotTime=0;
     return true;
@@ -140,9 +146,9 @@ export function createElahBattle(
         const launch=stoneVelocity(origin,shot.aim);
         velocity.set(launch.x,launch.y,launch.z);
       }
-      state.shot = { kind: 'flight', time: 0, position: origin, velocity };
+      state.shot = { kind: 'flight', time: 0, position: origin, velocity,stoneId:shot.stoneId };
       if(state.cinematicCombat){state.shot.origin=origin.clone();state.shot.launchVelocity=velocity.clone();}
-      state.stones--;
+      if(state.cinematicCombat){releaseBattleStone(state.stoneRecovery,shot.stoneId!);state.stones=heldStones(state.stoneRecovery);}else state.stones--;
       state.throws++;
       return;
     }
@@ -153,13 +159,15 @@ export function createElahBattle(
       if(contact!==undefined){
         const impact=lerpPoint(shot.position,next,contact);
         state.decisiveThrow={origin:copyPoint(shot.origin),velocity:copyPoint(shot.launchVelocity),flightSeconds:shot.time-dt+dt*contact,impact,david:copyPoint(previousFeet??shot.origin),jump:state.jumpShotTime!==undefined};
+        const token=state.stoneRecovery.stones.find(s=>s.id===shot.stoneId);if(token)token.status='spent';state.stoneRecovery.guiding=false;cancelStonePickup(state.stoneRecovery);
         state.hits++;state.anchor='battle.aftermath';state.shot=undefined;state.throwTime=undefined;
         state.phase='finisher';state.time=0;state.spear=undefined;state.aimLock=undefined;return;
       }
+      const barrier=presentation.stoneBarrier?.(shot.position,next);
       shot.position.set(next.x,next.y,next.z);shot.velocity.y=shot.launchVelocity.y-slingPhysics.gravity*shot.time;
       const ground=next.y<=groundHeight(next.x,next.z)+slingPhysics.stoneRadius;
       const armour=Math.hypot(next.x-state.foe.x,next.z-state.foe.z)<.52&&next.y<head.y-.32;
-      if(ground||armour||shot.time>=slingPhysics.maxSeconds){state.misses++;state.shot=undefined;state.feedback=armour?'Armour hit — aim higher at the forehead':'Missed — adjust your position and aim';state.feedbackTime=2.2;}
+      if(ground||armour||barrier||shot.time>=slingPhysics.maxSeconds){const impact=barrier??next,landing=presentation.stoneLanding?.(impact)??{x:impact.x,y:groundHeight(impact.x,impact.z)+.06,z:impact.z};landBattleStone(state.stoneRecovery,shot.stoneId!,{...impact,y:Math.max(impact.y,landing.y)},landing);state.misses++;state.shot=undefined;state.feedback=armour?'Armour hit — aim higher at the forehead':'Missed — the stone can be collected';state.feedbackTime=2.2;}
       return;
     }
     travel.copy(shot.velocity).mulScalar(dt);
@@ -226,7 +234,7 @@ export function createElahBattle(
       strikeWindow={start:dt?Math.max(0,1-remaining/dt):0,end:1,ageStart:0,ageEnd:state.attackTime,finish:remaining>=spearFlightDuration};
     }else if(state.attack==='strike'){
       strikeWindow={start:0,end:dt?Math.min(1,(spearFlightDuration-old)/dt):1,ageStart:old,ageEnd:Math.min(spearFlightDuration,state.attackTime),finish:state.attackTime>=spearFlightDuration};state.attackTime=Math.min(spearFlightDuration,state.attackTime);
-    }else if(state.attack==='recover'&&state.attackTime>=(state.cinematicCombat&&slingAvailable()?3.2:pattern().recovery)){state.attack='advance';state.attackTime=0;}
+    }else if(state.attack==='recover'&&state.attackTime>=(state.cinematicCombat&&slingAvailable()?slingSpearRecovery:pattern().recovery)){state.attack='advance';state.attackTime=0;}
     else if(state.attack==='exposed'&&!state.cinematicCombat)state.foeYaw=Math.atan2(dx,dz);
   }
 
@@ -337,6 +345,14 @@ export function createElahBattle(
     checkpoint,
     target,
     startThrow, registerDodge, registerJump, slingAvailable, pattern,
+    collectStones(){return state.phase==='fight'&&slingAvailable()&&toggleStoneRoute(state.stoneRecovery);},
+    cancelPickup(){cancelStonePickup(state.stoneRecovery);},
+    updateRecovery(dt:number,david:GroundPoint,allowed:boolean){
+      if(!state.cinematicCombat)return;
+      if(state.phase!=='fight'){state.stoneRecovery.guiding=false;cancelStonePickup(state.stoneRecovery);return;}
+      const recovered=stepStoneRecovery(state.stoneRecovery,dt,david,allowed&&!state.shot&&state.throwTime===undefined&&slingAvailable());state.stones=heldStones(state.stoneRecovery);
+      if(recovered){state.feedback=`Stone collected · ${state.stones}/5 · Throw now or collect another`;state.feedbackTime=2.5;}
+    },
     aftermathTarget() {
       if(state.phase==='retrieve'||state.phase==='pickup'||state.phase==='fall_checkpoint')return {x:state.foe.x+1.35,z:state.foe.z+.65};
       const p=forehead();return {x:Math.max(-7,Math.min(7,p.x+1.05)),z:Math.max(-13.7,Math.min(12,p.z+.35))};
@@ -379,7 +395,7 @@ export function createElahBattle(
         state.phase = 'fight';
         state.time = 0;
       } else if (state.phase === 'fight') {
-        if (state.stones === 0 && !state.shot && Math.abs(david.z - brookZ) <= .65) {
+        if (!state.cinematicCombat&&state.stones === 0 && !state.shot && Math.abs(david.z - brookZ) <= .65) {
           state.stones = supplies.stonesGathered;
         }
         // A confirmed impact wins before the champion can resolve a strike in the same update.

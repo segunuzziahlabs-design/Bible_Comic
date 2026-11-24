@@ -1,0 +1,538 @@
+{
+  "assessedOn": "2026-11-24",
+  "status": "IMPLEMENTED_AND_VERIFIED_WITH_STATED_LIMITS",
+  "baseCommit": "c520992ba8b3aac4f0d2f27cb8e1d130d2264e28",
+  "workingTreeChanges": true,
+  "frozenBuild": "build/battle-recovery-local07",
+  "buildHtmlSha256": "68bae4809ce5ed1a885db2a7f6b36b4f8f9c5849bc3d2187a48bddd56fba946b",
+  "runtimeChanges": [
+    {
+      "path": "apps/playcanvas/duel.html",
+      "sha256": "fca4ba3b49935538893aaede007add39eb031821666aa0a3f7eff21885da463d"
+    },
+    {
+      "path": "apps/playcanvas/src/app/duel-main.ts",
+      "sha256": "f9388510327de860de947e7b2f737ddda9bada3d19e52ad9e22206637b84b6d3"
+    },
+    {
+      "path": "apps/playcanvas/src/app/duel.css",
+      "sha256": "abd93a5b93a9fdf2ea3abde9885250b5aedbf9bc1d2e257fa01464d0839a8b8f"
+    },
+    {
+      "path": "apps/playcanvas/src/app/sling-controls-ui.ts",
+      "sha256": "96cd3aaa6a24797d6d88fdeba822fcbf875d294a51a51191fd9cc2f21d487fac"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/action-router.ts",
+      "sha256": "9a398ac10956d6ed572c781c35f575c426115c29c359fe67941ba8be257593cd"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/battle-stones.ts",
+      "sha256": "4e3abf21d87a6f107cbe4bbd0b60da9bdeb1bc8ea3967cd4e165db5b7a08f09c"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/elah-battle.ts",
+      "sha256": "53b799a1bb4fe380a7e1dd49feb4eeccd3400b0924d70974055297c140e82feb"
+    },
+    {
+      "path": "apps/playcanvas/src/gameplay/thrown-spear.ts",
+      "sha256": "f2a015c41857e5e1861e192ec6116a87f1b05a9e43728fcf328f818b4f378dd4"
+    },
+    {
+      "path": "apps/playcanvas/src/world/elah-area.ts",
+      "sha256": "fb50a4c2ec8139728b0d114fee8f1649760146e8a7c033d297be152496ffe36c"
+    },
+    {
+      "path": "apps/playcanvas/src/world/movement-area.ts",
+      "sha256": "b74ec092d9e0306a932afc963369d352ab0d2bb277a85ae17862c7c1e2da6839"
+    },
+    {
+      "path": "apps/playcanvas/src/world/recoverable-stones.ts",
+      "sha256": "ee26fd42243972c5fc18795651832072e968e871e4ed88d31487d17182e3c9c2"
+    },
+    {
+      "path": "apps/playcanvas/src/world/stone-preview.ts",
+      "sha256": "2011f0105db4cd1bbc99557d30d8744913bd7d7cd63a46611e959d0bd12c1b01"
+    }
+  ],
+  "rules": {
+    "status": "PASS",
+    "executed": [
+      "battle-stones-check.cjs",
+      "cinematic-battle-rules-check.cjs",
+      "ranged-spear-rules-check.cjs",
+      "spear-airborne-rules-check.cjs",
+      "spear-sequence-rules-check.cjs",
+      "battle-ending-rules-check.cjs",
+      "action-router-check.cjs",
+      "episode-rules-check.cjs"
+    ]
+  },
+  "browserRuns": [
+    {
+      "evidence": "docs/implementation/evidence/battle-stones-2026-11-24/final07/desktop-results.json",
+      "status": "PASS",
+      "label": "desktop",
+      "basis": "Frozen local production build, reducer-built prepared checkpoint, actual mouse/keyboard or emulated multitouch controls; normal game clocks; no runtime state writes.",
+      "checks": [
+        "Loading warm-up leaves five held stones and no visible ground drops",
+        "Sword and two spear stages survived with real controls",
+        "Real spear hit defeats David; Retry restores five stones and clears old drops at the battle checkpoint",
+        "Five real misses leave five individual recoverable stones and no victory",
+        "Pause freezes combat and stone recovery",
+        "Dodge cancels pickup without granting a stone",
+        "Arrow-guided walk and automatic single pickup",
+        "Recovered one stone can be thrown while four remain",
+        "All five recovered once, route ends and inventory stays bounded",
+        "Physically aimed recovered stone earns forehead hit and replay",
+        "Sword pickup, player finish and saved Chapter 6 gate preserved",
+        "Reload preserves completed battle and Chapter 6 gate",
+        "Slower spear visible through its full 2.1s flight"
+      ],
+      "geometry": [
+        {
+          "id": "collect-stones",
+          "x": 1008.4375,
+          "y": 159.46875,
+          "w": 130,
+          "h": 44,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "throw-stone",
+          "x": 1145.40625,
+          "y": 651.015625,
+          "w": 96,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "dodge",
+          "x": 1129.40625,
+          "y": 590.21875,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump",
+          "x": 1045,
+          "y": 642.609375,
+          "w": 64,
+          "h": 56,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump-shot",
+          "x": 1125,
+          "y": 514.609375,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        }
+      ],
+      "spearFrames": 1104,
+      "maxFlightTime": 2.0991000000000017,
+      "consoleErrors": []
+    },
+    {
+      "evidence": "docs/implementation/evidence/battle-stones-2026-11-24/final07/portrait-results.json",
+      "status": "PASS",
+      "label": "portrait",
+      "basis": "Frozen local production build, reducer-built prepared checkpoint, actual mouse/keyboard or emulated multitouch controls; normal game clocks; no runtime state writes.",
+      "checks": [
+        "Loading warm-up leaves five held stones and no visible ground drops",
+        "Sword and two spear stages survived with real controls",
+        "Five real misses leave five individual recoverable stones and no victory",
+        "Pause freezes combat and stone recovery",
+        "Dodge cancels pickup without granting a stone",
+        "Arrow-guided walk and automatic single pickup",
+        "Recovered one stone can be thrown while four remain",
+        "All five recovered once, route ends and inventory stays bounded",
+        "Physically aimed recovered stone earns forehead hit and replay",
+        "Sword pickup, player finish and saved Chapter 6 gate preserved",
+        "Reload preserves completed battle and Chapter 6 gate",
+        "Slower spear visible through its full 2.1s flight"
+      ],
+      "geometry": [
+        {
+          "id": "collect-stones",
+          "x": 33.1875,
+          "y": 213.53125,
+          "w": 130,
+          "h": 44,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "throw-stone",
+          "x": 267.40625,
+          "y": 664.0625,
+          "w": 96,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "dodge",
+          "x": 251.40625,
+          "y": 603.265625,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump",
+          "x": 167,
+          "y": 655.65625,
+          "w": 64,
+          "h": 56,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump-shot",
+          "x": 247,
+          "y": 527.65625,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        }
+      ],
+      "spearFrames": 1063,
+      "maxFlightTime": 2.0984999999999987,
+      "consoleErrors": []
+    },
+    {
+      "evidence": "docs/implementation/evidence/battle-stones-2026-11-24/final07-landscape-rerun/landscape-results.json",
+      "status": "PASS",
+      "label": "landscape",
+      "basis": "Frozen local production build, reducer-built prepared checkpoint, actual mouse/keyboard or emulated multitouch controls; normal game clocks; no runtime state writes.",
+      "checks": [
+        "Loading warm-up leaves five held stones and no visible ground drops",
+        "Sword and two spear stages survived with real controls",
+        "Five real misses leave five individual recoverable stones and no victory",
+        "Pause freezes combat and stone recovery",
+        "Dodge cancels pickup without granting a stone",
+        "Arrow-guided walk and automatic single pickup",
+        "Recovered one stone can be thrown while four remain",
+        "All five recovered once, route ends and inventory stays bounded",
+        "Physically aimed recovered stone earns forehead hit and replay",
+        "Sword pickup, player finish and saved Chapter 6 gate preserved",
+        "Reload preserves completed battle and Chapter 6 gate",
+        "Slower spear visible through its full 2.1s flight"
+      ],
+      "geometry": [
+        {
+          "id": "collect-stones",
+          "x": 626,
+          "y": 111.5625,
+          "w": 130,
+          "h": 44,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "throw-stone",
+          "x": 733.40625,
+          "y": 275.40625,
+          "w": 96,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "dodge",
+          "x": 717.40625,
+          "y": 220.203125,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump",
+          "x": 628.203125,
+          "y": 258.203125,
+          "w": 64,
+          "h": 56,
+          "inside": true,
+          "clear": true
+        },
+        {
+          "id": "jump-shot",
+          "x": 590.203125,
+          "y": 172.203125,
+          "w": 112,
+          "h": 48,
+          "inside": true,
+          "clear": true
+        }
+      ],
+      "spearFrames": 846,
+      "maxFlightTime": 2.0989999999999984,
+      "consoleErrors": []
+    }
+  ],
+  "profile": {
+    "evidence": "docs/implementation/evidence/battle-stones-2026-11-24/final07-profile/profile-results.json",
+    "status": "PASS",
+    "browser": "157.0.8103.79",
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "fps": 31.96500298973865,
+    "p50Ms": 31.299999952316284,
+    "p95Ms": 35.30000019073486,
+    "maxMs": 67.29999995231628,
+    "over50Ms": 2,
+    "over250Ms": 0,
+    "minRollingOneSecondFps": 30.715675231427625,
+    "longestBelow30Seconds": 0,
+    "dodges": 5,
+    "enabledRecoveryNodes": 10,
+    "renderer": "ANGLE (Intel, Intel(R) Graphics (0x000046D4) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "stalls": [
+      {
+        "at": 43933.40000009537,
+        "gap": 67.29999995231628,
+        "x": -0.09354748739931275,
+        "z": 2.363736700399907,
+        "attack": "strike",
+        "frame": {
+          "fps": 31,
+          "ms": 62.39999999999418,
+          "dt": 0.06239999999999418,
+          "updateStart": 43921,
+          "updateTime": 5.900000095367432,
+          "renderStart": 43926.90000009537,
+          "renderTime": 4.299999952316284,
+          "physicsStart": 0,
+          "physicsTime": 0,
+          "scriptUpdateStart": 43921,
+          "scriptUpdate": 0,
+          "scriptPostUpdateStart": 43922.200000047684,
+          "scriptPostUpdate": 0,
+          "animUpdateStart": 43921,
+          "animUpdate": 1.2000000476837158,
+          "cullTime": 0,
+          "sortTime": 0,
+          "skinTime": 0,
+          "morphTime": 0,
+          "instancingTime": 0,
+          "gsplats": 0,
+          "gsplatSort": 0,
+          "gsplatBufferCopy": 0,
+          "computeDispatches": 0,
+          "computePasses": 0,
+          "shaders": 0,
+          "materials": 0,
+          "cameras": 0,
+          "shadowMapUpdates": 0,
+          "shadowMapTime": 0,
+          "depthMapTime": 0,
+          "forwardTime": 0,
+          "lightClustersTime": 0,
+          "lightClusters": 0,
+          "_timeToCountFrames": 44201.1,
+          "_fpsAccum": 22
+        }
+      },
+      {
+        "at": 67237.40000009537,
+        "gap": 61.09999990463257,
+        "x": -2.317856247015144,
+        "z": -0.002989742338243925,
+        "attack": "recover",
+        "frame": {
+          "fps": 32,
+          "ms": 62.90000000000873,
+          "dt": 0.06290000000000873,
+          "updateStart": 67233.5,
+          "updateTime": 2.4000000953674316,
+          "renderStart": 67235.90000009537,
+          "renderTime": 1.2999999523162842,
+          "physicsStart": 0,
+          "physicsTime": 0,
+          "scriptUpdateStart": 67233.5,
+          "scriptUpdate": 0,
+          "scriptPostUpdateStart": 67233.70000004768,
+          "scriptPostUpdate": 0,
+          "animUpdateStart": 67233.5,
+          "animUpdate": 0.20000004768371582,
+          "cullTime": 0,
+          "sortTime": 0,
+          "skinTime": 0,
+          "morphTime": 0,
+          "instancingTime": 0,
+          "gsplats": 0,
+          "gsplatSort": 0,
+          "gsplatBufferCopy": 0,
+          "computeDispatches": 0,
+          "computePasses": 0,
+          "shaders": 0,
+          "materials": 0,
+          "cameras": 0,
+          "shadowMapUpdates": 0,
+          "shadowMapTime": 0,
+          "depthMapTime": 0,
+          "forwardTime": 0,
+          "lightClustersTime": 0,
+          "lightClusters": 0,
+          "_timeToCountFrames": 67544.9,
+          "_fpsAccum": 21
+        }
+      }
+    ],
+    "longTasks": [],
+    "shaderCalls": [
+      {
+        "method": "getProgramParameter",
+        "at": 1332.9000000953674,
+        "ms": 31.700000047683716
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1368.2000000476837,
+        "ms": 56.299999952316284
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1426.9000000953674,
+        "ms": 54.200000047683716
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1484.8000001907349,
+        "ms": 50.89999985694885
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1540.8000001907349,
+        "ms": 35.39999985694885
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1578.3000001907349,
+        "ms": 11.199999809265137
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1592.9000000953674,
+        "ms": 11.700000047683716
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1967.8000001907349,
+        "ms": 3.6999998092651367
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 1973,
+        "ms": 190.10000014305115
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2164,
+        "ms": 128.40000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2293.100000143051,
+        "ms": 212.79999995231628
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2507.4000000953674,
+        "ms": 252.40000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2760.7000000476837,
+        "ms": 61.40000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2838.5,
+        "ms": 134.40000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 2975.5,
+        "ms": 288.30000019073486
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3264.9000000953674,
+        "ms": 39
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3306.300000190735,
+        "ms": 109.5
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3419.100000143051,
+        "ms": 268.59999990463257
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3690.2000000476837,
+        "ms": 43.700000047683716
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3734.9000000953674,
+        "ms": 110.59999990463257
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 3847,
+        "ms": 168.20000004768372
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 4016.4000000953674,
+        "ms": 77.20000004768372
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 4094.7000000476837,
+        "ms": 89.90000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 4186.700000047684,
+        "ms": 107.90000009536743
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 4313.600000143051,
+        "ms": 200.29999995231628
+      },
+      {
+        "method": "getProgramParameter",
+        "at": 28037.200000047684,
+        "ms": 80.79999995231628
+      }
+    ],
+    "errors": [],
+    "basis": "First 45 seconds of live sling combat after five real misses, with Collect stones guidance and ground tokens enabled. Actual directional dodges and normal clocks. Laptop GPU, inspect diagnostics enabled, no recording/screenshots or parallel browser tests during measurement; not a phone measurement."
+  },
+  "limits": [
+    "Local production export, not deployed.",
+    "Touch layouts are emulated on the Intel N150 laptop; no physical-phone, Safari or Firefox result is claimed.",
+    "Earlier chapters and live account services were not rerun; chapter rules and local actual checkpoint writes/reload were checked.",
+    "Ammunition and drops are attempt-local; Reload/Retry resets the existing battle attempt to five stones.",
+    "The recovery stress case has limited headroom above the provisional 30 FPS floor."
+  ]
+}

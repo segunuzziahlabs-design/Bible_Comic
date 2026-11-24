@@ -1,6 +1,7 @@
 import { lerpPoint, type Point3, type SpearSample } from './spear-collision';
 
-export const spearFlightDuration=1.25, spearGravity=12;
+// Slow the same readable arc instead of lofting a longer flight off-screen.
+export const spearFlightDuration=2.1, spearGravity=12*(1.25/spearFlightDuration)**2;
 export type ThrownSpear={time:number;start:Point3;landing:Point3;initial:SpearSample;sample:SpearSample;landed:boolean};
 export function thrownSpearSample(flight:ThrownSpear,age:number):SpearSample {
   const t=Math.max(0,Math.min(spearFlightDuration,age)),u=t/spearFlightDuration;

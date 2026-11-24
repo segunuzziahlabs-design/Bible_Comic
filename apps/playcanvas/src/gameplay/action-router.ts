@@ -1,6 +1,6 @@
 export type Direction = 'forward' | 'back' | 'left' | 'right';
 export type HeldAction = Direction | 'aimUp' | 'aimDown' | 'aimLeft' | 'aimRight';
-export type PlayerAction = 'interact' | 'sling' | 'dodge' | 'jump' | 'jumpShot' | 'pause';
+export type PlayerAction = 'interact' | 'sling' | 'dodge' | 'jump' | 'jumpShot' | 'collectStones' | 'pause';
 export type ActionHandler = { run: () => void; available?: () => boolean };
 export type ActionHandlers = Partial<Record<PlayerAction, ActionHandler>>;
 
@@ -10,7 +10,7 @@ export const heldBindings: Readonly<Record<string, HeldAction>> = {
   KeyI: 'aimUp', KeyK: 'aimDown', KeyJ: 'aimLeft', KeyL: 'aimRight',
 };
 export const actionBindings: Readonly<Record<string, PlayerAction>> = {
-  KeyE: 'interact', KeyF: 'sling', KeyQ: 'jumpShot', ShiftLeft: 'dodge', ShiftRight: 'dodge', Space: 'jump', Escape: 'pause',
+  KeyE: 'interact', KeyF: 'sling', KeyQ: 'jumpShot', KeyR:'collectStones', ShiftLeft: 'dodge', ShiftRight: 'dodge', Space: 'jump', Escape: 'pause',
 };
 
 /** Device-independent state. Each held source owns its own release. */

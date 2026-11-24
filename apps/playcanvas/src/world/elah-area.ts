@@ -280,11 +280,11 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   warning.update();
   const lane = Array.from({ length: 7 }, (_, i) => shape(app.root, 'Spear warning ' + i, 'box', warning,
     [0, 0, 0], [1, .019, 1]));
-  const slingStone = surface([.62, .58, .49]);
-  slingStone.emissive = new Color(.20, .17, .12);
+  const slingStone = surface([.91, .86, .70]);
+  slingStone.emissive = new Color(.42, .35, .21);
   slingStone.update();
   const projectile = shape(app.root, 'Sling stone', 'sphere', slingStone, [0, 0, 0], [.091, .091, .091]);
-  const tracer = shape(app.root, 'Stone trail', 'box', slingStone, [0, 0, 0], [.025, .025, .42]);
+  const tracer = shape(app.root, 'Stone trail', 'box', slingStone, [0, 0, 0], [.04, .04, .58]);
   const cord = shape(app.root, 'Sling cord', 'box', leather, [0, 0, 0], [.022, .022, 1]);
   const pocket = shape(app.root, 'Sling pouch', 'sphere', leather, [0, 0, 0], [.123, .038, .108]);
   const spearWood=surface([.53,.32,.13]);spearWood.emissive=new Color(.11,.065,.025);spearWood.update();
@@ -344,6 +344,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
       else champion.pose('goliath_sword_strike',telegraph?attackTime/swordTiming.windup*(26/24):thrusting?26/24+attackTime:phase==='defeat'?26/24+(state.impactAttackTime??0):26/24+swordTiming.strike+attackTime,dt);
     }else if(phase==='stagger'){champion.pose('goliath_stagger',time,dt);
     }else if(phase==='finisher'){champion.pose(time>=decisiveReplay.impact?'goliath_hit':'goliath_ready',time>=decisiveReplay.impact?time-decisiveReplay.impact:time%2.083,dt);
+    }else if(state.ranged&&active&&attack==='recover'){champion.pose('goliath_ready',time%2.083,dt);
     }else if(state.ranged&&active&&attack!=='advance'&&attack!=='exposed'){champion.pose('goliath_throw',telegraph?attackTime/spearPatterns[state.attackIndex].windup:1+attackTime,dt);
     }else if(phase==='entrance'){champion.pose(time<4.5?'goliath_advance':'goliath_ready',time<4.5?(time*1.03)%1.333:time%2.083,dt);
     } else if (phase === 'approach') {
@@ -417,10 +418,14 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
       cord.setLocalScale(.022, .022, grip.distance(pouch));
     } else if (shot?.kind === 'flight') {
       projectile.setPosition(shot.position);
+      // Minimum screen presence for readability; the swept collision radius stays unchanged.
+      const size=Math.max(.105,Math.min(.23,6*2*camera.getPosition().distance(projectile.getPosition())*Math.tan(camera.camera!.fov*Math.PI/360)/Math.max(1,app.graphicsDevice.canvas.clientHeight)));
+      projectile.setLocalScale(size,size,size);
       rear.copy(shot.position).addScaled(shot.velocity, -.026);
       tracer.setPosition(rear);
       tracer.lookAt(shot.position);
     }
+    if(shot?.kind!=='flight')projectile.setLocalScale(.105,.105,.105);
     if(phase==='finisher'&&state.decisiveThrow){
       const replay=state.decisiveThrow,u=math.clamp((time-decisiveReplay.release)/(decisiveReplay.impact-decisiveReplay.release),0,1);
       projectile.enabled=time>=decisiveReplay.release&&time<decisiveReplay.duration;
@@ -438,6 +443,8 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
     const { x, z } = state.foe;
     return [...obstacles, { minX: x - .45, maxX: x + .45, minZ: z - .32, maxZ: z + .32 }];
   }
+  function stoneObstacles(){const{x,z}=champion.model.getPosition();return[...obstacles,{minX:x-.45,maxX:x+.45,minZ:z-.32,maxZ:z+.32}];}
   return { camera, walls, groundHeight, anchors: elahAnchors, goliath, brookZ, champion, poseChampion, sampleSword, renderBattle, battleObstacles,
+    stoneObstacles,
     retreatFocus: shieldBearer.actor };
 }
