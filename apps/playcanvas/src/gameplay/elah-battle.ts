@@ -307,7 +307,7 @@ export function createElahBattle(
     if(window.finish){
       const moved=state.dodgeFrom&&Math.hypot(david.x-state.dodgeFrom.x,david.z-state.dodgeFrom.z)>.55;
       if(state.dodgeThreatened&&moved||state.jumpRegistered&&state.jumpCleared){state.dodges++;if(state.cinematicCombat){state.spearEvasions++;if(state.spearEvasions>=2)state.combatStage='sling';}state.lastEvasion=state.jumpCleared?'jump':'dodge';state.feedback=`Spear ${state.cinematicCombat?state.spearEvasions:state.dodges} avoided${slingAvailable()?' · Your sling is ready':''}`;}
-      else state.feedback='Spear missed. Move away from the marked landing point.';
+      else state.feedback=state.cinematicCombat?'Spear missed. Watch for the next throw.':'Spear missed. Move away from the marked landing point.';
       state.feedbackTime=2.2;state.attack=state.cinematicCombat?'recover':slingAvailable()?'exposed':'recover';state.attackTime=0;
     }
   }

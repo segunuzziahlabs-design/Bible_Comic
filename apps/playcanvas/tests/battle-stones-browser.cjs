@@ -6,6 +6,7 @@ const out=path.resolve(process.argv[4]),label=process.argv[5]||'desktop';fs.mkdi
 
 async function assertDockedRoute(page,expected){
  const dock=page.locator('#duel-route-instructions');await dock.waitFor({state:'visible'});assert.match(await dock.innerText(),expected);
+ await page.locator('.destination-guide').waitFor({state:'visible'});
  const anchors=await page.evaluate(()=>{
    const dock=document.querySelector('#duel-route-instructions'),stage=document.querySelector('canvas'),pin=document.querySelector('.destination-guide');
    const card=dock.getBoundingClientRect(),screen=stage.getBoundingClientRect();
@@ -31,14 +32,23 @@ async function run(){const browser=await chromium.launch({channel:'chrome',headl
  try{
    const loaded=await read(p);assert.equal(loaded.battle.stones,5);assert(loaded.battle.stoneRecovery.stones.every(s=>s.status==='held'));assert.equal(await p.evaluate(()=>window.battleTestApp.root.find(e=>/^Recoverable stone |^Recovery stone ring /.test(e.name)&&e.enabled).length),0);checks.push('Loading warm-up leaves five held stones and no visible ground drops');
    await p.evaluate(()=>{
-     const app=window.battleTestApp,lane=app.root.findByName('Spear warning 0'),landing=app.root.findByName('Spear landing warning'),head=app.root.findByName('Thrown spear head');
-     window.groundWarningAudit=[];
+     const app=window.battleTestApp;
+     const blade=app.root.findByName('Goliath').findComponents('render').find(r=>r.entity.name.includes('Goliath drawn sword'));
+     const head=app.root.findByName('Thrown spear head'),trail=app.root.findByName('Spear flight trail');
+     window.attackFrames=[];
      app.on('frameend',()=>{
        const raw=document.querySelector('canvas').dataset.movement;if(!raw)return;
        const {battle:b}=JSON.parse(raw);
-       if(b.phase==='fight'&&['windup','strike'].includes(b.attack))window.groundWarningAudit.push({sword:b.combatStage==='sword',state:b.attack,time:b.attackTime,lane:lane.enabled,circle:landing.enabled,weapon:head.enabled,opacity:lane.render.meshInstances[0].material.opacity});
+       if(b.phase!=='fight'||!['windup','strike'].includes(b.attack))return;
+       const markers=app.root.find(e=>/^Spear (warning|landing warning)/.test(e.name)).length;
+       const sword=b.combatStage==='sword';
+       window.attackFrames.push({sword,state:b.attack,time:b.attackTime,markers,weapon:sword?blade?.enabled:head.enabled&&trail.enabled});
      });
    });
+   await wait(p,s=>s.battle.combatStage==='sword'&&s.battle.attack==='windup'&&s.battle.attackTime>.2);
+   assert.equal(await p.locator('#dodge').innerText(),'Dodge');
+   assert.equal(await p.locator('#objective').getAttribute('data-warning'),null);
+   await capture(t,'sword-windup');
    await evasion(t,0,'back');await evasion(t,1,'right');await evasion(t,2,'left');checks.push('Sword and two spear stages survived with real controls');
    if(label==='desktop'){
      await driver.aim('movement',.73,.37);await driver.action('sling');await until(s=>s.battle.misses===1);assert(await p.locator('#collect-stones').isEnabled());
@@ -59,17 +69,17 @@ async function run(){const browser=await chromium.launch({channel:'chrome',headl
    await wait(p,s=>s.battle.phase==='retrieve');await assertDockedRoute(p,/Goliath’s sword/);await capture(t,'sword-route');
    await completeAftermath(p,driver);assert.equal((await read(p,'duel')).run.battle.stage,'finished');checks.push('Stone and sword route text stays in the upper-right HUD');checks.push('Sword pickup, player finish and saved Chapter 6 gate preserved');await capture(t,'victory-gate');
    const flights=await p.evaluate(()=>window.spearFlightAudit);
-   const warnings=await p.evaluate(()=>window.groundWarningAudit);
-   for(const [sword,half] of [[true,.22],[false,1.05]]){
-     const rows=warnings.filter(row=>row.sword===sword),windup=rows.filter(row=>row.state==='windup'),strike=rows.filter(row=>row.state==='strike');
-     assert(windup.length&&windup.every(row=>row.lane&&row.circle===!sword&&Math.abs(row.opacity-.30)<.001));
-     assert(strike.some(row=>row.time>0&&row.time<half&&row.lane&&row.circle===!sword));
-     assert(strike.some(row=>row.time<half&&row.opacity>0&&row.opacity<.29),'Ground cue fades before halfway');
-     const late=strike.filter(row=>row.time>=half);
-     assert(late.length&&late.every(row=>!row.lane&&!row.circle&&(sword||row.weapon)),'Only the ground marker disappears at halfway');
+   const attackFrames=await p.evaluate(()=>window.attackFrames);
+   for(const sword of [true,false]){
+     const rows=attackFrames.filter(row=>row.sword===sword);
+     assert(rows.some(row=>row.state==='windup')&&rows.some(row=>row.state==='strike'),'Observed the full attack');
+     assert(rows.every(row=>row.markers===0),'Chapter 5 never creates attack markers');
+     assert(rows.filter(row=>row.state==='strike').every(row=>row.weapon),'The active weapon is visible throughout the strike');
    }
-   checks.push('Faint sword and spear ground warnings fade by 0.22 s and 1.05 s of their active attacks');
-   fs.writeFileSync(path.join(out,label+'-warning-frames.json'),JSON.stringify(warnings));
+   const audio=await p.evaluate(()=>window.combatAudio);
+   for(const duration of [.48,.30])assert(audio.some(cue=>Math.abs(cue.duration-duration)<.001&&cue.peak>.001),'Non-silent sword and spear cues played');
+   checks.push('Sword and spear attacks have no ground markers and retain the visible weapons and audio cues');
+   fs.writeFileSync(path.join(out,label+'-attack-frames.json'),JSON.stringify(attackFrames));
    await p.reload();await p.locator('#review-gate').waitFor({timeout:60000});assert.equal((await read(p,'duel')).run.battle.stage,'finished');checks.push('Reload preserves completed battle and Chapter 6 gate');
    const cropped=flights.filter(f=>f.time>.02&&f.parts.some(p=>!p.enabled||p.z<0||p.x<0||p.x>1||p.y<0||p.y>1));
    assert(flights.length>25);assert(Math.max(...flights.map(f=>f.time))>2);assert.equal(cropped.length,0,'Visible spear throughout flight: '+JSON.stringify(cropped.slice(0,2)));checks.push('Slower spear visible through its full 2.1s flight');assert.deepEqual(t.errors,[]);

@@ -60,16 +60,13 @@ function controls() {
   button('jump-shot').hidden=cinematic||!live||view?.phase!=='fight'||!view.slingReady;button('jump-shot').disabled=!view?.canJumpShot;
   button('dodge').hidden = cinematic || !live || view?.phase !== 'fight';
   button('dodge').disabled = !view?.dodgeReady;
-  button('dodge').textContent = view?.dodgeReady ? (view.slingReady?'Dodge':`Dodge ${view.attackDirection!<0?'← left':'right →'}`) : `Dodge · ${view?.dodgeCooldown?.toFixed(1) ?? '0.0'}s`;
+  button('dodge').textContent = view?.dodgeReady ? 'Dodge' : `Dodge · ${view?.dodgeCooldown?.toFixed(1) ?? '0.0'}s`;
   button('pause').textContent = paused ? 'Resume' : 'Pause';
   el('pause-notice').hidden = !started || !paused || busy || !!view?.result;
   el('instructions').hidden = swinging||view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
   el('battle-instructions').hidden = view?.phase !== 'fight';
   if(view){
     text('combat-stage-label',aftermathMovement(view.phase)?'IV · Goliath’s sword':view.phase==='approach'?'The confrontation':view.combatStage==='sword'?'I · Survive the sword':view.combatStage==='spear'?`II · Survive the spear · ${view.spearEvasions??0}/2`:`III · Dodge and counterattack · ${view.stones} stones`);
-    const warning = view.attackProgress ?? 0;
-    el('objective').style.setProperty('--attack-progress', `${warning * 100}%`);
-    el('objective').toggleAttribute('data-warning', warning > 0);
     const aiming=live&&!cinematic&&view.phase==='fight'&&!!view.slingReady;
     el('combat-aim-panel').hidden=!aiming;
     text('position-guidance',`${view.positionHint??'Find your position'}${view.distance!==undefined?' · '+view.distance.toFixed(1)+' m':''}`);

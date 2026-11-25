@@ -17,7 +17,6 @@ import { createCharacterJump } from './character-jump';
 import { createElahSound } from './elah-sound';
 import { createWebGLApp, observeCanvas, waitForFrame } from './graphics';
 import { decisiveReplay, slingGuidance, type SlingGuidance } from '../gameplay/sling-ballistics';
-import { swordTiming } from '../gameplay/sword-combat';
 import { createStonePreview } from './stone-preview';
 import { groundedStones,reachableStoneLanding,stonePickupSeconds,stoneRecoveryRoute } from '../gameplay/battle-stones';
 import { spearFlightDuration } from '../gameplay/thrown-spear';
@@ -56,7 +55,7 @@ export type BattleView = {
   result: 'victory' | 'defeat' | '';
   reason?: 'david_killed_by_goliath';
   dodgeReady?: boolean;
-  dodgeCooldown?: number; slingReady?:boolean; dodges?:number; attackDirection?:number;attackName?:string;attackHeight?:'low'|'middle'|'high';attackProgress?:number;
+  dodgeCooldown?: number; slingReady?:boolean; dodges?:number; attackName?:string;attackHeight?:'low'|'middle'|'high';
   combatStage?: 'sword'|'spear'|'sling'; swordEvaded?:boolean; spearEvasions?:number; weaponHit?:'sword'|'spear';
   positionHint?:string; aimHint?:string; distance?:number; foreheadX?:number; foreheadY?:number; foreheadVisible?:boolean;
   actionPrompt?:string; canInteract?:boolean; swordSwing?:number;
@@ -265,9 +264,11 @@ export async function openMovementArea(
         else if (misses) instruction = 'Missed. Aim at his forehead and throw again.';
         else instruction = chapter ? 'Move · Aim at his forehead · Click or F to throw · Shift to dodge' : 'Aim at Goliath’s forehead and throw';
         if(battle.state.cinematicCombat){
-          if(battle.state.combatStage==='sword')instruction=attack==='draw'?'Goliath draws his sword — stay ready':attack==='windup'?'Sword raised — move out of the marked strike':attack==='strike'?'Dodge the blade!':battle.state.swordEvaded?'Sword evaded — stay alert':'Keep moving — Goliath is closing in';
-          else if(battle.state.combatStage==='spear')instruction=attack==='windup'?`Spear ${battle.state.spearEvasions+1}/2 — leave the marked landing point`:attack==='strike'?'Incoming spear — move now!':battle.state.feedbackTime>0?battle.state.feedback:'Keep your distance — watch for the spear';
-          else instruction=attack==='windup'?'Spear raised — keep aiming and leave the landing circle':attack==='strike'?'Incoming spear — dodge while aiming!':battle.state.stoneRecovery.pickup?'Collecting stone — move or dodge to cancel':stones===0&&!shot?'Out of stones · Collect stones to follow their landing places':shot?'Stone away — stay alert for the next spear':battle.state.feedbackTime>0?battle.state.feedback:'Move and aim · Goliath will throw again';
+          if(battle.state.combatStage==='sword')instruction=attack==='draw'?'Goliath draws his sword':attack==='windup'?'Goliath raises his sword':attack==='strike'?'The sword swings':battle.state.swordEvaded?'Sword evaded':'Goliath is closing in';
+          else if(attack==='windup')instruction='Goliath draws back his spear';
+          else if(attack==='strike')instruction='Incoming spear';
+          else if(battle.state.combatStage==='spear')instruction=battle.state.feedbackTime>0?battle.state.feedback:'Watch Goliath’s spear';
+          else instruction=battle.state.stoneRecovery.pickup?'Collecting stone — move or dodge to cancel':stones===0&&!shot?'Out of stones · Collect stones to follow their landing places':shot?'Stone away':battle.state.feedbackTime>0?battle.state.feedback:'Move and aim · Goliath will throw again';
         }
       }
       if(phase==='finisher')caption='Decisive shot · Cinematic replay';
@@ -293,7 +294,7 @@ export async function openMovementArea(
         positionHint:guidance?.position,aimHint:guidance?.aiming,distance:guidance?.distance,
         foreheadX:forehead?forehead.x/canvas.clientWidth:undefined,foreheadY:forehead?forehead.y/canvas.clientHeight:undefined,
         foreheadVisible:!!forehead&&forehead.z>0&&forehead.x>0&&forehead.x<canvas.clientWidth&&forehead.y>0&&forehead.y<canvas.clientHeight,
-        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackDirection:recommendedDodgeDirection(),attackName:battle.state.combatStage==='sword'?'Overhead sword strike':battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,attackProgress:attack==='windup'?Math.min(1,battle.state.attackTime/(battle.state.combatStage==='sword'?swordTiming.windup:battle.pattern().windup)):0,dodgeReady: phase === 'fight' && !jumpShotActive && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
+        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackName:battle.state.combatStage==='sword'?'Overhead sword strike':battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,dodgeReady: phase === 'fight' && !jumpShotActive && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
     }
 
     function updateInteraction() {

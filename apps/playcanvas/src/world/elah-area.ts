@@ -7,7 +7,7 @@ import {
   type ElahBattleState, type SpearPoseState,
 } from '../gameplay/elah-battle';
 import { spearSegments, copyPoint, type SpearSample, type Point3 } from '../gameplay/spear-collision';
-import { spearFlightDuration, thrownSpearSample } from '../gameplay/thrown-spear';
+import { thrownSpearSample } from '../gameplay/thrown-spear';
 import { playerRadius, type WallBounds } from '../gameplay/ground-motion';
 import { loadGoliath } from './goliath-character';
 import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
@@ -273,15 +273,39 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   const obstacles = options.playableBattle ? walls : [...walls,
     { minX: bearer.x - .46, maxX: bearer.x + .31, minZ: bearer.z - .19, maxZ: bearer.z + .32 },
   ];
-  const warning = surface([.72, .21, .075]);
-  warning.emissive = new Color(.30, .08, .025);
-  const warningOpacity = options.playableBattle ? .30 : .65;
-  warning.opacity = warningOpacity;
-  warning.blendType = BLEND_NORMAL;
-  warning.depthWrite = false;
-  warning.update();
-  const lane = Array.from({ length: 7 }, (_, i) => shape(app.root, 'Spear warning ' + i, 'box', warning,
-    [0, 0, 0], [1, .019, 1]));
+  function createGroundWarnings() {
+    const warning = surface([.72, .21, .075]);
+    warning.emissive = new Color(.30, .08, .025);
+    warning.opacity = .65;
+    warning.blendType = BLEND_NORMAL;
+    warning.depthWrite = false;
+    warning.update();
+    const lane = Array.from({ length: 7 }, (_, i) => shape(app.root, 'Spear warning ' + i, 'box', warning,
+      [0, 0, 0], [1, .019, 1]));
+    const landing = shape(app.root, 'Spear landing warning', 'cylinder', warning, [0, 0, 0], [1, .025, 1]);
+
+    return (state: ElahBattleState) => {
+      const { foe, attack, attackYaw, aimLock, phase, ranged } = state;
+      const attacking = phase === 'fight' && (attack === 'windup' || attack === 'strike');
+      const showLane = attacking && !ranged;
+      const length = (strikeReach + playerRadius) / lane.length;
+      const dx = Math.sin(attackYaw), dz = Math.cos(attackYaw);
+      const width = state.dodgesRequired ? spearPatterns[state.attackIndex].width : strikeHalfWidth;
+      lane.forEach((tile, i) => {
+        tile.enabled = showLane;
+        if (!showLane) return;
+        const x = foe.x + dx * length * (i + .5), z = foe.z + dz * length * (i + .5);
+        const rise = groundHeight(x + dx * length * .5, z + dz * length * .5)
+          - groundHeight(x - dx * length * .5, z - dz * length * .5);
+        tile.setPosition(x, groundHeight(x, z) + .049, z);
+        tile.setEulerAngles(-Math.atan2(rise, length) * math.RAD_TO_DEG, attackYaw * math.RAD_TO_DEG, 0);
+        tile.setLocalScale(2 * (width + playerRadius), .02, length * .95);
+      });
+      landing.enabled = !!ranged && attacking && !!aimLock;
+      if (landing.enabled && aimLock) landing.setPosition(aimLock.x, groundHeight(aimLock.x, aimLock.z) + .035, aimLock.z);
+    };
+  }
+  const renderGroundWarnings = options.playableBattle ? undefined : createGroundWarnings();
   const slingStone = surface([.91, .86, .70]);
   slingStone.emissive = new Color(.42, .35, .21);
   slingStone.update();
@@ -295,7 +319,6 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   const flyingHead=shape(app.root,'Thrown spear head','cone',iron,[0,0,0],[.12,.26,.12]);
   const trailMat=surface([.9,.87,.65]);trailMat.emissive=new Color(.38,.34,.19);trailMat.opacity=.65;trailMat.blendType=BLEND_NORMAL;trailMat.depthWrite=false;trailMat.update();
   const flightTrail=shape(app.root,'Spear flight trail','cylinder',trailMat,[0,0,0],[.027,1,.027]);
-  const landing=shape(app.root,'Spear landing warning','cylinder',warning,[0,0,0],[1.0,.025,1.0]);
   const dustMaterial=surface([.64,.53,.37]);dustMaterial.opacity=.38;dustMaterial.blendType=BLEND_NORMAL;dustMaterial.depthWrite=false;dustMaterial.update();
   const dust=Array.from({length:9},(_,i)=>shape(app.root,'Weapon earth impact '+i,'sphere',dustMaterial,[0,0,0],[.05,.05,.05]));
   let dustAge=2,dustPoint:Point3|undefined,lastGround:Point3|undefined;
@@ -379,40 +402,14 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   }
   function renderBattle(state: ElahBattleState, dt: number, sling?: { grip: Vec3; pouch: Vec3 }) {
     poseChampion(state,dt);
-    const {foe,attackYaw,attack,phase,time,shot}=state,fallen=phase==='retreat'||phase==='victory';
-    const telegraph=phase==='fight'&&attack==='windup',thrusting=phase==='fight'&&attack==='strike';
+    const {phase,time,shot}=state,fallen=phase==='retreat'||phase==='victory';
     if (fallen || phase === 'approach') stageRetreat(phase === 'victory' ? retreatDuration : phase === 'retreat' ? time : 0);
-
-    const swordStage=state.cinematicCombat&&state.combatStage==='sword';
-    const rangedWarning=state.cinematicCombat&&state.combatStage!=='sword';
-    const duration = swordStage ? swordTiming.strike : spearFlightDuration;
-    // Ground guidance follows the attack clock. The weapon, trail and hit tests keep running.
-    const fade = options.playableBattle && thrusting
-      ? 1 - math.smoothstep(duration * .35, duration * .5, state.attackTime) : 1;
-    warning.opacity = warningOpacity * fade;
-    const groundWarning = (telegraph || thrusting) && fade > 0;
-    const showLane = (!state.ranged||swordStage||rangedWarning) && groundWarning;
-    const length = (rangedWarning&&state.aimLock?Math.hypot(state.aimLock.x-foe.x,state.aimLock.z-foe.z):strikeReach + playerRadius) / lane.length;
-    const dx = Math.sin(attackYaw);
-    const dz = Math.cos(attackYaw);
-    lane.forEach((tile, i) => {
-      tile.enabled = showLane;
-      if (!showLane) return;
-      const x = foe.x + dx * length * (i + .5);
-      const z = foe.z + dz * length * (i + .5);
-      const rise = groundHeight(x + dx * length * .5, z + dz * length * .5)
-        - groundHeight(x - dx * length * .5, z - dz * length * .5);
-      tile.setPosition(x, groundHeight(x, z) + .049, z);
-      tile.setEulerAngles(-Math.atan2(rise, length) * math.RAD_TO_DEG, attackYaw * math.RAD_TO_DEG, 0);
-      tile.setLocalScale(rangedWarning?.15:swordStage?1.1:2 * ((state.dodgesRequired?spearPatterns[state.attackIndex].width:strikeHalfWidth) + playerRadius), .02, length * (rangedWarning?.55:.95));
-    });
+    renderGroundWarnings?.(state);
 
     const flight=state.ranged?state.spear:undefined;
     flyingShaft.enabled=flyingHead.enabled=!!flight;flightTrail.enabled=!!flight&&!flight.landed&&phase==='fight';
     if(flightTrail.enabled){const a=thrownSpearSample(flight!,Math.max(0,flight!.time-.15)).tip,b=flight!.sample.tip,from=new Vec3(a.x,a.y,a.z),to=new Vec3(b.x,b.y,b.z);flightTrail.setPosition(new Vec3().lerp(from,to,.5));flightTrail.lookAt(to);flightTrail.rotateLocal(-90,0,0);flightTrail.setLocalScale(.027,Math.max(.01,from.distance(to)),.027);}
     if(flight){const parts=spearSegments(flight.sample),shaft=parts[0],head=parts[1],a=new Vec3(shaft.a.x,shaft.a.y,shaft.a.z),b=new Vec3(shaft.b.x,shaft.b.y,shaft.b.z);flyingShaft.setPosition(new Vec3().lerp(a,b,.5));flyingShaft.lookAt(b);flyingShaft.rotateLocal(-90,0,0);flyingShaft.setLocalScale(.045,a.distance(b),.045);a.set(head.a.x,head.a.y,head.a.z);b.set(head.b.x,head.b.y,head.b.z);flyingHead.setPosition(new Vec3().lerp(a,b,.5));flyingHead.lookAt(b);flyingHead.rotateLocal(-90,0,0);flyingHead.setLocalScale(.119,a.distance(b),.119);}
-    landing.enabled=!!state.ranged&&!!state.aimLock&&groundWarning&&(!options.playableBattle||!swordStage);
-    if(landing.enabled){const p=state.aimLock!;landing.setPosition(p.x,groundHeight(p.x,p.z)+.035,p.z);}
     cord.enabled = !!sling && (shot?.kind === 'windup'||phase==='finisher');
     pocket.enabled = cord.enabled;
     projectile.enabled = !!shot;

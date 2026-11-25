@@ -32,7 +32,7 @@ type David = Awaited<ReturnType<typeof loadDavid>>;
 export async function createDuelPresentation(app: Application) {
   const world = await buildValleyOpening(app, { goliathUrl, actorUrl, playableBattle: true, externalChallenge: true });
   // The opening hides the original fixture dressing. Retain its combat props only.
-  for (const child of app.root.children) if (/^(Spear warning|Sling stone|Stone trail|Sling cord|Sling pouch)/.test(child.name)) child.enabled = true;
+  for (const child of app.root.children) if (/^(Sling stone|Stone trail|Sling cord|Sling pouch)/.test(child.name)) child.enabled = true;
   world.anchors={...world.anchors,'battle.approach':{x:0,z:-1.0}};
   world.marker.enabled = false;
   const audio = await createSceneSpeech(lines, {
