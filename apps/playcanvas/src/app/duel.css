@@ -8,14 +8,16 @@
 .duel #save-error { z-index:20; }
 .duel #review-gate { z-index:10; }
 .duel .combat-stage-label{margin:0 0 .3rem;color:#e7bf7b;font:600 10px/1.25 system-ui;letter-spacing:.08em;text-transform:uppercase}
-.duel .combat-aim-panel{position:absolute;right:.7rem;top:.7rem;max-width:min(22rem,45%);padding:.55rem .7rem;background:#13262ced;border:1px solid #d6b57980;border-radius:.5rem;color:#fff0d1;font:12px/1.4 system-ui;pointer-events:none}
+.duel .duel-guidance{position:absolute;right:.7rem;top:.7rem;max-width:min(22rem,45%);display:flex;flex-direction:column;align-items:flex-end;gap:.35rem;pointer-events:none}
+.duel .combat-aim-panel,.duel .duel-route-instructions{padding:.55rem .7rem;background:#13262ced;border:1px solid #d6b57980;border-radius:.5rem;color:#fff0d1;font:12px/1.4 system-ui}
+.duel .duel-route-instructions strong,.duel .duel-route-instructions small{display:block}
+.duel .duel-route-instructions small{color:#e6ddc8;font-size:.92em}
 .duel .combat-aim-panel p{margin:.15rem 0}.duel .guidance-label{color:#d2b778;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-right:.4rem}
 .duel .combat-aim-panel[data-aligned]{border-color:#8bd6b4}.duel .forehead-target{position:absolute;transform:translate(-50%,-50%);width:32px;height:32px;border:2px solid #ffebbb;border-radius:50%;box-shadow:0 0 0 2px #14252be6,0 0 10px #ffcf6b77;pointer-events:none;color:#ffe4a6}
 .duel .forehead-target::after{content:'';position:absolute;inset:12px;border-radius:50%;background:#fff2d5;box-shadow:0 0 0 1px #14252b}
 .duel #collect-stones{pointer-events:auto;touch-action:none;min-height:44px;min-width:130px;margin-top:.3rem;padding:.35rem .65rem;border:1px solid #bbaa83;background:#203e3b;color:#fff1ce;border-radius:6px;font:600 12px system-ui}
 .duel #collect-stones:disabled{opacity:.55}.duel .stage[data-stone-empty] #collect-stones:not(:disabled){background:#edc884;color:#14252b;border-color:#fff0bd}
 .duel #stone-count{font:600 11px/1.3 system-ui;color:#f4dca2;margin:.25rem 0 0}
-.duel .destination-guide{width:148px;max-width:148px}
 .duel .forehead-target span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);padding:2px 5px;background:#13262cbb;border-radius:3px;font:9px system-ui;white-space:nowrap}
 .duel .forehead-target[data-aligned]{border-color:#8fe7bc;color:#a3edc9}
 .duel #battle-interact{min-height:48px;min-width:140px;touch-action:none}
@@ -26,11 +28,9 @@
 .duel #sword-grip>span:first-child{font-size:32px;line-height:1}.duel #sword-progress{width:100%;height:8px;margin-top:.65rem;accent-color:#e7c276}
 @media(max-width:600px){.duel .sword-control{right:.6rem;top:26%;width:122px;padding:.55rem;font-size:11px}.duel #sword-grip{height:80px}}
 @media(max-height:450px){.duel .sword-control{top:.6rem;right:.6rem;width:150px;padding:.5rem;font-size:11px}.duel .sword-control p{margin:.2rem 0 .3rem}.duel #sword-grip{height:56px}.duel #sword-grip>span:first-child{font-size:24px}}
-.duel .stage[data-threat] .spear-guide{border-color:#edaf83;background-color:#6c321fed}
-@media(max-width:600px){.duel .stage[data-threat] .spear-guide{top:12.8rem;max-width:90%;width:max-content}}
-@media(max-height:450px){.duel .stage[data-threat] .spear-guide{top:auto;bottom:.4rem;max-width:calc(100% - 290px)}}
-@media(max-width:600px){.duel .valley-hud{max-width:calc(100% - 1.2rem);font-size:12px}.duel .combat-aim-panel{top:5.8rem;left:.6rem;right:auto;max-width:calc(100% - 1.2rem);padding:.35rem .6rem;font-size:11px}.duel .spear-guide{top:6.2rem}.duel .combat-stage-label{font-size:9px}}
-@media(max-height:450px){.duel .valley-hud{max-width:48%;padding:.4rem .55rem}.duel .combat-aim-panel{top:.5rem;left:auto;right:.5rem;max-width:45%;font-size:10px;padding:.3rem .5rem}.duel .combat-stage-label{font-size:8px}.duel .valley-hud #objective{font-size:11px}.duel .spear-guide{top:auto}.duel .stage .jump-shot{bottom:135px;min-height:44px;font-size:11px}}
+.duel #objective[data-warning]{background:linear-gradient(90deg,#65432e var(--attack-progress),#172322ed var(--attack-progress))}
+@media(max-width:600px){.duel .valley-hud{max-width:calc(100% - 1.2rem);font-size:12px}.duel .duel-guidance{top:5.8rem;right:.6rem;max-width:calc(100% - 1.2rem);flex-direction:row;align-items:flex-start}.duel .combat-aim-panel,.duel .duel-route-instructions{padding:.35rem .6rem;font-size:11px}.duel .combat-stage-label{font-size:9px}}
+@media(max-height:450px){.duel .valley-hud{max-width:48%;padding:.4rem .55rem}.duel .duel-guidance{top:.5rem;right:.5rem;max-width:49%;flex-direction:row;align-items:flex-start}.duel .combat-aim-panel,.duel .duel-route-instructions{font-size:10px;padding:.3rem .5rem}.duel .combat-stage-label{font-size:8px}.duel .valley-hud #objective{font-size:11px}.duel .stage .jump-shot{bottom:135px;min-height:44px;font-size:11px}}
 .duel .stage .jump-shot{position:absolute;right:18px;bottom:154px;z-index:3;min-height:48px;min-width:112px;max-width:145px;padding:7px 12px;border:1px solid #e4bc74;border-radius:10px;background:#e5be7d;color:#172322;font-weight:700;touch-action:none}.duel .jump-shot kbd{font-size:10px}
 @media(max-width:360px){.duel .stage .jump-shot{right:12px;bottom:230px}}
 @media(max-width:600px){.duel .preview-heading h1{font-size:1.15rem}.duel .eyebrow{font-size:.55rem}.duel main{padding:.45rem}.duel .movement-footer p{font-size:.72rem}}

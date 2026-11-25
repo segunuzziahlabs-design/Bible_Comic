@@ -173,7 +173,7 @@ export async function openMovementArea(
   renderInteraction: (view: InteractionView) => void,
   scene: 'courtyard' | 'elah' = 'courtyard',
   episode?: EpisodeBattleSetup,
-  options: { chapter?: 'duel' } = {},
+  options: { chapter?: 'duel'; routeDetails?: HTMLElement } = {},
 ) {
   const app = await createWebGLApp(canvas, !!options.chapter);
   let chapter: Awaited<ReturnType<typeof import('./duel-presentation')['createDuelPresentation']>> | undefined;
@@ -183,7 +183,7 @@ export async function openMovementArea(
     const elah = chapter?.world ?? (scene === 'elah' ? await (await import('./elah-area')).buildElah(app) : undefined);
     const area = elah ?? buildArea(app);
     const camera = area.camera;
-    const destinationGuide=chapter?mountObjectiveGuide(canvas.parentElement!,canvas):undefined,guidePoint=new Vec3();
+    const destinationGuide=chapter?mountObjectiveGuide(canvas.parentElement!,canvas,options.routeDetails):undefined,guidePoint=new Vec3();
     const cueLight = 'cueLight' in area ? area.cueLight : undefined;
     const spawn = elah?.anchors[chapter&&episode&&episode.attempt>1&&episode.anchor==='battle.entry'&&!episode.defeated?'battle.approach':episode?.anchor ?? 'battle.entry'] ?? start;
     const cameraWalls = elah?.walls ?? walls;
@@ -690,12 +690,12 @@ export async function openMovementArea(
       if (chapter && controls.fire) throwStone();
       if(chapter&&battle&&elah){
         const state=battle.state,refill=!state.cinematicCombat&&state.phase==='fight'&&state.stones===0&&!state.shot;
-        if(aftermathMovement(state.phase)){
+        if(state.phase==='retrieve'||state.phase==='finish_approach'){
           const target=battle.aftermathTarget();destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(target.x,elah.groundHeight(target.x,target.z)+.25,target.z),state.phase==='retrieve'?'Goliath’s sword':'Finish the battle','Walk to the arrow · E / action button',true);
         }else if(state.phase==='fight'&&state.stoneRecovery.guiding&&state.stoneRecovery.targetId){
           const token=state.stoneRecovery.stones.find(s=>s.id===state.stoneRecovery.targetId&&s.status==='ground');
           if(token?.position){routeAge+=dt;if(routeAge>.4||routeTarget!==token.id){recoveryRoute=stoneRecoveryRoute(model.getPosition(),token.position,elah.stoneObstacles(),elah.groundHeight,duelStoneField);routeAge=0;routeTarget=token.id;}
-            destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(token.position.x,token.position.y+.22,token.position.z),`Stone ${token.id} · ${state.stones}/5 held`,state.stoneRecovery.pickup?'Collecting · Move / dodge cancels':'Follow arrows · Stop close to collect',true,recoveryRoute);
+            destinationGuide?.update(camera.camera!,model.getPosition(),guidePoint.set(token.position.x,token.position.y+.22,token.position.z),`Stone ${token.id} · ${state.stones}/5 held`,state.stoneRecovery.pickup?'Collecting · Move / dodge cancels':'Stop close to collect',true,recoveryRoute);
           }
         }else{
         const away=!state.ranged&&Math.hypot(position.x-state.foe.x,position.z-state.foe.z)>6.2;

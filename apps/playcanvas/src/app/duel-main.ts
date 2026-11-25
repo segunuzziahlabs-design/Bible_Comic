@@ -65,12 +65,11 @@ function controls() {
   el('pause-notice').hidden = !started || !paused || busy || !!view?.result;
   el('instructions').hidden = swinging||view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
   el('battle-instructions').hidden = view?.phase !== 'fight';
-  el('spear-guide').hidden=!live||view?.phase!=='fight'||!!view.slingReady&&!(view.attackProgress!>0||view.instruction.startsWith('Incoming'));
-  stage.toggleAttribute('data-threat',!el('spear-guide').hidden&&!!view?.slingReady);
   if(view){
     text('combat-stage-label',aftermathMovement(view.phase)?'IV · Goliath’s sword':view.phase==='approach'?'The confrontation':view.combatStage==='sword'?'I · Survive the sword':view.combatStage==='spear'?`II · Survive the spear · ${view.spearEvasions??0}/2`:`III · Dodge and counterattack · ${view.stones} stones`);
-    text('spear-guide',view.combatStage==='sword'?'Sword strike · Leave the marked ground':view.slingReady?'Incoming spear · Leave the landing circle':`Spear ${Math.min(2,(view.spearEvasions??0)+1)} of 2 · Watch the landing circle`);
-    el('spear-guide').style.setProperty('--attack-progress',`${(view.attackProgress??0)*100}%`);el('spear-guide').toggleAttribute('data-warning',(view.attackProgress??0)>0);
+    const warning = view.attackProgress ?? 0;
+    el('objective').style.setProperty('--attack-progress', `${warning * 100}%`);
+    el('objective').toggleAttribute('data-warning', warning > 0);
     const aiming=live&&!cinematic&&view.phase==='fight'&&!!view.slingReady;
     el('combat-aim-panel').hidden=!aiming;
     text('position-guidance',`${view.positionHint??'Find your position'}${view.distance!==undefined?' · '+view.distance.toFixed(1)+' m':''}`);
@@ -196,7 +195,7 @@ async function main() {
     episodeId, contentVersion, preparation: preparation(session.run), attempt: session.run.attempt,
     anchor: hasHit() ? 'battle.aftermath' : 'battle.entry', defeated: session.run.status === 'defeated',
     aftermath:session.run.battle?.stage??'combat',
-  }, { chapter: 'duel' });
+  }, { chapter: 'duel', routeDetails: el('duel-route-instructions') });
   area.setMuted(muted); setEpisodeSoundButton(button('sound'),muted);
   button('sound').setAttribute('aria-pressed', String(!muted));
   canvas.dataset.renderer = area.backend;

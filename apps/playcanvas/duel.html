@@ -28,10 +28,13 @@
         </div>
         <div id="sling-aim" class="sling-aim" aria-hidden="true" hidden></div>
         <div id="forehead-target" class="forehead-target" aria-hidden="true" hidden><span>Forehead</span></div>
-        <div id="combat-aim-panel" class="combat-aim-panel" hidden>
-          <p><span class="guidance-label">Position</span> <span id="position-guidance"></span></p>
-          <p><span class="guidance-label">Aim</span> <span id="angle-guidance"></span></p>
-          <button type="button" id="collect-stones" aria-pressed="false" hidden>Collect stones <kbd>R</kbd></button>
+        <div class="duel-guidance">
+          <div id="combat-aim-panel" class="combat-aim-panel" hidden>
+            <p><span class="guidance-label">Position</span> <span id="position-guidance"></span></p>
+            <p><span class="guidance-label">Aim</span> <span id="angle-guidance"></span></p>
+            <button type="button" id="collect-stones" aria-pressed="false" hidden>Collect stones <kbd>R</kbd></button>
+          </div>
+          <div id="duel-route-instructions" class="duel-route-instructions" hidden></div>
         </div>
         <div id="move-pad" class="move-pad" aria-hidden="true"><span></span><strong>Move</strong></div>
         <button type="button" id="throw-stone" class="interaction-prompt" hidden>Throw <kbd aria-hidden="true">F</kbd></button>
@@ -47,7 +50,7 @@
             <button type="button" id="battle-replay"></button>
           </div>
         </section>
-        <div id="spear-guide" class="spear-guide" role="status" hidden></div><div id="review-gate" class="entry" hidden><div class="entry-card"><p class="eyebrow">Chapter Five</p><h2>The champion has fallen</h2><p>David prevailed with his sling. The victory chapter follows.</p><p id="review-message" role="status"></p><button id="continue-victory">Continue to Victory</button><button id="replay-chapter">Replay Chapter 5</button><p class="review-note">Battle outcome confirmed</p></div></div><div id="save-error" class="entry" hidden><div class="entry-card"><h2>Checkpoint not saved</h2><p id="save-error-message" role="alert"></p><button id="retry-save">Retry save</button><button id="reload-save">Reload checkpoint</button></div></div><div class="entry" id="entry">
+        <div id="review-gate" class="entry" hidden><div class="entry-card"><p class="eyebrow">Chapter Five</p><h2>The champion has fallen</h2><p>David prevailed with his sling. The victory chapter follows.</p><p id="review-message" role="status"></p><button id="continue-victory">Continue to Victory</button><button id="replay-chapter">Replay Chapter 5</button><p class="review-note">Battle outcome confirmed</p></div></div><div id="save-error" class="entry" hidden><div class="entry-card"><h2>Checkpoint not saved</h2><p id="save-error-message" role="alert"></p><button id="retry-save">Retry save</button><button id="reload-save">Reload checkpoint</button></div></div><div class="entry" id="entry">
           <div class="entry-card">
             <p id="entry-message" role="status">Loading David and the Valley of Elah…</p>
             <button type="button" id="retry" hidden>Retry</button>

@@ -3,20 +3,28 @@ import './objective-guide.css';
 import { routeAhead, type RoutePoint } from '../gameplay/route-path';
 
 /** One guide projects each coordinator's real interaction target, never a second objective state. */
-export function mountObjectiveGuide(stage: HTMLElement, canvas: HTMLCanvasElement) {
+export function mountObjectiveGuide(stage: HTMLElement, canvas: HTMLCanvasElement, details?: HTMLElement) {
   const pin = document.createElement('div'); pin.className = 'destination-guide'; pin.hidden = true;
   const arrow = document.createElement('span'); arrow.className = 'destination-arrow'; arrow.textContent = '◆';
   const label = document.createElement('strong'), action = document.createElement('small');
-  pin.append(arrow, label, action); stage.append(pin);
+  pin.append(arrow);
+  if (details) {
+    details.append(label, action);
+    pin.setAttribute('data-docked', '');
+    pin.setAttribute('aria-hidden', 'true');
+  } else pin.append(label, action);
+  stage.append(pin);
   const route=document.createElement('div');route.className='walking-route';route.hidden=true;route.setAttribute('aria-hidden','true');
   const chevrons=Array.from({length:7},()=>{const e=document.createElement('span');e.textContent='➤';route.append(e);return e;});stage.append(route);
   const a=new Vec3(),b=new Vec3(),screenB=new Vec3();
   const screen = new Vec3(), delta = new Vec3();
   let lastLabel = '';
   return {
-    hide() { pin.hidden = route.hidden = true; },
+    hide() { pin.hidden = route.hidden = true; if (details) details.hidden = true; },
     update(camera: CameraComponent, player: Vec3, target: Vec3, title: string, prompt: string, visible: boolean, path?: readonly RoutePoint[]) {
-      pin.hidden = route.hidden = !visible; if (!visible) return;
+      pin.hidden = route.hidden = !visible;
+      if (details) details.hidden = !visible;
+      if (!visible) return;
       const w = canvas.clientWidth, h = canvas.clientHeight;
       const points=routeAhead(player,path??[{x:player.x,y:target.y-.8,z:player.z},{x:target.x,y:target.y-.8,z:target.z}]);
       route.dataset.points=JSON.stringify(points);
@@ -25,8 +33,9 @@ export function mountObjectiveGuide(stage: HTMLElement, canvas: HTMLCanvasElemen
       const behind = delta.sub2(target, camera.entity.getPosition()).dot(camera.entity.forward) <= 0;
       let dx = screen.x - w / 2, dy = screen.y - h / 2;
       if (behind) { dx = -dx; dy = Math.abs(dy) + h / 2; }
-      const x = Math.max(76, Math.min(w - 76, w / 2 + dx));
-      const y = Math.max(65, Math.min(h - Math.min(136, h * .35), h / 2 + dy));
+      const inset = details ? 25 : 76;
+      const x = Math.max(inset, Math.min(w - inset, w / 2 + dx));
+      const y = Math.max(details ? 40 : 65, Math.min(h - Math.min(136, h * .35), h / 2 + dy));
       const offscreen = behind || Math.abs(x - screen.x) > 2 || Math.abs(y - screen.y) > 2;
       arrow.textContent = '➤';
       arrow.style.transform = `rotate(${offscreen?Math.atan2(dy,dx):-Math.PI/2}rad)`;

@@ -7,7 +7,7 @@ import {
   type ElahBattleState, type SpearPoseState,
 } from '../gameplay/elah-battle';
 import { spearSegments, copyPoint, type SpearSample, type Point3 } from '../gameplay/spear-collision';
-import { thrownSpearSample } from '../gameplay/thrown-spear';
+import { spearFlightDuration, thrownSpearSample } from '../gameplay/thrown-spear';
 import { playerRadius, type WallBounds } from '../gameplay/ground-motion';
 import { loadGoliath } from './goliath-character';
 import { decisiveReplay, stoneAt } from '../gameplay/sling-ballistics';
@@ -275,7 +275,8 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
   ];
   const warning = surface([.72, .21, .075]);
   warning.emissive = new Color(.30, .08, .025);
-  warning.opacity = .65;
+  const warningOpacity = options.playableBattle ? .30 : .65;
+  warning.opacity = warningOpacity;
   warning.blendType = BLEND_NORMAL;
   warning.depthWrite = false;
   warning.update();
@@ -384,7 +385,13 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
 
     const swordStage=state.cinematicCombat&&state.combatStage==='sword';
     const rangedWarning=state.cinematicCombat&&state.combatStage!=='sword';
-    const showLane = (!state.ranged||swordStage||rangedWarning) && phase === 'fight' && (telegraph || thrusting);
+    const duration = swordStage ? swordTiming.strike : spearFlightDuration;
+    // Ground guidance follows the attack clock. The weapon, trail and hit tests keep running.
+    const fade = options.playableBattle && thrusting
+      ? 1 - math.smoothstep(duration * .35, duration * .5, state.attackTime) : 1;
+    warning.opacity = warningOpacity * fade;
+    const groundWarning = (telegraph || thrusting) && fade > 0;
+    const showLane = (!state.ranged||swordStage||rangedWarning) && groundWarning;
     const length = (rangedWarning&&state.aimLock?Math.hypot(state.aimLock.x-foe.x,state.aimLock.z-foe.z):strikeReach + playerRadius) / lane.length;
     const dx = Math.sin(attackYaw);
     const dz = Math.cos(attackYaw);
@@ -404,7 +411,7 @@ export async function buildElah(app: Application, options: { goliathUrl?: string
     flyingShaft.enabled=flyingHead.enabled=!!flight;flightTrail.enabled=!!flight&&!flight.landed&&phase==='fight';
     if(flightTrail.enabled){const a=thrownSpearSample(flight!,Math.max(0,flight!.time-.15)).tip,b=flight!.sample.tip,from=new Vec3(a.x,a.y,a.z),to=new Vec3(b.x,b.y,b.z);flightTrail.setPosition(new Vec3().lerp(from,to,.5));flightTrail.lookAt(to);flightTrail.rotateLocal(-90,0,0);flightTrail.setLocalScale(.027,Math.max(.01,from.distance(to)),.027);}
     if(flight){const parts=spearSegments(flight.sample),shaft=parts[0],head=parts[1],a=new Vec3(shaft.a.x,shaft.a.y,shaft.a.z),b=new Vec3(shaft.b.x,shaft.b.y,shaft.b.z);flyingShaft.setPosition(new Vec3().lerp(a,b,.5));flyingShaft.lookAt(b);flyingShaft.rotateLocal(-90,0,0);flyingShaft.setLocalScale(.045,a.distance(b),.045);a.set(head.a.x,head.a.y,head.a.z);b.set(head.b.x,head.b.y,head.b.z);flyingHead.setPosition(new Vec3().lerp(a,b,.5));flyingHead.lookAt(b);flyingHead.rotateLocal(-90,0,0);flyingHead.setLocalScale(.119,a.distance(b),.119);}
-    landing.enabled=!!state.ranged&&phase==='fight'&&!!state.aimLock&&(telegraph||thrusting);
+    landing.enabled=!!state.ranged&&!!state.aimLock&&groundWarning&&(!options.playableBattle||!swordStage);
     if(landing.enabled){const p=state.aimLock!;landing.setPosition(p.x,groundHeight(p.x,p.z)+.035,p.z);}
     cord.enabled = !!sling && (shot?.kind === 'windup'||phase==='finisher');
     pocket.enabled = cord.enabled;
