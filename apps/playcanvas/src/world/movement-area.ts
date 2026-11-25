@@ -14,6 +14,7 @@ import { loadDavid } from './david-character';
 import type { DavidAppearance } from './david-appearance';
 import { createDavidSling } from './david-sling';
 import { createCharacterJump } from './character-jump';
+import { createJumpMotor } from '../gameplay/jump-motion';
 import { createElahSound } from './elah-sound';
 import { createWebGLApp, observeCanvas, waitForFrame } from './graphics';
 import { decisiveReplay, slingGuidance, type SlingGuidance } from '../gameplay/sling-ballistics';
@@ -48,7 +49,7 @@ export type BattleView = {
   caption: string;
   stones: number;
   groundedStones?:number; collectingStones?:boolean; canCollectStones?:boolean;
-  canThrow: boolean; canJumpShot?:boolean; cinematic?:boolean;
+  canThrow: boolean; cinematic?:boolean;
   aimX: number;
   aimY: number;
   aimed: boolean;
@@ -198,6 +199,21 @@ export async function openMovementArea(
     setAppearance(appearance);
     const { layer, gestureDuration } = configureLocomotion(animator, tracks);
     const sling = elah && createDavidSling(model, animator, tracks.get('sling_throw'));
+    let slingReleaseRise = 0;
+    if (chapter && sling) {
+      // Sample the same jump and sling pose used at release before gameplay begins.
+      const launch = createJumpMotor();
+      launch.request(0);
+      launch.step(slingWindup, 0);
+      const air = launch.animation()!;
+      layer.play(air.clip);
+      layer.activeStateCurrentTime = air.progress * tracks.get(air.clip)!.duration;
+      animator.update(0);
+      sling.previewOrigin();
+      slingReleaseRise = launch.sample().height;
+      layer.play('Locomotion');
+      animator.update(0);
+    }
     const sound = elah && createElahSound();
     const aftermath=chapter&&elah?createBattleAftermath(app,model,elah.groundHeight):undefined;
     const stonePreview=chapter?createStonePreview(app):undefined;
@@ -206,7 +222,7 @@ export async function openMovementArea(
     let guidance:SlingGuidance|undefined;
     const inspect = new URLSearchParams(location.search).has('inspect');
 
-    let position = { ...spawn };let defeatLift=0,jumpShotActive=false;
+    let position = { ...spawn };let defeatLift=0;
     const jump=createCharacterJump(app,elah?.groundHeight??(()=>0));jump.connect(input,updateInteraction);
     let velocity = { x: 0, z: 0 };
     let yaw = 0;
@@ -236,7 +252,11 @@ export async function openMovementArea(
       return !battle || battle.state.phase === 'approach' || battle.state.phase === 'fight' || aftermathMovement(battle.state.phase);
     }
 
-    function canJumpShot(){return !!chapter&&!paused&&!jumpShotActive&&battle?.state.phase==='fight'&&battle.slingAvailable()&&battle.state.stones>0&&!battle.state.shot&&battle.state.throwTime===undefined&&jump.ready(position);}
+    function canThrow() {
+      return !paused && battle?.state.phase === 'fight' && battle.slingAvailable()
+        && battle.state.stones > 0 && !battle.state.shot && battle.state.throwTime === undefined
+        && (chapter ? dodgeAge < 0 && jump.ready(position) : !jump.active());
+    }
     function recommendedDodgeDirection(){
       if(!battle||!elah)return 1;
       const wanted=battle.pattern().direction,angle=battleBearing(),obstacles=elah.battleObstacles(battle.state);
@@ -245,7 +265,7 @@ export async function openMovementArea(
     }
     function describeBattle(): BattleView | undefined {
       if (!battle) return;
-      const { phase, attack, time, shot, stones, misses, throwTime } = battle.state;
+      const { phase, attack, time, shot, stones, misses } = battle.state;
       let caption = '';
       let instruction = '';
       if(phase==='entrance')caption=chapter?.caption()??'';
@@ -268,6 +288,7 @@ export async function openMovementArea(
           else if(attack==='windup')instruction='Goliath draws back his spear';
           else if(attack==='strike')instruction='Incoming spear';
           else if(battle.state.combatStage==='spear')instruction=battle.state.feedbackTime>0?battle.state.feedback:'Watch Goliath’s spear';
+          else if (shot?.kind === 'windup') instruction = 'David readies the sling';
           else instruction=battle.state.stoneRecovery.pickup?'Collecting stone — move or dodge to cancel':stones===0&&!shot?'Out of stones · Collect stones to follow their landing places':shot?'Stone away':battle.state.feedbackTime>0?battle.state.feedback:'Move and aim · Goliath will throw again';
         }
       }
@@ -287,14 +308,14 @@ export async function openMovementArea(
         : 'They turned and fled. David prevailed.';
       const result = phase === 'victory' || (phase === 'defeat' && time >= defeatDuration) ? phase : '';
       const forehead=chapter?camera.camera!.worldToScreen(battle.target()):undefined;
-      return { phase, instruction, caption, stones, canThrow: phase === 'fight' && !jumpShotActive && !jump.active() && battle.slingAvailable() && throwTime === undefined && !shot && stones > 0,
+      return { phase, instruction, caption, stones, canThrow: canThrow(),
         groundedStones:groundedStones(battle.state.stoneRecovery).length,collectingStones:battle.state.stoneRecovery.guiding,canCollectStones:phase==='fight'&&battle.slingAvailable()&&groundedStones(battle.state.stoneRecovery).length>0,
-        aimX, aimY, aimed, result, reason: battle.state.reason, canJumpShot:canJumpShot(), cinematic:jumpShotActive||['finisher','stagger','fall','pickup','execution'].includes(phase),actionPrompt,canInteract:!!actionPrompt&&near,
+        aimX, aimY, aimed, result, reason: battle.state.reason, cinematic:['finisher','stagger','fall','pickup','execution'].includes(phase),actionPrompt,canInteract:!!actionPrompt&&near,
         combatStage:battle.state.combatStage,swordEvaded:battle.state.swordEvaded,spearEvasions:battle.state.spearEvasions,weaponHit:battle.state.weaponHit,swordSwing:battle.state.swordSwing,
         positionHint:guidance?.position,aimHint:guidance?.aiming,distance:guidance?.distance,
         foreheadX:forehead?forehead.x/canvas.clientWidth:undefined,foreheadY:forehead?forehead.y/canvas.clientHeight:undefined,
         foreheadVisible:!!forehead&&forehead.z>0&&forehead.x>0&&forehead.x<canvas.clientWidth&&forehead.y>0&&forehead.y<canvas.clientHeight,
-        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackName:battle.state.combatStage==='sword'?'Overhead sword strike':battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,dodgeReady: phase === 'fight' && !jumpShotActive && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
+        ...(chapter ? { slingReady:battle.slingAvailable(),dodges:battle.state.dodges,attackName:battle.state.combatStage==='sword'?'Overhead sword strike':battle.state.ranged?['First aimed throw','Second aimed throw','Final aimed throw'][battle.state.attackIndex]:battle.pattern().name,attackHeight:battle.pattern().height,dodgeReady: phase === 'fight' && !jump.active() && dodgeCooldown === 0, dodgeCooldown: Math.ceil(dodgeCooldown * 10) / 10 } : {}) };
     }
 
     function updateInteraction() {
@@ -406,7 +427,15 @@ export async function openMovementArea(
       aimRay.sub(eye);
       aimDepth.sub2(target, eye);
       aimRay.mulScalar(aimDepth.dot(forward) / aimRay.dot(forward)).add(eye);
-      if(battle!.state.cinematicCombat&&sling&&elah){guidance=slingGuidance(model.getPosition(),{x:battle!.state.foe.x,y:elah.groundHeight(battle!.state.foe.x,battle!.state.foe.z),z:battle!.state.foe.z},sling.previewOrigin(),aimRay,target,elah.groundHeight,battle!.state.foeYaw);aimed=guidance.aligned;}
+      if (battle!.state.cinematicCombat && sling && elah) {
+        const feet = model.getPosition();
+        const origin = sling.previewOrigin();
+        origin.y += elah.groundHeight(feet.x, feet.z) - feet.y + slingReleaseRise;
+        const { foe, foeYaw } = battle!.state;
+        guidance = slingGuidance(feet, { ...foe, y: elah.groundHeight(foe.x, foe.z) },
+          origin, aimRay, target, elah.groundHeight, foeYaw);
+        aimed = guidance.aligned;
+      }
       else aimed = aimRay.distance(target) <= aimAssistRadius;
       return aimRay;
     }
@@ -422,7 +451,7 @@ export async function openMovementArea(
       if(chapter&&before==='entrance'){const t=battle.state.time,p=math.smoothstep(5,11,t),previous=position.z;position={x:spawn.x,z:spawn.z-2*p};model.setPosition(position.x,elah.groundHeight(position.x,position.z),position.z);heading=Math.PI;model.setEulerAngles(0,180,0);animator.playing=false;const marching=t>5&&t<11;if(layer.activeState!==(marching?'March':'Listen'))layer.transition(marching?'March':'Listen',.12);layer.activeStateCurrentTime=Math.max(0,(marching?(spawn.z-position.z)/authoredWalkSpeed%1.333:t%david.tracks.get('listen')!.duration)-dt);animator.update(dt);}
       if (chapter && before === 'challenge') battle.state.time = chapter.audio.cueTime();
       battle.update(chapter && before === 'challenge' ? 0 : dt, model.getPosition(), slingRelease);
-      battle.updateRecovery(dt,position,!jump.active()&&dodgeAge<0&&speed<.15&&!jumpShotActive&&!input.state().x&&!input.state().forward);
+      battle.updateRecovery(dt,position,!jump.active()&&dodgeAge<0&&speed<.15&&!input.state().x&&!input.state().forward);
       const pickup=battle.state.stoneRecovery.pickup;
       if(pickup){recoveryPose=true;animator.playing=false;animator.speed=1;if(layer.activeState!=='pickup_provisions')layer.transition('pickup_provisions',.12);layer.activeStateCurrentTime=Math.max(0,pickup.time/stonePickupSeconds*tracks.get('pickup_provisions')!.duration-dt);animator.update(dt);}
       else if(recoveryPose){recoveryPose=false;if((battle.state.phase==='fight'||battle.state.phase==='defeat')&&dodgeAge<0&&!jump.active()){layer.transition('Locomotion',.12);animator.playing=battle.state.phase==='fight';}}
@@ -431,7 +460,7 @@ export async function openMovementArea(
       if (phase !== before) {
         if(phase!=='fight'&&phase!=='approach'){defeatLift=phase==='defeat'?Math.max(0,model.getPosition().y-elah.groundHeight(position.x,position.z)):0;jump.reset(position);model.setPosition(position.x,elah.groundHeight(position.x,position.z)+defeatLift,position.z);}
         input.setAimMode(!!chapter && phase === 'fight');
-        input.setEnabled(!jumpShotActive&&battleControlsAvailable());
+        input.setEnabled(battleControlsAvailable());
         if (phase !== 'fight') {
           dodgeRemaining = 0;
           velocity = { x: 0, z: 0 };
@@ -451,7 +480,7 @@ export async function openMovementArea(
       if(phase==='defeat'){model.setPosition(position.x,elah.groundHeight(position.x,position.z)+Math.max(0,defeatLift-7*time*time),position.z);model.setEulerAngles(-80*math.smoothstep(0,defeatDuration,time),heading*math.RAD_TO_DEG,0);}
       sling.pose(battle.state.throwTime);
       if(phase==='finisher'){
-        jumpShotActive=false;animator.playing=false;
+        animator.playing=false;
         const hop=time<decisiveReplay.release?.50*Math.sin(Math.PI*time/decisiveReplay.release):0;
         model.setPosition(position.x,elah.groundHeight(position.x,position.z)+hop,position.z);
         const clip=time<.18?'jump_takeoff':time<.65?'jump_air':time<decisiveReplay.release?'jump_land':'Listen';
@@ -480,9 +509,9 @@ export async function openMovementArea(
       }
       chapter?.step(battle.state, dt, david);
       if(phase==='execution')chapter?.frame(battle.state,model,dt);
-      if((jumpShotActive||battle.state.cinematicCombat&&battle.state.jumpShotTime!==undefined)&&phase==='fight'&&!jump.active()&&battle.state.jumpShotTime!>1.3&&!battle.state.shot){jumpShotActive=false;battle.state.jumpShotTime=undefined;input.clear();input.setEnabled(!paused);}
+      if (phase === 'fight' && !jump.active() && !battle.state.shot) battle.state.jumpShotTime = undefined;
       if (phase === 'fight') aimAt();
-      stonePreview?.update(phase==='fight'&&battle.slingAvailable()&&!battle.state.shot?guidance:undefined,camera.camera!,canvas.clientHeight);
+      stonePreview?.update(canThrow() ? guidance : undefined, camera.camera!, canvas.clientHeight);
       recoverableStones?.update(battle.state.stoneRecovery,phase==='fight');
     }
 
@@ -509,7 +538,7 @@ export async function openMovementArea(
     }
 
     function reset(options?: { attempt: number }) {
-      cue = undefined;defeatLift=0;jumpShotActive=false;guidance=undefined;stonePreview?.update();recoveryPose=false;routeTarget=0;routeAge=1;recoveryRoute=[];
+      cue = undefined;defeatLift=0;guidance=undefined;stonePreview?.update();recoveryPose=false;routeTarget=0;routeAge=1;recoveryRoute=[];
       completedCueId = 0;
       position = { ...(initialized && elah ? elah.anchors[chapter&&(options?.attempt??battle?.state.attempt??1)>1?'battle.approach':'battle.entry'] : spawn) };
       // The initial setup may resume an aftermath/defeat; later resets use battle.entry.
@@ -550,7 +579,7 @@ export async function openMovementArea(
       sound?.setPaused(paused);
       if (chapter) void (paused ? chapter.audio.pause() : chapter.audio.resume());
       if (!paused) sound?.start();
-      input.setEnabled(!paused && !cue && !jumpShotActive && battleControlsAvailable());
+      input.setEnabled(!paused && !cue && battleControlsAvailable());
       animator.playing = !paused && !cue && !recoveryPose && !jump.active() && dodgeAge<0 && battle?.state.phase !== 'defeat' && battle?.state.phase !== 'finisher' && !(chapter && (battle?.state.phase === 'challenge'||battle?.state.phase==='entrance'));
       if (paused) {
         battle?.setSwordSwing();
@@ -591,23 +620,23 @@ export async function openMovementArea(
     }
 
     function throwStone() {
-      if (paused || jumpShotActive || jump.active() || battle?.state.phase !== 'fight') return false;
+      if (!battle || !canThrow()) return false;
       const pointer = chapter && input.pointerAim();
       if (pointer) { aimX = pointer.x; aimY = pointer.y; }
       const point = aimAt();
-      if (!battle.startThrow(point, aimed)) return false;
+      if (chapter && !jump.request(position)) return false;
+      if (!battle.startThrow(point, aimed, !!chapter)) {
+        if (chapter) jump.reset(position);
+        return false;
+      }
+      if (chapter) battle.registerJump();
       updateInteraction();
       showSample();
       return true;
     }
 
-    function jumpShot(){
-      if(!canJumpShot()||!battle)return false;const pointer=input.pointerAim();if(pointer){aimX=pointer.x;aimY=pointer.y;}const point=aimAt().clone();
-      if(!jump.request(position))return false;if(!battle.startThrow(point,false,true)){jump.reset(position);return false;}
-      jumpShotActive=!battle.state.cinematicCombat;if(jumpShotActive){velocity={x:0,z:0};input.clear();}input.setEnabled(!jumpShotActive);updateInteraction();showSample();return true;
-    }
     function dodge() {
-      if (!chapter || paused || jumpShotActive || jump.active() || battle?.state.phase !== 'fight' || dodgeCooldown > 0) return false;
+      if (!chapter || paused || jump.active() || battle?.state.phase !== 'fight' || dodgeCooldown > 0) return false;
       battle.cancelPickup();
       const held=input.state();lastMove={x:held.x,forward:held.forward};
       const x = lastMove.x || (!lastMove.forward ? recommendedDodgeDirection() : 0), forward = lastMove.forward;
@@ -725,10 +754,10 @@ export async function openMovementArea(
       interact,
       setSwordSwing:(target?:number)=>!paused&&!!battle?.setSwordSwing(target),
       confirmCheckpoint:()=>{const ok=battle?.confirmCheckpoint();if(ok){input.setEnabled(!paused&&battleControlsAvailable());layer.transition('Locomotion',.12);animator.playing=!paused;updateInteraction();showSample();}return ok;},
-      throwStone, jumpShot, canJumpShot,
+      throwStone,
       collectStones:()=>{if(paused||!battle)return false;const accepted=battle.collectStones();routeAge=1;updateInteraction();showSample();return accepted;},
-      jump:()=>{if(!paused&&!cue&&!jumpShotActive&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot){const accepted=jump.request(position);if(accepted){battle?.cancelPickup();battle?.registerJump();}return accepted;}return false;},
-      canJump:()=>!paused&&!cue&&!jumpShotActive&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot&&jump.ready(position),
+      jump:()=>{if(!chapter&&!paused&&!cue&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot){const accepted=jump.request(position);if(accepted){battle?.cancelPickup();battle?.registerJump();}return accepted;}return false;},
+      canJump:()=>!chapter&&!paused&&!cue&&battleControlsAvailable()&&dodgeAge<0&&!battle?.state.shot&&jump.ready(position),
       dodge,
       reset,
       setPaused,

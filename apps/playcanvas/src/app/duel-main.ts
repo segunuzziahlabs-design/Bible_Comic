@@ -57,10 +57,9 @@ function controls() {
   button('battle-replay').disabled = busy;
   button('sound').disabled = !started;
   help.button.disabled = !started || busy || !!view?.result;
-  button('jump-shot').hidden=cinematic||!live||view?.phase!=='fight'||!view.slingReady;button('jump-shot').disabled=!view?.canJumpShot;
   button('dodge').hidden = cinematic || !live || view?.phase !== 'fight';
   button('dodge').disabled = !view?.dodgeReady;
-  button('dodge').textContent = view?.dodgeReady ? 'Dodge' : `Dodge · ${view?.dodgeCooldown?.toFixed(1) ?? '0.0'}s`;
+  button('dodge').textContent = view?.dodgeCooldown ? `Dodge · ${view.dodgeCooldown.toFixed(1)}s` : 'Dodge';
   button('pause').textContent = paused ? 'Resume' : 'Pause';
   el('pause-notice').hidden = !started || !paused || busy || !!view?.result;
   el('instructions').hidden = swinging||view?.phase === 'fight'||!!view?.result;el('instructions').textContent=view?.phase==='approach'?(matchMedia('(any-pointer: coarse), (hover: none)').matches?'Move: left controls · Drag to look · Follow the arrows':'Move: WASD / arrows · Drag to look · Follow the arrows'):'Watch the scene · Pause at any time';
@@ -102,7 +101,9 @@ function render(next: InteractionView) {
   const previous = view; view = next.battle;
   const instruction = matchMedia('(any-pointer: coarse), (hover: none)').matches
     ? view.instruction.replace('Dodge (Shift)', 'tap Dodge').replace('Click or F to throw · Shift to dodge', 'Tap Throw · Tap Dodge').replace('Shift / Dodge','Tap Dodge') : view.instruction;text('objective',instruction);
-  el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches?(view.slingReady?'Drag to aim · Tap Throw · Dots show the stone’s arc':'Move with the left controls · Hold a direction + Dodge'):(view.slingReady?'Mouse / IJKL: aim · F: Throw · Q: Jump Shot':'WASD / arrows: move · Direction + Shift: Dodge · Space: Jump');
+  el('battle-instructions').textContent=matchMedia('(any-pointer: coarse), (hover: none)').matches
+    ? (view.slingReady ? 'Drag to aim · Tap Throw to leap and release' : 'Move with the left controls · Hold a direction + Dodge')
+    : (view.slingReady ? 'Aim: mouse / IJKL · Leap and throw: click / F' : 'Move: WASD / arrows · Dodge: direction + Shift');
   if(view.cinematic)el('battle-instructions').textContent=view.phase==='finisher'?'The decisive throw · Cinematic replay · Pause any time':'Watch the scene · Pause any time';
   text('stone-count',`${view.stones}/5 stones${view.groundedStones?' · '+view.groundedStones+' to collect':''}`);
   text('battle-caption',view.caption); el('battle-caption').hidden = !view.caption;
@@ -147,11 +148,9 @@ async function restart() {
 function throwStone() { if (started && !paused && !busy && area?.throwStone()) canvas.focus(); }
 function startBattle(){input.clear();started=true;if(connectedArrival)autoEntry='entered';el('entry').hidden=true;void pause(false);}
 button('enter').addEventListener('click',startBattle);
-const playerControls=mountPlayerControls(canvas,input,value=>{void pause(value);},()=>paused);
+const playerControls=mountPlayerControls(canvas,input,value=>{void pause(value);},()=>paused,{jump:false});
 input.bindActions({
   interact:{run:()=>{area?.interact();},available:()=>started&&!paused&&!busy&&!!view?.canInteract},
-  jump:{run:()=>{area?.jump();},available:()=>started&&!paused&&!busy&&!!area?.canJump()},
-  jumpShot:{run:()=>{area?.jumpShot();},available:()=>started&&!paused&&!busy&&!!view?.canJumpShot},
   sling:{run:throwStone,available:()=>started&&!paused&&!busy&&!!view?.canThrow},
   collectStones:{run:()=>{if(area?.collectStones())canvas.focus();},available:()=>started&&!paused&&!busy&&!!view?.canCollectStones},
   dodge:{run:()=>{if(area?.dodge())canvas.focus();},available:()=>started&&!paused&&!busy&&!!view?.dodgeReady},
@@ -161,7 +160,7 @@ input.bindButton(button('pause'),'pause');
 input.bindButton(button('battle-interact'),'interact');
 button('reset').addEventListener('click', () => { void restart(); });
 button('battle-replay').addEventListener('click', () => { void restart(); });
-input.bindButton(button('jump-shot'),'jumpShot');input.bindButton(button('throw-stone'),'sling');input.bindButton(button('dodge'),'dodge');
+input.bindButton(button('throw-stone'),'sling');input.bindButton(button('dodge'),'dodge');
 input.bindButton(button('collect-stones'),'collectStones');
 button('sound').addEventListener('click', () => { muted = !muted; writeEpisodeMuted(muted); area?.setMuted(muted); setEpisodeSoundButton(button('sound'),muted); button('sound').setAttribute('aria-pressed', String(!muted)); });
 button('retry-save').addEventListener('click', () => { if (!retryWrite) return; button('retry-save').disabled = true; void retryWrite().catch(error => { el('save-error-message').textContent = String(error); button('retry-save').disabled = false; }); });

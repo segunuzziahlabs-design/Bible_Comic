@@ -8,7 +8,7 @@ type Preferences = { movement: 'keys' | 'stick'; labels: 'wasd' | 'arrows' };
 
 /** Actual game controls, backed by the same actions as physical input. */
 export function mountPlayerControls(canvas: HTMLCanvasElement, input: MovementInput,
-  pause: (value: boolean) => void, isPaused: () => boolean) {
+  pause: (value: boolean) => void, isPaused: () => boolean, { jump = true } = {}) {
   const stage = canvas.parentElement!, pad = stage.querySelector<HTMLElement>('#move-pad')!;
   const coarse = matchMedia('(any-pointer: coarse), (hover: none)');
   let preferences: Preferences = { movement: coarse.matches ? 'stick' : 'keys', labels: 'wasd' };
@@ -36,9 +36,12 @@ export function mountPlayerControls(canvas: HTMLCanvasElement, input: MovementIn
   settings.className = 'player-movement-options'; settings.textContent = '⚙'; settings.setAttribute('aria-label', 'Movement options'); settings.title = 'Movement options';
   pad.removeAttribute('aria-hidden'); pad.setAttribute('aria-label', 'Movement thumb stick');
   root.append(keys, pad, label, settings); stage.append(root); stage.dataset.sharedControls = 'ctrl04';
-  const jumpButton = document.createElement('button'); jumpButton.type = 'button'; jumpButton.id = 'jump'; jumpButton.className = 'player-jump'; jumpButton.hidden = true;
-  jumpButton.innerHTML = '<span aria-hidden="true">↥</span> Jump <kbd>Space</kbd>';
-  jumpButton.title = 'Jump · Space'; input.bindButton(jumpButton, 'jump'); stage.append(jumpButton);
+  const jumpButton = jump ? document.createElement('button') : undefined;
+  if (jumpButton) {
+    jumpButton.type = 'button'; jumpButton.id = 'jump'; jumpButton.className = 'player-jump'; jumpButton.hidden = true;
+    jumpButton.innerHTML = '<span aria-hidden="true">↥</span> Jump <kbd>Space</kbd>';
+    jumpButton.title = 'Jump · Space'; input.bindButton(jumpButton, 'jump'); stage.append(jumpButton);
+  }
 
   const panel = document.createElement('section'); panel.id = 'movement-settings'; panel.className = 'entry player-control-settings'; panel.hidden = true;
   panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); panel.setAttribute('aria-labelledby', 'movement-settings-title');
@@ -54,7 +57,10 @@ export function mountPlayerControls(canvas: HTMLCanvasElement, input: MovementIn
   card.append(title, description);
   const movement = select('Movement layout', 'movement-layout', [['keys', 'Direction keys'], ['stick', 'Thumb stick']]);
   const labels = select('Key labels', 'movement-labels', [['wasd', 'WASD'], ['arrows', 'Arrows']]);
-  const note = document.createElement('p'); note.textContent = 'Speak / Take: E or the action button. Jump: Space or Jump. Throw: F / click or Throw. Dodge: Shift. Keep one thumb moving while the other aims or acts.';
+  const note = document.createElement('p');
+  note.textContent = jump
+    ? 'Speak / Take: E or the action button. Jump: Space or Jump. Throw: F / click or Throw. Dodge: Shift. Keep one thumb moving while the other aims or acts.'
+    : 'Take: E or the action button. Press F, click or tap Throw to leap and release. Dodge: Shift or Dodge. Keep one thumb moving while the other aims or acts.';
   const close = document.createElement('button'); close.type = 'button'; close.id = 'close-movement-settings'; close.textContent = 'Back to game';
   card.append(note, close); panel.append(card); stage.append(panel);
   let wasPaused = true;
@@ -86,7 +92,10 @@ export function mountPlayerControls(canvas: HTMLCanvasElement, input: MovementIn
   coarse.addEventListener('change', adapt, options);
   const unsubscribe = input.subscribe(() => {
     const state = input.state(); root.hidden = !state.enabled;
-    jumpButton.hidden = !state.enabled || !input.hasAction('jump'); jumpButton.disabled = !input.can('jump');
+    if (jumpButton) {
+      jumpButton.hidden = !state.enabled || !input.hasAction('jump');
+      jumpButton.disabled = !input.can('jump');
+    }
     root.dataset.x = String(state.x); root.dataset.forward = String(state.forward);
     buttons.forEach((button, index) => {
       const direction = definitions[index][0], active = state.held.has(direction) || (direction === 'forward' ? state.forward > .15 : direction === 'back' ? state.forward < -.15 : direction === 'left' ? state.x < -.15 : state.x > .15);

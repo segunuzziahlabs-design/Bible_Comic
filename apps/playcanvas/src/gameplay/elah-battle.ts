@@ -129,14 +129,14 @@ export function createElahBattle(
     if(state.phase!=='fight'||!['windup','strike'].includes(state.attack)||!state.cinematicCombat&&slingAvailable())return false;
     state.jumpRegistered=true;return true;
   }
-  function startThrow(aim: Vec3, assisted: boolean, cinematic = false) {
+  function startThrow(aim: Vec3, assisted: boolean, jumping = false) {
     if (state.phase !== 'fight' || state.shot || state.throwTime !== undefined || state.stones === 0 || !slingAvailable()) return false;
     const stoneId=state.cinematicCombat?state.stoneRecovery.stones.find(s=>s.status==='held')?.id:undefined;
     if(state.cinematicCombat&&stoneId===undefined)return false;
     cancelStonePickup(state.stoneRecovery);
     state.shot = { kind: 'windup', time: 0, aim: aim.clone(), assisted,stoneId };
     state.throwTime = 0;
-    if(cinematic)state.jumpShotTime=0;
+    if(jumping)state.jumpShotTime=0;
     return true;
   }
 

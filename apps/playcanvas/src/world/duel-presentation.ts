@@ -130,12 +130,6 @@ export async function createDuelPresentation(app: Application) {
       shot='spear-direction-establish';const p=david.getPosition(),g=world.champion.forehead.getPosition();
       eye.lerp(world.camera.getPosition(),new Vec3(p.x+2.2,p.y+2.8,p.z+4.4),1-Math.exp(-6*dt));world.camera.setPosition(eye);world.camera.lookAt(g.x,g.y-1,g.z);world.camera.camera!.fov=canvasPortrait()?64:57;return true;
     }
-    if(state.phase==='fight'&&state.jumpShotTime!==undefined&&!state.cinematicCombat){
-      shot='david-jump-and-sling';const p=david.getPosition(),g=world.champion.forehead.getPosition(),angle=Math.atan2(p.x-g.x,p.z-g.z),t=state.jumpShotTime;
-      const side=1.8*Math.min(1,t/.3),distance=canvasPortrait()?4.7:4.2;
-      const destination=new Vec3(p.x+Math.sin(angle)*distance+Math.cos(angle)*side,p.y+1.9,p.z+Math.cos(angle)*distance-Math.sin(angle)*side);
-      eye.lerp(world.camera.getPosition(),destination,1-Math.exp(-5*dt));world.camera.setPosition(eye);world.camera.lookAt((p.x+g.x)*.5,p.y+1.15,(p.z+g.z)*.5);world.camera.camera!.fov=canvasPortrait()?61:53;return true;
-    }
     if(state.phase==='entrance'){const p=david.getPosition(),g=world.champion.model.getPosition(),t=state.time;shot=t<4.5?'the-champion-walks-out':t<9?'david-steps-forward':'the-field-awaits';const target=t<4.5?new Vec3(g.x+3.1,g.y+.9,g.z+4.3):t<9?new Vec3(p.x+2.0,p.y+1.65,p.z-.8):new Vec3(p.x+.4,p.y+2.1,p.z+3.8);eye.lerp(world.camera.getPosition(),target,1-Math.exp(-5*dt));world.camera.setPosition(eye);if(t<4.5)world.camera.lookAt(g.x,g.y+1.85,g.z);else if(t<9)world.camera.lookAt(p.x,p.y+1.3,p.z);else world.camera.lookAt(g.x,g.y+1.8,g.z);world.camera.camera!.fov=53;return true;}
     if (state.phase === 'fall' || state.phase === 'victory') {
       shot = 'the-champion-falls'; const p = state.foe, y = world.groundHeight(p.x, p.z);
